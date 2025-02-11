@@ -67,7 +67,7 @@ if not MULTI_TENANT:
     ]
 
 
-def get_cloud_tasks_to_schedule(beat_multiplier: int) -> list[dict[str, Any]]:
+def get_cloud_tasks_to_schedule(beat_multiplier: float) -> list[dict[str, Any]]:
     beat_system_tasks = ee_beat_system_tasks + base_beat_system_tasks
     beat_task_templates = ee_beat_task_templates + base_beat_task_templates
     cloud_tasks = generate_cloud_tasks(
