@@ -1,7 +1,7 @@
 """Chat turn that exercises the search tool path.
 
 The `-tools1` model knob makes the mock LLM answer the first AUTO-tool-choice
-cycle with an `internal_search` tool call, so Onyx genuinely executes the
+cycle with an `internal_search` tool call, so Zeshan genuinely executes the
 search tool: query expansion, embedding model server, Vespa/OpenSearch
 retrieval, document streaming. The follow-up LLM call (tool result in
 history) streams the final answer.

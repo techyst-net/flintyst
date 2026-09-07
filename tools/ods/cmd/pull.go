@@ -16,8 +16,8 @@ func NewPullCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "pull",
-		Short: "Pull images for Onyx docker containers",
-		Long: `Pull the latest images for Onyx docker containers.
+		Short: "Pull images for Zeshan docker containers",
+		Long: `Pull the latest images for Zeshan docker containers.
 
 Examples:
   # Pull images

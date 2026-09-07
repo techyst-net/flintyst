@@ -86,7 +86,7 @@ func (r *llmProviderResource) Schema(_ context.Context, _ resource.SchemaRequest
 	emptyInt64Set := types.SetValueMust(types.Int64Type, []attr.Value{})
 
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An Onyx LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its " +
+		MarkdownDescription: "An Zeshan LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its " +
 			"enabled models. `model_configurations` is the full list of record: models omitted from it " +
 			"are removed server-side on apply, and removing the model that is currently the deployment " +
 			"default fails validation — repoint the default first. `api_key` and `custom_config` are " +
@@ -117,7 +117,7 @@ func (r *llmProviderResource) Schema(_ context.Context, _ resource.SchemaRequest
 			"api_key": schema.StringAttribute{
 				Optional:  true,
 				Sensitive: true,
-				MarkdownDescription: "Provider API key. The Onyx API masks this on read, so Terraform " +
+				MarkdownDescription: "Provider API key. The Zeshan API masks this on read, so Terraform " +
 					"cannot detect out-of-band changes; the configured value is authoritative." +
 					writeOnlyDescription("api_key"),
 			},
@@ -176,7 +176,7 @@ func (r *llmProviderResource) Schema(_ context.Context, _ resource.SchemaRequest
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(false),
-				MarkdownDescription: "Onyx Auto mode: the model list is managed by Onyx. When enabled, " +
+				MarkdownDescription: "Zeshan Auto mode: the model list is managed by Zeshan. When enabled, " +
 					"the server owns `model_configurations`: Terraform stops drift-checking the list, " +
 					"and updates re-assert the server's current models instead of the configured ones, " +
 					"so registry-managed models are never removed.",
@@ -222,11 +222,11 @@ func (r *llmProviderResource) Schema(_ context.Context, _ resource.SchemaRequest
 						},
 						"supports_image_input": schema.BoolAttribute{
 							Optional:            true,
-							MarkdownDescription: "Override for image-input support; unset lets Onyx infer it.",
+							MarkdownDescription: "Override for image-input support; unset lets Zeshan infer it.",
 						},
 						"supports_reasoning": schema.BoolAttribute{
 							Optional:            true,
-							MarkdownDescription: "Override for reasoning-model classification; unset lets Onyx infer it.",
+							MarkdownDescription: "Override for reasoning-model classification; unset lets Zeshan infer it.",
 						},
 						"display_name": schema.StringAttribute{
 							Optional:            true,
@@ -323,7 +323,7 @@ func (r *llmProviderResource) Create(ctx context.Context, req resource.CreateReq
 
 	view, err := r.client.UpsertLLMProvider(ctx, upsert, true)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx LLM provider", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan LLM provider", err.Error())
 		return
 	}
 
@@ -351,7 +351,7 @@ func (r *llmProviderResource) Read(ctx context.Context, req resource.ReadRequest
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx LLM provider", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan LLM provider", err.Error())
 		return
 	}
 
@@ -468,7 +468,7 @@ func (r *llmProviderResource) Update(ctx context.Context, req resource.UpdateReq
 		view, err := r.client.GetLLMProvider(ctx, id)
 		if err != nil {
 			resp.Diagnostics.AddError(
-				"Failed to read Onyx LLM provider before update",
+				"Failed to read Zeshan LLM provider before update",
 				"The provider is in auto mode, so its current model list must be carried "+
 					"through the update.\n\n"+err.Error(),
 			)
@@ -478,7 +478,7 @@ func (r *llmProviderResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	if _, err := r.client.UpsertLLMProvider(ctx, upsert, false); err != nil {
-		resp.Diagnostics.AddError("Failed to update Onyx LLM provider", err.Error())
+		resp.Diagnostics.AddError("Failed to update Zeshan LLM provider", err.Error())
 		return
 	}
 
@@ -519,7 +519,7 @@ func (r *llmProviderResource) Delete(ctx context.Context, req resource.DeleteReq
 	err := r.client.DeleteLLMProvider(ctx, id, state.ForceDelete.ValueBool())
 	if err != nil && !client.IsNotFound(err) {
 		resp.Diagnostics.AddError(
-			"Failed to delete Onyx LLM provider",
+			"Failed to delete Zeshan LLM provider",
 			err.Error()+"\n\nIf this provider holds the deployment default model, either repoint "+
 				"the default first or set force_delete = true.",
 		)

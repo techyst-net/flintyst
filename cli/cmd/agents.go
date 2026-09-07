@@ -15,7 +15,7 @@ func newAgentsCmd(ios *iostreams.IOStreams) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "agents",
 		Short: "List available agents (ID, name, description)",
-		Long: `List all visible agents configured on the Onyx server.
+		Long: `List all visible agents configured on the Zeshan server.
 
 By default, output is a human-readable table with ID, name, and description.
 Use --json for machine-readable output.`,

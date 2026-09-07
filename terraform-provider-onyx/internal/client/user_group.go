@@ -92,7 +92,7 @@ type setGroupManagerRequest struct {
 }
 
 // addUsersToUserGroupRequest mirrors AddUsersToUserGroupRequest. It carries no
-// connector ids: Onyx keeps the stored ones itself.
+// connector ids: Zeshan keeps the stored ones itself.
 type addUsersToUserGroupRequest struct {
 	UserIDs []string `json:"user_ids"`
 }
@@ -150,12 +150,12 @@ func (c *Client) LookupUserGroup(ctx context.Context, id int64) (*UserGroup, boo
 
 // SetUserGroupMembers makes the group roster match userIDs.
 //
-// Onyx's update endpoint replaces connector links along with members, and
+// Zeshan's update endpoint replaces connector links along with members, and
 // those links belong to onyx_cc_pair, so they have to survive a roster change.
 // Which call does that best depends on the change:
 //
 // A roster that only gains members goes through the add-users endpoint. That
-// one takes members alone, and Onyx preserves the connector links itself,
+// one takes members alone, and Zeshan preserves the connector links itself,
 // reading and rewriting them inside the transaction that holds the membership
 // lock. The read and the write are one step there, so a connector share made
 // at the same moment cannot be overwritten by a list this client read a
@@ -164,7 +164,7 @@ func (c *Client) LookupUserGroup(ctx context.Context, id int64) (*UserGroup, boo
 // A roster that loses a member has no such endpoint and has to use the full
 // replace, which means reading the connector ids here and sending them back.
 // That read-modify-write spans two calls, so a connector share that lands in
-// between is overwritten by the older list. Onyx offers nothing narrower —
+// between is overwritten by the older list. Zeshan offers nothing narrower —
 // omitting the field is not "leave them alone", it is a validation error, and
 // sending an empty list unshares every connector outright. The window is one
 // round-trip and only opens for a removal.
@@ -196,7 +196,7 @@ func (c *Client) SetUserGroupMembers(ctx context.Context, id int64, userIDs []st
 		}
 	}
 
-	// The whole roster goes out, not just the new names: Onyx works out which
+	// The whole roster goes out, not just the new names: Zeshan works out which
 	// of them are new and skips the rest.
 	if !removes && len(userIDs) > 0 {
 		var group UserGroup
@@ -257,7 +257,7 @@ func (c *Client) SetGroupManager(ctx context.Context, id int64, userID string, i
 }
 
 // GetUserGroupPermissions returns the group's toggleable permission grants.
-// Grants Onyx manages itself are excluded, which matches what the provider
+// Grants Zeshan manages itself are excluded, which matches what the provider
 // is able to write.
 func (c *Client) GetUserGroupPermissions(ctx context.Context, id int64) ([]string, error) {
 	var permissions []string
@@ -269,7 +269,7 @@ func (c *Client) GetUserGroupPermissions(ctx context.Context, id int64) ([]strin
 }
 
 // SetUserGroupPermissions replaces the group's permission grants and returns
-// the stored set. Onyx refuses any permission it does not let a group toggle.
+// the stored set. Zeshan refuses any permission it does not let a group toggle.
 func (c *Client) SetUserGroupPermissions(ctx context.Context, id int64, permissions []string) ([]string, error) {
 	if permissions == nil {
 		permissions = []string{}
@@ -283,7 +283,7 @@ func (c *Client) SetUserGroupPermissions(ctx context.Context, id int64, permissi
 	return enabled, nil
 }
 
-// DeleteUserGroup asks Onyx to delete a group. The row usually survives the
+// DeleteUserGroup asks Zeshan to delete a group. The row usually survives the
 // call: the group is marked for deletion and a background sync removes it.
 //
 // Not replayed. A delete that commits but loses its response has already
@@ -296,7 +296,7 @@ func (c *Client) DeleteUserGroup(ctx context.Context, id int64) error {
 
 // WaitForUserGroupSettled waits until the group accepts gated writes again.
 //
-// Onyx refuses a membership change, a rename and a delete while a group is
+// Zeshan refuses a membership change, a rename and a delete while a group is
 // syncing, and a newly created group starts out syncing. Managers, incognito
 // and permissions are not gated, so they need no wait. A group that has
 // already gone counts as settled, so a caller waiting before a delete does not

@@ -47,7 +47,7 @@ func TestUpsertMCPServerAlwaysSendsDescription(t *testing.T) {
 	}
 
 	body := bodyAsMap(t, captured.Body)
-	// Onyx preserves the stored description when the field is missing, so an
+	// Zeshan preserves the stored description when the field is missing, so an
 	// empty one has to travel as "" for a cleared description to clear.
 	description, ok := body["description"]
 	if !ok {
@@ -98,7 +98,7 @@ func TestUpsertMCPServerUpdateCarriesTheChangedFlags(t *testing.T) {
 		t.Errorf("an update must name the server it edits, got %v", body["existing_server_id"])
 	}
 	if body["api_token_changed"] != true {
-		t.Error("without the changed flag Onyx keeps the token it already holds")
+		t.Error("without the changed flag Zeshan keeps the token it already holds")
 	}
 	if body["api_token"] != "shhh" {
 		t.Errorf("want the configured token, got %v", body["api_token"])

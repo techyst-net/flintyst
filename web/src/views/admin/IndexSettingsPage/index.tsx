@@ -130,7 +130,7 @@ function computeWontPortConnectors(
 
 /**
  * Wrapper that disables its children when either:
- * 1. The app is running on Onyx Cloud (`NEXT_PUBLIC_CLOUD_ENABLED`), or
+ * 1. The app is running on Zeshan Cloud (`NEXT_PUBLIC_CLOUD_ENABLED`), or
  * 2. A local `disabled` condition is true (e.g. a parent toggle is off).
  */
 interface CloudDisabledProps {
@@ -797,7 +797,7 @@ export default function IndexSettingsPage() {
   } = useLlmDefaults();
 
   /**
-   * Persist a new default vision model. Onyx routes all image-captioning
+   * Persist a new default vision model. Zeshan routes all image-captioning
    * calls through `get_default_llm_with_vision()` (`backend/onyx/llm/factory.py`),
    * which reads `default_vision` — so writing here switches the model the
    * indexer uses for new captions. Existing captions stay baked into the

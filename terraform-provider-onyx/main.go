@@ -1,5 +1,5 @@
-// terraform-provider-onyx manages Onyx application configuration via the
-// admin API (for the infrastructure under Onyx, see deployment/terraform).
+// terraform-provider-onyx manages Zeshan application configuration via the
+// admin API (for the infrastructure under Zeshan, see deployment/terraform).
 package main
 
 import (

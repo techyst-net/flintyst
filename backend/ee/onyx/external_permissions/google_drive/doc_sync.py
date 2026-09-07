@@ -188,7 +188,7 @@ def get_external_access_for_raw_gdrive_file(
     # and permissions.list may return 403. In this case, fall back to
     # granting access to the user who found the file in their drive.
     # Note, even if other users also have access to this file,
-    # they will not be granted access in Onyx.
+    # they will not be granted access in Zeshan.
     # We check permissions_list (the final result after all fetch attempts)
     # rather than the raw fields, because permission_ids may be present
     # but the actual fetch can still return empty due to a 403.
@@ -215,7 +215,7 @@ def get_external_access_for_raw_gdrive_file(
     for permission in permissions_list:
         # if the permission is inherited, do not add it directly to the file
         # instead, add the folder ID as a group that has access to the file
-        # we will then handle mapping that folder to the list of Onyx users
+        # we will then handle mapping that folder to the list of Zeshan users
         # in the group sync job
         # NOTE: this doesn't handle the case where a folder initially has no
         # permissioning, but then later that folder is shared with a user or group.

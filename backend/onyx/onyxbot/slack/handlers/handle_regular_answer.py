@@ -159,16 +159,16 @@ def handle_regular_answer(
 
     # Capture whether response mode for channel is ephemeral. Even if the channel is set
     # to respond with an ephemeral message, we still send as non-ephemeral if
-    # the message is a dm with the Onyx bot.
+    # the message is a dm with the Zeshan bot.
     send_as_ephemeral = (
         slack_channel_config.channel_config.get("is_ephemeral", False)
         or message_info.is_slash_command
     ) and not message_info.is_bot_dm
 
     # If the channel is configured to respond with an ephemeral message,
-    # or the message is a dm to the Onyx bot, we should use the proper onyx user from the email.
-    # This will make documents privately accessible to the user available to Onyx Bot answers.
-    # Otherwise - if not ephemeral or DM to Onyx Bot - we use anonymous user to restrict
+    # or the message is a dm to the Zeshan bot, we should use the proper onyx user from the email.
+    # This will make documents privately accessible to the user available to Zeshan Bot answers.
+    # Otherwise - if not ephemeral or DM to Zeshan Bot - we use anonymous user to restrict
     # to public docs.
 
     resolved_user = (
@@ -483,7 +483,7 @@ def handle_regular_answer(
             client=client,
             channel=channel,
             receiver_ids=target_receiver_ids,
-            text="Hello! Onyx has some results for you!",
+            text="Hello! Zeshan has some results for you!",
             blocks=all_blocks,
             thread_ts=target_thread_ts,
             # don't unfurl, since otherwise we will have 5+ previews which makes the message very long

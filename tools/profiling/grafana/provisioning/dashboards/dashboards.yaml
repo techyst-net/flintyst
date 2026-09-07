@@ -3,7 +3,7 @@ apiVersion: 1
 providers:
   - name: 'onyx-dashboards'
     orgId: 1
-    folder: 'Onyx'
+    folder: 'Zeshan'
     type: file
     updateIntervalSeconds: 10
     allowUiUpdates: true
@@ -17,7 +17,7 @@ providers:
   # would be silently lost — edit the files on disk instead.
   - name: 'onyx-dashboards-helm'
     orgId: 1
-    folder: 'Onyx'
+    folder: 'Zeshan'
     type: file
     updateIntervalSeconds: 10
     allowUiUpdates: false

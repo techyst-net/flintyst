@@ -1,6 +1,6 @@
-# Onyx Local Monitoring Stack
+# Zeshan Local Monitoring Stack
 
-Prometheus + Grafana for local development. Pre-loaded with dashboards for the Onyx backend.
+Prometheus + Grafana for local development. Pre-loaded with dashboards for the Zeshan backend.
 
 ## Usage
 
@@ -16,9 +16,9 @@ docker compose up -d
 
 ## Dashboards
 
-- **Onyx DB Pool Health** — PostgreSQL connection pool utilization
-- **Onyx Indexing Pipeline v2** — Per-connector indexing throughput, queue depth, task latency
-- **Onyx Permission Sync** — Doc permission sync and external group sync duration, throughput, errors, and Celery task metrics
+- **Zeshan DB Pool Health** — PostgreSQL connection pool utilization
+- **Zeshan Indexing Pipeline v2** — Per-connector indexing throughput, queue depth, task latency
+- **Zeshan Permission Sync** — Doc permission sync and external group sync duration, throughput, errors, and Celery task metrics
 
 ## Scrape targets
 

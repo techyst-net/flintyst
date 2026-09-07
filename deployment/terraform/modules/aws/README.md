@@ -1,7 +1,7 @@
-# Onyx AWS modules
+# Zeshan AWS modules
 
 ## Overview
-This directory contains Terraform modules to provision the core AWS infrastructure for Onyx:
+This directory contains Terraform modules to provision the core AWS infrastructure for Zeshan:
 
 - `vpc`: Creates a VPC with public/private subnets sized for EKS, an optional S3 gateway endpoint, and VPC flow logs
 - `eks`: Provisions an Amazon EKS cluster, essential addons (EBS CSI, metrics server, cluster autoscaler), and optional IRSA for S3 and RDS access
@@ -13,7 +13,7 @@ This directory contains Terraform modules to provision the core AWS infrastructu
 
 Use the `onyx` module if you want a working EKS + Postgres + Redis + S3 stack with sane defaults. Use the individual modules if you need more granular control.
 
-These are the same modules Onyx runs for its own managed deployments. The managed
+These are the same modules Zeshan runs for its own managed deployments. The managed
 deployments add operational wiring on top (alert routing, secret management, log
 aggregation) but provision the underlying AWS infrastructure from exactly this code.
 
@@ -29,7 +29,7 @@ module "vpc" {
 }
 ```
 
-Releases are tagged `tf/vX.Y.Z`, versioned independently of Onyx product
+Releases are tagged `tf/vX.Y.Z`, versioned independently of Zeshan product
 releases. A commit sha works as a `ref` too, and is the better choice for
 automated consumers: a sha cannot be moved, where a tag can. Terraform clones
 the whole repository either way, so there is no meaningful speed difference.
@@ -42,7 +42,7 @@ The snippet below shows a minimal working example that:
 - Sets up providers
 - Waits for EKS to be ready
 - Configures `kubernetes` and `helm` providers against the created cluster
-- Provisions the full Onyx AWS stack via the `onyx` module
+- Provisions the full Zeshan AWS stack via the `onyx` module
 
 ```hcl
 locals {
@@ -161,7 +161,7 @@ fits one m7i.2xlarge (external Postgres/Redis/S3); with plain chart defaults the
 autoscaler settles at two nodes. Set `vespa_node_enabled = true` to add the dedicated
 node back.
 
-These defaults are calibrated from Onyx's own managed production fleet: memory, not CPU, is
+These defaults are calibrated from Zeshan's own managed production fleet: memory, not CPU, is
 the binding dimension on the Kubernetes side, and the burstable `db.t4g.large` holds up to
 roughly the medium tier before CPU peaks make a fixed-performance class worthwhile.
 
@@ -293,7 +293,7 @@ Key inputs include:
 
 ## Upgrading from an earlier version of these modules
 
-These modules were realigned with the versions Onyx runs in production. If you
+These modules were realigned with the versions Zeshan runs in production. If you
 applied an earlier revision, note the following before your next `terraform apply`.
 
 **Renamed resources are handled for you.** The modules ship `moved` blocks that
@@ -331,7 +331,7 @@ the previous default, set the value explicitly before applying.
 **The Craft sandbox node group's key changed** from `craft_sandbox` to `sandbox`.
 A `moved` block handles the relabel, so the group is not recreated.
 
-## Installing the Onyx Helm chart (after Terraform)
+## Installing the Zeshan Helm chart (after Terraform)
 Once the cluster is active, deploy application workloads via Helm. You can use the chart in `deployment/helm/charts/onyx`.
 
 ```bash

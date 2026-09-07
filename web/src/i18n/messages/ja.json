@@ -271,7 +271,7 @@
         },
         "placeholder": "方法を選択",
         "ptOauth": {
-          "description": "Onyx の認証に使用したユーザーの OAuth アクセストークンを転送します。",
+          "description": "Zeshan の認証に使用したユーザーの OAuth アクセストークンを転送します。",
           "label": "OAuth パススルー"
         },
         "required": "認証タイプは必須です"
@@ -310,11 +310,11 @@
         "title": "この MCP サーバーでは認証を使用しません"
       },
       "oauthInfo": {
-        "discovery": "クライアント ID とシークレットは任意です。自動検出では、Onyx はサポートされている場合に Client ID Metadata Document (CIMD) を使用し、対応していない場合は Dynamic Client Registration (DCR) を使用します。",
-        "manualRegistration": "サーバーがどちらの方法にも対応していない場合は、先に Onyx インスタンスをサーバーの提供元に登録してください。アクションに必要なスコープを Onyx に付与してください。"
+        "discovery": "クライアント ID とシークレットは任意です。自動検出では、Zeshan はサポートされている場合に Client ID Metadata Document (CIMD) を使用し、対応していない場合は Dynamic Client Registration (DCR) を使用します。",
+        "manualRegistration": "サーバーがどちらの方法にも対応していない場合は、先に Zeshan インスタンスをサーバーの提供元に登録してください。アクションに必要なスコープを Zeshan に付与してください。"
       },
       "passThroughNotice": {
-        "description": "Onyx はユーザーの OAuth アクセストークンを Authorization ヘッダーとしてサーバーに直接転送します。サーバーが同じプロバイダーでの認証に対応していることを確認してください。",
+        "description": "Zeshan はユーザーの OAuth アクセストークンを Authorization ヘッダーとしてサーバーに直接転送します。サーバーが同じプロバイダーでの認証に対応していることを確認してください。",
         "title": "ID プロバイダーを共有するサービスにはパススルーを使用してください。"
       },
       "providerMode": {
@@ -468,7 +468,7 @@
         },
         "placeholder": "方法を選択",
         "ptOauth": {
-          "description": "Onyx の認証に使用したユーザーの OAuth アクセストークンを転送します。",
+          "description": "Zeshan の認証に使用したユーザーの OAuth アクセストークンを転送します。",
           "label": "OAuth パススルー"
         },
         "required": "認証方法は必須です"
@@ -516,7 +516,7 @@
         "description": "OAuth パススルーには、OAuth に対応したログイン方法 (Google または OIDC) が必要です。"
       },
       "passThroughNotice": {
-        "description": "Onyx はユーザーの OAuth アクセストークンを Authorization ヘッダーとしてサーバーに直接転送します。サーバーが同じプロバイダーでの認証に対応していることを確認してください。",
+        "description": "Zeshan はユーザーの OAuth アクセストークンを Authorization ヘッダーとしてサーバーに直接転送します。サーバーが同じプロバイダーでの認証に対応していることを確認してください。",
         "title": "ID プロバイダーを共有するサービスにはパススルーを使用してください。"
       },
       "redirectUri": {
@@ -993,7 +993,7 @@
         "title": "フィードバック"
       },
       "page": {
-        "description": "クエリ、フィードバック、エージェントの観点から、ワークスペースでの Onyx の利用状況を把握します。"
+        "description": "クエリ、フィードバック、エージェントの観点から、ワークスペースでの Zeshan の利用状況を把握します。"
       },
       "reports": {
         "calendar": {
@@ -1253,7 +1253,7 @@
         "close": {
           "label": "閉じる"
         },
-        "description": "この Onyx インスタンスにライセンスを手動で追加して有効化します。",
+        "description": "この Zeshan インスタンスにライセンスを手動で追加して有効化します。",
         "emptyKey": {
           "error": "ライセンスキーを入力してください"
         },
@@ -1264,7 +1264,7 @@
           "label": "ライセンスキーの有効期限が切れています"
         },
         "keyField": {
-          "description": "Onyx から受け取ったライセンスキーを貼り付けるか、ファイルを添付してください。",
+          "description": "Zeshan から受け取ったライセンスキーを貼り付けるか、ファイルを添付してください。",
           "title": "ライセンスキー"
         },
         "updateKey": {
@@ -1560,7 +1560,7 @@
           "placeholder": "日数",
           "restoreTooltip": "既定値に戻す"
         },
-        "description": "組織のチャットを Onyx が保持する期間を指定します。",
+        "description": "組織のチャットを Zeshan が保持する期間を指定します。",
         "enterprisePlanTag": {
           "label": "Enterprise プラン"
         },
@@ -1622,7 +1622,7 @@
       },
       "teamContext": {
         "description": "ユーザーは個人設定で、個別のコンテキストを追加することもできます。",
-        "placeholder": "チームの説明と、Onyx に期待する動作を入力してください。",
+        "placeholder": "チームの説明と、Zeshan に期待する動作を入力してください。",
         "title": "チームのコンテキスト"
       },
       "teamName": {
@@ -2781,7 +2781,7 @@
         "title": "ユーザーが見つかりません"
       },
       "header": {
-        "description": "Onyx のエージェント型アプリビルダーである Craft を使えるユーザーを管理します。",
+        "description": "Zeshan のエージェント型アプリビルダーである Craft を使えるユーザーを管理します。",
         "title": "アクセス"
       },
       "perUserAccess": {
@@ -2812,7 +2812,7 @@
         }
       },
       "unavailable": {
-        "description": "Craft はデプロイごとに Onyx が有効にします。利用するには、Onyx の担当者にお問い合わせください。",
+        "description": "Craft はデプロイごとに Zeshan が有効にします。利用するには、Zeshan の担当者にお問い合わせください。",
         "title": "このデプロイでは Craft を利用できません"
       },
       "usersLoadError": {
@@ -2898,7 +2898,7 @@
         "label": "Craft で試す"
       },
       "unavailable": {
-        "description": "Craft はデプロイごとに Onyx が有効にします。利用するには、Onyx の担当者にお問い合わせください。",
+        "description": "Craft はデプロイごとに Zeshan が有効にします。利用するには、Zeshan の担当者にお問い合わせください。",
         "title": "このデプロイでは Craft を利用できません"
       }
     },
@@ -3283,7 +3283,7 @@
       },
       "page": {
         "header": {
-          "description": "Onyx を Discord サーバーに接続します。ユーザーは Discord のチャンネルで直接質問できます。"
+          "description": "Zeshan を Discord サーバーに接続します。ユーザーは Discord のチャンネルで直接質問できます。"
         }
       },
       "registrationKey": {
@@ -3320,7 +3320,7 @@
           "label": "API キーを削除"
         },
         "deleteHint": "更新する前に、現在の API キーを削除してください。",
-        "description": "Unstructured は .pdf、.docx、.png、.pptx などの形式から複雑なデータを抽出し、Onyx が取り込める整ったテキストに変換します。Unstructured によるドキュメント処理を有効にするには、API キーを入力してください。",
+        "description": "Unstructured は .pdf、.docx、.png、.pptx などの形式から複雑なデータを抽出し、Zeshan が取り込める整ったテキストに変換します。Unstructured によるドキュメント処理を有効にするには、API キーを入力してください。",
         "learnMore": "Unstructured の詳細は<link>こちら</link>をご覧ください。",
         "note": "<label>注意:</label> ドキュメントは処理のため Unstructured のサーバーに送信されます。",
         "saveButton": {
@@ -3397,7 +3397,7 @@
         "deleteScheduled": {
           "toast": "ドキュメントセット「{name}」の削除をスケジュールしました"
         },
-        "description": "**ドキュメントセット**を使うと、関連するドキュメントを 1 つのまとまりにグループ化できます。作成したセットは検索時のフィルターとして使い、Onyx が検索する情報の範囲を制御できます。",
+        "description": "**ドキュメントセット**を使うと、関連するドキュメントを 1 つのまとまりにグループ化できます。作成したセットは検索時のフィルターとして使い、Zeshan が検索する情報の範囲を制御できます。",
         "edit": {
           "header": {
             "title": "ドキュメントセットを編集"
@@ -3660,7 +3660,7 @@
         "noCustomSkills": "カスタムスキルなし",
         "orgCredentialsSet": "組織の認証情報を設定済み",
         "perUserCredentials": "ユーザーごとの認証情報",
-        "providedByOnyx": "Onyx が提供",
+        "providedByOnyx": "Zeshan が提供",
         "tools": "{count, plural, one {ツール # 個} other {ツール # 個}}",
         "upstreamPatterns": "{count, plural, one {アップストリームパターン # 件} other {アップストリームパターン # 件}}"
       },
@@ -3909,7 +3909,7 @@
           "tooltip": "このグループの最近の変更により、ドキュメントの embedding を更新しています。"
         },
         "systemGroup": {
-          "description": "このグループは Onyx が管理します。保持するのはメンバーのみで、変更できるのもメンバーだけです。",
+          "description": "このグループは Zeshan が管理します。保持するのはメンバーのみで、変更できるのもメンバーだけです。",
           "title": "システムグループ"
         },
         "toasts": {
@@ -4022,7 +4022,7 @@
         }
       },
       "permissionsChanged": {
-        "description": "Onyx はグループ単位の権限を使用するようになりました。アクセス権はグループごとに設定するため、ユーザーの権限は所属するすべてのグループの組み合わせになります。",
+        "description": "Zeshan はグループ単位の権限を使用するようになりました。アクセス権はグループごとに設定するため、ユーザーの権限は所属するすべてのグループの組み合わせになります。",
         "learnMore": {
           "label": "詳細を見る"
         },
@@ -4085,7 +4085,7 @@
           "placeholder": "コスト上限",
           "unit": "(USD)"
         },
-        "disabledTooltip": "token レート制限は [Onyx の Enterprise 版](/admin/billing) でのみ利用できます。",
+        "disabledTooltip": "token レート制限は [Zeshan の Enterprise 版](/admin/billing) でのみ利用できます。",
         "section": {
           "description": "このグループが指定期間内に使用できる token 数を制限します。",
           "title": "Token レート制限"
@@ -4428,7 +4428,7 @@
           "message": "API キーの検証に失敗しました"
         },
         "authMethod": {
-          "idle": "Onyx が Google Vertex AI に認証する方法を選択してください。",
+          "idle": "Zeshan が Google Vertex AI に認証する方法を選択してください。",
           "label": "認証方法",
           "required": "認証方法は必須です",
           "serviceAccount": {
@@ -4472,7 +4472,7 @@
           "required": "リージョンは必須です"
         },
         "projectId": {
-          "idle": "Vertex AI を有効にした GCP プロジェクトです。Onyx は Pod にバインドされたサービスアカウント (GKE Workload Identity) で認証します。",
+          "idle": "Vertex AI を有効にした GCP プロジェクトです。Zeshan は Pod にバインドされたサービスアカウント (GKE Workload Identity) で認証します。",
           "label": "GCP プロジェクト ID",
           "required": "プロジェクト ID は必須です"
         },
@@ -4562,7 +4562,7 @@
           "title": "デプロイ名"
         },
         "modelName": {
-          "description": "Onyx 内でこのモデルを示すラベルです。Azure はデプロイ名でリクエストを振り分けるため、一意の識別子であれば十分です。"
+          "description": "Zeshan 内でこのモデルを示すラベルです。Azure はデプロイ名でリクエストを振り分けるため、一意の識別子であれば十分です。"
         },
         "targetUrl": {
           "title": "ターゲット URL"
@@ -4597,7 +4597,7 @@
         }
       },
       "cloudDisabled": {
-        "tooltip": "この設定は Onyx Cloud が管理します。"
+        "tooltip": "この設定は Zeshan Cloud が管理します。"
       },
       "contextualModel": {
         "description": "このモデルはチャンクのコンテキストを生成するために使用します。",
@@ -4611,9 +4611,9 @@
       },
       "embeddingModel": {
         "cloudManaged": {
-          "title": "embedding モデルと関連設定は Onyx Cloud が管理します。"
+          "title": "embedding モデルと関連設定は Zeshan Cloud が管理します。"
         },
-        "description": "Onyx はこのモデルを使用して、検索と取得のためにドキュメントをエンコードします。",
+        "description": "Zeshan はこのモデルを使用して、検索と取得のためにドキュメントをエンコードします。",
         "title": "Embedding モデル"
       },
       "errorsModal": {
@@ -4661,7 +4661,7 @@
         },
         "modelName": {
           "placeholder": "model-name",
-          "selfHostedDescription": "Onyx はセルフホストのエンドポイント上にあるこのモデルに接続します。",
+          "selfHostedDescription": "Zeshan はセルフホストのエンドポイント上にあるこのモデルに接続します。",
           "title": "モデル名"
         },
         "normalize": {
@@ -4705,7 +4705,7 @@
           "title": "API ベース URL"
         },
         "modelName": {
-          "description": "Onyx は {provider} プロキシ上にあるこのモデルに接続します。"
+          "description": "Zeshan は {provider} プロキシ上にあるこのモデルに接続します。"
         }
       },
       "maxImageSize": {
@@ -4921,7 +4921,7 @@
       "wontPortConsentModal": {
         "title": "{count, plural, one {このコネクタは削除されます} other {これら # 個のコネクタは削除されます}}",
         "submit": "削除して再インデックス",
-        "description": "{count, plural, one {再インデックスでは一時停止中および無効なコネクタはスキップされるため、このコネクタは新しいインデックスに移行されません。Onyx はこのコネクタと、それがインデックスしたドキュメントを削除します:} other {再インデックスでは一時停止中および無効なコネクタはスキップされるため、これら # 個は新しいインデックスに移行されません。Onyx はこれらのコネクタと、それらがインデックスしたドキュメントを削除します:}}",
+        "description": "{count, plural, one {再インデックスでは一時停止中および無効なコネクタはスキップされるため、このコネクタは新しいインデックスに移行されません。Zeshan はこのコネクタと、それがインデックスしたドキュメントを削除します:} other {再インデックスでは一時停止中および無効なコネクタはスキップされるため、これら # 個は新しいインデックスに移行されません。Zeshan はこれらのコネクタと、それらがインデックスしたドキュメントを削除します:}}",
         "connector": "{name} — {status}",
         "statusInvalid": "無効",
         "statusPaused": "一時停止中",
@@ -5086,7 +5086,7 @@
         "title": "新しい LLM の設定は一時的に利用できません。"
       },
       "defaultModel": {
-        "description": "このモデルは Onyx のチャットでデフォルトとして使用されます。",
+        "description": "このモデルは Zeshan のチャットでデフォルトとして使用されます。",
         "title": "デフォルトモデル"
       },
       "deleteModal": {
@@ -5100,7 +5100,7 @@
       },
       "groups": {
         "addProvider": {
-          "description": "Onyx は主要なプロバイダーとセルフホストモデルの両方に対応しています。",
+          "description": "Zeshan は主要なプロバイダーとセルフホストモデルの両方に対応しています。",
           "title": "プロバイダーを追加"
         },
         "gateways": {
@@ -5174,7 +5174,7 @@
               "description": "AWS 以外の環境向け",
               "label": "アクセスキー"
             },
-            "description": "Onyx が Bedrock で認証する方法を選択してください。",
+            "description": "Zeshan が Bedrock で認証する方法を選択してください。",
             "iam": {
               "description": "AWS 環境で推奨",
               "label": "環境の IAM ロール"
@@ -5186,7 +5186,7 @@
             "title": "認証方法"
           },
           "iamNotice": {
-            "title": "Onyx は実行環境に割り当てられた IAM ロールを使用して認証します。"
+            "title": "Zeshan は実行環境に割り当てられた IAM ロールを使用して認証します。"
           },
           "longTermApiKeyField": {
             "placeholder": "長期 API キー",
@@ -5457,7 +5457,7 @@
         },
         "setup": {
           "apiBaseField": {
-            "containerizedNote": "Onyx をコンテナで実行している場合、ホスト上のサービスに接続するには `localhost` の代わりに `host.docker.internal` を使用してください。",
+            "containerizedNote": "Zeshan をコンテナで実行している場合、ホスト上のサービスに接続するには `localhost` の代わりに `host.docker.internal` を使用してください。",
             "title": "API ベース URL"
           },
           "apiKeyField": {
@@ -5510,7 +5510,7 @@
         },
         "vertexAi": {
           "authMethodField": {
-            "description": "Onyx が Google Vertex AI で認証する方法を選択してください。",
+            "description": "Zeshan が Google Vertex AI で認証する方法を選択してください。",
             "serviceAccount": {
               "description": "GCP サービスアカウントキーの JSON ファイルをアップロード",
               "label": "サービスアカウント JSON"
@@ -5539,7 +5539,7 @@
             "projectRequired": "GCP プロジェクト ID は必須です"
           },
           "workloadIdentityNotice": {
-            "title": "Onyx は Pod の環境に設定された Google Cloud 認証情報を google.auth.default 経由で使用します。Kubernetes ServiceAccount が Vertex AI にアクセスできる GCP サービスアカウントにバインドされていることを確認してください。"
+            "title": "Zeshan は Pod の環境に設定された Google Cloud 認証情報を google.auth.default 経由で使用します。Kubernetes ServiceAccount が Vertex AI にアクセスできる GCP サービスアカウントにバインドされていることを確認してください。"
           }
         }
       },
@@ -5605,7 +5605,7 @@
         },
         "requestSentBody": "参加リクエストを送信しました。{domain} の管理者が承認するまで、自分のチームで操作を試すことができます。",
         "tryOnyxButton": {
-          "label": "待っている間に Onyx を試す"
+          "label": "待っている間に Zeshan を試す"
         }
       },
       "newTenant": {
@@ -6160,7 +6160,7 @@
     },
     "serviceAccounts": {
       "deleteModal": {
-        "description": "アカウント *{name}*（`{keyDisplay}`）の API キーを使用しているアプリケーションは、Onyx にアクセスできなくなります。",
+        "description": "アカウント *{name}*（`{keyDisplay}`）の API キーを使用しているアプリケーションは、Zeshan にアクセスできなくなります。",
         "submit": {
           "label": "削除"
         },
@@ -6207,7 +6207,7 @@
         "cancelButton": {
           "label": "キャンセル"
         },
-        "description": "サービスアカウントの API キーを使用すると、ユーザーレベルの権限で Onyx API にプログラムからアクセスできます。アカウントの詳細は後から変更できます。",
+        "description": "サービスアカウントの API キーを使用すると、ユーザーレベルの権限で Zeshan API にプログラムからアクセスできます。アカウントの詳細は後から変更できます。",
         "groups": {
           "empty": {
             "description": "このサービスアカウントに割り当てられたグループはありません。",
@@ -6269,7 +6269,7 @@
         }
       },
       "page": {
-        "description": "サービスアカウントを使用して、Onyx API にプログラムからアクセスします。",
+        "description": "サービスアカウントを使用して、Zeshan API にプログラムからアクセスします。",
         "error": {
           "description": "詳細はコンソールを確認してください。",
           "title": "サービスアカウントの読み込みに失敗しました。"
@@ -6339,7 +6339,7 @@
         }
       },
       "liteModeNotice": {
-        "description": "このデプロイでは Onyx Lite が動作しています。ベクトルデータベースがないため、コネクターとドキュメントのインデックス作成は無効で、何もインデックスされません。データソースを接続してドキュメントをインデックスするには、Onyx を **Standard モード** でデプロイしてください。開始するには [デプロイガイド]({docsUrl}) を参照してください。",
+        "description": "このデプロイでは Zeshan Lite が動作しています。ベクトルデータベースがないため、コネクターとドキュメントのインデックス作成は無効で、何もインデックスされません。データソースを接続してドキュメントをインデックスするには、Zeshan を **Standard モード** でデプロイしてください。開始するには [デプロイガイド]({docsUrl}) を参照してください。",
         "title": "Lite モードではインデックス作成を利用できません"
       },
       "providerCard": {
@@ -6593,7 +6593,7 @@
         },
         "showContinueInWebUi": {
           "label": "「Web UI で続ける」ボタンを表示",
-          "tooltip": "設定すると、応答の下部にボタンを表示し、ユーザーが Onyx の Web UI で会話を続けられるようにします"
+          "tooltip": "設定すると、応答の下部にボタンを表示し、ユーザーが Zeshan の Web UI で会話を続けられるようにします"
         },
         "stillNeedHelp": {
           "label": "「Still need help?」ボタンを表示する",
@@ -6623,12 +6623,12 @@
         "autoAnswer": {
           "item": "特定のチャンネルで OnyxBot が自動的に質問に回答するように設定できます。"
         },
-        "description": "Onyx に接続する Slack ボットを設定します。設定が完了すると、Slack から直接 Onyx に質問できます。さらに、次のことができます:",
+        "description": "Zeshan に接続する Slack ボットを設定します。設定が完了すると、Slack から直接 Zeshan に質問できます。さらに、次のことができます:",
         "directMessage": {
           "item": "OnyxBot にダイレクトメッセージを送ると、Web UI と同じように検索できます。"
         },
         "docsPrompt": {
-          "text": "Onyx のドキュメントにある<link>ガイド</link>に沿って始めてください。"
+          "text": "Zeshan のドキュメントにある<link>ガイド</link>に沿って始めてください。"
         },
         "documentSets": {
           "item": "質問が投稿されるチャンネルに応じて、OnyxBot が回答に使用するドキュメントセットを選べます。"
@@ -6666,7 +6666,7 @@
           "badge": "無効"
         },
         "empty": {
-          "message": "Onyx とのチャットを始めるには、新しい Slack ボットを追加してください。"
+          "message": "Zeshan とのチャットを始めるには、新しい Slack ボットを追加してください。"
         },
         "enabled": {
           "badge": "有効"
@@ -7073,11 +7073,11 @@
         "label": "初回訪問時のポップアップ通知"
       },
       "appName": {
-        "description": "この名前はアプリ全体に表示され、UI内の「Onyx」を置き換えます。",
+        "description": "この名前はアプリ全体に表示され、UI内の「Zeshan」を置き換えます。",
         "label": "アプリケーションの表示名"
       },
       "branding": {
-        "description": "アプリ内の「powered by Onyx」やその他のOnyxブランディングを削除します。",
+        "description": "アプリ内の「powered by Zeshan」やその他のOnyxブランディングを削除します。",
         "enterpriseTooltip": "Onyxブランディングの非表示はEnterpriseプランの機能です。",
         "label": "Onyxブランディングを非表示"
       },
@@ -7522,7 +7522,7 @@
         }
       },
       "activateModal": {
-        "description": "<strong>{email}</strong> は Onyx へのアクセスを回復します。",
+        "description": "<strong>{email}</strong> は Zeshan へのアクセスを回復します。",
         "submit": {
           "label": "有効化"
         },
@@ -7532,7 +7532,7 @@
         }
       },
       "cancelInviteModal": {
-        "description": "<strong>{email}</strong> は、この招待で Onyx に参加できなくなります。",
+        "description": "<strong>{email}</strong> は、この招待で Zeshan に参加できなくなります。",
         "submit": {
           "label": "招待を取り消す"
         },
@@ -7542,7 +7542,7 @@
         }
       },
       "deactivateModal": {
-        "description": "<strong>{email}</strong> は Onyx へのアクセスを直ちに失います。セッションとエージェントは保持されます。ライセンスのシートは解放されます。このアカウントは後から再度有効化できます。",
+        "description": "<strong>{email}</strong> は Zeshan へのアクセスを直ちに失います。セッションとエージェントは保持されます。ライセンスのシートは解放されます。このアカウントは後から再度有効化できます。",
         "submit": {
           "label": "無効化"
         },
@@ -7552,7 +7552,7 @@
         }
       },
       "deleteModal": {
-        "description": "<strong>{email}</strong> は Onyx から完全に削除されます。セッション履歴もすべて削除されます。削除は元に戻せません。",
+        "description": "<strong>{email}</strong> は Zeshan から完全に削除されます。セッション履歴もすべて削除されます。削除は元に戻せません。",
         "submit": {
           "label": "削除"
         },
@@ -7677,7 +7677,7 @@
         "title": "ユーザーとリクエスト"
       },
       "permissionsNotice": {
-        "description": "Onyx はグループベースの権限を使用するようになりました。Curator と Global Curator のロールは、設定可能なグループ権限に置き換えられました。グループごとの管理者が、範囲を限定した管理を行います。",
+        "description": "Zeshan はグループベースの権限を使用するようになりました。Curator と Global Curator のロールは、設定可能なグループ権限に置き換えられました。グループごとの管理者が、範囲を限定した管理を行います。",
         "learnMoreButton": {
           "label": "詳細を見る"
         },
@@ -7904,12 +7904,12 @@
           "label": "STT モデル"
         },
         "targetUri": {
-          "description": "[Azure Portal（キーとエンドポイント）]({portalUrl}) に表示されるエンドポイントを貼り付けてください。Onyx はこの URL から音声リージョンを抽出します。例：`https://westus.api.cognitive.microsoft.com/` または `https://westus.tts.speech.microsoft.com/`。",
+          "description": "[Azure Portal（キーとエンドポイント）]({portalUrl}) に表示されるエンドポイントを貼り付けてください。Zeshan はこの URL から音声リージョンを抽出します。例：`https://westus.api.cognitive.microsoft.com/` または `https://westus.tts.speech.microsoft.com/`。",
           "label": "ターゲット URI",
           "required": "ターゲット URI は必須です"
         },
         "ttsModel": {
-          "description": "このモデルが、Onyx のテキスト読み上げでデフォルトとして使用されます。",
+          "description": "このモデルが、Zeshan のテキスト読み上げでデフォルトとして使用されます。",
           "label": "デフォルトモデル"
         },
         "updateButton": {
@@ -7972,7 +7972,7 @@
           "message": "{label} の接続を解除しました"
         },
         "fallback": {
-          "description": "Onyx は組み込みの Web クローラーにフォールバックします。"
+          "description": "Zeshan は組み込みの Web クローラーにフォールバックします。"
         },
         "header": {
           "description": "このプロバイダーに保存された認証情報を削除します。",
@@ -8396,7 +8396,7 @@
           "title": "会話のきっかけ"
         },
         "defaultModel": {
-          "description": "このモデルが、Onyx のチャットでデフォルトとして使用されます。",
+          "description": "このモデルが、Zeshan のチャットでデフォルトとして使用されます。",
           "title": "デフォルトモデル"
         },
         "featured": {
@@ -8497,7 +8497,7 @@
         "label": "新しい組織を作成"
       },
       "createTeamOption": {
-        "text": "新しい Onyx チームを作成する"
+        "text": "新しい Zeshan チームを作成する"
       },
       "differentEmailPrompt": {
         "text": "別のメールアドレスのアカウントをお持ちですか？"
@@ -8506,10 +8506,10 @@
         "title": "アカウントが見つかりません"
       },
       "inviteOption": {
-        "text": "既存の Onyx チームに招待してもらう"
+        "text": "既存の Zeshan チームに招待してもらう"
       },
       "notFound": {
-        "description": "お客様のアカウントが記録内に見つかりませんでした。Onyx を利用するには、次のいずれかが必要です："
+        "description": "お客様のアカウントが記録内に見つかりませんでした。Zeshan を利用するには、次のいずれかが必要です："
       },
       "signInLink": {
         "label": "サインイン"
@@ -8569,7 +8569,7 @@
         "description": "アカウントのアクセス制限または権限"
       },
       "cloudSupportPrompt": {
-        "text": "問題が解決しない場合は、Onyx チーム（<link>support@onyx.app</link>）までご連絡ください"
+        "text": "問題が解決しない場合は、Zeshan チーム（<link>support@onyx.app</link>）までご連絡ください"
       },
       "code": {
         "accessDenied": "ID プロバイダーによってアクセスが拒否されました。",
@@ -8853,10 +8853,10 @@
         "placeholder": "選択してください"
       },
       "referralQuestion": {
-        "label": "Onyx をどこでお知りになりましたか？"
+        "label": "Zeshan をどこでお知りになりましたか？"
       },
       "subtitle": {
-        "text": "Onyx を始めましょう"
+        "text": "Zeshan を始めましょう"
       }
     },
     "verifyEmail": {
@@ -9090,7 +9090,7 @@
       },
       "healthBanner": {
         "backendUnavailable": {
-          "description": "初回セットアップ直後、または Onyx のデプロイを更新した直後の場合は、バックエンドがまだ起動中である可能性が高いです。1〜2 分ほど待ってから、ページを再読み込みしてください。それでも解決しない場合は、バックエンドが正しくセットアップされているか確認するか、管理者にお問い合わせください。",
+          "description": "初回セットアップ直後、または Zeshan のデプロイを更新した直後の場合は、バックエンドがまだ起動中である可能性が高いです。1〜2 分ほど待ってから、ページを再読み込みしてください。それでも解決しない場合は、バックエンドが正しくセットアップされているか確認するか、管理者にお問い合わせください。",
           "title": "バックエンドは現在利用できません"
         }
       },
@@ -9195,7 +9195,7 @@
           "placeholder": "今日はどのようなご用件でしょうか？",
           "queuedPlaceholder": "上キーを押すとキュー内のメッセージを編集できます",
           "searchPlaceholder": "接続済みのソースを検索",
-          "speakingPlaceholder": "Onyx が話しています..."
+          "speakingPlaceholder": "Zeshan が話しています..."
         },
         "sendButton": {
           "processingFilesTooltip": "添付ファイルの処理が完了するのを待っています"
@@ -9316,7 +9316,7 @@
       },
       "sharedAppInputBar": {
         "input": {
-          "placeholder": "Onyx がお手伝いできることはありますか"
+          "placeholder": "Zeshan がお手伝いできることはありますか"
         },
         "startSessionButton": {
           "label": "新しいセッションを開始"
@@ -10244,7 +10244,7 @@
           "loginButton": {
             "label": "ログイン"
           },
-          "title": "Onyx へようこそ"
+          "title": "Zeshan へようこそ"
         },
         "noResubmitMessage": {
           "toast": "以前に送信されたメッセージが見つかりません。"
@@ -10262,8 +10262,8 @@
           "confirmButton": {
             "label": "オフにする"
           },
-          "description": "代わりにブラウザのデフォルトの新しいタブページが表示されます。Onyx の設定からいつでも再度オンにできます。",
-          "title": "Onyx の新しいタブページをオフにしますか？"
+          "description": "代わりにブラウザのデフォルトの新しいタブページが表示されます。Zeshan の設定からいつでも再度オンにできます。",
+          "title": "Zeshan の新しいタブページをオフにしますか？"
         }
       },
       "settingsPanel": {
@@ -10289,7 +10289,7 @@
           "title": "設定"
         },
         "newTabToggle": {
-          "label": "Onyx を新しいタブページとして使用"
+          "label": "Zeshan を新しいタブページとして使用"
         },
         "themeToggle": {
           "tooltip": "{mode, select, light {ライトテーマに切り替え} other {ダークテーマに切り替え}}"
@@ -10300,7 +10300,7 @@
           "tooltip": "新しいチャット"
         },
         "openInOnyxButton": {
-          "tooltip": "Onyx で開く"
+          "tooltip": "Zeshan で開く"
         }
       }
     },
@@ -10312,7 +10312,7 @@
         "error": "アプリケーションを利用するには、規約に同意する必要があります。"
       },
       "header": {
-        "title": "Onyx へようこそ！"
+        "title": "Zeshan へようこそ！"
       },
       "logoIcon": {
         "alt": "ロゴ"
@@ -11011,7 +11011,7 @@
         "alt": "ロゴ"
       },
       "poweredBy": {
-        "label": "Powered by Onyx"
+        "label": "Powered by Zeshan"
       }
     },
     "nonSelectableConnectors": {
@@ -11208,8 +11208,8 @@
             "label": "名前"
           }
         },
-        "managedDescription": "Onyx が提供。エージェントに許可する操作を設定してください。",
-        "managedNote": "このアプリは Onyx が提供し、認証情報は自動的に管理されます。以下でエージェントに許可する操作を選択してください。ユーザーはアプリページから接続します。",
+        "managedDescription": "Zeshan が提供。エージェントに許可する操作を設定してください。",
+        "managedNote": "このアプリは Zeshan が提供し、認証情報は自動的に管理されます。以下でエージェントに許可する操作を選択してください。ユーザーはアプリページから接続します。",
         "saveButton": "保存"
       },
       "customApp": {
@@ -11294,14 +11294,14 @@
           "startAuthFailed": "認可を開始できませんでした"
         },
         "header": {
-          "description": "Onyx Craft が作業中にコンテキストとして使えるツールを接続します。",
+          "description": "Zeshan Craft が作業中にコンテキストとして使えるツールを接続します。",
           "manageButton": "アプリを管理",
           "searchPlaceholder": "アプリを検索...",
           "title": "アプリ"
         },
         "kinds": {
           "app": {
-            "blurb": "Onyx が直接サポートするインテグレーションです。それぞれに Craft へ使い方を教えるスキルが付属しています。まずはここから始めましょう。",
+            "blurb": "Zeshan が直接サポートするインテグレーションです。それぞれに Craft へ使い方を教えるスキルが付属しています。まずはここから始めましょう。",
             "empty": "組織向けに設定されたアプリはまだありません。",
             "emptyTitle": "アプリはまだありません",
             "tabLabel": "アプリ · {count}"
@@ -11676,7 +11676,7 @@
       },
       "llmLocked": {
         "backToChatButton": "チャットに戻る",
-        "description": "Onyx Craft にはモデルプロバイダーが必要で、設定できるのは管理者のみです。管理者に Anthropic、OpenAI、または OpenRouter の接続を依頼してください。",
+        "description": "Zeshan Craft にはモデルプロバイダーが必要で、設定できるのは管理者のみです。管理者に Anthropic、OpenAI、または OpenRouter の接続を依頼してください。",
         "title": "LLM プロバイダーが必要です"
       },
       "llmSetup": {
@@ -11821,7 +11821,7 @@
         "ariaLabel": "リンクをコピー"
       },
       "organization": {
-        "description": "あなたの Onyx にログインしている人は誰でもこのアプリを表示できます。",
+        "description": "あなたの Zeshan にログインしている人は誰でもこのアプリを表示できます。",
         "label": "組織"
       },
       "private": {
@@ -12357,7 +12357,7 @@
         "placeholder": "ファイルを絞り込み..."
       },
       "processing": {
-        "description": "Onyx はアップロードされたファイルをまだ処理中です。今すぐエージェントを作成できますが、処理が完了するまで一部のファイルにはアクセスできません。"
+        "description": "Zeshan はアップロードされたファイルをまだ処理中です。今すぐエージェントを作成できますが、処理が完了するまで一部のファイルにはアクセスできません。"
       }
     },
     "search": {
@@ -12436,7 +12436,7 @@
         "button": {
           "label": "ウェブ検索"
         },
-        "description": "Onyx がインターネットで情報を検索できるようにします。",
+        "description": "Zeshan がインターネットで情報を検索できるようにします。",
         "title": "ウェブ検索プロバイダーを選択"
       }
     },
@@ -12456,7 +12456,7 @@
         "subtitle": "LiteLLM 互換 API",
         "title": "カスタム LLM プロバイダー"
       },
-      "description": "Onyx はセルフホストのモデルと主要なプロバイダーの両方に対応しています。",
+      "description": "Zeshan はセルフホストのモデルと主要なプロバイダーの両方に対応しています。",
       "edit": {
         "ariaLabel": "LLM プロバイダーを編集"
       },
@@ -12476,7 +12476,7 @@
       "input": {
         "placeholder": "お名前"
       },
-      "title": "Onyx はあなたを何と呼べばよいですか？"
+      "title": "Zeshan はあなたを何と呼べばよいですか？"
     },
     "nonAdminStep": {
       "confirmation": {
@@ -12602,7 +12602,7 @@
         "searchPlaceholder": "検索..."
       },
       "revokeModal": {
-        "description": "トークン {name}（{tokenDisplay}）を使用しているアプリケーションは、Onyx にアクセスできなくなります。この操作は取り消せません。",
+        "description": "トークン {name}（{tokenDisplay}）を使用しているアプリケーションは、Zeshan にアクセスできなくなります。この操作は取り消せません。",
         "question": "このトークンを無効化しますか？",
         "submit": "無効化",
         "title": "アクセストークンを無効化"
@@ -12668,7 +12668,7 @@
         "title": "デフォルトのアプリモード"
       },
       "defaultModel": {
-        "description": "Onyx はチャットでこのモデルをデフォルトで使用します。",
+        "description": "Zeshan はチャットでこのモデルをデフォルトで使用します。",
         "title": "デフォルトのモデル"
       },
       "defaultReasoningLevel": {
@@ -12693,7 +12693,7 @@
       "connectButton": "接続",
       "disconnectModal": {
         "continueNote": "{name} のコンテンツを参照している既存のセッションは、引き続き利用できます。",
-        "description": "Onyx はあなたの {name} アカウントのコンテンツにアクセスまたは検索できなくなります。",
+        "description": "Zeshan はあなたの {name} アカウントのコンテンツにアクセスまたは検索できなくなります。",
         "disconnecting": "切断中...",
         "submit": "切断",
         "title": "*{name}* を切断"
@@ -12740,7 +12740,7 @@
         "copy": "コピー",
         "copyError": "値をコピーできませんでした。"
       },
-      "description": "Onyx で利用できるモデルに外部ツールを接続します。",
+      "description": "Zeshan で利用できるモデルに外部ツールを接続します。",
       "guideButton": "ガイド",
       "loadError": {
         "description": "ページを更新してからもう一度お試しください。",
@@ -12803,7 +12803,7 @@
         "maxReached": "メモリの上限（{count}件）に達しました"
       },
       "empty": {
-        "description": "Onyx に覚えておいてほしい個人的なメモやメモリを追加します。",
+        "description": "Zeshan に覚えておいてほしい個人的なメモやメモリを追加します。",
         "getStarted": "まだメモリがありません。「行を追加」をクリックして始めてください。",
         "noMatches": "検索に一致するメモリはありません。"
       },
@@ -12818,7 +12818,7 @@
         "searchPlaceholder": "検索..."
       },
       "referenceStoredMemories": {
-        "description": "チャットで保存済みのメモリを Onyx が参照できるようにします。",
+        "description": "チャットで保存済みのメモリを Zeshan が参照できるようにします。",
         "title": "保存済みメモリを参照"
       },
       "removeLineButton": {
@@ -12830,7 +12830,7 @@
         "saved": "設定を保存しました"
       },
       "updateMemories": {
-        "description": "Onyx が保存済みのメモリを生成・更新できるようにします。",
+        "description": "Zeshan が保存済みのメモリを生成・更新できるようにします。",
         "title": "メモリを更新"
       },
       "viewAll": {
@@ -13108,10 +13108,10 @@
     },
     "adminSidebar": {
       "businessOrEnterpriseOnly": {
-        "tooltip": "この機能は [Onyx の Business 版または Enterprise 版](/admin/billing) でのみ利用できます。"
+        "tooltip": "この機能は [Zeshan の Business 版または Enterprise 版](/admin/billing) でのみ利用できます。"
       },
       "enterpriseOnly": {
-        "tooltip": "この機能は [Onyx の Enterprise 版](/admin/billing) でのみ利用できます。"
+        "tooltip": "この機能は [Zeshan の Enterprise 版](/admin/billing) でのみ利用できます。"
       },
       "exitAdminPanel": {
         "label": "管理パネルを終了"

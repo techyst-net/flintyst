@@ -1,4 +1,4 @@
-# Onyx Chat Widget
+# Zeshan Chat Widget
 
 An embeddable, lightweight chat widget that brings AI-powered conversations to any website. Built with [Lit](https://lit.dev/) web components for maximum compatibility and minimal bundle size.
 
@@ -60,7 +60,7 @@ That's it! The widget will appear as a floating button in the bottom-right corne
                │ API Calls (SSE)
                ▼
 ┌──────────────────────────────────────────┐
-│         Onyx Backend                     │
+│         Zeshan Backend                     │
 │  • POST /api/chat/create-chat-session    │
 │  • POST /api/chat/send-chat-message      │
 │  • Streams responses via SSE             │
@@ -94,7 +94,7 @@ That's it! The widget will appear as a floating button in the bottom-right corne
           └─ Input Area
               ├─ Text Input
               ├─ Send Button
-              └─ "Powered by Onyx" Footer
+              └─ "Powered by Zeshan" Footer
 ```
 
 ## Configuration Options
@@ -103,7 +103,7 @@ That's it! The widget will appear as a floating button in the bottom-right corne
 
 | Attribute     | Type   | Description                                                          |
 | ------------- | ------ | -------------------------------------------------------------------- |
-| `backend-url` | string | Your Onyx backend API URL (or set `VITE_WIDGET_BACKEND_URL` in .env) |
+| `backend-url` | string | Your Zeshan backend API URL (or set `VITE_WIDGET_BACKEND_URL` in .env) |
 | `api-key`     | string | API key for authentication (or set `VITE_WIDGET_API_KEY` in .env)    |
 
 **Note**: For cloud deployment, these must be provided as HTML attributes. For self-hosted deployment, they can be set in `.env` file during build and will be baked into the bundle.
@@ -114,7 +114,7 @@ That's it! The widget will appear as a floating button in the bottom-right corne
 | ------------------ | ------ | ------------- | ---------------------------------------- |
 | `agent-id`         | number | `undefined`   | Specific agent/persona to use            |
 | `agent-name`       | string | `"Assistant"` | Display name in header                   |
-| `logo`             | string | Onyx logo     | URL to custom logo image                 |
+| `logo`             | string | Zeshan logo     | URL to custom logo image                 |
 | `primary-color`    | string  | `#1c1c1c`     | Primary brand color (buttons, accents)   |
 | `background-color` | string  | `#e9e9e9`     | Widget background color                  |
 | `text-color`       | string  | `#000000bf`   | Text color (75% opacity black)           |
@@ -192,7 +192,7 @@ The widget is embedded directly in your page layout. Perfect for dedicated suppo
 ### Prerequisites
 
 - [Bun](https://bun.sh) 1.3+
-- Access to Onyx backend API
+- Access to Zeshan backend API
 
 ### Setup
 
@@ -255,7 +255,7 @@ widget/
 │   ├── utils/
 │   │   └── storage.ts           # Session persistence
 │   └── assets/
-│       └── logo.ts              # Default Onyx logo (base64)
+│       └── logo.ts              # Default Zeshan logo (base64)
 ├── dist/                        # Build output
 ├── index.html
 ├── package.json
@@ -274,7 +274,7 @@ widget/
 
 ### Backend Endpoints Used
 
-The widget communicates with these Onyx backend endpoints:
+The widget communicates with these Zeshan backend endpoints:
 
 #### 1. Create Chat Session
 

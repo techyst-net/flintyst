@@ -155,7 +155,7 @@ repos:
       - id: uv-run
         alias: terraform-public-safe
         name: terraform public-safe values
-        # These modules are published but stay in sync with what Onyx runs, so
+        # These modules are published but stay in sync with what Zeshan runs, so
         # an internal value can travel across by accident. Fails on account
         # ids, access key ids, routable IPv4 CIDRs, and email addresses.
         # Append '# public-safe: ok' to accept a line.

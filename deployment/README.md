@@ -1,4 +1,4 @@
-Documentation for how to deploy Onyx can be found in our official docs:
+Documentation for how to deploy Zeshan can be found in our official docs:
 https://docs.onyx.app/deployment/overview
 
 ## Maintaining the compose files (contributors)

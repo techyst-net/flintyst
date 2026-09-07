@@ -1,6 +1,6 @@
 """Physical database ("shard") registry for tenant routing.
 
-Onyx addresses a tenant by *schema* via ``schema_translate_map``. This module adds
+Zeshan addresses a tenant by *schema* via ``schema_translate_map``. This module adds
 the orthogonal axis: which *database* that schema lives in.
 
 Design notes:

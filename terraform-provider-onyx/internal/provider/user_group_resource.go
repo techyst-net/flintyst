@@ -71,7 +71,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 		MarkdownDescription: "A user group: a roster of people, the managers among them, and the " +
 			"permissions the group grants. **Enterprise Edition only** — the routes do not exist " +
 			"on Community Edition, where every call answers 404.\n\n" +
-			"Permissions in Onyx come only from group grants, so this resource is how a person " +
+			"Permissions in Zeshan come only from group grants, so this resource is how a person " +
 			"gets any authority at all.\n\n" +
 			"What the group can *see* is not set here. Connectors, document sets, agents, LLM " +
 			"providers, MCP servers and credentials each carry their own `groups` attribute, and " +
@@ -81,12 +81,12 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 			"id": schema.StringAttribute{
 				Computed:            true,
 				PlanModifiers:       []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
-				MarkdownDescription: "Group id, assigned by Onyx.",
+				MarkdownDescription: "Group id, assigned by Zeshan.",
 			},
 			"name": schema.StringAttribute{
 				Required: true,
 				MarkdownDescription: "Group name, unique across the deployment. Renaming is a " +
-					"separate call that Onyx refuses while the group is syncing, so the provider " +
+					"separate call that Zeshan refuses while the group is syncing, so the provider " +
 					"waits first.",
 			},
 			"user_ids": schema.SetAttribute{
@@ -95,7 +95,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 				Computed:    true,
 				Default:     setdefault.StaticValue(emptyStringSet()),
 				MarkdownDescription: "Member user ids (UUIDs). The configuration owns this list: leaving it out empties the group.\n\n" +
-					"Onyx refuses a removal that would leave someone in no group at all, because a " +
+					"Zeshan refuses a removal that would leave someone in no group at all, because a " +
 					"person with no group has no permissions and would keep a login that can do nothing.",
 			},
 			"manager_ids": schema.SetAttribute{
@@ -104,7 +104,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 				Computed:    true,
 				Default:     setdefault.StaticValue(emptyStringSet()),
 				MarkdownDescription: "User ids that manage the group. Every manager must also appear " +
-					"in `user_ids` — Onyx stores the flag on the membership row, so a manager is " +
+					"in `user_ids` — Zeshan stores the flag on the membership row, so a manager is " +
 					"always a member.",
 			},
 			"permissions": schema.SetAttribute{
@@ -112,7 +112,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 				Optional:    true,
 				Computed:    true,
 				Default:     setdefault.StaticValue(emptyStringSet()),
-				MarkdownDescription: "Permission grants, written as Onyx's own tokens: " +
+				MarkdownDescription: "Permission grants, written as Zeshan's own tokens: " +
 					"`manage:connectors`, `manage:document_sets`, `manage:llms`, `manage:actions`, " +
 					"`manage:agents`, `add:agents`, `manage:user_groups`, `manage:bots`, " +
 					"`manage:service_account_api_keys`, `create:user_api_keys`, " +
@@ -120,7 +120,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 					"not the enum names.\n\n" +
 					"The configuration owns the list, so leaving it out revokes every grant the " +
 					"group has.\n\n" +
-					"Only toggleable permissions may be set. Onyx manages the rest itself " +
+					"Only toggleable permissions may be set. Zeshan manages the rest itself " +
 					"(`basic`, `admin`, `craft_sandbox`, `manage:skills` and the implied read " +
 					"tokens); they are neither read back here nor writable, and naming one is " +
 					"refused. Writing this attribute needs full admin access, so the provider only " +
@@ -156,7 +156,7 @@ func (r *userGroupResource) Schema(ctx context.Context, _ resource.SchemaRequest
 			"is_default": schema.BoolAttribute{
 				Computed: true,
 				MarkdownDescription: "Whether this is one of the seeded system groups (`Admin`, " +
-					"`Basic`). A default group holds members and nothing else: Onyx refuses to " +
+					"`Basic`). A default group holds members and nothing else: Zeshan refuses to " +
 					"rename it, delete it, or change its permissions or incognito setting. Importing " +
 					"one and managing its roster works; anything else fails at apply time.",
 			},
@@ -205,7 +205,7 @@ func (r *userGroupResource) ValidateConfig(ctx context.Context, req resource.Val
 			resp.Diagnostics.AddAttributeError(
 				path.Root("manager_ids"),
 				"Manager is not a member of the group",
-				fmt.Sprintf("User %q is listed in manager_ids but not in user_ids. Onyx stores the "+
+				fmt.Sprintf("User %q is listed in manager_ids but not in user_ids. Zeshan stores the "+
 					"manager flag on the membership row, so a manager must also be a member. Add the "+
 					"user to user_ids.", manager),
 			)
@@ -413,7 +413,7 @@ func (r *userGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 		return
 	}
 
-	// The row usually outlives the call: Onyx marks the group for deletion and
+	// The row usually outlives the call: Zeshan marks the group for deletion and
 	// a background sync removes it. Returning early would let a replacement
 	// fail on the name the group still holds.
 	if err := r.client.WaitForUserGroupDeleted(ctx, id, deleteTimeout); err != nil {
@@ -421,7 +421,7 @@ func (r *userGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 	}
 }
 
-// deleteUserGroup asks Onyx to delete the group and reports whether it had
+// deleteUserGroup asks Zeshan to delete the group and reports whether it had
 // already gone.
 //
 // The delete passes through the sync gate, and the route funnels every
@@ -453,7 +453,7 @@ func (r *userGroupResource) deleteUserGroup(ctx context.Context, id int64, timeo
 		}
 	}
 	return false, fmt.Errorf(
-		"user group %d is still listed after Onyx answered not found, which is what a group "+
+		"user group %d is still listed after Zeshan answered not found, which is what a group "+
 			"reports while it is syncing — it started syncing again between the check and the "+
 			"delete, so re-run the destroy", id)
 }
@@ -464,7 +464,7 @@ func (r *userGroupResource) ImportState(ctx context.Context, req resource.Import
 
 // applyManagers reconciles the manager flags against what the group currently
 // holds, rather than against prior state, so a change made in the admin panel
-// is corrected too. Onyx has no bulk form: each promotion or demotion is its
+// is corrected too. Zeshan has no bulk form: each promotion or demotion is its
 // own call.
 func (r *userGroupResource) applyManagers(ctx context.Context, id int64, planned types.Set, diags *diag.Diagnostics) bool {
 	desired, valueDiags := stringSetValues(ctx, planned)

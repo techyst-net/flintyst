@@ -31,7 +31,7 @@ func newAskCmd(ios *iostreams.IOStreams) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "ask [question]",
 		Short: "Ask a question and print the answer to stdout",
-		Long: `Send a one-shot question to an Onyx agent and print the response.
+		Long: `Send a one-shot question to an Zeshan agent and print the response.
 
 The question can be provided as a positional argument, via --prompt, or piped
 through stdin. When stdin contains piped data, it is sent as context along

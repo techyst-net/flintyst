@@ -9,7 +9,7 @@ logger = setup_logger()
 
 MCP_CLIENT_TOOL_TOTAL = Counter(
     "onyx_mcp_client_tool_calls_total",
-    "External MCP tool calls made by Onyx",
+    "External MCP tool calls made by Zeshan",
     ["server_name", "tool_name", "status"],
 )
 MCP_CLIENT_TOOL_LATENCY = Histogram(

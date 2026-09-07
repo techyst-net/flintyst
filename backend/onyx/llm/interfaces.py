@@ -49,7 +49,7 @@ class LLMConfig(BaseModel):
 
 
 class LLM(abc.ABC):
-    """Abstract base for every LLM backend used by Onyx.
+    """Abstract base for every LLM backend used by Zeshan.
 
     Concrete subclasses have their ``invoke`` and ``stream`` methods
     auto-wrapped (via ``__init_subclass__`` below) with a fallback braintrust

@@ -95,7 +95,7 @@ export function InputBar({
         <ComposerInput
           value={value}
           onChangeText={onChangeText}
-          placeholder="Message Onyx…"
+          placeholder="Message Zeshan…"
           placeholderClassName="text-text-02"
           multiline
           className="px-12 pb-8 pt-12 text-text-04"

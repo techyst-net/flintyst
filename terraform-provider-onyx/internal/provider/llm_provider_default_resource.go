@@ -50,7 +50,7 @@ func (r *llmProviderDefaultResource) Schema(_ context.Context, _ resource.Schema
 		MarkdownDescription: "The deployment-wide default LLM model — a singleton pointer at one " +
 			"provider + model pair (plus optional vision and chat auto-naming defaults). Managing it " +
 			"as its own resource lets `depends_on` ordering repoint the default before the provider " +
-			"holding it is deleted or shrunk. Onyx has no unset API for the text and vision defaults, " +
+			"holding it is deleted or shrunk. Zeshan has no unset API for the text and vision defaults, " +
 			"so destroying this resource leaves them in place; the chat-naming default is cleared when " +
 			"managed.",
 		Attributes: map[string]schema.Attribute{
@@ -254,7 +254,7 @@ func (r *llmProviderDefaultResource) Delete(ctx context.Context, req resource.De
 	if resp.Diagnostics.HasError() {
 		return
 	}
-	detail := "onyx_llm_provider_default was removed from Terraform state, but Onyx has no API to " +
+	detail := "onyx_llm_provider_default was removed from Terraform state, but Zeshan has no API to " +
 		"unset the deployment default text/vision models, so they remain pointed at their current targets."
 	if !state.ChatNamingProviderID.IsNull() {
 		if err := r.client.ClearDefaultChatNamingModel(ctx); err != nil {

@@ -1,4 +1,4 @@
-# Onyx Developer Script
+# Zeshan Developer Script
 
 [![Deploy Status](https://github.com/onyx-dot-app/onyx/actions/workflows/release-devtools.yml/badge.svg)](https://github.com/onyx-dot-app/onyx/actions/workflows/release-devtools.yml)
 [![PyPI](https://img.shields.io/pypi/v/onyx-devtools.svg)](https://pypi.org/project/onyx-devtools/)
@@ -12,7 +12,7 @@ A stable version of `ods` is provided in the default [python venv](https://githu
 which is synced automatically if you have [pre-commit](https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md#formatting-and-linting)
 hooks installed.
 
-While inside the Onyx repository, activate the root project's venv,
+While inside the Zeshan repository, activate the root project's venv,
 
 ```shell
 source .venv/bin/activate
@@ -68,7 +68,7 @@ _Note: bash completion requires the [bash-completion](https://github.com/scop/ba
 
 ### `compose` - Launch Docker Containers
 
-Launch Onyx docker containers using docker compose.
+Launch Zeshan docker containers using docker compose.
 
 ```shell
 ods compose [profile]
@@ -116,7 +116,7 @@ ods compose --tag edge
 
 ### `logs` - View Docker Container Logs
 
-View logs from running Onyx docker containers. Service names are available as
+View logs from running Zeshan docker containers. Service names are available as
 arguments to filter output, with tab-completion support.
 
 ```shell
@@ -151,7 +151,7 @@ ods logs --follow=false
 
 ### `pull` - Pull Docker Images
 
-Pull the latest images for Onyx docker containers.
+Pull the latest images for Zeshan docker containers.
 
 ```shell
 ods pull
@@ -246,7 +246,7 @@ ods web test --watch
 
 ### `dev` - Devcontainer Management
 
-Manage the Onyx devcontainer. Also available as `ods dc`.
+Manage the Zeshan devcontainer. Also available as `ods dc`.
 
 Requires the [devcontainer CLI](https://github.com/devcontainers/cli) (`bun install -g @devcontainers/cli`).
 
@@ -394,7 +394,7 @@ ods lint tf [paths...]
 ```
 
 The modules under `deployment/terraform` are published, but they stay in sync
-with the infrastructure Onyx runs. That makes it easy to carry an internal value
+with the infrastructure Zeshan runs. That makes it easy to carry an internal value
 across by accident -- an office IP in a variable default is the case this check
 was written for.
 
@@ -729,7 +729,7 @@ while `go install .` will output to your [GOPATH](https://go.dev/wiki/SettingGOP
 ```
 
 _Typically, `GOPATH` is added to your shell's `PATH`, but this may be confused easily during development
-with the pip version of `ods` installed in the Onyx venv._
+with the pip version of `ods` installed in the Zeshan venv._
 
 To build the wheel,
 

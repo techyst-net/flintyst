@@ -134,7 +134,7 @@ func (r *embeddingProviderResource) Create(ctx context.Context, req resource.Cre
 	}
 
 	if _, err := r.client.UpsertEmbeddingProvider(ctx, upsertFromPlan(plan, apiKey)); err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx embedding provider", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan embedding provider", err.Error())
 		return
 	}
 
@@ -155,7 +155,7 @@ func (r *embeddingProviderResource) Read(ctx context.Context, req resource.ReadR
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx embedding provider", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan embedding provider", err.Error())
 		return
 	}
 
@@ -185,14 +185,14 @@ func (r *embeddingProviderResource) Update(ctx context.Context, req resource.Upd
 		// The upsert below overwrites the stored key with null; warn first.
 		resp.Diagnostics.AddWarning(
 			"Stored embedding API key may be cleared",
-			"onyx_embedding_provider has no api_key or api_key_wo in configuration, and the Onyx API "+
+			"onyx_embedding_provider has no api_key or api_key_wo in configuration, and the Zeshan API "+
 				"replaces all fields on update — any key stored server-side is now cleared. Set one of "+
 				"them to manage it.",
 		)
 	}
 
 	if _, err := r.client.UpsertEmbeddingProvider(ctx, upsertFromPlan(plan, apiKey)); err != nil {
-		resp.Diagnostics.AddError("Failed to update Onyx embedding provider", err.Error())
+		resp.Diagnostics.AddError("Failed to update Zeshan embedding provider", err.Error())
 		return
 	}
 
@@ -213,12 +213,12 @@ func (r *embeddingProviderResource) Delete(ctx context.Context, req resource.Del
 		if errors.As(err, &apiErr) && apiErr.StatusCode == 400 {
 			resp.Diagnostics.AddError(
 				"Cannot delete the active embedding provider",
-				err.Error()+"\n\nThe Onyx API refuses to delete the embedding provider used by current "+
+				err.Error()+"\n\nThe Zeshan API refuses to delete the embedding provider used by current "+
 					"search settings, with no override. Switch search settings to another provider first.",
 			)
 			return
 		}
-		resp.Diagnostics.AddError("Failed to delete Onyx embedding provider", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan embedding provider", err.Error())
 	}
 }
 

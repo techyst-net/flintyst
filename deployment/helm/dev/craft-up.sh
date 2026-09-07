@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# craft-up.sh — one-shot Onyx Craft dev setup on the local machine.
+# craft-up.sh — one-shot Zeshan Craft dev setup on the local machine.
 #
 # Idempotent wrapper around k8s-up.sh that also builds and loads the sandbox
 # image and bootstraps .vscode/.env.k8s from the tracked template. Safe to
@@ -127,7 +127,7 @@ cat <<EOF
 craft-up complete.
 
 next steps:
-  1. open vscode and run the "Run All Onyx Services (k8s)" launch profile.
+  1. open vscode and run the "Run All Zeshan Services (k8s)" launch profile.
      (api + web + every celery worker + beat, intercepting api_server via
      telepresence.)
 

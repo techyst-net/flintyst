@@ -18,11 +18,11 @@ import (
 
 // The URL never has to answer: creating a server is a database write and a
 // structural URL check, with no call to the server itself. It does have to look
-// external, because Onyx refuses loopback whatever the SSRF setting.
+// external, because Zeshan refuses loopback whatever the SSRF setting.
 const mcpServerURL = "https://mcp.example.com/mcp"
 
 func TestAccMCPServerResource(t *testing.T) {
-	// Onyx does not require server names to be unique, so this is for legible
+	// Zeshan does not require server names to be unique, so this is for legible
 	// assertions and tidy leftovers rather than to avoid a collision.
 	name := acctest.RandomWithPrefix("tf-acc-mcp")
 
@@ -64,7 +64,7 @@ resource "onyx_mcp_server" "test" {
 			},
 			{
 				// Rename, drop the description, and turn both flags around.
-				// Dropping the description is the real test: Onyx preserves the
+				// Dropping the description is the real test: Zeshan preserves the
 				// stored one unless an empty string is sent.
 				Config: fmt.Sprintf(`
 resource "onyx_mcp_server" "test" {
@@ -93,7 +93,7 @@ resource "onyx_mcp_server" "test" {
 	})
 }
 
-// A shared API token is write-only: Onyx returns it masked, so Terraform holds
+// A shared API token is write-only: Zeshan returns it masked, so Terraform holds
 // the only true copy. The lifecycle that matters is create, leave alone, rotate.
 func TestAccMCPServerResourceAPIToken(t *testing.T) {
 	name := acctest.RandomWithPrefix("tf-acc-mcp-token")
@@ -121,7 +121,7 @@ resource "onyx_mcp_server" "token" {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("onyx_mcp_server.token", "auth_type", "API_TOKEN"),
 					resource.TestCheckResourceAttr("onyx_mcp_server.token", "api_token", "token-one"),
-					// Onyx writes the header template itself for a shared token.
+					// Zeshan writes the header template itself for a shared token.
 					resource.TestCheckResourceAttr("onyx_mcp_server.token", "auth_template_headers.Authorization", "Bearer {api_key}"),
 				),
 			},
@@ -146,7 +146,7 @@ resource "onyx_mcp_server" "token" {
 				ResourceName:      "onyx_mcp_server.token",
 				ImportState:       true,
 				ImportStateVerify: true,
-				// Onyx returns the token masked, so an imported server carries
+				// Zeshan returns the token masked, so an imported server carries
 				// none and the configured value cannot be verified against it.
 				ImportStateVerifyIgnore: []string{"api_token"},
 			},
@@ -197,7 +197,7 @@ resource "onyx_mcp_server" "missing" {
 }
 
 // A per-user server: the admin declares the header template that names the
-// fields, and supplies their own values for them. Onyx stores those against the
+// fields, and supplies their own values for them. Zeshan stores those against the
 // identity that applied rather than against the server, so they are write-only
 // here for a second reason on top of the masking.
 func TestAccMCPServerResourcePerUserAuth(t *testing.T) {
@@ -227,14 +227,14 @@ resource "onyx_mcp_server" "per_user" {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("onyx_mcp_server.per_user", "auth_performer", "PER_USER"),
 					// The template survives the round trip as written, rather
-					// than being replaced by the shared-token one Onyx writes
+					// than being replaced by the shared-token one Zeshan writes
 					// for an ADMIN performer.
 					resource.TestCheckResourceAttr("onyx_mcp_server.per_user", "auth_template_headers.X-Api-Key", "{api_key}"),
 					resource.TestCheckResourceAttr("onyx_mcp_server.per_user", "admin_credentials.api_key", "the-admins-own-key"),
 				),
 			},
 			{
-				// Onyx keeps a stored header template whenever a request omits
+				// Zeshan keeps a stored header template whenever a request omits
 				// one, so switching to a shared token does not restore the
 				// default Authorization header. Pinned here because it is
 				// surprising, not because it is wanted.
@@ -257,7 +257,7 @@ resource "onyx_mcp_server" "per_user" {
 				ResourceName:      "onyx_mcp_server.per_user",
 				ImportState:       true,
 				ImportStateVerify: true,
-				// Onyx returns these masked, so an imported server carries none.
+				// Zeshan returns these masked, so an imported server carries none.
 				ImportStateVerifyIgnore: []string{"admin_credentials", "api_token"},
 			},
 		},
@@ -265,7 +265,7 @@ resource "onyx_mcp_server" "per_user" {
 }
 
 // Removing an optional access list from the configuration must clear it on the
-// server. Onyx reads a missing list as "leave it alone", so an omitted one
+// server. Zeshan reads a missing list as "leave it alone", so an omitted one
 // would come back on the next read and disagree with the plan.
 func TestAccMCPServerResourceClearsAnEmptiedUserList(t *testing.T) {
 	name := acctest.RandomWithPrefix("tf-acc-mcp-acl")
@@ -341,7 +341,7 @@ func testAccCurrentUserID(t *testing.T) string {
 	return body.ID
 }
 
-// A header template value may be a literal rather than a placeholder, and Onyx
+// A header template value may be a literal rather than a placeholder, and Zeshan
 // masks those on the way out. Refreshing over the configured value would store
 // the mask, so the plan that follows this apply would not be empty.
 func TestAccMCPServerResourceKeepsALiteralHeaderValue(t *testing.T) {

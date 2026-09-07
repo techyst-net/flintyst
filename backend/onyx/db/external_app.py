@@ -644,7 +644,7 @@ def set_external_app_organization_credentials(
     organization_credentials: dict[str, str],
 ) -> None:
     """Replace an app's organization credentials (flush only — the caller
-    commits). Used by the Onyx-managed provisioning/rotation path — deliberately
+    commits). Used by the Zeshan-managed provisioning/rotation path — deliberately
     touches nothing else (skill preferences, policies, gateway config are left
     untouched)."""
     # EncryptedJson column accepts a plain dict and encrypts on write (same

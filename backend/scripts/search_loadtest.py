@@ -1,5 +1,5 @@
 """
-Load test for the Onyx search flow (/api/search/send-search-message).
+Load test for the Zeshan search flow (/api/search/send-search-message).
 
 Usage:
     source .venv/bin/activate
@@ -345,10 +345,10 @@ def run(args: argparse.Namespace) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="A load test tool for the Onyx search endpoint."
+        description="A load test tool for the Zeshan search endpoint."
     )
     parser.add_argument(
-        "--url", required=True, help="Onyx base URL, e.g. https://cloud.onyx.app"
+        "--url", required=True, help="Zeshan base URL, e.g. https://cloud.onyx.app"
     )
     parser.add_argument(
         "--token",

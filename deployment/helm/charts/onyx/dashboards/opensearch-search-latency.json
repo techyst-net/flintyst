@@ -514,7 +514,7 @@
     "refresh_intervals": ["5s", "10s", "30s", "1m"]
   },
   "timezone": "",
-  "title": "Onyx OpenSearch Search Latency",
+  "title": "Zeshan OpenSearch Search Latency",
   "uid": "onyx-opensearch-search-latency",
   "version": 0,
   "weekStart": ""

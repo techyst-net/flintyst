@@ -100,7 +100,7 @@ export interface ExternalAppAdminResponse {
     name: string;
     is_valid: boolean | null;
   }[];
-  // Onyx-managed built-in (cloud): creds/config Onyx-owned and blanked here; the
+  // Zeshan-managed built-in (cloud): creds/config Zeshan-owned and blanked here; the
   // admin may only set availability and policies (the UI hides the rest).
   is_onyx_managed: boolean;
 }

@@ -1,4 +1,4 @@
-# Onyx Azure modules
+# Zeshan Azure modules
 
 ## Status
 
@@ -10,7 +10,7 @@ a first deployment.
 ## Overview
 
 This directory contains Terraform modules to provision the core Azure
-infrastructure for Onyx:
+infrastructure for Zeshan:
 
 - `vnet`: a virtual network with subnets sized for AKS, a NAT gateway for
   stable egress, and optional flow logs
@@ -21,7 +21,7 @@ infrastructure for Onyx:
 - `redis`: an Azure Managed Redis behind a private endpoint, with four metric
   alerts. Off by default, because the in-cluster Redis needs no extra
   configuration -- see below
-- `storage`: a storage account and container for the Onyx file store, with
+- `storage`: a storage account and container for the Zeshan file store, with
   versioning, lifecycle rules and network rules
 - `waf`: a regional Web Application Firewall policy for an Application Gateway
 - `onyx`: a higher-level composition that wires the above together
@@ -47,7 +47,7 @@ module "vnet" {
 ```
 
 Azure releases are tagged `tf-azure/vX.Y.Z`, versioned independently of both
-the AWS modules and Onyx product releases. A commit sha works as a `ref` too,
+the AWS modules and Zeshan product releases. A commit sha works as a `ref` too,
 and is the better choice for automated consumers: a sha cannot be moved, where
 a tag can.
 
@@ -195,17 +195,17 @@ and the database.
 
 An Azure Managed Redis reachable only through a private endpoint.
 
-Onyx runs on it, but not on the default settings, so `enable_redis` defaults
+Zeshan runs on it, but not on the default settings, so `enable_redis` defaults
 to `false`. Two separate limits apply, both measured against live caches rather
 than assumed:
 
 - **Only database 0 exists.** `SELECT 1` and above return `DB index is out of
   range` under every clustering policy, because that is a Redis Enterprise
-  property rather than a clustering one. Onyx defaults to database 0 for the
+  property rather than a clustering one. Zeshan defaults to database 0 for the
   app, 14 for Celery results and 15 for the Celery broker, so a caller must set
   `REDIS_DB_NUMBER`, `REDIS_DB_NUMBER_CELERY` and
   `REDIS_DB_NUMBER_CELERY_RESULT_BACKEND` to `0`. The three key namespaces do
-  not collide: Onyx prefixes its own keys with the tenant, Celery results are
+  not collide: Zeshan prefixes its own keys with the tenant, Celery results are
   `celery-task-meta-*` and the broker uses `_kombu.binding.*` and bare queue
   names.
 - **Sharded policies break Celery.** `EnterpriseCluster` presents one endpoint
@@ -231,7 +231,7 @@ resource rather than a renamed one, and the differences show:
 - It speaks TLS on **10000**, where the retiring service used 6380. There is no
   plaintext port to disable and no minimum TLS version to set.
 - Eviction policies are spelled `VolatileLRU`, not `volatile-lru`.
-- Clustering is not really a choice for Onyx. Every instance shards unless the
+- Clustering is not really a choice for Zeshan. Every instance shards unless the
   policy says otherwise, so the module asks for `NoCluster`.
 - Alerts report under `Microsoft.Cache/redisEnterprise`, and the single-thread
   server load metric is replaced by processor time.
@@ -239,7 +239,7 @@ resource rather than a renamed one, and the differences show:
 ### `storage`
 
 A storage account and a private container. Shared access keys are off by
-default: Onyx authenticates with `DefaultAzureCredential`, so no key has to
+default: Zeshan authenticates with `DefaultAzureCredential`, so no key has to
 exist.
 
 ### `waf`
@@ -290,7 +290,7 @@ This only applies to a network the composition creates. With
 log storage account that nothing would ever write to; configure the flow log
 against your own network instead.
 
-## Installing the Onyx Helm chart (after Terraform)
+## Installing the Zeshan Helm chart (after Terraform)
 
 ```bash
 az aks get-credentials --resource-group "$(terraform output -raw resource_group_name)" \
@@ -374,7 +374,7 @@ The outputs line up with the environment the app reads:
 | `AZURE_STORAGE_ACCOUNT_URL` | `storage_account_url` |
 | `AZURE_FILE_STORE_CONTAINER_NAME` | `storage_container_name` |
 
-Leave `AZURE_STORAGE_ACCOUNT_KEY` unset. Onyx authenticates with
+Leave `AZURE_STORAGE_ACCOUNT_KEY` unset. Zeshan authenticates with
 `DefaultAzureCredential`, which picks up the workload identity from step 1, and
 the storage account has shared keys turned off anyway.
 

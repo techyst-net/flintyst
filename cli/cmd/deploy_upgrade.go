@@ -15,8 +15,8 @@ func newDeployUpgradeCmdWithDeps(ios *iostreams.IOStreams, deps *install.Deps) *
 
 	cmd := &cobra.Command{
 		Use:   "upgrade",
-		Short: "Upgrade an existing Onyx deployment to a newer version",
-		Long: `Upgrade an existing Onyx deployment to a newer version.
+		Short: "Upgrade an existing Zeshan deployment to a newer version",
+		Long: `Upgrade an existing Zeshan deployment to a newer version.
 
 Only the IMAGE_TAG line (plus SANDBOX_BACKEND when Craft is enabled) is
 rewritten in .env — every other setting, including your edits, is preserved.
@@ -44,7 +44,7 @@ targets a stack that runs under a compose project name other than "onyx".`,
 		},
 	}
 
-	cmd.Flags().StringVar(&opts.Tag, "tag", "", "Image tag to upgrade to (default: the latest Onyx release)")
+	cmd.Flags().StringVar(&opts.Tag, "tag", "", "Image tag to upgrade to (default: the latest Zeshan release)")
 	cmd.Flags().BoolVar(&opts.Prod, "prod", false, "Manage this as a prod deployment (the standalone docker-compose.prod.yml)")
 	cmd.Flags().StringVar(&opts.Project, "project", "", `Docker compose project name (default: recorded in the manifest, else "onyx")`)
 	cmd.Flags().BoolVar(&opts.Force, "force", false, "Overwrite hand-edited managed files (a backup is kept)")

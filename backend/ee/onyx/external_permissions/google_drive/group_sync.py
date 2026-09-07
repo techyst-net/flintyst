@@ -188,7 +188,7 @@ def _drive_folder_to_onyx_group(
     group_email_to_member_emails_map: dict[str, list[str]],
 ) -> ExternalUserGroup:
     """
-    Converts a folder into an Onyx group.
+    Converts a folder into an Zeshan group.
     """
     anyone_can_access = False
     folder_member_emails: set[str] = set()
@@ -526,7 +526,7 @@ def gdrive_group_sync(
         admin_service, google_drive_connector.google_domain, sync_deadline
     )
 
-    # Each google group is an Onyx group, yield those
+    # Each google group is an Zeshan group, yield those
     group_email_to_member_emails_map: dict[str, list[str]] = {}
     for group_email in all_group_emails:
         _check_sync_deadline(sync_deadline)

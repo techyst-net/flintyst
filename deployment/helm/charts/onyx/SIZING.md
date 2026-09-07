@@ -1,4 +1,4 @@
-# Sizing the Onyx chart
+# Sizing the Zeshan chart
 
 The chart's default resources are calibrated for a mid-size deployment
 (roughly 200–1,000 users, up to ~2M documents) with everything at one

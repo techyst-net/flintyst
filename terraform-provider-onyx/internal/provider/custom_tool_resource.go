@@ -63,8 +63,8 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 			"assistants can call.\n\n" +
 			"Attach one to an assistant through `tool_ids` on `onyx_persona`.\n\n" +
 			"~> **Deleting an action detaches it from every agent that uses it**, including agents " +
-			"Terraform does not manage. Onyx does not refuse the delete or warn about it.\n\n" +
-			"~> **`custom_headers` holds secrets.** Onyx masks the values on reads, but they are " +
+			"Terraform does not manage. Zeshan does not refuse the delete or warn about it.\n\n" +
+			"~> **`custom_headers` holds secrets.** Zeshan masks the values on reads, but they are " +
 			"stored in Terraform state in clear text. Supply them from a secret store rather than " +
 			"literals, or use `custom_headers_wo` to keep them out of state entirely. Masked reads " +
 			"also mean a rotation made outside Terraform is only visible when its mask differs, so " +
@@ -90,7 +90,7 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 			"definition": schema.StringAttribute{
 				Required:   true,
 				CustomType: jsontypes.NormalizedType{},
-				MarkdownDescription: "The OpenAPI schema describing the API, as JSON. Onyx derives one " +
+				MarkdownDescription: "The OpenAPI schema describing the API, as JSON. Zeshan derives one " +
 					"callable method per operation, so every operation needs an `operationId`. " +
 					"Use `jsonencode(...)` or `file(...)` to supply it.",
 			},
@@ -99,7 +99,7 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				ElementType: types.StringType,
 				Sensitive:   true,
 				MarkdownDescription: "Headers sent with every call the action makes, such as an API key. " +
-					"Cannot carry an `Authorization` header while `passthrough_auth` is enabled. Onyx " +
+					"Cannot carry an `Authorization` header while `passthrough_auth` is enabled. Zeshan " +
 					"returns these values in full, so Terraform refreshes them and reports changes made " +
 					"elsewhere." + writeOnlyDescription("custom_headers"),
 			},
@@ -110,7 +110,7 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				WriteOnly:   true,
 				MarkdownDescription: "Headers sent with every call the action makes, held only in " +
 					"configuration. Terraform sends them on every apply and stores nothing, so they never " +
-					"reach state — and, unlike `custom_headers`, they are not refreshed from Onyx either, " +
+					"reach state — and, unlike `custom_headers`, they are not refreshed from Zeshan either, " +
 					"so a change made elsewhere goes unreported until the next apply overwrites it. Pair " +
 					"with `custom_headers_wo_version` to rotate them. Needs Terraform 1.11 or later.",
 				Validators: []validator.Map{
@@ -122,7 +122,7 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(false),
-				MarkdownDescription: "Forward the calling user's Onyx credentials to the API instead of " +
+				MarkdownDescription: "Forward the calling user's Zeshan credentials to the API instead of " +
 					"using a fixed credential. Use it when the API enforces per-user permissions.",
 			},
 			"oauth_config_id": schema.StringAttribute{
@@ -139,7 +139,7 @@ func (r *customToolResource) Schema(_ context.Context, _ resource.SchemaRequest,
 			},
 			"display_name": schema.StringAttribute{
 				Computed:            true,
-				MarkdownDescription: "Name shown in the chat UI. Onyx derives it from `name`.",
+				MarkdownDescription: "Name shown in the chat UI. Zeshan derives it from `name`.",
 			},
 		},
 	}
@@ -152,7 +152,7 @@ func (r *customToolResource) Configure(_ context.Context, req resource.Configure
 // ValidateConfig reports a bad action definition before anything is applied.
 //
 // The local checks mirror the server's own rejections. The definition is then
-// parsed by Onyx itself, which is the only way to learn whether it yields any
+// parsed by Zeshan itself, which is the only way to learn whether it yields any
 // callable method; that endpoint stores nothing. It needs a configured
 // provider, so it is skipped during `terraform validate`, where there is no
 // client, and the check happens at plan time instead.
@@ -175,7 +175,7 @@ func (r *customToolResource) ValidateConfig(ctx context.Context, req resource.Va
 			headerPath,
 			"Conflicting authentication settings",
 			fmt.Sprintf(
-				"passthrough_auth forwards the calling user's credentials, so Onyx rejects the "+
+				"passthrough_auth forwards the calling user's credentials, so Zeshan rejects the "+
 					"fixed %q header set here. Drop the header, or turn passthrough_auth off.",
 				headerKey,
 			),
@@ -193,7 +193,7 @@ func (r *customToolResource) ValidateConfig(ctx context.Context, req resource.Va
 	if err != nil {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("definition"),
-			"Onyx rejected the action definition",
+			"Zeshan rejected the action definition",
 			err.Error(),
 		)
 		return
@@ -202,7 +202,7 @@ func (r *customToolResource) ValidateConfig(ctx context.Context, req resource.Va
 		resp.Diagnostics.AddAttributeError(
 			path.Root("definition"),
 			"Action definition exposes no methods",
-			"Onyx parsed the schema but found no operation to call. Every operation needs an "+
+			"Zeshan parsed the schema but found no operation to call. Every operation needs an "+
 				"operationId, and the schema needs at least one.",
 		)
 	}
@@ -286,14 +286,14 @@ func (r *customToolResource) writeFromModel(
 }
 
 // customToolHeadersWriteOnlyKey records, in private state, that custom_headers
-// came from the write-only twin. Read has no configuration to consult and Onyx
+// came from the write-only twin. Read has no configuration to consult and Zeshan
 // returns header values in full, so without this marker the refresh would write
 // the secret into state.
 const customToolHeadersWriteOnlyKey = "custom_headers_write_only"
 
 // applyRemoteCustomTool copies the server's view into the model.
 //
-// Headers are read back from the server like everything else. Onyx returns
+// Headers are read back from the server like everything else. Zeshan returns
 // their values in full, so a change made outside Terraform is visible rather
 // than silently kept.
 func applyRemoteCustomTool(ctx context.Context, model *customToolResourceModel, remote *client.CustomTool, headersAreWriteOnly bool, diags *diag.Diagnostics) bool {
@@ -301,7 +301,7 @@ func applyRemoteCustomTool(ctx context.Context, model *customToolResourceModel, 
 	if !ok {
 		return false
 	}
-	// Onyx masks header values on reads, so the refresh resolves masks against
+	// Zeshan masks header values on reads, so the refresh resolves masks against
 	// state. A write-only header map skips even that: those values must never
 	// reach state at all.
 	if !headersAreWriteOnly {
@@ -348,7 +348,7 @@ func maskHeaderValue(value string) string {
 // key keeps its last value, which is all a map can hold. An action with no
 // headers reads back as null only when nothing was configured.
 //
-// Onyx masks values on reads: a mask matching the state value keeps the
+// Zeshan masks values on reads: a mask matching the state value keeps the
 // known value, an unmatched mask stays in state and surfaces as drift.
 // Colliding masks (all short values share one) make an out-of-band
 // rotation invisible, which only a changed-flag in the API could fix;
@@ -405,7 +405,7 @@ func (r *customToolResource) Create(ctx context.Context, req resource.CreateRequ
 
 	remote, err := r.client.CreateCustomTool(ctx, write)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx action", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan action", err.Error())
 		return
 	}
 
@@ -417,7 +417,7 @@ func (r *customToolResource) Create(ctx context.Context, req resource.CreateRequ
 				return
 			}
 			resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
-			resp.Diagnostics.AddError("Failed to disable the new Onyx action", err.Error())
+			resp.Diagnostics.AddError("Failed to disable the new Zeshan action", err.Error())
 			return
 		}
 		remote.Enabled = false
@@ -447,7 +447,7 @@ func (r *customToolResource) Read(ctx context.Context, req resource.ReadRequest,
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx action", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan action", err.Error())
 		return
 	}
 	// The read endpoint answers for built-in actions too, but every write
@@ -455,9 +455,9 @@ func (r *customToolResource) Read(ctx context.Context, req resource.ReadRequest,
 	// rather than recording state that can be neither updated nor destroyed.
 	if remote.InCodeToolID != nil {
 		resp.Diagnostics.AddError(
-			"Not a custom Onyx action",
+			"Not a custom Zeshan action",
 			fmt.Sprintf(
-				"Action %s is the built-in %q, which Onyx does not allow an API client to change. "+
+				"Action %s is the built-in %q, which Zeshan does not allow an API client to change. "+
 					"Only custom actions can be managed here.",
 				state.ID.ValueString(), *remote.InCodeToolID,
 			),
@@ -505,14 +505,14 @@ func (r *customToolResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	remote, err := r.client.UpdateCustomTool(ctx, id, write)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to update Onyx action", err.Error())
+		resp.Diagnostics.AddError("Failed to update Zeshan action", err.Error())
 		return
 	}
 
 	// enabled has its own endpoint, so it is only touched when it changes.
 	if plan.Enabled.ValueBool() != remote.Enabled {
 		if err := r.client.SetCustomToolEnabled(ctx, id, plan.Enabled.ValueBool()); err != nil {
-			resp.Diagnostics.AddError("Failed to change whether the Onyx action is enabled", err.Error())
+			resp.Diagnostics.AddError("Failed to change whether the Zeshan action is enabled", err.Error())
 			return
 		}
 		remote.Enabled = plan.Enabled.ValueBool()
@@ -541,7 +541,7 @@ func (r *customToolResource) Delete(ctx context.Context, req resource.DeleteRequ
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to delete Onyx action", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan action", err.Error())
 		return
 	}
 }

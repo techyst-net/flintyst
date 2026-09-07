@@ -1,6 +1,6 @@
 variable "ingest_group_id" {
   type        = number
-  description = "Id of an existing Onyx user group; ids are assigned per deployment."
+  description = "Id of an existing Zeshan user group; ids are assigned per deployment."
 }
 
 # A key for an internal integration. The key material is in

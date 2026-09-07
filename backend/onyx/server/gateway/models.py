@@ -9,7 +9,7 @@ GatewayModality: TypeAlias = Literal["text", "audio", "image", "video", "pdf"]
 
 
 class GatewayModelCapabilities(BaseModel):
-    """Effective capabilities exposed by the Onyx OpenAI-compatible gateway."""
+    """Effective capabilities exposed by the Zeshan OpenAI-compatible gateway."""
 
     model_config = ConfigDict(frozen=True)
 

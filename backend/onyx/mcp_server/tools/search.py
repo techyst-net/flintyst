@@ -46,7 +46,7 @@ async def _post_model(
     body: BaseModel,
     access_token: AccessToken,
 ) -> httpx.Response:
-    """POST a Pydantic model as JSON to the Onyx backend."""
+    """POST a Pydantic model as JSON to the Zeshan backend."""
     return await get_http_client().post(
         url,
         content=body.model_dump_json(exclude_unset=True),
@@ -87,7 +87,7 @@ def _extract_error_detail(response: httpx.Response) -> str:
         if detail := body.get("detail"):
             return str(detail)
     except Exception as exc:
-        logger.debug("Onyx MCP Server: error body was not JSON (%s)", exc)
+        logger.debug("Zeshan MCP Server: error body was not JSON (%s)", exc)
     return f"Request failed with status {response.status_code}"
 
 
@@ -119,13 +119,13 @@ async def search_indexed_documents(
     skip_query_expansion: bool = False,
 ) -> dict[str, Any]:
     """
-    Search the user's knowledge base indexed in Onyx.
+    Search the user's knowledge base indexed in Zeshan.
     Use this tool for information that is not public knowledge and specific to the user,
     their team, their work, or their organization/company.
 
-    Runs the full Onyx search pipeline (LLM query expansion, hybrid retrieval,
+    Runs the full Zeshan search pipeline (LLM query expansion, hybrid retrieval,
     document selection, context expansion) — the same search quality as the
-    Onyx chat interface.
+    Zeshan chat interface.
 
     To find a list of available sources, use the `indexed_sources` resource.
     `document_set_names` restricts results to documents belonging to the named
@@ -158,7 +158,7 @@ async def search_indexed_documents(
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_INDEXED_DOCUMENTS
     logger.info(
-        "Onyx MCP Server: document search: query='%s', sources=%s, document_sets=%s",
+        "Zeshan MCP Server: document search: query='%s', sources=%s, document_sets=%s",
         query,
         source_types,
         document_set_names,
@@ -182,19 +182,19 @@ async def search_indexed_documents(
             sources = await get_indexed_sources(access_token)
         except Exception as err:
             logger.error(
-                "Onyx MCP Server: Error checking indexed sources: %s",
+                "Zeshan MCP Server: Error checking indexed sources: %s",
                 err,
                 exc_info=True,
             )
             return _error_payload(f"Failed to check indexed sources: {str(err)}")
 
         if not sources:
-            logger.info("Onyx MCP Server: No indexed sources available for tenant")
+            logger.info("Zeshan MCP Server: No indexed sources available for tenant")
             outcome = MCPToolCallStatus.SUCCESS
             result_count = 0
             return _error_payload(
                 "No document sources are indexed yet. Add connectors or upload data "
-                "through Onyx before calling search_indexed_documents."
+                "through Zeshan before calling search_indexed_documents."
             )
 
         source_type_enums: list[DocumentSource] | None = None
@@ -205,7 +205,7 @@ async def search_indexed_documents(
                     source_type_enums.append(DocumentSource(source_str.lower()))
                 except ValueError:
                     logger.warning(
-                        "Onyx MCP Server: Invalid source type '%s' - skipping",
+                        "Zeshan MCP Server: Invalid source type '%s' - skipping",
                         source_str,
                     )
 
@@ -213,7 +213,7 @@ async def search_indexed_documents(
             parsed_cutoff = _TIME_CUTOFF_ADAPTER.validate_python(time_cutoff)
         except ValidationError as err:
             logger.warning(
-                "Onyx MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
+                "Zeshan MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
                 time_cutoff,
                 err,
             )
@@ -236,11 +236,11 @@ async def search_indexed_documents(
         outcome = MCPToolCallStatus.SUCCESS
         result_count = len(results)
         logger.info(
-            "Onyx MCP Server: Internal search returned %s results", len(results)
+            "Zeshan MCP Server: Internal search returned %s results", len(results)
         )
         return {"results": results}
     except Exception as err:
-        logger.error("Onyx MCP Server: Document search error: %s", err, exc_info=True)
+        logger.error("Zeshan MCP Server: Document search error: %s", err, exc_info=True)
         return _error_payload(f"Document search failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)
@@ -270,7 +270,7 @@ async def search_web(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_WEB
-    logger.info("Onyx MCP Server: Web search: query='%s', limit=%s", query, limit)
+    logger.info("Zeshan MCP Server: Web search: query='%s', limit=%s", query, limit)
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -296,7 +296,7 @@ async def search_web(
             "query": query,
         }
     except Exception as e:
-        logger.error("Onyx MCP Server: Web search error: %s", e, exc_info=True)
+        logger.error("Zeshan MCP Server: Web search error: %s", e, exc_info=True)
         return {
             "error": f"Web search failed: {str(e)}",
             "results": [],
@@ -330,7 +330,7 @@ async def open_urls(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.OPEN_URLS
-    logger.info("Onyx MCP Server: Open URL: fetching %s URLs", len(urls))
+    logger.info("Zeshan MCP Server: Open URL: fetching %s URLs", len(urls))
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -349,7 +349,7 @@ async def open_urls(
             "results": [result.model_dump(mode="json") for result in payload.results],
         }
     except Exception as err:
-        logger.error("Onyx MCP Server: URL fetch error: %s", err, exc_info=True)
+        logger.error("Zeshan MCP Server: URL fetch error: %s", err, exc_info=True)
         return _error_payload(f"URL fetch failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)

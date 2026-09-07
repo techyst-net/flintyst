@@ -494,7 +494,7 @@ def _build_external_access_from_holder_map(
     if unsupported_holder_counts:
         logger.warning(
             "Jira project %s has unsupported %s holder types that do not map to "
-            "static Onyx ACLs; unsupported_holder_counts=%s all_holder_counts=%s",
+            "static Zeshan ACLs; unsupported_holder_counts=%s all_holder_counts=%s",
             jira_project,
             BROWSE_PROJECTS_PERMISSION,
             unsupported_holder_counts,

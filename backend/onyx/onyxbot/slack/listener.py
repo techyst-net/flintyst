@@ -843,7 +843,7 @@ def prefilter_requests(req: SocketModeRequest, client: TenantSocketModeClient) -
         message_ts = event.get("ts")
         thread_ts = event.get("thread_ts")
         # Pick the root of the thread (if a thread exists)
-        # Can respond in thread if it's an "im" directly to Onyx or @OnyxBot is tagged
+        # Can respond in thread if it's an "im" directly to Zeshan or @OnyxBot is tagged
         if (
             thread_ts
             and message_ts != thread_ts
@@ -1260,7 +1260,7 @@ def _check_tenant_gated(client: TenantSocketModeClient, req: SocketModeRequest) 
                 channel=channel,
                 thread_ts=thread_ts,
                 text=(
-                    "Your organization's subscription has expired. Please contact your Onyx administrator to restore access."
+                    "Your organization's subscription has expired. Please contact your Zeshan administrator to restore access."
                 ),
             )
     logger.info("Blocked Slack request for gated tenant %s", get_current_tenant_id())

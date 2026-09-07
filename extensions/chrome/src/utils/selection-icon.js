@@ -12,7 +12,7 @@
 
     const img = document.createElement("img");
     img.src = chrome.runtime.getURL("public/icon32.png");
-    img.alt = "Search with Onyx";
+    img.alt = "Search with Zeshan";
 
     selectionIcon.appendChild(img);
     document.body.appendChild(selectionIcon);
@@ -83,7 +83,7 @@
         (response) => {
           if (chrome.runtime.lastError) {
             console.error(
-              "[Onyx] Error sending message:",
+              "[Zeshan] Error sending message:",
               chrome.runtime.lastError.message
             );
           } else {

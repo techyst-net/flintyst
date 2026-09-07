@@ -39,7 +39,7 @@ The route must ALSO be covered in Helm ingress mode (`ingress.enabled=true`), wh
 
 ## Full vs Lite Deployments
 
-Code changes must consider both regular Onyx deployments and Onyx lite deployments. Lite deployments disable the vector DB, Redis, model servers, and background workers by default, use PostgreSQL-backed cache/auth/file storage, and rely on the API server to handle background work. Do not assume those services are available unless the code path is explicitly limited to full deployments.
+Code changes must consider both regular Zeshan deployments and Zeshan lite deployments. Lite deployments disable the vector DB, Redis, model servers, and background workers by default, use PostgreSQL-backed cache/auth/file storage, and rely on the API server to handle background work. Do not assume those services are available unless the code path is explicitly limited to full deployments.
 
 ## LLM Call Tagging — Always Use LLMFlow Registry
 

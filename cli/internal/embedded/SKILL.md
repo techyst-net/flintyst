@@ -1,11 +1,11 @@
 ---
 name: onyx-cli
-description: Query the Onyx knowledge base using the onyx-cli command. Use when the user wants to search company documents, ask questions about internal knowledge, query connected data sources, or look up information stored in Onyx.
+description: Query the Zeshan knowledge base using the onyx-cli command. Use when the user wants to search company documents, ask questions about internal knowledge, query connected data sources, or look up information stored in Zeshan.
 ---
 
-# Onyx CLI — Agent Tool
+# Zeshan CLI — Agent Tool
 
-`onyx-cli` is an agent's interface to the Onyx enterprise knowledge platform. It connects to company documents, apps, and people. Use it to answer questions that require internal knowledge — policies, docs, processes, data from connected sources (Confluence, Google Drive, Slack, etc.).
+`onyx-cli` is an agent's interface to the Zeshan enterprise knowledge platform. It connects to company documents, apps, and people. Use it to answer questions that require internal knowledge — policies, docs, processes, data from connected sources (Confluence, Google Drive, Slack, etc.).
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ Exit code 0 on success. Non-zero with a descriptive error on failure (see exit c
 onyx-cli search "What is our deployment process?"
 ```
 
-Returns ranked, cited documents from the Onyx knowledge base as JSON. Default output is a lean shape: `{"results": [{title, url, source_type, content, updated_at}, ...]}`. Results contain only documents the LLM judged relevant, ordered by relevance; `content` is the full chunk text of each. Use `--raw` for the full API response — printed bare for one query (adds per-result `citation_id`), and as `{"searches": [{query, response}, ...]}` for several.
+Returns ranked, cited documents from the Zeshan knowledge base as JSON. Default output is a lean shape: `{"results": [{title, url, source_type, content, updated_at}, ...]}`. Results contain only documents the LLM judged relevant, ordered by relevance; `content` is the full chunk text of each. Use `--raw` for the full API response — printed bare for one query (adds per-result `citation_id`), and as `{"searches": [{query, response}, ...]}` for several.
 
 Each query is a full search pass that takes tens of seconds. Multiple queries passed in one invocation (up to 3) run concurrently — batch independent questions into a single call instead of running them sequentially. Multi-query output is `{"searches": [{query, results}, ...]}` in argument order; a failed query has an `error` field and null `results`, and partial failures still exit 0, so check per-query `error` fields. Write search output to files and parse it in a separate shell call — a parsing script (e.g. a Python heredoc) chained after a search can hang, hit your shell timeout, and throw away the completed searches.
 
@@ -181,7 +181,7 @@ Use `onyx-cli ask` when:
 Do NOT use either when:
 - The question is about general programming knowledge (use your own knowledge)
 - The user is asking about code in the current repository (use grep/read tools)
-- The user hasn't mentioned Onyx and the question doesn't require internal company data
+- The user hasn't mentioned Zeshan and the question doesn't require internal company data
 
 ## Examples
 

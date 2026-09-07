@@ -44,7 +44,7 @@ func argv(c dockercmd.Command) string {
 }
 
 // healthyDockerHandler answers like a host with docker + compose plugin, a
-// running daemon, and no Onyx containers.
+// running daemon, and no Zeshan containers.
 func healthyDockerHandler(c dockercmd.Command) (dockercmd.Result, error) {
 	a := argv(c)
 	switch {

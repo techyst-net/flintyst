@@ -14,8 +14,8 @@ func newDeployStopCmdWithDeps(ios *iostreams.IOStreams, deps *install.Deps) *cob
 	opts := install.Options{}
 	cmd := &cobra.Command{
 		Use:   "stop",
-		Short: "Stop (pause) the Onyx containers",
-		Long: `Stop the Onyx containers without removing them or their data.
+		Short: "Stop (pause) the Zeshan containers",
+		Long: `Stop the Zeshan containers without removing them or their data.
 Start them again with: onyx-cli deploy install`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -104,8 +104,8 @@ func newDeployUninstallCmdWithDeps(ios *iostreams.IOStreams, deps *install.Deps)
 	opts := install.Options{}
 	cmd := &cobra.Command{
 		Use:   "uninstall",
-		Short: "Permanently delete the Onyx deployment and all its data",
-		Long: `Remove the Onyx containers, volumes, and the deployment directory.
+		Short: "Permanently delete the Zeshan deployment and all its data",
+		Long: `Remove the Zeshan containers, volumes, and the deployment directory.
 
 This permanently deletes all user data and documents. Interactive runs must
 type DELETE to confirm; non-interactive runs require --force.`,

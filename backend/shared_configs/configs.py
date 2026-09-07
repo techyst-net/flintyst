@@ -31,8 +31,8 @@ INDEXING_MODEL_SERVER_PORT = int(
     os.environ.get("INDEXING_MODEL_SERVER_PORT") or MODEL_SERVER_PORT
 )
 
-# Onyx custom Deep Learning Models
-CONNECTOR_CLASSIFIER_MODEL_REPO = "Danswer/filter-extraction-model"
+# Zeshan custom Deep Learning Models
+CONNECTOR_CLASSIFIER_MODEL_REPO = "Zeshan/filter-extraction-model"
 CONNECTOR_CLASSIFIER_MODEL_TAG = "1.0.0"
 INTENT_MODEL_VERSION = "onyx-dot-app/hybrid-intent-token-classifier"
 DEFAULT_DOCUMENT_ENCODER_MODEL = "nomic-ai/nomic-embed-text-v1"

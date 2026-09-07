@@ -1,6 +1,6 @@
 """Assemble the outbound-TLS trust store for the model server.
 
-Every other Onyx pod merges operator-supplied CA roots into the system trust
+Every other Zeshan pod merges operator-supplied CA roots into the system trust
 store with a shell `update-ca-certificates` wrapper. The model server runs on a
 distroless image with no shell, so when custom roots are mounted this module
 reproduces that merge in pure Python: it concatenates certifi's public roots with

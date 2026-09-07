@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Notion REST API wrapper for the Onyx Craft sandbox.
+"""Notion REST API wrapper for the Zeshan Craft sandbox.
 
 Common Notion operations exposed as subcommands. The connected user's token is
 injected by the egress gateway, so this script sends no credentials itself.

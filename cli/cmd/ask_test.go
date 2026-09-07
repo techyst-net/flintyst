@@ -40,8 +40,8 @@ func TestResolveQuestion(t *testing.T) {
 		{
 			name: "positional_arg_only",
 			ios:  iosTTY(),
-			args: []string{"What is Onyx?"},
-			want: "What is Onyx?",
+			args: []string{"What is Zeshan?"},
+			want: "What is Zeshan?",
 		},
 		{
 			name:   "prompt_only",

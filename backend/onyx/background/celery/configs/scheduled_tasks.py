@@ -20,7 +20,7 @@ task_default_priority = shared_config.task_default_priority
 task_acks_late = shared_config.task_acks_late
 
 # Dedicated Craft scheduled-tasks worker configuration. Headless agent fires
-# can be long-running, so we use threads (consistent with every other Onyx
+# can be long-running, so we use threads (consistent with every other Zeshan
 # Celery worker) and a prefetch of 1 so a single thread never hoards work.
 worker_concurrency = CELERY_WORKER_SCHEDULED_TASKS_CONCURRENCY
 worker_pool = "threads"

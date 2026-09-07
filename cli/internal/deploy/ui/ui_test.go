@@ -17,11 +17,11 @@ func sampleModels() map[string]wizModel {
 	began := time.Now().Add(-42 * time.Second)
 	return map[string]wizModel{
 		"question": {
-			title:   "Onyx Installer",
+			title:   "Zeshan Installer",
 			version: "v0.1.0",
 			stage:   StageConfigure,
 			sel: &askSelectMsg{
-				title: "How should Onyx be deployed?",
+				title: "How should Zeshan be deployed?",
 				opts: []Option{
 					{Label: "Lite", Hint: "chat, tools, uploads, projects — no vector search (recommended)"},
 					{Label: "Standard", Hint: "full search, connectors, and RAG"},
@@ -33,17 +33,17 @@ func sampleModels() map[string]wizModel {
 		// The star question is the one that carries an emoji: a glyph the
 		// terminal draws two columns wide has to be measured as two.
 		"confirm": {
-			title:   "Onyx Installer",
+			title:   "Zeshan Installer",
 			version: "v0.1.0",
 			stage:   StageComplete,
 			answers: []answerMsg{{"Mode", "Lite"}, {"Version", "v4.4.6"}},
 			sel: &askSelectMsg{
-				title: "Enjoying Onyx? ⭐ Star the repo on GitHub?",
+				title: "Enjoying Zeshan? ⭐ Star the repo on GitHub?",
 				opts:  []Option{{Label: "Yes"}, {Label: "No"}},
 			},
 		},
 		"task": {
-			title:      "Onyx Installer",
+			title:      "Zeshan Installer",
 			version:    "v0.1.0",
 			stage:      StagePull,
 			answers:    []answerMsg{{"Action", "Upgrade"}, {"Version", "v4.4.6"}},
@@ -105,7 +105,7 @@ func TestBoxesFillTerminalWidth(t *testing.T) {
 		var buf bytes.Buffer
 		wiz := &Wizard{out: &buf}
 		wiz.printTail(wizModel{width: w, card: []string{
-			"🎉 Onyx is ready  →  http://localhost:3000",
+			"🎉 Zeshan is ready  →  http://localhost:3000",
 			"",
 			"Manage this deployment any time with:",
 			"  onyx-cli deploy status      health, version, and URL",
@@ -150,7 +150,7 @@ func TestFinishPrintsCardAfterQuit(t *testing.T) {
 	close(done)
 	wiz := &Wizard{out: &buf, done: done, width: 80}
 
-	wiz.Finish("🎉 Onyx is ready  →  http://localhost:3000")
+	wiz.Finish("🎉 Zeshan is ready  →  http://localhost:3000")
 
 	if !strings.Contains(buf.String(), "http://localhost:3000") {
 		t.Errorf("the summary was dropped with the wizard:\n%s", buf.String())
@@ -193,7 +193,7 @@ func TestOptionHintsShareAColumn(t *testing.T) {
 		{Label: "Standard", Hint: "full search, connectors, and RAG"},
 		{Label: "Standard + Craft", Hint: "adds AI web-app building (binds the docker socket)"},
 	}
-	m := wizModel{sel: &askSelectMsg{title: "How should Onyx be deployed?", opts: opts}}
+	m := wizModel{sel: &askSelectMsg{title: "How should Zeshan be deployed?", opts: opts}}
 
 	// Roomy: every hint starts past the widest label, at the same column.
 	want := cursorWidth + ansi.StringWidthWc("Standard + Craft") + hintGap

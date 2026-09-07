@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Calendar wrapper for the Onyx Craft sandbox.
+"""Google Calendar wrapper for the Zeshan Craft sandbox.
 
 Common operations exposed as subcommands. Output is JSON on stdout.
 """

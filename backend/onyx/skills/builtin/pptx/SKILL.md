@@ -64,7 +64,7 @@ Starting from a well-designed template produces far better decks than building f
 ```bash
 # User-uploaded templates (the user's own / brand decks) — list these first
 ls user_library/*.pptx attachments/*.pptx 2>/dev/null
-# Built-in templates (generic starting points provided by Onyx)
+# Built-in templates (generic starting points provided by Zeshan)
 ls /workspace/templates/pptx/*.pptx 2>/dev/null
 ```
 

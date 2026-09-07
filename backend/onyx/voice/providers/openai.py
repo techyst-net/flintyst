@@ -301,7 +301,7 @@ OPENAI_VOICES = [
     {"id": "alloy", "name": "Alloy"},
     {"id": "echo", "name": "Echo"},
     {"id": "fable", "name": "Fable"},
-    {"id": "onyx", "name": "Onyx"},
+    {"id": "onyx", "name": "Zeshan"},
     {"id": "nova", "name": "Nova"},
     {"id": "shimmer", "name": "Shimmer"},
 ]

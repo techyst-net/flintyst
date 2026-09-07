@@ -133,7 +133,7 @@ def admin_ee_put_settings(
     settings: EnterpriseSettings,
     _: User = Depends(require_permission(Permission.FULL_ADMIN_PANEL_ACCESS)),
 ) -> None:
-    # Custom help link and Onyx-branding toggle are Enterprise-only. Block
+    # Custom help link and Zeshan-branding toggle are Enterprise-only. Block
     # writes to those fields when tier < ENTERPRISE so the FE disabled state
     # cannot be bypassed by crafting a request. Uses FEATURE_NOT_AVAILABLE
     # (402) to match the tier_gate middleware shape.
@@ -150,7 +150,7 @@ def admin_ee_put_settings(
         if settings.hide_onyx_branding != existing.hide_onyx_branding:
             raise OnyxError(
                 OnyxErrorCode.FEATURE_NOT_AVAILABLE,
-                "Hiding Onyx branding requires the Enterprise plan.",
+                "Hiding Zeshan branding requires the Enterprise plan.",
             )
 
     store_settings(settings)

@@ -1,4 +1,4 @@
-// Package tui implements the Bubble Tea TUI for Onyx CLI.
+// Package tui implements the Bubble Tea TUI for Zeshan CLI.
 package tui
 
 import (

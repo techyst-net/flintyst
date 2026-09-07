@@ -102,7 +102,7 @@ class LangfuseTracingProcessor(TracingProcessor):
     def _propagated(attributes: dict[str, Any] | None) -> AbstractContextManager[Any]:
         """Apply a trace's correlating attributes to the observation created inside.
 
-        Re-applied per observation, not held open for the trace: Onyx links
+        Re-applied per observation, not held open for the trace: Zeshan links
         observations by explicit id across threads, so an enclosing context would
         not reach them.
         """

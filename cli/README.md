@@ -1,9 +1,9 @@
-# Onyx CLI
+# Zeshan CLI
 
 [![Release CLI](https://github.com/onyx-dot-app/onyx/actions/workflows/release-cli.yml/badge.svg)](https://github.com/onyx-dot-app/onyx/actions/workflows/release-cli.yml)
 [![PyPI](https://img.shields.io/pypi/v/onyx-cli.svg)](https://pypi.org/project/onyx-cli/)
 
-A CLI for querying enterprise knowledge from [Onyx](https://github.com/onyx-dot-app/onyx). Includes an interactive chat TUI for humans and non-interactive commands for AI agents and scripts.
+A CLI for querying enterprise knowledge from [Zeshan](https://github.com/onyx-dot-app/onyx). Includes an interactive chat TUI for humans and non-interactive commands for AI agents and scripts.
 
 ## Installation
 
@@ -28,7 +28,7 @@ Run the interactive chat TUI — on first launch it will guide you through setup
 onyx-cli chat
 ```
 
-This prompts for your Onyx server URL and personal access token (PAT), tests the connection, and saves config to `~/.config/onyx-cli/config.json` (or `$XDG_CONFIG_HOME/onyx-cli/config.json` if set). To reconfigure later, use the `/configure` command inside the TUI.
+This prompts for your Zeshan server URL and personal access token (PAT), tests the connection, and saves config to `~/.config/onyx-cli/config.json` (or `$XDG_CONFIG_HOME/onyx-cli/config.json` if set). To reconfigure later, use the `/configure` command inside the TUI.
 
 Environment variables override config file values:
 
@@ -112,9 +112,9 @@ Useful hardening flags:
 | `ask` | Agent / Script | Ask a question and print the answer to stdout |
 | `agents` | Agent / Script | List available agents (ID, name, description) |
 | `validate-config` | Agent / Script | Check CLI configuration and server connectivity |
-| `install-skill` | Agent / Script | Install the Onyx CLI agent skill file |
+| `install-skill` | Agent / Script | Install the Zeshan CLI agent skill file |
 | `experiments` | Agent / Script | List experimental features and their status |
-| `serve` | Interactive | Serve the Onyx TUI over SSH |
+| `serve` | Interactive | Serve the Zeshan TUI over SSH |
 
 ### Global Flags
 
@@ -186,7 +186,7 @@ onyx-cli install-skill --agent claude-code
 | `/configure` | Re-run connection setup |
 | `/connectors` | Open connectors in browser |
 | `/settings` | Open settings in browser |
-| `/quit` | Exit Onyx CLI |
+| `/quit` | Exit Zeshan CLI |
 
 ## Keyboard Shortcuts
 

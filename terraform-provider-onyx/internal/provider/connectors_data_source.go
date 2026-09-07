@@ -96,7 +96,7 @@ func (d *connectorsDataSource) Configure(_ context.Context, req datasource.Confi
 func (d *connectorsDataSource) Read(ctx context.Context, _ datasource.ReadRequest, resp *datasource.ReadResponse) {
 	remote, err := d.client.ListConnectors(ctx)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to list Onyx connectors", err.Error())
+		resp.Diagnostics.AddError("Failed to list Zeshan connectors", err.Error())
 		return
 	}
 

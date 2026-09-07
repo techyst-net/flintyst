@@ -1112,7 +1112,7 @@ class Document(Base):
     # NOTE: if more sensitive data is added here for display, make sure to add user/group permission
 
     # this should correspond to the ID of the document
-    # (as is passed around in Onyx)
+    # (as is passed around in Zeshan)
     id: Mapped[str] = mapped_column(NullFilteredString, primary_key=True)
     from_ingestion_api: Mapped[bool] = mapped_column(
         Boolean, default=False, nullable=True
@@ -1166,7 +1166,7 @@ class Document(Base):
         Boolean, nullable=False, default=False, server_default=text("false")
     )
     # The following are not attached to User because the account/email may not be known
-    # within Onyx
+    # within Zeshan
     # Something like the document creator
     primary_owners: Mapped[list[str] | None] = mapped_column(
         postgresql.ARRAY(String), nullable=True
@@ -1258,7 +1258,7 @@ class Document(Base):
 class OpenSearchDocumentMigrationRecord(Base):
     """Tracks the migration status of documents from Vespa to OpenSearch.
 
-    This table can be dropped when the migration is complete for all Onyx
+    This table can be dropped when the migration is complete for all Zeshan
     instances.
     """
 
@@ -1299,7 +1299,7 @@ class OpenSearchTenantMigrationRecord(Base):
 
     Should only contain one row.
 
-    This table can be dropped when the migration is complete for all Onyx
+    This table can be dropped when the migration is complete for all Zeshan
     instances.
     """
 
@@ -1921,7 +1921,7 @@ class ChunkStats(Base):
     # NOTE: if more sensitive data is added here for display, make sure to add user/group permission
 
     # this should correspond to the ID of the document
-    # (as is passed around in Onyx)x
+    # (as is passed around in Zeshan)x
     id: Mapped[str] = mapped_column(
         NullFilteredString,
         primary_key=True,
@@ -4976,11 +4976,11 @@ class Skill(Base):
 Enterprise Edition Models
 ************************************************************************
 
-These models are only used in Enterprise Edition only features in Onyx.
+These models are only used in Enterprise Edition only features in Zeshan.
 They are kept here to simplify the codebase and avoid having different assumptions
-on the shape of data being passed around between the MIT and EE versions of Onyx.
+on the shape of data being passed around between the MIT and EE versions of Zeshan.
 
-In the MIT version of Onyx, assume these tables are always empty.
+In the MIT version of Zeshan, assume these tables are always empty.
 """
 
 
@@ -5376,7 +5376,7 @@ class User__ExternalUserGroupId(Base):
     """Maps user info both internal and external to the name of the external group
     This maps the user to all of their external groups so that the external group name can be
     attached to the ACL list matching during query time. User level permissions can be handled by
-    directly adding the Onyx user to the doc ACL list"""
+    directly adding the Zeshan user to the doc ACL list"""
 
     __tablename__ = "user__external_user_group_id"
 
@@ -6969,7 +6969,7 @@ class ScimToken(Base):
 
 
 class ScimUserMapping(Base):
-    """Maps SCIM externalId from the IdP to an Onyx User."""
+    """Maps SCIM externalId from the IdP to an Zeshan User."""
 
     __tablename__ = "scim_user_mapping"
     __table_args__ = (
@@ -7008,7 +7008,7 @@ class ScimUserMapping(Base):
 
 
 class ScimGroupMapping(Base):
-    """Maps SCIM externalId from the IdP to an Onyx UserGroup."""
+    """Maps SCIM externalId from the IdP to an Zeshan UserGroup."""
 
     __tablename__ = "scim_group_mapping"
 
@@ -7190,7 +7190,7 @@ class ExternalApp(Base):
     # `external_apps.providers.PROVIDERS`.
     #
     # NOT unique — providers like self-hosted GitLab/Jira can have
-    # multiple distinct instances within one Onyx (each with its own
+    # multiple distinct instances within one Zeshan (each with its own
     # client_id + base URL) and would all share the same app_type.
     # Duplicate detection for the typical "one Slack" case happens
     # at the UI layer.

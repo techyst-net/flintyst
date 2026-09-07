@@ -93,7 +93,7 @@ func (d *settingsDataSource) Schema(_ context.Context, _ datasource.SchemaReques
 		"used_seats":                            schema.Int64Attribute{Computed: true},
 	}
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "The current Onyx workspace settings, read-only. Useful for referencing " +
+		MarkdownDescription: "The current Zeshan workspace settings, read-only. Useful for referencing " +
 			"settings (e.g. the license `tier`) without managing them.",
 		Attributes: attrs,
 	}
@@ -106,7 +106,7 @@ func (d *settingsDataSource) Configure(_ context.Context, req datasource.Configu
 func (d *settingsDataSource) Read(ctx context.Context, _ datasource.ReadRequest, resp *datasource.ReadResponse) {
 	server, err := d.client.GetSettings(ctx)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx settings", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan settings", err.Error())
 		return
 	}
 

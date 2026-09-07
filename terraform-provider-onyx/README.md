@@ -1,11 +1,11 @@
-# Terraform Provider for Onyx
+# Terraform Provider for Zeshan
 
-Manages **Onyx application configuration** declaratively via the Onyx admin API: LLM
+Manages **Zeshan application configuration** declaratively via the Zeshan admin API: LLM
 providers, the deployment default model, API keys, workspace settings, and embedding
 providers.
 
 > Not to be confused with `deployment/terraform/`, which provisions the *infrastructure*
-> Onyx runs on (EKS, RDS, ...). This provider configures what runs *inside* an Onyx
+> Zeshan runs on (EKS, RDS, ...). This provider configures what runs *inside* an Zeshan
 > deployment.
 
 ## Resources & data sources
@@ -23,7 +23,7 @@ providers.
 | `onyx_document_set` | Document sets (`/manage/admin/document-set`) | numeric id |
 | `onyx_custom_tool` | Custom actions (`/admin/tool/custom`) | numeric id |
 | `onyx_persona` | Agents / assistants (`/persona`) | numeric id |
-| `onyx_mcp_server` | MCP servers Onyx connects to (`/admin/mcp`) | numeric id |
+| `onyx_mcp_server` | MCP servers Zeshan connects to (`/admin/mcp`) | numeric id |
 | `onyx_user_group` | User groups: roster, managers, permission grants (**EE only**) | numeric id |
 | `data.onyx_llm_providers` | Read-only list of providers + defaults | — |
 | `data.onyx_embedding_providers` | Read-only list of embedding providers | — |
@@ -38,7 +38,7 @@ model, one indexed site, a document set built from it, and an agent that answers
 ## Authentication
 
 The provider needs an API key in the seeded **Admin** group (or an unrestricted PAT created
-by an admin user). Create one in the Onyx admin panel (*API Keys*) or via the API — pass the
+by an admin user). Create one in the Zeshan admin panel (*API Keys*) or via the API — pass the
 Admin group id, since a key with no group has no admin permissions:
 
 ```bash
@@ -68,7 +68,7 @@ provider "onyx" {
 ```
 
 API keys work regardless of the deployment's human `AUTH_TYPE` (basic/OIDC/SAML/cloud),
-and on Onyx Cloud the tenant is embedded in the key itself.
+and on Zeshan Cloud the tenant is embedded in the key itself.
 
 ## Keeping secrets out of state
 
@@ -91,9 +91,9 @@ the payload is mandatory.
 
 Three secrets have no twin, and cannot get one:
 
-- **`onyx_api_key.api_key`** is the key Onyx mints, not one you supply. Terraform can only
+- **`onyx_api_key.api_key`** is the key Zeshan mints, not one you supply. Terraform can only
   hand back a generated value through state. Treat the state file as holding it.
-- **`onyx_mcp_server.auth_template_headers`** is computed — Onyx writes the template itself
+- **`onyx_mcp_server.auth_template_headers`** is computed — Zeshan writes the template itself
   for a shared token — and Terraform does not allow an argument to be both computed and
   write-only. Its placeholder values are filled from `admin_credentials_wo`.
 - **The provider's own `api_key`** is provider configuration, which Terraform does not
@@ -123,18 +123,18 @@ diff that produces makes the next apply send the current secret.
 Do not derive the counter from the secret (`md5(var.token)` and friends). Unlike the
 secret, the counter is kept in state.
 
-The counter only decides when an apply is *triggered*. Onyx replaces all fields on update,
+The counter only decides when an apply is *triggered*. Zeshan replaces all fields on update,
 so the provider sends the secret on every apply it runs, whatever moved the plan.
 
 ### Two things to know
 
-**`onyx_custom_tool` stops refreshing its headers.** Onyx returns action headers in full
+**`onyx_custom_tool` stops refreshing its headers.** Zeshan returns action headers in full
 rather than masked, so `custom_headers` is normally refreshed and out-of-band edits show up
 in `terraform plan`. It cannot do that for `custom_headers_wo` without writing the secret
 into state, so it does not: a header changed in the admin UI goes unreported until the next
 apply overwrites it. This is the one place where the write-only form gives up something.
 
-**Importing takes one extra apply.** Import reads what the server has, so a secret Onyx
+**Importing takes one extra apply.** Import reads what the server has, so a secret Zeshan
 returns unmasked lands in the stored attribute. The first apply against a configuration
 that uses the twin clears it from state and moves the resource onto the write-only path.
 
@@ -143,7 +143,7 @@ that uses the twin clears it from state and moves the resource onto the write-on
 - **Secret drift is undetectable.** The API masks `api_key`/`custom_config` on read, so
   rotating them out-of-band (e.g. in the admin UI) is invisible to `terraform plan`. The
   configured value is authoritative and is re-asserted on the next apply.
-- **`onyx_settings` and `onyx_llm_provider_default` don't really delete.** Onyx has no
+- **`onyx_settings` and `onyx_llm_provider_default` don't really delete.** Zeshan has no
   reset-settings API and no unset API for the text/vision defaults; destroy removes them
   from state with a warning and leaves the live values alone. The chat-naming default is
   the exception: it has an unset API and is cleared on destroy when managed.
@@ -158,10 +158,10 @@ that uses the twin clears it from state and moves the resource onto the write-on
   masked, so it is never refreshed or diffed. `admin_public`, `curator_public` and `groups`
   have no update endpoint and force replacement instead.
 - **`onyx_connector` does not own its access control.** `access_type` and `groups` are
-  validated on write but stored on the cc-pair, so Terraform cannot refresh them. Onyx also
+  validated on write but stored on the cc-pair, so Terraform cannot refresh them. Zeshan also
   rewrites an unset `prune_freq` to 7 days on the first update, which the provider then
   keeps as the value of record.
-- **`onyx_connector` does not set access control.** Onyx applies it when a credential is
+- **`onyx_connector` does not set access control.** Zeshan applies it when a credential is
   associated, so it belongs to the connector-credential pair. The connector endpoints still
   require an `access_type` in the request body but ignore it, so the provider sends a fixed
   value rather than offering a knob that would do nothing.
@@ -170,11 +170,11 @@ that uses the twin clears it from state and moves the resource onto the write-on
   from a deleted one, so Terraform would drop it from state and recreate it. Keep
   `admin_public = true` (the default) for credentials Terraform manages, or run Terraform
   with the key that created them.
-- **Deleting an agent leaves a tombstone.** Onyx marks the row deleted instead of removing
+- **Deleting an agent leaves a tombstone.** Zeshan marks the row deleted instead of removing
   it, so the name stays taken. A later create under that name revives the tombstone, which
   is why destroy-then-apply returns the same agent id rather than a new one.
 - **A deleted agent answers 400, not 404.** The lookup raises a plain `ValueError`, which
-  Onyx renders as a bad request, so "gone" cannot be read off the status. The provider
+  Zeshan renders as a bad request, so "gone" cannot be read off the status. The provider
   confirms against the agent listing instead of matching on the message text. Making that
   endpoint return 404 is a worthwhile backend fix.
 - **`onyx_persona` does not own every field on an agent.** Attached folders and documents
@@ -182,9 +182,9 @@ that uses the twin clears it from state and moves the resource onto the write-on
   them and sends them back unchanged. That leaves a narrow window in which an attachment
   added between the read and the write is reverted; making the two fields nullable
   server-side would close it. Also,
-  `search_start_date` is sent but never read back, because Onyx returns it as a parsed
+  `search_start_date` is sent but never read back, because Zeshan returns it as a parsed
   timestamp that would not match a plain date. Avatar images are not managed at all.
-- **`display_priority` is create-only on the upsert.** Onyx reads it when an agent is
+- **`display_priority` is create-only on the upsert.** Zeshan reads it when an agent is
   created and ignores it on every later write, so the provider applies a change through
   the display-priority endpoint as a second call. That endpoint only sets a number, so the
   attribute is computed: removing it from the configuration leaves the last value rather
@@ -203,9 +203,9 @@ that uses the twin clears it from state and moves the resource onto the write-on
   attribute and own that link. The group exposes `cc_pair_ids`, `document_set_ids` and
   `persona_ids` read-only, so the two sides never fight over the same edge.
 - **A roster change must not disturb those links, and how it avoids that depends on the
-  change.** Onyx's update endpoint replaces connector links along with members. A roster
+  change.** Zeshan's update endpoint replaces connector links along with members. A roster
   that only gains members therefore goes through the add-users endpoint instead, which
-  takes members alone and lets Onyx preserve the links itself, inside the transaction that
+  takes members alone and lets Zeshan preserve the links itself, inside the transaction that
   holds the membership lock. A roster that loses one has no such endpoint: the provider
   reads the connector ids and sends them back, so a connector share made between that read
   and the write is overwritten by the older list. The window is one round-trip and only
@@ -214,7 +214,7 @@ that uses the twin clears it from state and moves the resource onto the write-on
 - **A group's computed links lag by one apply.** Terraform creates a group before the
   `onyx_cc_pair` that references it, so `cc_pair_ids` is still empty in the state written
   by that first apply and fills in on the next refresh.
-- **Onyx refuses membership, rename and delete while a group is syncing**, and a newly
+- **Zeshan refuses membership, rename and delete while a group is syncing**, and a newly
   created group starts out syncing, so the provider waits before each of those. Managers,
   incognito and permissions are not gated. **The user group tests therefore need Celery
   beat as well as the workers** — the sync that clears the gate is beat-scheduled every 20
@@ -224,14 +224,14 @@ that uses the twin clears it from state and moves the resource onto the write-on
   this right. So a 404 from any of them does not mean the group is gone — the destroy
   confirms each one against the listing before reporting success, since trusting it would
   drop a live group out of state and leave the next apply failing on the name it still holds.
-- **`onyx_user_group` permissions use Onyx's wire tokens**, for example `manage:connectors`,
+- **`onyx_user_group` permissions use Zeshan's wire tokens**, for example `manage:connectors`,
   not the enum names. Only toggleable permissions can be set; `basic`, `admin`,
-  `craft_sandbox`, `manage:skills` and the implied read tokens are managed by Onyx and are
+  `craft_sandbox`, `manage:skills` and the implied read tokens are managed by Zeshan and are
   neither read back nor writable.
 - **A seeded default group (`Admin`, `Basic`) holds members and nothing else.** Importing
   one and managing its roster works, but a rename, a delete, or a permission or incognito
   change is refused with a conflict.
-- **Onyx refuses a membership removal that would strand someone**, leaving them in no group
+- **Zeshan refuses a membership removal that would strand someone**, leaving them in no group
   at all — a person with no group has no permissions. Destroying a group is checked the same
   way, because it drops the whole roster, so a `terraform destroy` can fail on a member whose
   only group this is. It also guards self-removal by a manager, privilege amplification, and
@@ -239,11 +239,11 @@ that uses the twin clears it from state and moves the resource onto the write-on
 - **`onyx_mcp_server` manages only servers that need no interactive sign-in.** `NONE` and
   `API_TOKEN` are supported; `OAUTH` and `PT_OAUTH` need a browser round-trip and are
   refused while the plan is built, with a diagnostic naming the admin panel.
-- **Which tools an MCP server exposes is not managed.** Onyx only learns them by calling
+- **Which tools an MCP server exposes is not managed.** Zeshan only learns them by calling
   the server, and it rejects both a tool selection and a Craft approval policy naming a
   tool it has never seen. Neither attribute is exposed rather than exposing one that
   silently does nothing on a server Terraform just created.
-- **An MCP server's `description` left out of the configuration is cleared, not kept.** Onyx
+- **An MCP server's `description` left out of the configuration is cleared, not kept.** Zeshan
   reads a missing description as "leave it alone", so the provider always sends the field and
   an unstated one goes out empty — the same rule as `groups` and `users` below. The upsert
   cannot carry `available_in_craft`, which lives on a different endpoint, so setting it costs
@@ -252,24 +252,24 @@ that uses the twin clears it from state and moves the resource onto the write-on
   That flow leaves `auth_type` and `transport` unset, and Terraform has no value to show for
   them, so the first plan after such an import moves them to the schema defaults. It settles
   in one apply.
-- **A configured `auth_template_headers` is never refreshed from Onyx.** A header value may be
-  a literal rather than a `{placeholder}`, and Onyx masks those on the way out, so refreshing
-  would store the mask and leave a difference that never settles. Onyx's own template is read
+- **A configured `auth_template_headers` is never refreshed from Zeshan.** A header value may be
+  a literal rather than a `{placeholder}`, and Zeshan masks those on the way out, so refreshing
+  would store the mask and leave a difference that never settles. Zeshan's own template is read
   back only when the configuration states none. Editing the headers in the admin panel is
   therefore invisible to `terraform plan`, like any other secret.
 - **`auth_performer = "PER_USER"` credentials belong to the identity that applied them.**
-  Onyx stores `admin_credentials` against the applying user rather than the server, so a
+  Zeshan stores `admin_credentials` against the applying user rather than the server, so a
   Terraform-managed per-user server holds the API key's own credentials, not an
   administrator's. It also masks them partially rather than fully, unlike a shared token.
-- **An MCP server's header template is never reset.** Onyx keeps the stored template
+- **An MCP server's header template is never reset.** Zeshan keeps the stored template
   whenever a write omits one, so switching a server from `PER_USER` to a shared token
   leaves the per-user headers in place rather than restoring the default `Authorization`
   header. Recreate the server to start over.
-- **`groups` and `users` on an MCP server are owned by the configuration.** Onyx reads a
+- **`groups` and `users` on an MCP server are owned by the configuration.** Zeshan reads a
   missing list as "leave it alone", so the provider sends an empty one instead. Removing
   either from the configuration clears it on the server, including entries added from the
   admin panel.
-- **An MCP server URL cannot point at the Onyx host.** The SSRF guard refuses `localhost`
+- **An MCP server URL cannot point at the Zeshan host.** The SSRF guard refuses `localhost`
   and link-local addresses by name at every protection level, not only the strictest.
 - **The model list read is the API's display view.** It hides obsolete models and dated
   duplicates, so writes (including the auto-mode pass-through, which is also not atomic
@@ -282,7 +282,7 @@ Requires Go (see `go.mod`) and the [Terraform CLI](https://developer.hashicorp.c
 
 ```bash
 go build ./...        # build
-go test ./...         # unit tests (no Onyx needed)
+go test ./...         # unit tests (no Zeshan needed)
 ```
 
 ### Running it against a local build
@@ -304,7 +304,7 @@ using the provider.
 
 ### Acceptance tests
 
-Acceptance tests run real CRUD cycles against a live Onyx deployment (they create and
+Acceptance tests run real CRUD cycles against a live Zeshan deployment (they create and
 destroy providers/keys and briefly modify workspace settings — use a dev deployment):
 
 ```bash
@@ -318,7 +318,7 @@ TF_ACC=1 ONYX_TF_ACC_SERVER_URL=http://localhost:8080 go test ./internal/provide
   `admin_user@example.com` / `TestPassword123!`; on a fresh deployment the first
   registered user becomes admin automatically).
 
-Without `TF_ACC` these tests skip, so plain `go test ./...` stays green with no Onyx
+Without `TF_ACC` these tests skip, so plain `go test ./...` stays green with no Zeshan
 running. That is also what `pr-golang-tests.yml` runs, so the acceptance suite does not
 run there.
 
@@ -367,14 +367,14 @@ celery -A onyx.background.celery.versioned_apps.light worker \
 The primary worker picks up the deletion checks the API server dispatches; the light
 worker runs the deletions and the document set sync themselves.
 
-**Beat is required for the user group tests specifically.** Onyx refuses to change or
+**Beat is required for the user group tests specifically.** Zeshan refuses to change or
 delete a group while it is syncing, a new group starts out syncing, and only the
 beat-scheduled `check-for-vespa-sync` (every 20 seconds) clears that state. The workers
 alone never run it, so without beat every group rename, membership change and destroy
 waits until it times out.
 
 The pair tests use the `mock_connector` source on purpose. Creating a pair runs the
-connector's real `validate_connector_settings`, which reaches the source system; Onyx
+connector's real `validate_connector_settings`, which reaches the source system; Zeshan
 short-circuits that check for `mock_connector` and `ingestion_api`, so the tests cover the
 whole lifecycle without any live source or credentials.
 

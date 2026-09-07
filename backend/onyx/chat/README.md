@@ -1,9 +1,9 @@
 # Overview of Context Management
 
-This document reviews some design decisions around the main agent-loop powering Onyx's chat flow.
+This document reviews some design decisions around the main agent-loop powering Zeshan's chat flow.
 It is highly recommended for all engineers contributing to this flow to be familiar with the concepts here.
 
-> Note: it is assumed the reader is familiar with the Onyx product and features such as Projects, User files, Citations, etc. 
+> Note: it is assumed the reader is familiar with the Zeshan product and features such as Projects, User files, Citations, etc. 
 
 ## System Prompt
 

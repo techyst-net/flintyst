@@ -1,4 +1,4 @@
-// Package parser handles NDJSON stream parsing for Onyx chat responses.
+// Package parser handles NDJSON stream parsing for Zeshan chat responses.
 package parser
 
 import (

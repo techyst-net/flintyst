@@ -46,7 +46,7 @@ def get_doc_from_page(
     site: pywikibot.Site | None,  # ty: ignore[invalid-type-form]
     source_type: DocumentSource,
 ) -> Document:
-    """Generate Onyx Document from a MediaWiki page object.
+    """Generate Zeshan Document from a MediaWiki page object.
 
     Args:
         page: Page from a MediaWiki site.

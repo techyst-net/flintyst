@@ -148,7 +148,7 @@ variable "storage_account_name" {
 
 variable "storage_container_name" {
   type        = string
-  description = "Blob container holding the Onyx file store"
+  description = "Blob container holding the Zeshan file store"
   default     = "onyx-file-store"
 }
 
@@ -389,7 +389,7 @@ variable "entra_rbac_admin_group_object_ids" {
 
 variable "additional_workload_service_account_names" {
   type        = list(string)
-  description = "Further service accounts in the Onyx namespace that may use the workload identity. Use the rendered name for chart-created workloads such as onyx-sandbox-proxy."
+  description = "Further service accounts in the Zeshan namespace that may use the workload identity. Use the rendered name for chart-created workloads such as onyx-sandbox-proxy."
   default     = []
 }
 
@@ -409,7 +409,7 @@ variable "create_workload_service_account" {
 
 variable "enable_redis" {
   type        = bool
-  description = "Create an Azure Managed Redis cache. Off by default because the in-cluster Redis needs no extra configuration, not because a managed one cannot work. Managed Redis serves only database 0, where Onyx defaults to 0, 14 and 15, so a caller who turns this on must also set REDIS_DB_NUMBER, REDIS_DB_NUMBER_CELERY and REDIS_DB_NUMBER_CELERY_RESULT_BACKEND to 0. The redis module defaults to the NoCluster policy for the same reason: both sharded policies break Celery with CROSSSLOT."
+  description = "Create an Azure Managed Redis cache. Off by default because the in-cluster Redis needs no extra configuration, not because a managed one cannot work. Managed Redis serves only database 0, where Zeshan defaults to 0, 14 and 15, so a caller who turns this on must also set REDIS_DB_NUMBER, REDIS_DB_NUMBER_CELERY and REDIS_DB_NUMBER_CELERY_RESULT_BACKEND to 0. The redis module defaults to the NoCluster policy for the same reason: both sharded policies break Celery with CROSSSLOT."
   default     = false
 }
 

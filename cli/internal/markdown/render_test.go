@@ -88,8 +88,8 @@ func TestConstructs(t *testing.T) {
 		},
 		{
 			name:    "link with distinct text",
-			md:      "see [Onyx docs](https://docs.onyx.app) here",
-			want:    []string{"Onyx docs", "(https://docs.onyx.app)"},
+			md:      "see [Zeshan docs](https://docs.onyx.app) here",
+			want:    []string{"Zeshan docs", "(https://docs.onyx.app)"},
 			notWant: []string{"["},
 		},
 		{

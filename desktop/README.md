@@ -1,6 +1,6 @@
-# Onyx Desktop
+# Zeshan Desktop
 
-A lightweight macOS desktop application for [Onyx Cloud](https://cloud.onyx.app).
+A lightweight macOS desktop application for [Zeshan Cloud](https://cloud.onyx.app).
 
 Built with [Tauri](https://tauri.app) for minimal bundle size (~10MB vs Electron's 150MB+).
 
@@ -10,7 +10,7 @@ Built with [Tauri](https://tauri.app) for minimal bundle size (~10MB vs Electron
 - ⌨️ **Keyboard Shortcuts** - Quick navigation and actions
 - 🪟 **Native Feel** - macOS-style title bar with traffic lights
 - 💾 **Window State** - Remembers size/position between sessions
-- 🔗 **Multi-window** - Open multiple Onyx windows
+- 🔗 **Multi-window** - Open multiple Zeshan windows
 
 ## Keyboard Shortcuts
 
@@ -135,7 +135,7 @@ bunx tauri icon path/to/your-icon.png
 
 ### Self-Hosted / Custom Server URL
 
-The app defaults to `https://cloud.onyx.app` but supports any Onyx instance.
+The app defaults to `https://cloud.onyx.app` but supports any Zeshan instance.
 
 **Config file location:**
 
@@ -152,7 +152,7 @@ The app defaults to `https://cloud.onyx.app` but supports any Onyx instance.
 ```json
 {
   "server_url": "https://your-onyx-instance.company.com",
-  "window_title": "Onyx"
+  "window_title": "Zeshan"
 }
 ```
 
@@ -214,7 +214,7 @@ rustup target add aarch64-apple-darwin
 For distributing outside the App Store, you'll need to:
 
 1. Get an Apple Developer certificate
-2. Sign the app: `codesign --deep --force --sign "Developer ID" target/release/bundle/macos/Onyx.app`
+2. Sign the app: `codesign --deep --force --sign "Developer ID" target/release/bundle/macos/Zeshan.app`
 3. Notarize with Apple
 
 ## License

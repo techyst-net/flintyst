@@ -11,7 +11,7 @@ interface PageLoaderProps {
 }
 
 /**
- * Full-page loading state: the animated Onyx mark with a label, centered in
+ * Full-page loading state: the animated Zeshan mark with a label, centered in
  * the available space. Use for page/route-level loading. For an inline or
  * section-level loader without a label, use `OnyxLoader` directly.
  */

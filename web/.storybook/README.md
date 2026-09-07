@@ -1,8 +1,8 @@
-# Onyx Storybook
+# Zeshan Storybook
 
 Storybook is an isolated development environment for UI components. It renders each component in a standalone "story" outside of the main app, so you can visually verify appearance, interact with props, and catch regressions without navigating through the full application.
 
-The Onyx Storybook covers the full component library — from low-level `@opal/core` primitives up through `refresh-components`, and selected per-app feature components under `Apps/` — giving designers and engineers a shared reference for every visual state.
+The Zeshan Storybook covers the full component library — from low-level `@opal/core` primitives up through `refresh-components`, and selected per-app feature components under `Apps/` — giving designers and engineers a shared reference for every visual state.
 
 **Production:** [onyx-storybook.vercel.app](https://onyx-storybook.vercel.app)
 

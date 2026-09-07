@@ -1,4 +1,4 @@
-// Package api provides the HTTP client for communicating with the Onyx server.
+// Package api provides the HTTP client for communicating with the Zeshan server.
 package api
 
 import (
@@ -20,7 +20,7 @@ import (
 	"github.com/onyx-dot-app/onyx/cli/internal/models"
 )
 
-// Client is the Onyx API client.
+// Client is the Zeshan API client.
 //
 // Three http.Clients are kept so each call site can pick a timeout matched to
 // its expected work: 3min for quick JSON endpoints, 5min for /search (which
@@ -77,7 +77,7 @@ func (c *Client) newRequest(ctx context.Context, method, path string, body io.Re
 	if c.apiKey != "" {
 		bearer := "Bearer " + c.apiKey
 		req.Header.Set("Authorization", bearer)
-		req.Header.Set("X-Onyx-Authorization", bearer)
+		req.Header.Set("X-Zeshan-Authorization", bearer)
 	}
 	return req, nil
 }
@@ -241,7 +241,7 @@ func (c *Client) TestConnection(ctx context.Context) error {
 
 	if resp2.StatusCode == 401 || resp2.StatusCode == 403 {
 		if isHTML || strings.Contains(respServer, "awselb") {
-			return &AuthError{Message: fmt.Sprintf("HTTP %d from a reverse proxy (not the Onyx backend).\n  Check your deployment's ingress / proxy configuration", resp2.StatusCode)}
+			return &AuthError{Message: fmt.Sprintf("HTTP %d from a reverse proxy (not the Zeshan backend).\n  Check your deployment's ingress / proxy configuration", resp2.StatusCode)}
 		}
 		if resp2.StatusCode == 401 {
 			return &AuthError{Message: fmt.Sprintf("invalid personal access token.\n  %s", body)}

@@ -67,22 +67,22 @@ func (r *mcpServerResource) Metadata(_ context.Context, req resource.MetadataReq
 
 func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An MCP server Onyx connects to, so its tools can be attached to agents.\n\n" +
+		MarkdownDescription: "An MCP server Zeshan connects to, so its tools can be attached to agents.\n\n" +
 			"Only servers that need no interactive sign-in can be managed here: `NONE` and " +
 			"`API_TOKEN`. An OAuth server is refused while the plan is built, because the flow " +
 			"needs a browser round-trip that Terraform cannot perform.\n\n" +
-			"Which tools the server exposes is not part of this resource. Onyx learns them by " +
+			"Which tools the server exposes is not part of this resource. Zeshan learns them by " +
 			"calling the server, and both the tool selection and the Craft approval policies are " +
 			"rejected for a tool it has never seen.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed:            true,
 				PlanModifiers:       []planmodifier.String{stringplanmodifier.UseStateForUnknown()},
-				MarkdownDescription: "Server id, assigned by Onyx.",
+				MarkdownDescription: "Server id, assigned by Zeshan.",
 			},
 			"name": schema.StringAttribute{
 				Required: true,
-				MarkdownDescription: "Display name. Onyx does not require it to be unique, so two " +
+				MarkdownDescription: "Display name. Zeshan does not require it to be unique, so two " +
 					"servers may share a name.",
 			},
 			"description": schema.StringAttribute{
@@ -93,9 +93,9 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 			},
 			"server_url": schema.StringAttribute{
 				Required: true,
-				MarkdownDescription: "URL Onyx calls the server on. Onyx refuses loopback and " +
+				MarkdownDescription: "URL Zeshan calls the server on. Zeshan refuses loopback and " +
 					"link-local addresses whatever the SSRF protection level, so a server on the " +
-					"Onyx host itself cannot be reached by name.",
+					"Zeshan host itself cannot be reached by name.",
 			},
 			"transport": schema.StringAttribute{
 				Optional:            true,
@@ -120,7 +120,7 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				Optional:  true,
 				Sensitive: true,
 				MarkdownDescription: "Shared API token, for `auth_type = \"API_TOKEN\"` with " +
-					"`auth_performer = \"ADMIN\"`. Onyx returns it masked, so Terraform never reads " +
+					"`auth_performer = \"ADMIN\"`. Zeshan returns it masked, so Terraform never reads " +
 					"it back: the configured value is the only record, and an imported server has " +
 					"none." + writeOnlyDescription("api_token"),
 			},
@@ -141,9 +141,9 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				Computed:    true,
 				Sensitive:   true,
 				ElementType: types.StringType,
-				MarkdownDescription: "Headers Onyx sends to the server, for " +
+				MarkdownDescription: "Headers Zeshan sends to the server, for " +
 					"`auth_performer = \"PER_USER\"`. A `{placeholder}` in a value names a field " +
-					"each user fills in. Onyx writes this itself for a shared token, and keeps " +
+					"each user fills in. Zeshan writes this itself for a shared token, and keeps " +
 					"whatever it holds when a request states none, so switching a server from " +
 					"per-user to a shared token leaves the per-user headers in place. Recreate " +
 					"the server to start over.",
@@ -154,7 +154,7 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				ElementType: types.StringType,
 				MarkdownDescription: "Values for the `auth_template_headers` placeholders, required " +
 					"with `auth_performer = \"PER_USER\"` and rejected otherwise — a shared token " +
-					"is set through `api_token`. Onyx stores them against the identity that " +
+					"is set through `api_token`. Zeshan stores them against the identity that " +
 					"applied, not the server, and returns them masked." +
 					writeOnlyDescription("admin_credentials"),
 			},
@@ -182,7 +182,7 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				Optional:    true,
 				ElementType: types.Int64Type,
 				MarkdownDescription: "User group ids that may use the server when it is not public. " +
-					"Onyx refuses the built-in `Admin` group here and asks for a public server " +
+					"Zeshan refuses the built-in `Admin` group here and asks for a public server " +
 					"instead. The configuration owns this list: removing it clears the groups on " +
 					"the server, including any added from the admin panel.",
 			},
@@ -197,7 +197,7 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(false),
-				MarkdownDescription: "Whether the Craft agent may use this server. Onyx keeps this on " +
+				MarkdownDescription: "Whether the Craft agent may use this server. Zeshan keeps this on " +
 					"a different endpoint from the rest, so setting it costs a second call.",
 			},
 			"owner": schema.StringAttribute{
@@ -207,16 +207,16 @@ func (r *mcpServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 			},
 			"status": schema.StringAttribute{
 				Computed: true,
-				MarkdownDescription: "Connection state, which Onyx cycles on its own: `CREATED`, " +
+				MarkdownDescription: "Connection state, which Zeshan cycles on its own: `CREATED`, " +
 					"`AWAITING_AUTH`, `FETCHING_TOOLS`, `CONNECTED` or `DISCONNECTED`.",
 			},
 			"tool_count": schema.Int64Attribute{
 				Computed:            true,
-				MarkdownDescription: "How many tools Onyx has discovered on the server.",
+				MarkdownDescription: "How many tools Zeshan has discovered on the server.",
 			},
 			"last_refreshed_at": schema.StringAttribute{
 				Computed:            true,
-				MarkdownDescription: "When Onyx last listed the server's tools.",
+				MarkdownDescription: "When Zeshan last listed the server's tools.",
 			},
 		},
 	}
@@ -236,7 +236,7 @@ func (r *mcpServerResource) ValidateConfig(ctx context.Context, req resource.Val
 	}
 
 	// auth_performer is checked before auth_type, because the checks below
-	// return while the type is still unknown. A performer Onyx does not
+	// return while the type is still unknown. A performer Zeshan does not
 	// recognise is wrong whatever the type resolves to, and leaving it until
 	// after those returns let it reach the API and fail the apply instead.
 	performerKnown := !config.AuthPerformer.IsUnknown()
@@ -271,7 +271,7 @@ func (r *mcpServerResource) ValidateConfig(ctx context.Context, req resource.Val
 			path.Root("auth_type"),
 			"OAuth MCP servers cannot be managed by Terraform",
 			fmt.Sprintf("%q needs a browser sign-in that Terraform cannot perform. Add the server "+
-				"in the Onyx admin panel instead, and manage the rest of the deployment here.", authType),
+				"in the Zeshan admin panel instead, and manage the rest of the deployment here.", authType),
 		)
 		return
 	}
@@ -331,7 +331,7 @@ func (r *mcpServerResource) ValidateConfig(ctx context.Context, req resource.Val
 			resp.Diagnostics.AddAttributeError(
 				path.Root("auth_template_headers"),
 				"Headers set on a shared-token server",
-				"Onyx writes the header template itself for a shared token. Drop "+
+				"Zeshan writes the header template itself for a shared token. Drop "+
 					"`auth_template_headers`, or set `auth_performer` to \"PER_USER\" to write your own.",
 			)
 		}
@@ -339,7 +339,7 @@ func (r *mcpServerResource) ValidateConfig(ctx context.Context, req resource.Val
 			resp.Diagnostics.AddAttributeError(
 				path.Root("admin_credentials"),
 				"admin_credentials set on a shared-token server",
-				"A shared token is set through `api_token`/`api_token_wo`, which Onyx stores as the "+
+				"A shared token is set through `api_token`/`api_token_wo`, which Zeshan stores as the "+
 					"credentials itself. Use `admin_credentials`/`admin_credentials_wo` only with "+
 					"`auth_performer = \"PER_USER\"`.",
 			)
@@ -360,7 +360,7 @@ func (r *mcpServerResource) ValidateConfig(ctx context.Context, req resource.Val
 		resp.Diagnostics.AddAttributeError(
 			path.Root("admin_credentials"),
 			"Missing admin_credentials",
-			"Onyx requires the applying admin's own values for the template fields, in "+
+			"Zeshan requires the applying admin's own values for the template fields, in "+
 				"`admin_credentials` or `admin_credentials_wo`.",
 		)
 	}
@@ -405,8 +405,8 @@ func resolveMCPServerSecrets(ctx context.Context, config tfsdk.Config, plan mcpS
 // writeFromModel converts a plan into the upsert body.
 //
 // The changed flags follow the LLM provider: Terraform state holds the real
-// secret, never the masked one Onyx returns, so re-asserting the configured
-// value is always safe. Onyx rejects a masked value outright, which is what
+// secret, never the masked one Zeshan returns, so re-asserting the configured
+// value is always safe. Zeshan rejects a masked value outright, which is what
 // makes that safe rather than merely conventional.
 func (r *mcpServerResource) writeFromModel(
 	ctx context.Context,
@@ -428,12 +428,12 @@ func (r *mcpServerResource) writeFromModel(
 		IsPublic:         plan.IsPublic.ValueBoolPointer(),
 	}
 
-	// Only a per-user server states its own template; Onyx writes the shared one
+	// Only a per-user server states its own template; Zeshan writes the shared one
 	// itself. The attribute is computed, so on a shared-token server the plan
-	// holds whatever Onyx last stored, and echoing that back would put a value
+	// holds whatever Zeshan last stored, and echoing that back would put a value
 	// Terraform never had in its configuration into the write body.
 	//
-	// This does not decide what the server ends up with. Onyx preserves the
+	// This does not decide what the server ends up with. Zeshan preserves the
 	// stored template whenever the request omits one, so a server switched from
 	// per-user to a shared token keeps the headers it already had either way.
 	perUser := plan.AuthPerformer.ValueString() == client.MCPPerformerPerUser
@@ -453,7 +453,7 @@ func (r *mcpServerResource) writeFromModel(
 		write.AdminCredentialsChanged = changed
 	}
 
-	// Onyx reads a missing access list as "leave the stored one alone", but in a
+	// Zeshan reads a missing access list as "leave the stored one alone", but in a
 	// configuration a missing list means there is no access list. Send an empty
 	// one so the configuration stays authoritative: without this a list removed
 	// from the configuration survives on the server and comes back on the next
@@ -482,7 +482,7 @@ func (r *mcpServerResource) writeFromModel(
 
 // applyRemoteMCPServer copies the stored server over the model.
 //
-// api_token and admin_credentials are skipped on purpose: Onyx returns them
+// api_token and admin_credentials are skipped on purpose: Zeshan returns them
 // masked, so the configured value is the only true record and overwriting it
 // here would write a row of bullets into state.
 func applyRemoteMCPServer(ctx context.Context, model *mcpServerResourceModel, remote *client.MCPServer, diags *diag.Diagnostics) {
@@ -506,8 +506,8 @@ func applyRemoteMCPServer(ctx context.Context, model *mcpServerResourceModel, re
 	}
 
 	// Only fill the template in when the model holds none, which is the shared
-	// one Onyx writes for itself. A header value may be a literal rather than a
-	// placeholder, and Onyx masks those on the way out (`lite...-123`), so
+	// one Zeshan writes for itself. A header value may be a literal rather than a
+	// placeholder, and Zeshan masks those on the way out (`lite...-123`), so
 	// refreshing over a configured template would store the mask and leave a
 	// difference that never settles.
 	if model.AuthTemplateHeaders.IsNull() || model.AuthTemplateHeaders.IsUnknown() {
@@ -586,7 +586,7 @@ func (r *mcpServerResource) Create(ctx context.Context, req resource.CreateReque
 
 	id, err := r.client.UpsertMCPServer(ctx, write)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan MCP server", err.Error())
 		return
 	}
 
@@ -597,7 +597,7 @@ func (r *mcpServerResource) Create(ctx context.Context, req resource.CreateReque
 	remote, err := r.client.GetMCPServer(ctx, id)
 	if err != nil {
 		resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
-		resp.Diagnostics.AddError("Failed to read the new Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to read the new Zeshan MCP server", err.Error())
 		return
 	}
 
@@ -606,7 +606,7 @@ func (r *mcpServerResource) Create(ctx context.Context, req resource.CreateReque
 	applyRemoteMCPServer(ctx, &plan, remote, &resp.Diagnostics)
 	resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 	if craftErr != nil {
-		resp.Diagnostics.AddError("Failed to set Craft availability on the new Onyx MCP server", craftErr.Error())
+		resp.Diagnostics.AddError("Failed to set Craft availability on the new Zeshan MCP server", craftErr.Error())
 	}
 }
 
@@ -628,7 +628,7 @@ func (r *mcpServerResource) Read(ctx context.Context, req resource.ReadRequest, 
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Failed to read Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan MCP server", err.Error())
 		return
 	}
 
@@ -663,13 +663,13 @@ func (r *mcpServerResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	if _, err := r.client.UpsertMCPServer(ctx, write); err != nil {
-		resp.Diagnostics.AddError("Failed to update Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to update Zeshan MCP server", err.Error())
 		return
 	}
 
 	remote, err := r.client.GetMCPServer(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read the updated Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to read the updated Zeshan MCP server", err.Error())
 		return
 	}
 
@@ -678,7 +678,7 @@ func (r *mcpServerResource) Update(ctx context.Context, req resource.UpdateReque
 	applyRemoteMCPServer(ctx, &plan, remote, &resp.Diagnostics)
 	resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 	if craftErr != nil {
-		resp.Diagnostics.AddError("Failed to set Craft availability on the Onyx MCP server", craftErr.Error())
+		resp.Diagnostics.AddError("Failed to set Craft availability on the Zeshan MCP server", craftErr.Error())
 	}
 }
 
@@ -697,7 +697,7 @@ func (r *mcpServerResource) Delete(ctx context.Context, req resource.DeleteReque
 	// The delete is real, and a server already gone answers 404 like any other
 	// missing id, so there is no tombstone to check for.
 	if err := r.client.DeleteMCPServer(ctx, id); err != nil && !client.IsNotFound(err) {
-		resp.Diagnostics.AddError("Failed to delete Onyx MCP server", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan MCP server", err.Error())
 	}
 }
 

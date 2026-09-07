@@ -1,9 +1,9 @@
 {
   "__inputs": [],
-  "title": "Onyx Chat Load Test — Correlation",
+  "title": "Zeshan Chat Load Test — Correlation",
   "uid": "onyx-chat-loadtest-correlation",
   "annotations": { "list": [] },
-  "description": "Overlays Locust chat-path milestone latency / failure rate (from the loadtest Prometheus exporter) with server-side resource usage, so load and saturation can be read on one timeline. Templated: pick a Prometheus datasource and set $namespace / $workload to the Onyx deployment under test.",
+  "description": "Overlays Locust chat-path milestone latency / failure rate (from the loadtest Prometheus exporter) with server-side resource usage, so load and saturation can be read on one timeline. Templated: pick a Prometheus datasource and set $namespace / $workload to the Zeshan deployment under test.",
   "editable": true,
   "graphTooltip": 1,
   "schemaVersion": 39,

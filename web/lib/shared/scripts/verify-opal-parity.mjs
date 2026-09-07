@@ -1,3 +1,17 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// NOTE FOR THIS FORK
+//
+// This gate asserts that token values are IDENTICAL to the base branch. The
+// brand colours here were deliberately changed (the blue-* primitives now
+// carry the Zeshan indigo ramp), so running it against an upstream baseline
+// reports those differences as failures — by design, not as a regression.
+//
+// It remains useful for its other assertions: the variable-NAME set matching,
+// and that no variable is defined in both shared and opal. If you want the
+// value comparison too, point PARITY_BASELINE_REF at a ref of this fork that
+// already contains the retint.
+// ─────────────────────────────────────────────────────────────────────────────
+
 // Token parity gate — the no-regression guarantee for the Opal -> Shared token move.
 //
 // It proves that every design-token CSS variable resolves to the IDENTICAL concrete

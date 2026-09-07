@@ -21,7 +21,7 @@ const (
 	MCPPerformerPerUser = "PER_USER"
 )
 
-// MCPAuthTemplate is the header set Onyx sends to the MCP server. Values may
+// MCPAuthTemplate is the header set Zeshan sends to the MCP server. Values may
 // hold `{placeholder}` fields that each user fills in.
 type MCPAuthTemplate struct {
 	Headers map[string]string `json:"headers"`
@@ -46,7 +46,7 @@ type MCPServerWrite struct {
 	Transport     string `json:"transport"`
 
 	// APIToken is stored as admin_credentials["api_key"] and read back masked,
-	// so it is never refreshed from the server. APITokenChanged tells Onyx to
+	// so it is never refreshed from the server. APITokenChanged tells Zeshan to
 	// take the value rather than keep the one it holds.
 	APIToken        *string `json:"api_token,omitempty"`
 	APITokenChanged bool    `json:"api_token_changed"`
@@ -65,7 +65,7 @@ type MCPServerWrite struct {
 
 // MCPServerPatch carries the one field of MCPServerSimpleUpdateRequest the
 // upsert cannot reach. The request model holds more, and the endpoint also
-// covers per-tool Craft policies, but Onyx rejects a policy for a tool it has
+// covers per-tool Craft policies, but Zeshan rejects a policy for a tool it has
 // never discovered, so nothing here would be able to set one.
 type MCPServerPatch struct {
 	AvailableInCraft *bool `json:"available_in_craft,omitempty"`

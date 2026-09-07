@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Embeds a query and saves the embedding to a file.
 
-Requires Onyx to be running as it reads search settings from the database.
+Requires Zeshan to be running as it reads search settings from the database.
 
 Usage:
     source .venv/bin/activate

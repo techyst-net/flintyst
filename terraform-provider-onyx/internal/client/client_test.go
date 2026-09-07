@@ -82,8 +82,8 @@ func TestAuthHeaders(t *testing.T) {
 	if got := captured.Header.Get("Authorization"); got != want {
 		t.Errorf("Authorization = %q, want %q", got, want)
 	}
-	if got := captured.Header.Get("X-Onyx-Authorization"); got != want {
-		t.Errorf("X-Onyx-Authorization = %q, want %q", got, want)
+	if got := captured.Header.Get("X-Zeshan-Authorization"); got != want {
+		t.Errorf("X-Zeshan-Authorization = %q, want %q", got, want)
 	}
 }
 

@@ -1,6 +1,6 @@
 variable "name" {
   type        = string
-  description = "Name of the Onyx resources. Example: 'onyx'"
+  description = "Name of the Zeshan resources. Example: 'onyx'"
   default     = "onyx"
 }
 
@@ -171,7 +171,7 @@ variable "enable_upload_bucket" {
 
 variable "irsa_additional_service_account_names" {
   type        = list(string)
-  description = "Additional service accounts in the Onyx namespace that may assume the workload IRSA role. Use the rendered ServiceAccount name for chart-created workloads, such as onyx-sandbox-proxy, that also need RDS IAM auth."
+  description = "Additional service accounts in the Zeshan namespace that may assume the workload IRSA role. Use the rendered ServiceAccount name for chart-created workloads, such as onyx-sandbox-proxy, that also need RDS IAM auth."
   default     = []
 }
 

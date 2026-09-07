@@ -30,7 +30,7 @@ class LogoDisplayStyle(str, Enum):
 
 
 class EnterpriseSettings(BaseModel):
-    """General settings that only apply to the Enterprise Edition of Onyx
+    """General settings that only apply to the Enterprise Edition of Zeshan
 
     NOTE: don't put anything sensitive in here, as this is accessible without auth."""
 
@@ -53,7 +53,7 @@ class EnterpriseSettings(BaseModel):
     show_first_visit_notice: bool | None = None
     custom_greeting_message: str | None = None
     # login page subtitle under the "Welcome to <app name>" heading. Blank
-    # falls back to the default Onyx tagline.
+    # falls back to the default Zeshan tagline.
     custom_login_subtitle: str | None = None
 
     # custom help link surfaced in the profile dropdown alongside the
@@ -61,7 +61,7 @@ class EnterpriseSettings(BaseModel):
     custom_help_link_url: str | None = None
     custom_help_link_label: str | None = None
 
-    # hide the "Powered by Onyx" tagline under the sidebar logo
+    # hide the "Powered by Zeshan" tagline under the sidebar logo
     hide_onyx_branding: bool | None = None
 
     @field_validator("custom_help_link_url")

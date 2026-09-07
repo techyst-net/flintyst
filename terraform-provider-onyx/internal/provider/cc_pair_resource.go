@@ -69,7 +69,7 @@ func (r *ccPairResource) Schema(ctx context.Context, _ resource.SchemaRequest, r
 			"they produce.\n\n" +
 			"Creating a pair starts indexing. Destroying one removes the indexed documents too, which " +
 			"runs in the background — Terraform waits for it to finish.\n\n" +
-			"~> **Drift blind spot.** Onyx does not report `groups`, `auto_sync_options` or " +
+			"~> **Drift blind spot.** Zeshan does not report `groups`, `auto_sync_options` or " +
 			"`processing_mode` back on read, so Terraform cannot detect changes made to them elsewhere. " +
 			"They are recorded from the configuration at create time. After `terraform import` they are " +
 			"empty, and setting them then replaces the pair.",
@@ -97,7 +97,7 @@ func (r *ccPairResource) Schema(ctx context.Context, _ resource.SchemaRequest, r
 			},
 			"name": schema.StringAttribute{
 				Required: true,
-				MarkdownDescription: "Pair name, shown in the admin panel. Onyx does not require it to " +
+				MarkdownDescription: "Pair name, shown in the admin panel. Zeshan does not require it to " +
 					"be unique, but a connector and credential can only be paired once.",
 			},
 			"access_type": schema.StringAttribute{
@@ -152,7 +152,7 @@ func (r *ccPairResource) Schema(ctx context.Context, _ resource.SchemaRequest, r
 			"status": schema.StringAttribute{
 				Computed: true,
 				MarkdownDescription: "Server status: `SCHEDULED`, `INITIAL_INDEXING`, `ACTIVE`, `PAUSED`, " +
-					"`DELETING` or `INVALID`. Onyx cycles it as indexing progresses; use `paused` to change it.",
+					"`DELETING` or `INVALID`. Zeshan cycles it as indexing progresses; use `paused` to change it.",
 			},
 			"num_docs_indexed": schema.Int64Attribute{
 				Computed:            true,
@@ -225,7 +225,7 @@ func (r *ccPairResource) Create(ctx context.Context, req resource.CreateRequest,
 		ProcessingMode:  processingMode,
 	})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan connector-credential pair", err.Error())
 		r.warnIfConnectorWasRolledBack(ctx, connectorID, &resp.Diagnostics)
 		return
 	}
@@ -240,7 +240,7 @@ func (r *ccPairResource) Create(ctx context.Context, req resource.CreateRequest,
 
 	remote, err := r.client.GetCCPair(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read back the new Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to read back the new Zeshan connector-credential pair", err.Error())
 		// Persist the id so the next apply updates instead of creating a duplicate.
 		plan.ID = types.StringValue(strconv.FormatInt(id, 10))
 		resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
@@ -248,7 +248,7 @@ func (r *ccPairResource) Create(ctx context.Context, req resource.CreateRequest,
 	}
 	applyRemoteCCPair(&plan, remote)
 	if pauseErr != nil {
-		resp.Diagnostics.AddError("Failed to pause the new Onyx connector-credential pair", pauseErr.Error())
+		resp.Diagnostics.AddError("Failed to pause the new Zeshan connector-credential pair", pauseErr.Error())
 	}
 	resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 }
@@ -264,8 +264,8 @@ func (r *ccPairResource) warnIfConnectorWasRolledBack(ctx context.Context, conne
 		return
 	}
 	diags.AddError(
-		"Onyx deleted the connector while rejecting the pair",
-		fmt.Sprintf("Connector %d no longer exists. Onyx deletes the connector when the pair cannot "+
+		"Zeshan deleted the connector while rejecting the pair",
+		fmt.Sprintf("Connector %d no longer exists. Zeshan deletes the connector when the pair cannot "+
 			"be inserted, so the onyx_connector resource in state is now stale.\n\n"+
 			"This usually means something created the same pair at the same time. Run "+
 			"`terraform apply` again — Terraform recreates the connector, because it can no longer "+
@@ -291,7 +291,7 @@ func (r *ccPairResource) Read(ctx context.Context, req resource.ReadRequest, res
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan connector-credential pair", err.Error())
 		return
 	}
 	// A pair stuck in DELETING stays in state on purpose. A failed deletion
@@ -317,7 +317,7 @@ func (r *ccPairResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// Name and status have separate endpoints; everything else replaces.
 	if !plan.Name.Equal(state.Name) {
 		if err := r.client.SetCCPairName(ctx, id, plan.Name.ValueString()); err != nil {
-			resp.Diagnostics.AddError("Failed to rename Onyx connector-credential pair", err.Error())
+			resp.Diagnostics.AddError("Failed to rename Zeshan connector-credential pair", err.Error())
 			return
 		}
 	}
@@ -327,14 +327,14 @@ func (r *ccPairResource) Update(ctx context.Context, req resource.UpdateRequest,
 			status = client.CCPairStatusPaused
 		}
 		if err := r.client.SetCCPairStatus(ctx, id, status); err != nil {
-			resp.Diagnostics.AddError("Failed to change Onyx connector-credential pair status", err.Error())
+			resp.Diagnostics.AddError("Failed to change Zeshan connector-credential pair status", err.Error())
 			return
 		}
 	}
 
 	remote, err := r.client.GetCCPair(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read back the Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to read back the Zeshan connector-credential pair", err.Error())
 		return
 	}
 	applyRemoteCCPair(&plan, remote)
@@ -371,7 +371,7 @@ func (r *ccPairResource) Delete(ctx context.Context, req resource.DeleteRequest,
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to delete Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan connector-credential pair", err.Error())
 		return
 	}
 
@@ -395,7 +395,7 @@ func (r *ccPairResource) Delete(ctx context.Context, req resource.DeleteRequest,
 				remote.Status, remote.NumDocsIndexed), nil
 		})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to delete Onyx connector-credential pair", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan connector-credential pair", err.Error())
 	}
 }
 

@@ -214,7 +214,7 @@ class OnyxRedisSlackRetryHandler(BaseRetryHandler):
 
 
 class OnyxSlackWebClient(WebClient):
-    """Use in combination with the Onyx Retry Handler.
+    """Use in combination with the Zeshan Retry Handler.
 
     This client wrapper enforces a proper retry delay through redis BEFORE the
     api call so that multiple clients can synchronize and rate limit properly.

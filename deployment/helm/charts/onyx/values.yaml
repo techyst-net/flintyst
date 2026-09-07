@@ -8,15 +8,15 @@
 #                           /docs/craft/dev/local-kubernetes.md for the full workflow.
 
 global:
-  # Global version for all Onyx components (overrides .Chart.AppVersion)
-  # Every Onyx image publishes a -dev twin for each of its tags (e.g. "latest-dev",
+  # Global version for all Zeshan components (overrides .Chart.AppVersion)
+  # Every Zeshan image publishes a -dev twin for each of its tags (e.g. "latest-dev",
   # "v1.2.3-dev"), so this single value can select the dev variant of the whole
   # deployment. Today only the backend image actually differs: its -dev twin adds
   # debugging tools (vim, nano, curl, ps, psql) that the default image leaves out.
   version: "latest"
-  # Global pull policy for all Onyx component images
+  # Global pull policy for all Zeshan component images
   pullPolicy: "IfNotPresent"
-  # Host for all Onyx components
+  # Host for all Zeshan components
   host: "0.0.0.0"
 
 # -- Custom (private/internal) CA certificates for outbound TLS.
@@ -362,7 +362,7 @@ tooling:
 monitoring:
   grafana:
     dashboards:
-      # -- Set to true to deploy Grafana dashboard ConfigMaps for the Onyx indexing pipeline.
+      # -- Set to true to deploy Grafana dashboard ConfigMaps for the Zeshan indexing pipeline.
       # Requires kube-prometheus-stack (or equivalent) with the Grafana sidecar enabled and watching this namespace.
       # The sidecar must be configured with label selector: grafana_dashboard=1
       enabled: false
@@ -1020,7 +1020,7 @@ celery_worker_scheduled_tasks:
   tolerations: []
   affinity: {}
 
-# Discord bot for Onyx
+# Discord bot for Zeshan
 # The bot offloads message processing to scalable API pods via HTTP requests.
 discordbot:
   extraEnv: []
@@ -1085,8 +1085,8 @@ slackbot:
   tolerations: []
   affinity: {}
 
-# Onyx Model Context Protocol (MCP) Server
-# Allows LLMs to use Onyx like invoking tools or accessing resources
+# Zeshan Model Context Protocol (MCP) Server
+# Allows LLMs to use Zeshan like invoking tools or accessing resources
 mcpServer:
   extraEnv: []
   enabled: false  # Disabled by default
@@ -1445,7 +1445,7 @@ auth:
     # in secretKeys to be used. Values will be base64 encoded in the k8s
     # cluster.
     # For the bundled OpenSearch chart, the admin password is consumed during
-    # initial cluster setup. Changing this value later will update Onyx's
+    # initial cluster setup. Changing this value later will update Zeshan's
     # client credentials, but will not rotate the OpenSearch admin password.
     # Set this before first install or use existingSecret to preserve the
     # current secret on upgrade.
@@ -1601,7 +1601,7 @@ configMap:
   DOC_TIME_DECAY: ""
   HYBRID_ALPHA: ""
   # TEMPORARY (self-hosted only, will be removed soon): comma-separated document set
-  # NAMES. When set, the Onyx Search UI returns results only from those sets (chat is
+  # NAMES. When set, the Zeshan Search UI returns results only from those sets (chat is
   # unaffected). Empty = no restriction.
   FORCED_DOCUMENT_SET_NAMES: ""
   # Don't change the NLP models unless you know what you're doing
@@ -1658,7 +1658,7 @@ configMap:
   # Logging
   # Optional Telemetry, please keep it on (nothing sensitive is collected)? <3
   DISABLE_TELEMETRY: ""
-  # LOG_LEVEL is the global knob for log verbosity across every Onyx process —
+  # LOG_LEVEL is the global knob for log verbosity across every Zeshan process —
   # api_server, model_server, slack/discord bots, AND all Celery workers. Empty
   # (default) -> Python falls back to "info" for the api/model/etc processes;
   # Celery workers also pick up "" -> info via this same env var. Per-worker
