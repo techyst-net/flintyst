@@ -194,8 +194,8 @@ class DocumentQuery:
         time for results so that we can return arbitrarily-many IDs.
 
         Args:
-            document_id: Onyx document ID. Notably not an OpenSearch document
-                ID, which points to what Onyx would refer to as a chunk.
+            document_id: Zeshan document ID. Notably not an OpenSearch document
+                ID, which points to what Zeshan would refer to as a chunk.
             tenant_state: Tenant state containing the tenant ID.
             index_filters: Filters for the document retrieval query.
             include_hidden: Whether to include hidden documents.
@@ -274,8 +274,8 @@ class DocumentQuery:
         implementing batching.
 
         Args:
-            document_id: Onyx document ID. Notably not an OpenSearch document
-                ID, which points to what Onyx would refer to as a chunk.
+            document_id: Zeshan document ID. Notably not an OpenSearch document
+                ID, which points to what Zeshan would refer to as a chunk.
             tenant_state: Tenant state containing the tenant ID.
 
         Returns:

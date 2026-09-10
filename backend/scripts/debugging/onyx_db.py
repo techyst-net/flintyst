@@ -1,4 +1,4 @@
-"""Onyx Database tool"""
+"""Zeshan Database tool"""
 
 import os
 

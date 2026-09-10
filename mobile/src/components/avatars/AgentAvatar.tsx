@@ -17,7 +17,7 @@ interface AgentAvatarProps {
   size?: number;
 }
 
-// id 0 → Onyx logo; uploaded image → circle; icon_name → mapped icon; else monogram or a
+// id 0 → Zeshan logo; uploaded image → circle; icon_name → mapped icon; else monogram or a
 // two-line glyph. The enterprise custom-logo for id 0 isn't rendered (no enterprise-settings fetch).
 export function AgentAvatar({
   agent,

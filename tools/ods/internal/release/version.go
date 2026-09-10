@@ -1,4 +1,4 @@
-// Package release implements Onyx's release tag policy: how cloud, stable,
+// Package release implements Zeshan's release tag policy: how cloud, stable,
 // and beta tags are named, sequenced, and anchored to release branches, plus
 // validation of existing tags against that policy. Commands under cmd/ stay
 // thin cobra wiring over this package.

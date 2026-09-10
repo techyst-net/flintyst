@@ -82,11 +82,11 @@ func newServeCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "serve",
-		Short: "Serve the Onyx TUI over SSH",
-		Long: `Start an SSH server that presents the interactive Onyx chat TUI to
+		Short: "Serve the Zeshan TUI over SSH",
+		Long: `Start an SSH server that presents the interactive Zeshan chat TUI to
 connecting clients. Each SSH session gets its own independent TUI instance.
 
-Clients are prompted for their Onyx personal access token (PAT) on connect.
+Clients are prompted for their Zeshan personal access token (PAT) on connect.
 The PAT can also be provided via the ONYX_PAT environment variable to skip the prompt:
 
   ssh -o SendEnv=ONYX_PAT host -p port
@@ -177,7 +177,7 @@ environment variable (the --host-key flag takes precedence).`,
 			done := make(chan os.Signal, 1)
 			signal.Notify(done, os.Interrupt, syscall.SIGTERM)
 
-			log.Info("Starting Onyx SSH server", "addr", addr)
+			log.Info("Starting Zeshan SSH server", "addr", addr)
 			log.Info("Connect with", "cmd", fmt.Sprintf("ssh %s -p %d", host, port))
 
 			errCh := make(chan error, 1)

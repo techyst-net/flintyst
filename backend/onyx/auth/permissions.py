@@ -199,7 +199,7 @@ PERMISSION_REGISTRY: list[PermissionRegistryEntry] = [
     PermissionRegistryEntry(
         id="manage_bots",
         display_name="Manage Slack/Discord Bots",
-        description="Add and update Onyx integrations with Slack or Discord.",
+        description="Add and update Zeshan integrations with Slack or Discord.",
         permissions=[Permission.MANAGE_BOTS],
         group=1,
     ),

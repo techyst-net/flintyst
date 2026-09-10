@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-// DefaultProjectName is the compose project new Onyx deployments run under,
+// DefaultProjectName is the compose project new Zeshan deployments run under,
 // pinned by `name: onyx` in docker-compose.yml. Containers and volumes carry
 // the project as a label, which is what makes an install root movable and
 // what lets docker find the stack without the compose files. Adopted

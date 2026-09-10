@@ -480,7 +480,7 @@ class PythonTool(Tool[PythonToolOverrideKwargs]):
                         # Default to binary if we can't determine the type
                         mime_type = mime_type or "application/octet-stream"
 
-                        # Save to Onyx file store
+                        # Save to Zeshan file store
                         onyx_file_id = file_store.save_file(
                             content=BytesIO(file_content),
                             display_name=filename,

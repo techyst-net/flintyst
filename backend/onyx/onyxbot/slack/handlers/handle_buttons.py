@@ -300,7 +300,7 @@ def handle_publish_ephemeral_message_button(
                 client=client.web_client,
                 channel=channel_id,
                 receiver_ids=None,  # If respond_member_group_list is set, send to them. TODO: check!
-                text="Hello! Onyx has some results for you!",
+                text="Hello! Zeshan has some results for you!",
                 blocks=all_blocks,
                 thread_ts=original_question_ts,
                 # don't unfurl, since otherwise we will have 5+ previews which makes the message very long
@@ -373,7 +373,7 @@ def handle_slack_feedback(
 ) -> None:
     message_id, doc_id, doc_rank = decompose_action_id(feedback_id)
 
-    # Get Onyx user from Slack ID
+    # Get Zeshan user from Slack ID
     expert_info = expert_info_from_slack_id(
         user_id_to_post_confirmation, bot_user_info_fetcher(client), user_cache={}
     )

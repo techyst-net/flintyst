@@ -1,6 +1,6 @@
-# Welcome to Onyx
+# Welcome to Zeshan
 
-To set up Onyx there are several options, Onyx supports the following for deployment:
+To set up Zeshan there are several options, Zeshan supports the following for deployment:
 1. Quick guided install via the install.sh script
 2. Pulling the repo and running `docker compose up -d` from the deployment/docker_compose directory
   - Note, it is recommended to copy over the env.template file to .env and edit the necessary values
@@ -16,11 +16,11 @@ This README focuses on the easiest guided deployment which is via install.sh.
 curl -fsSL https://raw.githubusercontent.com/onyx-dot-app/onyx/main/deployment/docker_compose/install.sh > install.sh && chmod +x install.sh && ./install.sh
 ```
 
-The script installs the Onyx CLI (`onyx-cli`) and hands over to `onyx-cli deploy install`, which is
+The script installs the Zeshan CLI (`onyx-cli`) and hands over to `onyx-cli deploy install`, which is
 where the guided installation lives. Any flags you pass are forwarded to it. If you already have the
 CLI (`pip install onyx-cli`), skip the script and run `onyx-cli deploy install` directly.
 
-This provides a guided installation of Onyx via Docker Compose. It will deploy the latest version of Onyx
+This provides a guided installation of Zeshan via Docker Compose. It will deploy the latest version of Zeshan
 and set up the volumes to ensure data is persisted across deployments or upgrades.
 
 The deployment files are stored in `~/.config/onyx` (an existing `onyx_data` directory from an older
@@ -47,7 +47,7 @@ Beyond installing, the CLI covers the rest of the lifecycle:
 | `onyx-cli deploy uninstall` | Remove the containers, volumes, and deployment directory |
 
 ### Upgrading the deployment
-Onyx maintains backwards compatibility across all minor versions following SemVer, so upgrading is
+Zeshan maintains backwards compatibility across all minor versions following SemVer, so upgrading is
 `onyx-cli deploy upgrade` (add `--tag vX.Y.Z` to pin a version). It rewrites only IMAGE_TAG, preserves
 your .env edits, and backs up hand-edited files.
 
@@ -69,7 +69,7 @@ after its own files, so your changes win. The CLI does not manage the override: 
 replaces, or backs it up, and an upgrade does not touch it. `install`, `upgrade`, `stop`, `logs`, and
 `uninstall` all apply it.
 
-For example, to put Onyx behind your own reverse proxy, stop nginx from publishing a host port and
+For example, to put Zeshan behind your own reverse proxy, stop nginx from publishing a host port and
 attach it to your proxy's network:
 
 ```yaml
@@ -95,7 +95,7 @@ from a file called env.template. Feel free to edit the .env file to customize yo
 important / common changed values are located near the top of the file. Later `onyx-cli deploy` runs
 keep your edits.
 
-IMAGE_TAG is the version of Onyx to run. It is recommended to leave it as latest to get all updates with each redeployment.
+IMAGE_TAG is the version of Zeshan to run. It is recommended to leave it as latest to get all updates with each redeployment.
 
 Every image publishes a `-dev` twin for each of its tags (e.g. `latest-dev`, `v1.2.3-dev`), so a single
 `IMAGE_TAG=latest-dev` selects the dev variant of the whole deployment. Today only the backend image actually differs:

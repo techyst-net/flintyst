@@ -10,7 +10,7 @@ Fast browser automation CLI for AI agents. Chrome/Chromium via CDP, no Playwrigh
 
 Most normal web tasks (navigate, read, click, fill, extract, screenshot) are covered here. Load a specialized skill when the task falls outside browser web pages — see [When to load another skill](#when-to-load-another-skill).
 
-> **Onyx Craft:** for basic reads of static pages, prefer the `webfetch` tool — it returns clean markdown, is faster, and is cheaper. Reach for `browser` only when the page needs JavaScript/SPA rendering, interaction (clicks, forms, login), multi-step navigation, or visual inspection.
+> **Zeshan Craft:** for basic reads of static pages, prefer the `webfetch` tool — it returns clean markdown, is faster, and is cheaper. Reach for `browser` only when the page needs JavaScript/SPA rendering, interaction (clicks, forms, login), multi-step navigation, or visual inspection.
 >
 > Every `browser` command is automatically pinned to THIS session's browser, so just use the plain commands below — do not pass `--session`. The browser is headless (the user does not see it); rely on `snapshot` to read the page and `screenshot` if you need to inspect it visually.
 >

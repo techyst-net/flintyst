@@ -50,9 +50,9 @@ echo "=== Updating README ==="
 cat > /tmp/foss_notice.txt << 'EOF'
 
 > [!NOTE]
-> **This is the FOSS (Free and Open Source Software) version of Onyx**
+> **This is the FOSS (Free and Open Source Software) version of Zeshan**
 > 
-> This repository is 100% MIT-licensed and automatically synced with the [main Onyx repository](https://github.com/onyx-dot-app/onyx). The [main repository](https://github.com/onyx-dot-app/onyx) is recommended for most users. This FOSS version is maintained for users with strict open-source licensing requirements.
+> This repository is 100% MIT-licensed and automatically synced with the [main Zeshan repository](https://github.com/onyx-dot-app/onyx). The [main repository](https://github.com/onyx-dot-app/onyx) is recommended for most users. This FOSS version is maintained for users with strict open-source licensing requirements.
 > 
 > ---
 

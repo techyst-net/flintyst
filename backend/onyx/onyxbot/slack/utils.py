@@ -232,7 +232,7 @@ def _build_error_block(error_message: str) -> Block:
     the error without completely breaking
     """
     display_text = (
-        "There was an error displaying all of the Onyx answers."
+        "There was an error displaying all of the Zeshan answers."
         f" Please let an admin or an onyx developer know. Error: {error_message}"
     )
     return SectionBlock(text=display_text)
@@ -612,7 +612,7 @@ def read_slack_thread(
                     # this will need to be updated to get the correct "answer" portion
                     message = reply["blocks"][1].get("text", {}).get("text")
             else:
-                # Other bots are not counted as the LLM response which only comes from Onyx
+                # Other bots are not counted as the LLM response which only comes from Zeshan
                 message_type = MessageType.USER
                 bot_user_name = fetch_user_semantic_id_from_id(
                     reply.get("user"), client
@@ -661,7 +661,7 @@ def slack_usage_report(action: str, sender_id: str | None, client: WebClient) ->
     optional_telemetry(
         record_type=RecordType.USAGE,
         data={"action": action},
-        user_id=str(onyx_user.id) if onyx_user else "Non-Onyx-Or-No-Auth-User",
+        user_id=str(onyx_user.id) if onyx_user else "Non-Zeshan-Or-No-Auth-User",
     )
 
 

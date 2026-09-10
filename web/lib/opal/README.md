@@ -1,6 +1,6 @@
 # Opal
 
-Onyx's TypeScript component library and design system.
+Zeshan's TypeScript component library and design system.
 
 ## Install
 
@@ -49,7 +49,7 @@ module.exports = {
 The `content` glob ensures Tailwind picks up the classes used inside Opal components.
 
 You also need to define the underlying CSS variables (`--text-01`, etc.) in your own
-`colors.css` or import a copy from Onyx. The preset references them but does not define them —
+`colors.css` or import a copy from Zeshan. The preset references them but does not define them —
 they live with the consumer so the consumer controls the palette.
 
 ## Usage
@@ -111,15 +111,15 @@ web/lib/opal/
 └── README.md
 ```
 
-## Local development (inside the Onyx repo)
+## Local development (inside the Zeshan repo)
 
 Opal reuses `/web/node_modules` — it does not have its own `node_modules`. To add a runtime
 dependency, declare it under `peerDependencies` in `web/lib/opal/package.json` AND add the
 matching version in the root `web/package.json` `dependencies` block, then run `bun install` in `/web`
-so Onyx's web app keeps building.
+so Zeshan's web app keeps building.
 
 The package is consumed by `web/` as a workspace via `web/package.json`'s `"@onyx-ai/opal":
-"./lib/opal"`. During Onyx development, `web/` resolves Opal source through the `@opal/*`
+"./lib/opal"`. During Zeshan development, `web/` resolves Opal source through the `@opal/*`
 TypeScript path alias (defined in `web/tsconfig.json`), so changes are picked up live without
 running `bun run build`.
 
@@ -170,6 +170,6 @@ The tag pattern must match `opal/v*.*.*` for the workflow to fire.
 ## Third-party trademarks
 
 The `@onyx-ai/opal/logos` subpath ships brand marks of third-party
-products Onyx integrates with. Marks remain the property of their
-respective owners; Onyx claims no trademark over them. See
+products Zeshan integrates with. Marks remain the property of their
+respective owners; Zeshan claims no trademark over them. See
 [`NOTICE.md`](./NOTICE.md) for details.

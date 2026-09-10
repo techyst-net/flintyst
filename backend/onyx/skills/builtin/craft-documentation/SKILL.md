@@ -1,12 +1,12 @@
 ---
 name: craft-documentation
-description: Answer questions about how Onyx and Onyx Craft work using the official documentation at docs.onyx.app. Use when the user asks what Craft can do, how a feature works, how to set up skills or apps, or how to deploy, configure, or administer Onyx.
+description: Answer questions about how Zeshan and Zeshan Craft work using the official documentation at docs.onyx.app. Use when the user asks what Craft can do, how a feature works, how to set up skills or apps, or how to deploy, configure, or administer Zeshan.
 ---
 
 # craft-documentation
 
-Answer questions about Onyx and Onyx Craft from the official documentation at
-https://docs.onyx.app. Use this whenever the user asks how Craft or Onyx works,
+Answer questions about Zeshan and Zeshan Craft from the official documentation at
+https://docs.onyx.app. Use this whenever the user asks how Craft or Zeshan works,
 what a feature does, or how to set up, deploy, configure, or administer it,
 rather than guessing from memory.
 

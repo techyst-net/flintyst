@@ -1,5 +1,5 @@
 // Package install orchestrates the deploy lifecycle: install, upgrade, stop,
-// status and uninstall of a docker compose Onyx deployment. It is the Go
+// status and uninstall of a docker compose Zeshan deployment. It is the Go
 // replacement for deployment/docker_compose/install.sh.
 package install
 

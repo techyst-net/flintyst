@@ -39,7 +39,7 @@ logger = setup_logger()
 
 def _reject_if_unsupported() -> None:
     """SAML resolves a login by scanning provider rows for the assertion's
-    issuer, and an IdP-initiated assertion carries no state Onyx signed. Neither
+    issuer, and an IdP-initiated assertion carries no state Zeshan signed. Neither
     can name a workspace on a deployment that has more than one, so the whole
     router is closed there rather than failing deeper in."""
     if not sso_provider_type_supported(SSOProviderType.SAML):

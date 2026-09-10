@@ -13,7 +13,7 @@ import (
 )
 
 // userGroupDeleteServer answers the listing with the given groups and every
-// DELETE with 404 — what Onyx does both for a group that has gone and for one
+// DELETE with 404 — what Zeshan does both for a group that has gone and for one
 // that is still syncing.
 func userGroupDeleteServer(t *testing.T, listed []map[string]any) *userGroupResource {
 	t.Helper()

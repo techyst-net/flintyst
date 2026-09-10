@@ -5,7 +5,7 @@ import re
 import socket
 from enum import Enum, auto
 
-ONYX_DEFAULT_APPLICATION_NAME = "Onyx"
+ONYX_DEFAULT_APPLICATION_NAME = "Zeshan"
 ONYX_DISCORD_URL = "https://discord.gg/4NA5SbzrWb"
 ONYX_UTM_SOURCE = "onyx_app"
 SLACK_USER_TOKEN_PREFIX = "xoxp-"
@@ -245,7 +245,7 @@ TMP_DRALPHA_PERSONA_NAME = "KG Beta"
 
 
 class DocumentSource(str, Enum):
-    # Special case, document passed in via Onyx APIs without specifying a source type
+    # Special case, document passed in via Zeshan APIs without specifying a source type
     INGESTION_API = "ingestion_api"
     SLACK = "slack"
     WEB = "web"
@@ -387,7 +387,7 @@ class MessageType(str, Enum):
     USER = "user"  # HumanMessage
     ASSISTANT = "assistant"  # AIMessage - Can include tool_calls field for parallel tool calling
     TOOL_CALL_RESPONSE = "tool_call_response"
-    USER_REMINDER = "user_reminder"  # Custom Onyx message type which is translated into a USER message when passed to the LLM
+    USER_REMINDER = "user_reminder"  # Custom Zeshan message type which is translated into a USER message when passed to the LLM
 
 
 class ChatMessageSimpleType(str, Enum):

@@ -30,7 +30,7 @@ func newLintTerraformCommand() *cobra.Command {
 		Long: `Check published Terraform modules for values that must stay internal.
 
 The modules under deployment/terraform are published, but they stay in sync
-with the infrastructure Onyx runs. That makes it easy to carry an internal
+with the infrastructure Zeshan runs. That makes it easy to carry an internal
 value across by accident -- an office IP in a variable default is the case
 this check was written for.
 

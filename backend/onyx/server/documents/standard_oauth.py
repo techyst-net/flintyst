@@ -146,7 +146,7 @@ def _attempt_payload(
         ):
             raise OnyxError(
                 OnyxErrorCode.INVALID_INPUT,
-                "OAuth return URL must use the Onyx application origin",
+                "OAuth return URL must use the Zeshan application origin",
             )
         desired_return_url = urlunsplit(
             ("", "", return_url.path or "/", return_url.query, return_url.fragment)

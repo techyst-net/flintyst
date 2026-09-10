@@ -91,7 +91,7 @@ func TestUninstallForceRemovesEverything(t *testing.T) {
 }
 
 // --dir, ONYX_DEPLOYMENT_DIR and INSTALL_PREFIX name the deletion root
-// freely, so a path that isn't recognizably an Onyx deployment must not be
+// freely, so a path that isn't recognizably an Zeshan deployment must not be
 // handed to RemoveAll.
 func TestUninstallRefusesUnrecognizedDir(t *testing.T) {
 	isolateEnv(t)
@@ -103,7 +103,7 @@ func TestUninstallRefusesUnrecognizedDir(t *testing.T) {
 
 	deps := testDeps(t, &fakeRunner{handler: healthyDockerHandler}, notFoundServer(t))
 	err := RunUninstall(context.Background(), deps, Options{Dir: root, Force: true})
-	if err == nil || !strings.Contains(err.Error(), "doesn't look like an Onyx deployment") {
+	if err == nil || !strings.Contains(err.Error(), "doesn't look like an Zeshan deployment") {
 		t.Fatalf("err = %v, want a refusal", err)
 	}
 	if _, statErr := os.Stat(keep); statErr != nil {
@@ -233,7 +233,7 @@ func TestStatusHealthyAndDrift(t *testing.T) {
 	root := installFixture(t, runner, "v4.2.0")
 
 	// nginx (a stock image, listed first like the real deployment) must not
-	// be mistaken for the running Onyx version.
+	// be mistaken for the running Zeshan version.
 	psOut := "onyx-nginx-1\tnginx:1.25.5-alpine\tUp 2 hours\t0.0.0.0:3000->80/tcp\n" +
 		"onyx-api_server-1\tonyxdotapp/onyx-backend:v4.2.0\tUp 2 hours (healthy)\t\n"
 	statusRunner := &fakeRunner{handler: func(c dockercmd.Command) (dockercmd.Result, error) {

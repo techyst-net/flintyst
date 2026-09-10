@@ -347,13 +347,13 @@ def fetch_visible_model_names_for_provider_as_set(
 
 
 def get_provider_display_name(provider_name: str) -> str:
-    """Get human-friendly display name for an Onyx-supported provider.
+    """Get human-friendly display name for an Zeshan-supported provider.
 
-    First checks Onyx-specific display names, then falls back to
+    First checks Zeshan-specific display names, then falls back to
     PROVIDER_DISPLAY_NAMES from constants.
     """
-    # Display names for Onyx-supported LLM providers (used in admin UI provider selection).
-    # These override PROVIDER_DISPLAY_NAMES for Onyx-specific branding.
+    # Display names for Zeshan-supported LLM providers (used in admin UI provider selection).
+    # These override PROVIDER_DISPLAY_NAMES for Zeshan-specific branding.
     _ONYX_PROVIDER_DISPLAY_NAMES: dict[str, str] = {
         OPENAI_PROVIDER_NAME: "ChatGPT (OpenAI)",
         OLLAMA_PROVIDER_NAME: "Ollama",

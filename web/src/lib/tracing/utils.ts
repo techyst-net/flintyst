@@ -39,9 +39,9 @@ export const TRACING_PROVIDER_DETAILS: Record<
       {
         name: "project",
         label: "Project Name",
-        placeholder: "Onyx",
+        placeholder: "Zeshan",
         optional: true,
-        defaultValue: "Onyx",
+        defaultValue: "Zeshan",
         help: "Braintrust project name traces are logged to.",
       },
       {

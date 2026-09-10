@@ -20,7 +20,7 @@ export const Default: Story = {
 export const ExternalLink: Story = {
   render: () => (
     <LinkButton href="https://onyx.app" target="_blank">
-      Onyx
+      Zeshan
     </LinkButton>
   ),
 };
@@ -36,7 +36,7 @@ export const InternalLink: Story = {
 export const LongLabel: Story = {
   render: () => (
     <LinkButton href="https://docs.onyx.app" target="_blank">
-      Go read the full Onyx documentation site
+      Go read the full Zeshan documentation site
     </LinkButton>
   ),
 };

@@ -58,7 +58,7 @@ _FIREFLIES_API_QUERY = """
 # available after its start-time window was already polled would be skipped
 # permanently. So each poll re-scans an overlap window large enough to cover the
 # longest meeting plus Fireflies' processing lag. Re-seen transcripts are cheap:
-# Onyx's content-hash check skips re-chunking/re-embedding anything already indexed.
+# Zeshan's content-hash check skips re-chunking/re-embedding anything already indexed.
 _FIREFLIES_POLL_OVERLAP_SECONDS = 8 * 60 * 60  # 8 hours
 
 

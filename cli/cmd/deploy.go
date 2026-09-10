@@ -10,8 +10,8 @@ import (
 func newDeployCmd(ios *iostreams.IOStreams) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deploy",
-		Short: "Install and manage a self-hosted Onyx deployment",
-		Long: `Install and manage a self-hosted Onyx deployment (docker compose).
+		Short: "Install and manage a self-hosted Zeshan deployment",
+		Long: `Install and manage a self-hosted Zeshan deployment (docker compose).
 
 New installs live in ~/.config/onyx by default; deployments created by the
 legacy install.sh in ./onyx_data are detected and managed in place. Pass

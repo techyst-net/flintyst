@@ -1,4 +1,4 @@
-"""Locust entrypoint for Onyx chat load tests.
+"""Locust entrypoint for Zeshan chat load tests.
 
 With no user classes named, the default weighted mix runs (BasicChat 70 /
 ChatWithSearch 20 / MultiTool 8 / DeepResearch 2); name a class to run a

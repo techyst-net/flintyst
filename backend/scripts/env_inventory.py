@@ -1,4 +1,4 @@
-"""Environment-variable inventory for the Onyx backend.
+"""Environment-variable inventory for the Zeshan backend.
 
 AST-walks the backend (and optionally the frontend) to build a canonical
 manifest of every environment variable the code actually reads, then

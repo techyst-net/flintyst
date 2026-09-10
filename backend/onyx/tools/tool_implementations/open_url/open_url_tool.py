@@ -438,7 +438,7 @@ class OpenURLTool(Tool[OpenURLToolOverrideKwargs]):
             user: User context for ACL filtering, anonymous users only see public docs.
             content_provider: Optional content provider. If not provided,
                 will use the default provider from the database or fall back
-                to the built-in Onyx web crawler.
+                to the built-in Zeshan web crawler.
             web_fetch_disabled: When True (e.g. the user turned Web Search off
                 for the chat), URLs are only served from indexed documents —
                 the live-crawl path is never used.
@@ -461,7 +461,7 @@ class OpenURLTool(Tool[OpenURLToolOverrideKwargs]):
                 raise RuntimeError(
                     "No web content provider available. "
                     "Please configure a content provider or ensure the "
-                    "built-in Onyx web crawler can be initialized."
+                    "built-in Zeshan web crawler can be initialized."
                 )
             self._provider = provider
 

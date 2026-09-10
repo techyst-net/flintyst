@@ -1,4 +1,4 @@
-"""Incremental parser for the Onyx chat NDJSON stream.
+"""Incremental parser for the Zeshan chat NDJSON stream.
 
 Vendored from backend/tests/integration/common_utils/managers/chat.py
 (analyze_response) and backend/onyx/server/query_and_chat/streaming_models.py,

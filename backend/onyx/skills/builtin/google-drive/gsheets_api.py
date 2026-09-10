@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Sheets wrapper for the Onyx Craft sandbox.
+"""Google Sheets wrapper for the Zeshan Craft sandbox.
 
 Common operations exposed as subcommands. Output is JSON on stdout. No auth is
 handled here: the sandbox egress proxy injects the connected user's bearer token.

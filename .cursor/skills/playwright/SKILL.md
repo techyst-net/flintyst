@@ -1,13 +1,13 @@
 ---
 name: playwright-e2e-tests
-description: Write and maintain Playwright end-to-end tests for the Onyx application. Use when creating new E2E tests, debugging test failures, adding test coverage, or when the user mentions Playwright, E2E tests, or browser testing.
+description: Write and maintain Playwright end-to-end tests for the Zeshan application. Use when creating new E2E tests, debugging test failures, adding test coverage, or when the user mentions Playwright, E2E tests, or browser testing.
 ---
 
 # Playwright E2E Tests
 
 **Spec-authoring rules live in `web/tests/e2e/README.md`** — the Page Object Model, locator
 priority, and auto-retrying matchers. Read it before adding or changing a spec. This skill covers
-the surrounding workflow: layout, environment, running tests, auth, and Onyx-specific utilities.
+the surrounding workflow: layout, environment, running tests, auth, and Zeshan-specific utilities.
 
 ## Project Layout
 
@@ -146,7 +146,7 @@ Backend API client for test setup/teardown. Key methods:
 
 - `sendMessage(page, message)` — sends a message and waits for AI response
 - `startNewChat(page)` — clicks new-chat button and waits for intro
-- `verifyDefaultAssistantIsChosen(page)` — checks Onyx logo is visible
+- `verifyDefaultAssistantIsChosen(page)` — checks Zeshan logo is visible
 - `verifyAssistantIsChosen(page, name)` — checks assistant name display
 - `switchModel(page, modelName)` — switches LLM model via popover
 

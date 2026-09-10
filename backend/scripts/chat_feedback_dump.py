@@ -203,15 +203,15 @@ if __name__ == "__main__":
         "--url",
         type=str,
         default="http://localhost:8080",
-        help="Onyx URL, should point to Onyx nginx.",
+        help="Zeshan URL, should point to Zeshan nginx.",
     )
 
     # Not needed if Auth is disabled?
-    # Or for Onyx MIT Edition API key must be replaced with session cookie
+    # Or for Zeshan MIT Edition API key must be replaced with session cookie
     parser.add_argument(
         "--api-key",
         type=str,
-        help="Onyx Admin Level API key",
+        help="Zeshan Admin Level API key",
     )
 
     args = parser.parse_args()

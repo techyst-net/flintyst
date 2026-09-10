@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Onyx",
+    "name": "Zeshan",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -103,7 +103,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow Onyx to access your photos so you can add them to a project.",
+          "photosPermission": "Allow Zeshan to access your photos so you can add them to a project.",
           "microphonePermission": false,
           "cameraPermission": false
         }

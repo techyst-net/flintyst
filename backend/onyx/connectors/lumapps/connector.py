@@ -93,15 +93,15 @@ def _parse_dt(value: Any) -> datetime | None:
 
 
 class LumAppsConnector(CheckpointedConnector[LumAppsCheckpoint], SlimConnector):
-    """Ingests LumApps content (pages/news/custom) into Onyx.
+    """Ingests LumApps content (pages/news/custom) into Zeshan.
 
-    Carries over **all** LumApps metadata families as Onyx metadata
+    Carries over **all** LumApps metadata families as Zeshan metadata
     (``{family_key: [labels]}``), so whatever HR tags — country or otherwise — becomes a
     filterable tag without any connector change.
 
     Permissions: this is a public-only connector — every piece of LIVE content the
     service user can read is indexed with no per-document access controls, so it is
-    visible to all Onyx users regardless of the original LumApps audience. It is not a
+    visible to all Zeshan users regardless of the original LumApps audience. It is not a
     ``CheckpointedConnectorWithPermSync`` and has no entry in the EE permission-sync
     registry. Scope the service user (and optionally ``instance_ids``) to only content
     that is safe to expose org-wide.

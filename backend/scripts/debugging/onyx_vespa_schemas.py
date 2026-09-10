@@ -1,4 +1,4 @@
-"""Tool to generate all supported schema variations for Onyx Cloud's Vespa database.
+"""Tool to generate all supported schema variations for Zeshan Cloud's Vespa database.
 
 Usage:
 

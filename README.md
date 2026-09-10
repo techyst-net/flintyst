@@ -1,118 +1,98 @@
-<a name="readme-top"></a>
+# Zeshan Search
 
-<h2 align="center">
-    <a href="https://www.onyx.app/?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme"> <img width="50%" src="https://github.com/onyx-dot-app/onyx/blob/logo/OnyxLogoCropped.jpg?raw=true" /></a>
-</h2>
+Enterprise search and AI chat over your own data: 40+ connectors (Confluence,
+Salesforce, Slack, Google Drive, GitHub, …), hybrid vector search, an agentic
+research mode, custom assistants and an MCP server.
 
-<p align="center">
-    <a href="https://discord.gg/TDJ59cGV2X" target="_blank">
-        <img src="https://img.shields.io/badge/discord-join-blue.svg?logo=discord&logoColor=white" alt="Discord" />
-    </a>
-    <a href="https://docs.onyx.app/?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme" target="_blank">
-        <img src="https://img.shields.io/badge/docs-view-blue" alt="Documentation" />
-    </a>
-    <a href="https://www.onyx.app/?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme" target="_blank">
-        <img src="https://img.shields.io/website?url=https://www.onyx.app&up_message=visit&up_color=blue" alt="Documentation" />
-    </a>
-    <a href="https://github.com/onyx-dot-app/onyx/blob/main/LICENSE" target="_blank">
-        <img src="https://img.shields.io/static/v1?label=license&message=MIT&color=blue" alt="License" />
-    </a>
-</p>
+## Architecture
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/12516" target="_blank">
-    <img src="https://trendshift.io/api/badge/repositories/12516" alt="onyx-dot-app/onyx | Trendshift" style="width: 250px; height: 55px;" />
-  </a>
-</p>
+| Component | Detail |
+|---|---|
+| `web/` | Next.js frontend |
+| `web/lib/opal`, `web/lib/shared` | **Vendored** design system and design tokens |
+| `backend/` | FastAPI API server, Celery workers, connector framework |
+| `backend/ee/` | Enterprise features under a separate licence |
+| `desktop/` | Tauri desktop app |
+| `mobile/` | React Native app |
+| `widget/`, `extensions/chrome/` | Embeddable chat widget and browser extension |
+| `cli/`, `terraform-provider-onyx/` | Go CLI and Terraform provider |
+| Data | PostgreSQL, Redis, Vespa (search index), S3/MinIO (file store) |
 
-# Onyx - The Open Source AI Platform
+## Local setup
 
-**[Onyx](https://www.onyx.app/?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme)** is the application layer for LLMs - bringing a feature-rich interface that can be easily hosted by anyone.
-Onyx enables LLMs through advanced capabilities like RAG, web search, code execution, file creation, deep research and more.
+```sh
+cd deployment/docker_compose
+cp env.template .env
+docker compose up -d
+```
 
-Connect your applications with over 50+ indexing based connectors provided out of the box or via MCP.
+See [OPERATIONS.md](./OPERATIONS.md) for configuration, ports and deployment
+requirements.
 
-> [!TIP]
-> Deploy with a single command:
-> ```
-> curl -fsSL https://onyx.app/install_onyx.sh | bash
-> ```
+## Branding
 
-![Onyx Chat Silent Demo](https://github.com/onyx-dot-app/onyx/releases/download/v3.0.0/Onyx.gif)
+| Surface | Where |
+|---|---|
+| Design tokens | `web/lib/shared/tokens/primitives.json` |
+| Backend-served logos (emails, API pages) | `backend/static/images/` |
+| Web logos, wordmarks, favicon | `web/public/` |
+| Desktop icons | `desktop/src-tauri/icons/` — 37 PNGs, the `.ico`, and the macOS `.icns` |
+| Mobile app icon and inline logo | `mobile/assets/images/icon.png`, `mobile/src/icons/onyx-logo.tsx` |
+| Chrome extension icons | `extensions/chrome/public/` |
+| Widget default logo | `widget/src/assets/logo.ts` — a base64 data URL, regenerated |
+| Product name | swept across 566 files |
 
----
+### The design system is vendored, so tokens were edited at source
 
-## ⭐ Features
+Unlike several other products here, `@onyx-ai/opal` and `@onyx-ai/shared` are
+**local packages** (`file:./lib/opal`, `file:./lib/shared`), not npm
+dependencies. The palette could therefore be changed properly rather than
+overridden by cascade.
 
-- **🔍 Agentic RAG:** Get best in class search and answer quality based on hybrid index + AI Agents for information retrieval
-  - Benchmark to release soon!
-- **🔬 Deep Research:** Get in depth reports with a multi-step research flow.
-  - Top of [leaderboard](https://github.com/onyx-dot-app/onyx_deep_research_bench) as of Feb 2026.
-- **🤖 Custom Agents:** Build AI Agents with unique instructions, knowledge, and actions.
-- **🌍 Web Search:** Browse the web to get up to date information.
-  - Supports Serper, Google PSE, Brave, SearXNG, and others.
-  - Comes with an in house web crawler and support for Firecrawl/Exa.
-- **📄 Artifacts:** Generate documents, graphics, and other downloadable artifacts.
-- **▶️ Actions & MCP:** Let Onyx agents interact with external applications, comes with flexible Auth options.
-- **💻 Code Execution:** Execute code in a sandbox to analyze data, render graphs, or modify files.
-- **🎙️ Voice Mode:** Chat with Onyx via text-to-speech and speech-to-text.
-- **🎨 Image Generation:** Generate images based on user prompts.
+`web/lib/shared/tokens/primitives.json` is the source of truth, compiled to CSS
+by `bun run build:tokens` (style-dictionary). Reading the semantic layer shows
+what actually needed changing:
 
-Onyx supports all major LLM providers, both self-hosted (like Ollama, LiteLLM, vLLM, etc.) and proprietary (like Anthropic, OpenAI, Gemini, etc.).
+- `theme-primary-*` → `onyx-ink-*`, which are **black and greys**. Upstream's
+  primary ramp is deliberately monochrome, so it carries no brand identity and
+  was left alone.
+- `action-selection-*` and `action-text-link-05` → the **`blue-*`** family.
+  That is the real interactive accent, so its 12 steps were remapped onto the
+  brand indigo ramp.
 
-To learn more - check out our [docs](https://docs.onyx.app/welcome?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme)!
+`#E02D27`, which looks like a brand red in a naive colour census, is the
+**Canvas LMS connector's logo** — a third party's mark, correctly left alone.
 
----
+### One check will now report differences
 
-## 🚀 Deployment Modes
+`web/lib/shared/scripts/verify-opal-parity.mjs` is a migration gate that asserts
+token values are *identical to the base branch*. Since the brand colours changed
+deliberately, its value comparison now flags them. The script was **annotated
+rather than deleted** — its other assertions (variable-name parity, no
+duplicate definitions between the two packages) remain useful. See the note at
+the top of that file.
 
-> Onyx supports deployments in Docker, Kubernetes, Helm/Terraform and provides guides for major cloud providers.
-> Detailed deployment guides found [here](https://docs.onyx.app/deployment/overview).
+### Deliberately left unchanged
 
-Onyx supports two separate deployment options: standard and lite.
+- **`Onyx*` CamelCase identifiers** — `OnyxError` (1,711 uses),
+  `OnyxErrorCode`, `OnyxCeleryTask`, `OnyxApiClient`, `OnyxRedisLocks` and
+  many more. Real code symbols.
+- **Terraform resource type names** — `onyx_persona`, `onyx_connector`,
+  `onyx_document_set` and the rest. These are the public API of the provider:
+  they appear in users' `.tf` files, so renaming them breaks every existing
+  Terraform configuration.
+- **The `onyx` Python package** and `LOG_ONYX_MODEL_INTERACTIONS` /
+  `ENABLE_PAID_ENTERPRISE_EDITION_FEATURES` environment variable names.
+- **`LICENSE`** and the three `ee/LICENSE` files, verbatim, including the
+  `Copyright (c) 2023-present DanswerAI, Inc.` line (Danswer was this project's
+  former name, and remains the copyright holder's name).
 
-#### Onyx Lite
+### Removed
 
-The Lite mode can be thought of as a lightweight Chat UI. It requires less resources (under 1GB memory) and runs a less complex stack.
-It is great for users who want to test out Onyx quickly or for teams who are only interested in the Chat UI and Agents functionalities.
+`docs/` held upstream's internal planning documents and runbooks
+(`craft-main-plan.md`, EKS runbooks, feature plans) — not product documentation.
 
-#### Standard Onyx
+## Provenance and licence
 
-The complete feature set of Onyx which is recommended for serious users and larger teams. Additional components not included in Lite mode:
-- Vector + Keyword index for RAG.
-- Background containers to run job queues and workers for syncing knowledge from connectors.
-- AI model inference servers to run deep learning models used during indexing and inference.
-- Performance optimizations for large scale use via in memory cache (Redis) and blob store (MinIO).
-
-> [!TIP]  
-> **To try Onyx for free without deploying, visit [Onyx Cloud](https://cloud.onyx.app/signup?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme)**.
-
----
-
-## 🏢 Onyx for Enterprise
-
-Onyx is built for teams of all sizes, from individual users to the largest global enterprises:
-- 👥 Collaboration: Share chats and agents with other members of your organization.
-- 🔐 Single Sign On: SSO via Google OAuth, OIDC, or SAML. Group syncing and user provisioning via SCIM.
-- 🛡️ Role Based Access Control: RBAC for sensitive resources like access to agents, actions, etc.
-- 📊 Analytics: Usage graphs broken down by teams, LLMs, or agents.
-- 🕵️ Query History: Audit usage to ensure safe adoption of AI in your organization.
-- 💻 Custom code: Run custom code to remove PII, reject sensitive queries, or to run custom analysis.
-- 🎨 Whitelabeling: Customize the look and feel of Onyx with custom naming, icons, banners, and more.
-
-## 📚 Licensing
-
-There are two editions of Onyx:
-
-- Onyx Community Edition (CE) is available freely under the MIT license and covers all of the core features for Chat, RAG, Agents, and Actions.
-- Onyx Enterprise Edition (EE) includes extra features that are primarily useful for larger organizations.
-
-For feature details, check out [our website](https://www.onyx.app/pricing?utm_source=onyx_repo&utm_medium=github&utm_campaign=readme).
-
-## 👪 Community
-
-Join our open source community on **[Discord](https://discord.gg/TDJ59cGV2X)**!
-
-## 💡 Contributing
-
-Looking to contribute? Please check out the [Contribution Guide](CONTRIBUTING.md) for more details.
+MIT for the core; **three `ee/` directories are under the Onyx Enterprise
+License.** See [UPSTREAM.md](./UPSTREAM.md).

@@ -6,7 +6,7 @@ import SvgLoader from "@/icons/loader";
 
 interface SpinnerProps {
   size?: number;
-  // Onyx text-color class for the arc, e.g. "text-status-error-05".
+  // Zeshan text-color class for the arc, e.g. "text-status-error-05".
   className?: string;
 }
 

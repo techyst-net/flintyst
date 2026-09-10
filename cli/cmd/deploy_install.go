@@ -18,8 +18,8 @@ func newDeployInstallCmdWithDeps(ios *iostreams.IOStreams, deps *install.Deps) *
 
 	cmd := &cobra.Command{
 		Use:   "install",
-		Short: "Install or restart a self-hosted Onyx deployment",
-		Long: `Install a self-hosted Onyx deployment with docker compose, or restart /
+		Short: "Install or restart a self-hosted Zeshan deployment",
+		Long: `Install a self-hosted Zeshan deployment with docker compose, or restart /
 update an existing one.
 
 The deployment files bundled with this CLI are used by default; installing a
@@ -52,12 +52,12 @@ every prompt, including Lite mode).`,
 	}
 
 	// Flag names match install.sh so bootstrap passthrough keeps working.
-	cmd.Flags().BoolVar(&opts.Lite, "lite", false, "Deploy Onyx Lite (no OpenSearch, Redis, or model servers)")
-	cmd.Flags().BoolVar(&opts.IncludeCraft, "include-craft", false, "Enable Onyx Craft (AI-powered web app building)")
+	cmd.Flags().BoolVar(&opts.Lite, "lite", false, "Deploy Zeshan Lite (no OpenSearch, Redis, or model servers)")
+	cmd.Flags().BoolVar(&opts.IncludeCraft, "include-craft", false, "Enable Zeshan Craft (AI-powered web app building)")
 	cmd.Flags().BoolVar(&opts.Prod, "prod", false, "Restart an existing prod deployment (the standalone docker-compose.prod.yml); fresh prod installs are not created here")
 	cmd.Flags().BoolVar(&opts.Dev, "dev", false, "Stack docker-compose.dev.yml on the deployment: publish the API, Postgres, Redis, OpenSearch, MinIO and model server ports on this host (development and testing)")
 	cmd.Flags().StringVar(&opts.Project, "project", "", `Docker compose project name (default: recorded in the manifest, else "onyx")`)
-	cmd.Flags().StringVar(&opts.Tag, "tag", "", "Image tag to deploy (default: the latest Onyx release)")
+	cmd.Flags().StringVar(&opts.Tag, "tag", "", "Image tag to deploy (default: the latest Zeshan release)")
 	cmd.Flags().BoolVar(&opts.Local, "local", false, "Use existing config files on disk instead of downloading")
 	cmd.Flags().BoolVar(&opts.Offline, "offline", false, "Deploy from the images already on this host and contact no network (implies --local)")
 	cmd.Flags().BoolVar(&opts.NoPrompt, "no-prompt", false, "Run non-interactively with defaults (for CI/automation)")
@@ -82,6 +82,6 @@ every prompt, including Lite mode).`,
 func newInstallOnyxCmd(ios *iostreams.IOStreams) *cobra.Command {
 	cmd := newDeployInstallCmd(ios)
 	cmd.Use = "install-onyx"
-	cmd.Short = "Install a self-hosted Onyx deployment (alias for `deploy install`)"
+	cmd.Short = "Install a self-hosted Zeshan deployment (alias for `deploy install`)"
 	return cmd
 }

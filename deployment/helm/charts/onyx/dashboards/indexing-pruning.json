@@ -426,7 +426,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "  This chart shows how long it takes for Onyx to crawl each source connector and collect the current list of documents. The Y axis represents duration  in seconds (bucketed), and each band shows how many enumerations completed within that time range.",
+      "description": "  This chart shows how long it takes for Zeshan to crawl each source connector and collect the current list of documents. The Y axis represents duration  in seconds (bucketed), and each band shows how many enumerations completed within that time range.",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -699,7 +699,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "This chart shows how frequently Onyx hits rate limits from source connectors during the enumeration phase. Rate limit errors slow down or stall the document crawl, directly increasing enumeration duration. A spike here for a specific connector type indicates the source API is throttling Onyx's requests, which may explain long enumeration times for that connector.",
+      "description": "This chart shows how frequently Zeshan hits rate limits from source connectors during the enumeration phase. Rate limit errors slow down or stall the document crawl, directly increasing enumeration duration. A spike here for a specific connector type indicates the source API is throttling Zeshan's requests, which may explain long enumeration times for that connector.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -987,7 +987,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "This chart shows how long it takes Onyx to compare the list of documents fetched from the source connector against what is currently indexed. The diff computes the set difference \u2014 documents that exist in the index but no longer exist in the source are flagged for removal.",
+      "description": "This chart shows how long it takes Zeshan to compare the list of documents fetched from the source connector against what is currently indexed. The diff computes the set difference \u2014 documents that exist in the index but no longer exist in the source are flagged for removal.",
       "fieldConfig": {
         "defaults": {
           "custom": {

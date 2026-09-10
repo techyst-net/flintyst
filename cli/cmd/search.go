@@ -18,7 +18,7 @@ import (
 )
 
 // searchOutputResult is the per-document JSON shape `onyx-cli search` prints
-// (without --raw). One `content` field per result, no Onyx-internal jargon.
+// (without --raw). One `content` field per result, no Zeshan-internal jargon.
 type searchOutputResult struct {
 	Title      string  `json:"title"`
 	URL        *string `json:"url"`
@@ -404,11 +404,11 @@ func newSearchCmd(ios *iostreams.IOStreams) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "search <query> [<query>...]",
 		Short: "Search company knowledge and return ranked documents",
-		Long: `Search the Onyx knowledge base and return ranked, cited documents.
+		Long: `Search the Zeshan knowledge base and return ranked, cited documents.
 
 Results are retrieved using the full search pipeline: LLM query expansion,
 hybrid retrieval, document selection, and context expansion — the same
-search quality as the Onyx chat interface.
+search quality as the Zeshan chat interface.
 
 Multiple queries (up to 3 per invocation) run concurrently, so batching
 independent queries is much faster than separate sequential calls. Flags

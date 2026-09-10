@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Onyx",
+  "name": "Zeshan",
   "version": "1.1",
-  "description": "Onyx lets you research, create, and automate with LLMs powered by your team's unique knowledge",
+  "description": "Zeshan lets you research, create, and automate with LLMs powered by your team's unique knowledge",
   "permissions": [
     "sidePanel",
     "storage",
@@ -37,7 +37,7 @@
         "default": "Ctrl+Shift+O",
         "mac": "Command+Shift+O"
       },
-      "description": "Toggle Onyx New Tab Override"
+      "description": "Toggle Zeshan New Tab Override"
     },
     "openSidePanel": {
       "suggested_key": {
@@ -45,7 +45,7 @@
         "windows": "Alt+O",
         "mac": "MacCtrl+O"
       },
-      "description": "Open Onyx Side Panel"
+      "description": "Open Zeshan Side Panel"
     }
   },
   "side_panel": {

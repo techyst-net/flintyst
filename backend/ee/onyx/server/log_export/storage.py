@@ -129,13 +129,13 @@ def _build_bundle_readme(snapshot: LogExportSnapshot) -> str:
     """Builds the README.txt content describing the download bundle."""
     manifest = snapshot.manifest
     lines = [
-        "Onyx log export bundle",
+        "Zeshan log export bundle",
         "======================",
         "",
         SENSITIVE_DATA_WARNING,
         "",
         f"Export ID: {manifest.export_id}",
-        f"Onyx version: {manifest.onyx_version}",
+        f"Zeshan version: {manifest.onyx_version}",
         f"Requested by: {manifest.requester_email}",
         f"Created at (UTC): {manifest.created_at.isoformat()}",
         "",

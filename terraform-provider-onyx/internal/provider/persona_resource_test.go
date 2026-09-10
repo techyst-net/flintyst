@@ -57,7 +57,7 @@ resource "onyx_persona" "test" {
   tool_ids      = [onyx_custom_tool.persona.id]
   is_listed     = false
 
-  # Onyx ignores this on an update, so changing it in the next step proves
+  # Zeshan ignores this on an update, so changing it in the next step proves
   # the follow-up call to the display-priority endpoint runs.
   display_priority = 5
 

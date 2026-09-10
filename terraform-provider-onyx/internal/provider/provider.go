@@ -1,4 +1,4 @@
-// Package provider implements the Terraform provider for Onyx application
+// Package provider implements the Terraform provider for Zeshan application
 // configuration.
 package provider
 
@@ -43,18 +43,18 @@ func (p *onyxProvider) Metadata(_ context.Context, _ provider.MetadataRequest, r
 
 func (p *onyxProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manage Onyx application configuration (LLM providers, API keys, " +
-			"workspace settings, ...) declaratively via the Onyx admin API.",
+		MarkdownDescription: "Manage Zeshan application configuration (LLM providers, API keys, " +
+			"workspace settings, ...) declaratively via the Zeshan admin API.",
 		Attributes: map[string]schema.Attribute{
 			"endpoint": schema.StringAttribute{
 				Optional: true,
-				MarkdownDescription: "Onyx server origin, e.g. `https://cloud.onyx.app` or `http://localhost:3000`. " +
+				MarkdownDescription: "Zeshan server origin, e.g. `https://cloud.onyx.app` or `http://localhost:3000`. " +
 					"May also be set via the `ONYX_SERVER_URL` environment variable.",
 			},
 			"api_key": schema.StringAttribute{
 				Optional:  true,
 				Sensitive: true,
-				MarkdownDescription: "Onyx API key (`on_...`) in the seeded `Admin` group, or unrestricted " +
+				MarkdownDescription: "Zeshan API key (`on_...`) in the seeded `Admin` group, or unrestricted " +
 					"personal access token (`onyx_pat_...`). May also be set via the `ONYX_API_KEY` " +
 					"environment variable.",
 			},
@@ -113,15 +113,15 @@ func (p *onyxProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 
 	if endpoint == "" {
 		resp.Diagnostics.AddError(
-			"Missing Onyx endpoint",
+			"Missing Zeshan endpoint",
 			"Set the provider's endpoint attribute or the ONYX_SERVER_URL environment variable.",
 		)
 	}
 	if apiKey == "" {
 		resp.Diagnostics.AddError(
-			"Missing Onyx API key",
+			"Missing Zeshan API key",
 			"Set the provider's api_key attribute or the ONYX_API_KEY environment variable. "+
-				"Create an API key in the Onyx admin panel, assigned to the Admin group "+
+				"Create an API key in the Zeshan admin panel, assigned to the Admin group "+
 				"(or via POST /admin/api-key with group_ids set to the Admin group's id).",
 		)
 	}

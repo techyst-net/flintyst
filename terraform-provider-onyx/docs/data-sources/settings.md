@@ -3,12 +3,12 @@
 page_title: "onyx_settings Data Source - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  The current Onyx workspace settings, read-only. Useful for referencing settings (e.g. the license tier) without managing them.
+  The current Zeshan workspace settings, read-only. Useful for referencing settings (e.g. the license tier) without managing them.
 ---
 
 # onyx_settings (Data Source)
 
-The current Onyx workspace settings, read-only. Useful for referencing settings (e.g. the license `tier`) without managing them.
+The current Zeshan workspace settings, read-only. Useful for referencing settings (e.g. the license `tier`) without managing them.
 
 ## Example Usage
 

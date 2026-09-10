@@ -1,6 +1,6 @@
-# Onyx Dev Container
+# Zeshan Dev Container
 
-A containerized development environment for working on Onyx.
+A containerized development environment for working on Zeshan.
 
 ## What's included
 

@@ -10,7 +10,7 @@ variable "storage_account_name" {
 
 variable "container_name" {
   type        = string
-  description = "Blob container that holds the Onyx file store. Maps to AZURE_FILE_STORE_CONTAINER_NAME."
+  description = "Blob container that holds the Zeshan file store. Maps to AZURE_FILE_STORE_CONTAINER_NAME."
   default     = "onyx-file-store"
 
   # Azure rejects consecutive hyphens, and anything shorter than three
@@ -64,11 +64,11 @@ variable "account_tier" {
   }
 }
 
-# Onyx authenticates to Blob with DefaultAzureCredential, so the account does
+# Zeshan authenticates to Blob with DefaultAzureCredential, so the account does
 # not need shared keys. Leaving them off means a leaked key cannot exist.
 variable "shared_access_key_enabled" {
   type        = bool
-  description = "Allow authenticating with the account's shared keys. Off by default: Onyx uses workload identity, and callers that need a key can set AZURE_STORAGE_ACCOUNT_KEY only after turning this on. Set storage_use_azuread = true on the azurerm provider so Terraform itself does not reach for a key either."
+  description = "Allow authenticating with the account's shared keys. Off by default: Zeshan uses workload identity, and callers that need a key can set AZURE_STORAGE_ACCOUNT_KEY only after turning this on. Set storage_use_azuread = true on the azurerm provider so Terraform itself does not reach for a key either."
   default     = false
 }
 

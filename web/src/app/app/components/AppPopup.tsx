@@ -65,9 +65,9 @@ export function AppPopup() {
   const logoDisplayStyle = settings.enterprise?.logo_display_style;
 
   // Header icon rules:
-  // - If neither app name nor custom logo exists -> show Onyx icon
+  // - If neither app name nor custom logo exists -> show Zeshan icon
   // - If logo display is "name_only" -> show alert icon
-  // - Otherwise -> show uploaded custom logo (fallback to Onyx icon)
+  // - Otherwise -> show uploaded custom logo (fallback to Zeshan icon)
   const headerIcon =
     !hasApplicationName && !hasCustomLogo
       ? (props: IconProps) => <SvgOnyxLogo size={24} {...props} />

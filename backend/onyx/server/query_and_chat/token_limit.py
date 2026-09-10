@@ -144,7 +144,7 @@ def _token_budget_reset(
         if rate_limit.token_budget is None or rate_limit.token_budget <= 0:
             continue
 
-        # The admin enters the budget in THOUSANDS of tokens (Onyx convention),
+        # The admin enters the budget in THOUSANDS of tokens (Zeshan convention),
         # so the stored value is scaled up to the real token count here.
         budget = rate_limit.token_budget * TOKEN_BUDGET_UNIT
         cutoff = get_token_window_start(now, rate_limit.period_hours)

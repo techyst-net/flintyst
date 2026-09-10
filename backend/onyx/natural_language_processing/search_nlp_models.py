@@ -195,7 +195,7 @@ def _cleanup_thread_local(func: Callable) -> Callable:
 
 
 WARM_UP_STRINGS = [
-    "Onyx is amazing!",
+    "Zeshan is amazing!",
     "Check out our easy deployment guide at",
     "https://docs.onyx.app/deployment/getting_started/quickstart",
 ]
@@ -378,7 +378,7 @@ class CloudEmbedding:
 
         final_embeddings: list[Embedding] = []
         for text_batch in batch_list(texts, _COHERE_MAX_INPUT_LEN):
-            # Does not use the same tokenizer as the Onyx API server but it's approximately the same
+            # Does not use the same tokenizer as the Zeshan API server but it's approximately the same
             # empirically it's only off by a very few tokens so it's not a big deal
             response = await client.embed(
                 texts=text_batch,
@@ -897,10 +897,10 @@ class EmbeddingModel:
         def _make_request() -> Response:
             headers = {}
             if tenant_id:
-                headers["X-Onyx-Tenant-ID"] = tenant_id
+                headers["X-Zeshan-Tenant-ID"] = tenant_id
 
             if request_id:
-                headers["X-Onyx-Request-ID"] = request_id
+                headers["X-Zeshan-Request-ID"] = request_id
 
             response = requests.post(
                 endpoint,

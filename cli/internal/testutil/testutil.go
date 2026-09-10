@@ -27,7 +27,7 @@ func StatusServer(status int) *httptest.Server {
 	}))
 }
 
-// OnyxServer returns an httptest.Server that simulates the Onyx backend.
+// OnyxServer returns an httptest.Server that simulates the Zeshan backend.
 // Routes are mounted under /api to match the production URL layout.
 func OnyxServer(meStatus int) *httptest.Server {
 	mux := http.NewServeMux()

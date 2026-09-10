@@ -56,7 +56,7 @@ func (r *apiKeyResource) Metadata(_ context.Context, req resource.MetadataReques
 
 func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An Onyx API key. The key material is returned by the API exactly once at " +
+		MarkdownDescription: "An Zeshan API key. The key material is returned by the API exactly once at " +
 			"creation and is kept in Terraform state (`api_key`, sensitive) from then on; it can never be " +
 			"re-read, so after `terraform import` the attribute stays null. Note the chicken-and-egg: the " +
 			"key the provider itself authenticates with must be created out-of-band (admin UI or curl).",
@@ -128,7 +128,7 @@ func (r *apiKeyResource) Create(ctx context.Context, req resource.CreateRequest,
 		GroupIDs: groupIDs,
 	})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Onyx API key", err.Error())
+		resp.Diagnostics.AddError("Failed to create Zeshan API key", err.Error())
 		return
 	}
 
@@ -157,7 +157,7 @@ func (r *apiKeyResource) Read(ctx context.Context, req resource.ReadRequest, res
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Onyx API key", err.Error())
+		resp.Diagnostics.AddError("Failed to read Zeshan API key", err.Error())
 		return
 	}
 
@@ -203,7 +203,7 @@ func (r *apiKeyResource) Update(ctx context.Context, req resource.UpdateRequest,
 		GroupIDs: groupIDs,
 	})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to update Onyx API key", err.Error())
+		resp.Diagnostics.AddError("Failed to update Zeshan API key", err.Error())
 		return
 	}
 
@@ -231,7 +231,7 @@ func (r *apiKeyResource) Delete(ctx context.Context, req resource.DeleteRequest,
 		if _, getErr := r.client.GetAPIKey(ctx, id); client.IsNotFound(getErr) {
 			return
 		}
-		resp.Diagnostics.AddError("Failed to delete Onyx API key", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Zeshan API key", err.Error())
 	}
 }
 

@@ -24,7 +24,7 @@ resource "onyx_document_set" "hr_private" {
   users     = [var.hr_lead_user_id]
 }
 
-# Onyx rejects a set that holds nothing, so a set built only from federated
+# Zeshan rejects a set that holds nothing, so a set built only from federated
 # connectors still needs at least one entry there.
 #
 # `entities` follows the schema of the connector it points at. Slack is the

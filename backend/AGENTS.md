@@ -19,7 +19,7 @@ tests. Additive to the root `AGENTS.md`.
 
 ## Background Workers (Celery)
 
-Onyx uses Celery for asynchronous task processing. Worker apps live in
+Zeshan uses Celery for asynchronous task processing. Worker apps live in
 `backend/onyx/background/celery/apps/`; the periodic schedule is defined in
 `backend/onyx/background/celery/tasks/beat_schedule.py`.
 
@@ -95,7 +95,7 @@ Write the migration manually and place it in the file that alembic creates when 
 Run pytest through `uv run` from the repo root — no venv activation needed (`uv run` uses the
 lockfile-pinned environment and creates/syncs `.venv` as needed).
 
-There are 4 main types of tests within Onyx:
+There are 4 main types of tests within Zeshan:
 
 ### Model choice for tests that make real LLM calls
 
@@ -107,7 +107,7 @@ that hit a live provider), use the cheap-and-fast tier for each provider:
 
 ### Unit Tests
 
-These should not assume any Onyx/external services are available to be called.
+These should not assume any Zeshan/external services are available to be called.
 Interactions with the outside world should be mocked using `unittest.mock`. Generally, only
 write these for complex, isolated modules e.g. `citation_processing.py`.
 
@@ -119,10 +119,10 @@ uv run pytest -xv backend/tests/unit
 
 ### External Dependency Unit Tests
 
-These tests assume that all external dependencies of Onyx are available and callable (e.g. Postgres, Redis,
+These tests assume that all external dependencies of Zeshan are available and callable (e.g. Postgres, Redis,
 MinIO/S3, OpenSearch are running + OpenAI can be called + any request to the internet is fine + etc.).
 
-However, the actual Onyx containers are not running and with these tests we call the function to test directly.
+However, the actual Zeshan containers are not running and with these tests we call the function to test directly.
 We can also mock components/calls at will.
 
 The goal with these tests are to minimize mocking while giving some flexibility to mock things that are flakey,
@@ -139,7 +139,7 @@ uv run --env-file .vscode/.env pytest backend/tests/external_dependency_unit
 
 ### Integration Tests
 
-Standard integration tests. Every test in `backend/tests/integration` runs against a real Onyx deployment. We cannot
+Standard integration tests. Every test in `backend/tests/integration` runs against a real Zeshan deployment. We cannot
 mock anything in these tests. Prefer writing integration tests (or External Dependency Unit Tests if mocking/internal
 verification is necessary) over any other type of test.
 
@@ -160,7 +160,7 @@ uv run --env-file .vscode/.env pytest backend/tests/integration
 
 ### Playwright (E2E) Tests
 
-These tests are an even more complete version of the Integration Tests mentioned above. Has all services of Onyx
+These tests are an even more complete version of the Integration Tests mentioned above. Has all services of Zeshan
 running, _including_ the Web Server.
 
 Use these tests for anything that requires significant frontend <-> backend coordination.

@@ -1,6 +1,6 @@
-# Onyx File Store
+# Zeshan File Store
 
-The Onyx file store provides a unified interface for storing files and large binary objects. It supports four storage backends: S3-compatible storage (AWS S3, MinIO, Digital Ocean Spaces, etc.), Google Cloud Storage (GCS), Azure Blob Storage, and PostgreSQL Large Objects.
+The Zeshan file store provides a unified interface for storing files and large binary objects. It supports four storage backends: S3-compatible storage (AWS S3, MinIO, Digital Ocean Spaces, etc.), Google Cloud Storage (GCS), Azure Blob Storage, and PostgreSQL Large Objects.
 
 ## Architecture
 

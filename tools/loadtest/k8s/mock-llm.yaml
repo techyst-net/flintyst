@@ -1,9 +1,9 @@
-# Mock LLM server for load testing — deploy alongside an Onyx installation
+# Mock LLM server for load testing — deploy alongside an Zeshan installation
 # and register as an `openai_compatible` LLM provider with
 # api_base=http://onyx-mock-llm:8000 (see ../README.md for provider setup,
 # including the max-input-tokens >= 50k requirement).
 #
-# Apply into the Onyx namespace:  kubectl apply -n <onyx-namespace> -f mock-llm.yaml
+# Apply into the Zeshan namespace:  kubectl apply -n <onyx-namespace> -f mock-llm.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:

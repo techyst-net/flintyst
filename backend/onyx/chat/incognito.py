@@ -87,7 +87,7 @@ def incognito_allowed_for_user(
 
 # Bifrost's per-request switch for keeping content out of its gateway log.
 # Honored only when the gateway enables allow_per_request_content_storage_override.
-# Ignored otherwise, so this stays best effort from Onyx's side.
+# Ignored otherwise, so this stays best effort from Zeshan's side.
 BIFROST_DISABLE_CONTENT_LOGGING_HEADER = "x-bf-disable-content-logging"
 # Portkey "DO NOT TRACK": request/response content stays out of its logs,
 # token/cost stats still record.

@@ -3,12 +3,12 @@
 page_title: "onyx_settings Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  The Onyx workspace settings singleton. Only attributes set in configuration are managed: unset attributes are left untouched server-side, and removing an attribute from configuration stops managing it rather than resetting it. Deleting the resource only removes it from state — the live settings are not changed. At most one onyx_settings resource should exist per deployment.
+  The Zeshan workspace settings singleton. Only attributes set in configuration are managed: unset attributes are left untouched server-side, and removing an attribute from configuration stops managing it rather than resetting it. Deleting the resource only removes it from state — the live settings are not changed. At most one onyx_settings resource should exist per deployment.
 ---
 
 # onyx_settings (Resource)
 
-The Onyx workspace settings singleton. Only attributes set in configuration are managed: unset attributes are left untouched server-side, and removing an attribute from configuration stops managing it rather than resetting it. Deleting the resource only removes it from state — the live settings are not changed. At most one `onyx_settings` resource should exist per deployment.
+The Zeshan workspace settings singleton. Only attributes set in configuration are managed: unset attributes are left untouched server-side, and removing an attribute from configuration stops managing it rather than resetting it. Deleting the resource only removes it from state — the live settings are not changed. At most one `onyx_settings` resource should exist per deployment.
 
 ## Example Usage
 
@@ -32,7 +32,7 @@ resource "onyx_settings" "workspace" {
 - `auto_scroll` (Boolean) Auto-scroll chat responses.
 - `company_description` (String) Company description.
 - `company_name` (String) Company name shown in the UI.
-- `craft_default_enabled` (Boolean) Workspace default for Onyx Craft access (per-user overrides win).
+- `craft_default_enabled` (Boolean) Workspace default for Zeshan Craft access (per-user overrides win).
 - `craft_instructions` (String) Workspace-wide instructions injected into every Craft agent (max 4000 chars).
 - `deep_research_enabled` (Boolean) Enable the Deep Research feature.
 - `disable_default_assistant` (Boolean) Disable the built-in default assistant.

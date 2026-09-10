@@ -128,7 +128,7 @@ func defaultModelObject(dm *client.DefaultModel, diags *diag.Diagnostics) types.
 func (d *llmProvidersDataSource) Read(ctx context.Context, _ datasource.ReadRequest, resp *datasource.ReadResponse) {
 	list, err := d.client.ListLLMProviders(ctx)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to list Onyx LLM providers", err.Error())
+		resp.Diagnostics.AddError("Failed to list Zeshan LLM providers", err.Error())
 		return
 	}
 

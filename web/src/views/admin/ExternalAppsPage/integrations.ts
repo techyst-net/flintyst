@@ -103,7 +103,7 @@ export function externalAppToIntegration(
       : descriptor
         ? () => onEdit(descriptor)
         : null,
-    // Onyx-managed built-ins are provisioned by Onyx.
+    // Zeshan-managed built-ins are provisioned by Zeshan.
     remove: app.is_onyx_managed
       ? null
       : {

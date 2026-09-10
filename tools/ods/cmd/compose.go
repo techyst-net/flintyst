@@ -32,8 +32,8 @@ func NewComposeCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "compose [profile]",
-		Short: "Launch Onyx docker containers",
-		Long: `Launch Onyx docker containers using docker compose.
+		Short: "Launch Zeshan docker containers",
+		Long: `Launch Zeshan docker containers using docker compose.
 
 By default, this runs docker compose up -d with the standard docker-compose.yml.
 Enterprise Edition features are enabled by default for development.

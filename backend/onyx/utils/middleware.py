@@ -26,7 +26,7 @@ def add_onyx_tenant_id_middleware(
     ) -> Response:
         """Captures and sets the context var for the tenant."""
 
-        onyx_tenant_id = request.headers.get("X-Onyx-Tenant-ID")
+        onyx_tenant_id = request.headers.get("X-Zeshan-Tenant-ID")
         if onyx_tenant_id:
             CURRENT_TENANT_ID_CONTEXTVAR.set(onyx_tenant_id)
         return await call_next(request)
@@ -49,7 +49,7 @@ def add_onyx_request_id_middleware(
         Total length is 12 chars.
         """
 
-        onyx_request_id = request.headers.get("X-Onyx-Request-ID")
+        onyx_request_id = request.headers.get("X-Zeshan-Request-ID")
         if not onyx_request_id:
             onyx_request_id = make_randomized_onyx_request_id(prefix)
 

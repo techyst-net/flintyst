@@ -1,4 +1,4 @@
-"""Locust user that drives the Onyx chat streaming endpoint.
+"""Locust user that drives the Zeshan chat streaming endpoint.
 
 Each turn POSTs /api/chat/send-chat-message with stream=True and consumes the
 NDJSON response line by line, firing a named pseudo-request the moment each

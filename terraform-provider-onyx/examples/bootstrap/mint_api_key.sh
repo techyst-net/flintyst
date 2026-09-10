@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mints an Onyx API key in the seeded "Admin" group and prints it.
+# Mints an Zeshan API key in the seeded "Admin" group and prints it.
 #
 # This is the scripted form of what the admin panel does under
 # Settings -> Service Accounts. Use it for CI or a scripted first setup. A

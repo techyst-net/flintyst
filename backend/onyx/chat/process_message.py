@@ -684,7 +684,7 @@ def build_chat_turn(
         },
     )
 
-    # Check LLM cost limits before using the LLM (only for Onyx-managed keys),
+    # Check LLM cost limits before using the LLM (only for Zeshan-managed keys),
     # then build the LLM instance(s).
     llms: list[LLM] = []
     model_display_names: list[str] = []

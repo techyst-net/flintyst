@@ -2,7 +2,7 @@
 # Fill in the <REPLACE THIS> values as needed; it is recommended to set the
 # GEN_AI_API_KEY value to avoid having to set up an LLM in the UI.
 # Also check out onyx/backend/scripts/restart_containers.sh for a script to
-# restart the containers which Onyx relies on outside of VSCode/Cursor
+# restart the containers which Zeshan relies on outside of VSCode/Cursor
 # processes.
 
 
@@ -46,7 +46,7 @@ PYTHONPATH=../backend
 PYTHONUNBUFFERED=1
 
 
-# Enable the full set of Onyx Enterprise Edition features.
+# Enable the full set of Zeshan Enterprise Edition features.
 # NOTE: DO NOT ENABLE THIS UNLESS YOU HAVE A PAID ENTERPRISE LICENSE (or if you
 # are using this for local testing/development).
 ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=False
