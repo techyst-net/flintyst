@@ -1,28 +1,44 @@
 import type { IconProps } from "@opal/types";
-const SvgOnyxLogo = ({ size, ...props }: IconProps) => (
-  <svg
-    height={size}
-    viewBox="0 0 64 64"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <path
-      d="M10.4014 13.25L18.875 32L10.3852 50.75L2 32L10.4014 13.25Z"
-      fill="var(--theme-primary-05)"
-    />
-    <path
-      d="M53.5264 13.25L62 32L53.5102 50.75L45.125 32L53.5264 13.25Z"
-      fill="var(--theme-primary-05)"
-    />
-    <path
-      d="M32 45.125L50.75 53.5625L32 62L13.25 53.5625L32 45.125Z"
-      fill="var(--theme-primary-05)"
-    />
-    <path
-      d="M32 2L50.75 10.4375L32 18.875L13.25 10.4375L32 2Z"
-      fill="var(--theme-primary-05)"
-    />
-  </svg>
-);
+
+// The Flintyst mark: a four-point spark with concave edges, carrying the brand
+// gradient from deep blue at the lower left to bright blue at the upper right.
+//
+// The gradient id is derived from a module-level counter rather than being a
+// fixed string, because several of these render at once (sidebar, avatars, auth)
+// and duplicate ids in one document make every instance take the first one's
+// gradient.
+let gradientSeq = 0;
+
+const SvgOnyxLogo = ({ size, ...props }: IconProps) => {
+  const gradientId = `flintyst-mark-${(gradientSeq += 1)}`;
+  return (
+    <svg
+      height={size}
+      width={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <defs>
+        <linearGradient
+          id={gradientId}
+          x1="8"
+          y1="56"
+          x2="56"
+          y2="8"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#17318C" />
+          <stop offset="0.45" stopColor="#2456B8" />
+          <stop offset="1" stopColor="#4D9CFF" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M32 2C34.1 17.6 46.4 29.9 62 32C46.4 34.1 34.1 46.4 32 62C29.9 46.4 17.6 34.1 2 32C17.6 29.9 29.9 17.6 32 2Z"
+        fill={`url(#${gradientId})`}
+      />
+    </svg>
+  );
+};
 export default SvgOnyxLogo;
