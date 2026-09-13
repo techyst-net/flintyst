@@ -34,7 +34,6 @@ from ee.onyx.server.query_and_chat.models import (
 from ee.onyx.server.query_and_chat.streaming_models import SearchErrorPacket
 from onyx.auth.permissions import require_permission
 from onyx.configs.app_configs import ONYX_SEARCH_UI_USES_OPENSEARCH_KEYWORD_SEARCH
-from onyx.configs.constants import PUBLIC_API_TAGS
 from onyx.db.engine.sql_engine import get_session, get_session_with_current_tenant
 from onyx.db.enums import Permission
 from onyx.db.models import User
@@ -50,19 +49,12 @@ logger = setup_logger()
 router = APIRouter(prefix="/search")
 
 
-@router.post("/search-flow-classification", tags=PUBLIC_API_TAGS)
+@router.post("/search-flow-classification")
 def search_flow_classification(
     request: SearchFlowClassificationRequest,
     _: User = Depends(require_permission(Permission.READ_SEARCH)),
     db_session: Session = Depends(get_session),
 ) -> SearchFlowClassificationResponse:
-    """
-    Classify whether a query should be answered by search or by chat.
-
-    Queries longer than 200 characters are classified as a chat flow without an
-    LLM call. A failed classification falls back to ``is_search_flow: false``
-    rather than raising.
-    """
     query = request.user_query
     # This is a heuristic that if the user is typing a lot of text, it's unlikely they're looking for some specific document
     # Most likely something needs to be done with the text included so we'll just classify it as a chat flow
@@ -95,29 +87,8 @@ def search_flow_classification(
 # compatible across versions.
 @router.post(
     "/send-search-message",
-    response_model=SearchFullResponse,
+    response_model=None,
     dependencies=[Depends(require_vector_db)],
-    tags=PUBLIC_API_TAGS,
-    responses={
-        200: {
-            "description": (
-                "If `stream=true`, returns `text/event-stream`.\n"
-                "If `stream=false` (the default), returns `application/json` "
-                "(SearchFullResponse)."
-            ),
-            "content": {
-                "text/event-stream": {
-                    "schema": {"type": "string"},
-                    "examples": {
-                        "stream": {
-                            "summary": "Stream of NDJSON search packets",
-                            "value": "string",
-                        }
-                    },
-                },
-            },
-        }
-    },
 )
 def handle_send_search_message(
     request: SendSearchQueryRequest,
@@ -167,7 +138,7 @@ def handle_send_search_message(
     return StreamingResponse(stream_generator(), media_type="text/event-stream")
 
 
-@router.get("/search-history", tags=PUBLIC_API_TAGS)
+@router.get("/search-history")
 def get_search_history(
     limit: int = 100,
     filter_days: int | None = None,

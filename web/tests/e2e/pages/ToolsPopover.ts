@@ -12,12 +12,7 @@
 import { type Page, type Locator, expect } from "@playwright/test";
 
 const POPOVER = '[data-testid="tool-options"]';
-/**
- * Rows render as `role="button"`, so they are reachable by accessible name
- * rather than by a styling class. The previous `.group/LineItem` selector was
- * a Tailwind group name that only `refresh-components/LineItem` emitted, and
- * it matched nothing once the popover moved to Opal's `LineItemButton`.
- */
+const LINE_ITEM = ".group\\/LineItem";
 
 function escapeRegex(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -87,6 +82,7 @@ export class ToolsPopover {
   readonly page: Page;
   readonly toggle: Locator;
   readonly popover: Locator;
+  readonly serverRows: Locator;
   readonly toolSwitches: Locator;
   readonly credentialsModal: McpCredentialsModal;
 
@@ -94,6 +90,7 @@ export class ToolsPopover {
     this.page = page;
     this.toggle = page.getByTestId("action-management-toggle");
     this.popover = page.locator(POPOVER);
+    this.serverRows = this.popover.locator("[data-mcp-server-name]");
     this.toolSwitches = this.popover.locator('[role="switch"]');
     this.credentialsModal = new McpCredentialsModal(page);
   }
@@ -101,15 +98,6 @@ export class ToolsPopover {
   // ---------------------------------------------------------------------------
   // Open / close / navigation
   // ---------------------------------------------------------------------------
-
-  /**
-   * The primary view's own search box. Every secondary view replaces it with
-   * one of its own ("Search Filters", "Search <server> tools"), so its
-   * presence is what says the popover is showing the action list.
-   */
-  private get actionSearch(): Locator {
-    return this.popover.getByPlaceholder("Search actions...");
-  }
 
   private get backButton(): Locator {
     return this.popover.getByRole("button", { name: /Back/i }).first();
@@ -128,7 +116,7 @@ export class ToolsPopover {
     if (!(await this.popover.isVisible().catch(() => false))) {
       return;
     }
-    if ((await this.actionSearch.count()) > 0) {
+    if ((await this.serverRows.count()) > 0) {
       return;
     }
     if ((await this.backButton.count()) > 0) {
@@ -147,24 +135,14 @@ export class ToolsPopover {
   }
 
   // ---------------------------------------------------------------------------
-  // Rows
-  // ---------------------------------------------------------------------------
-
-  /** A popover row, found by the accessible name its contents give it. */
-  private row(name: RegExp): Locator {
-    return this.popover.getByRole("button", { name }).first();
-  }
-
-  // ---------------------------------------------------------------------------
   // Server rows
   // ---------------------------------------------------------------------------
 
   serverRow(serverName: string): Locator {
-    // Deliberately unanchored. A server row's accessible name is not just its
-    // name: an authenticated server with some of its tools enabled renders a
-    // visible count beside it, which the name picks up. Anchoring the end
-    // would drop exactly those rows.
-    return this.row(new RegExp(escapeRegex(serverName)));
+    return this.popover
+      .locator(LINE_ITEM)
+      .filter({ hasText: new RegExp(escapeRegex(serverName)) })
+      .first();
   }
 
   async expectServerVisible(serverName: string): Promise<void> {
@@ -266,7 +244,10 @@ export class ToolsPopover {
   }
 
   toolRow(toolName: string): Locator {
-    return this.row(new RegExp(`^${escapeRegex(toolName)}`));
+    return this.popover
+      .locator(LINE_ITEM)
+      .filter({ hasText: new RegExp(`^${escapeRegex(toolName)}`) })
+      .first();
   }
 
   private async isToolChecked(toolName: string): Promise<boolean> {
@@ -332,7 +313,10 @@ export class ToolsPopover {
   // ---------------------------------------------------------------------------
 
   reauthRow(): Locator {
-    return this.row(/Re-Authenticate/i);
+    return this.popover
+      .locator(LINE_ITEM)
+      .filter({ hasText: /Re-Authenticate/i })
+      .first();
   }
 
   async clickReauthRow(): Promise<void> {

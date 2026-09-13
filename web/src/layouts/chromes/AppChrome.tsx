@@ -622,13 +622,7 @@ function Footer() {
     <RootLayout.Footer>
       <div
         className={cn(
-          // Wrapping a long disclaimer needs both halves. `[&>*]:min-w-0`
-          // lets the text shrink, since a flex item's min-width is `auto`
-          // and otherwise holds it at its min-content width. `wordWrap` on
-          // the Text below then lets an unbroken run split, which ordinary
-          // wrapping will not do — it only breaks at whitespace, so a
-          // pasted URL or one long token would still overflow.
-          "relative w-full flex flex-row justify-center items-center gap-2 px-2 sm:px-4 mt-auto [&>*]:min-w-0",
+          "relative w-full flex flex-row justify-center items-center gap-2 px-2 sm:px-4 mt-auto",
           // # Note (from @raunakab):
           //
           // The conditional rendering of vertical padding based on the current page is intentional.
@@ -646,12 +640,7 @@ function Footer() {
           appPosition.isChat() ? "pb-2" : "py-2"
         )}
       >
-        <Text
-          font="secondary-action"
-          color="text-03"
-          as="p"
-          wordWrap="wrap-anywhere"
-        >
+        <Text font="secondary-action" color="text-03">
           {markdown(customFooterContent)}
         </Text>
       </div>

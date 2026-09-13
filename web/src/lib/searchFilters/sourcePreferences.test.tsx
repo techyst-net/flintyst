@@ -8,20 +8,19 @@ beforeEach(() => {
   localStorage.clear();
 });
 
-function setup(availableSources: ValidSources[], ready = true) {
+function setup(availableSources: ValidSources[]) {
   const state: { selected: SourceMetadata[] } = { selected: [] };
 
   const hook = renderHook(
-    ({ avail, ready: isReady }) =>
+    ({ avail }) =>
       useSourcePreferences({
         availableSources: avail,
         selectedSources: state.selected,
         setSelectedSources: (sources: SourceMetadata[]) => {
           state.selected = sources;
         },
-        ready: isReady,
       }),
-    { initialProps: { avail: availableSources, ready } }
+    { initialProps: { avail: availableSources } }
   );
 
   return { hook, state };
@@ -76,7 +75,6 @@ describe("useSourcePreferences — agent switching", () => {
 
     hook.rerender({
       avail: [ValidSources.Notion, ValidSources.UserFile],
-      ready: true,
     });
 
     expect(sourceNames(state.selected)).toEqual(["notion", "user_file"]);
@@ -91,7 +89,6 @@ describe("useSourcePreferences — agent switching", () => {
 
     hook.rerender({
       avail: [ValidSources.Notion, ValidSources.Web, ValidSources.Confluence],
-      ready: true,
     });
 
     expect(sourceNames(state.selected)).toEqual([
@@ -155,46 +152,5 @@ describe("buildFilters — source_type payload", () => {
 
     const filters = buildFilters(state.selected, [], null, []);
     expect(filters.source_type).toEqual(["user_file"]);
-  });
-});
-
-describe("useSourcePreferences — readiness", () => {
-  test("an unsettled list does not initialise preferences", () => {
-    const { hook, state } = setup([ValidSources.Notion], false);
-
-    expect(state.selected).toEqual([]);
-    expect(hook.result.current.sourcesInitialized).toBe(false);
-    expect(localStorage.getItem("selectedInternalSearchSources")).toBeNull();
-  });
-
-  test("initialising waits for the list to settle", () => {
-    const { hook, state } = setup([ValidSources.Notion], false);
-    expect(state.selected).toEqual([]);
-
-    hook.rerender({ avail: [ValidSources.Notion], ready: true });
-
-    expect(sourceNames(state.selected)).toEqual(["notion"]);
-    expect(hook.result.current.sourcesInitialized).toBe(true);
-  });
-
-  test("a partial list is never persisted as the choice", () => {
-    // The connector fetch has only returned one of two sources so far.
-    const { hook, state } = setup([ValidSources.Notion], false);
-    expect(localStorage.getItem("selectedInternalSearchSources")).toBeNull();
-
-    // It settles, and the complete set arrives together with readiness.
-    hook.rerender({
-      avail: [ValidSources.Notion, ValidSources.Confluence],
-      ready: true,
-    });
-
-    expect(sourceNames(state.selected)).toEqual(["confluence", "notion"]);
-    const saved = JSON.parse(
-      localStorage.getItem("selectedInternalSearchSources")!
-    );
-    expect(Object.keys(saved.sourcePreferences).sort()).toEqual([
-      "confluence",
-      "notion",
-    ]);
   });
 });

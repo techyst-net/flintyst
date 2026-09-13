@@ -16,8 +16,6 @@ from onyx.db.models import (
     User,
 )
 from onyx.db.user_group import assert_not_shared_with_default_group
-from onyx.error_handling.error_codes import OnyxErrorCode
-from onyx.error_handling.exceptions import OnyxError
 from onyx.server.documents.models import CredentialBase
 from onyx.utils.logger import setup_logger
 
@@ -351,11 +349,9 @@ def _delete_credential_internal(
             # Commit these deletions before deleting the credential
             db_session.flush()
         else:
-            raise OnyxError(
-                OnyxErrorCode.RESOURCE_IN_USE,
+            raise ValueError(
                 f"Cannot delete credential as it is still associated with "
-                f"{len(associated_connectors)} connector(s) and "
-                f"{len(associated_doc_cc_pairs)} document(s).",
+                f"{len(associated_connectors)} connector(s) and {len(associated_doc_cc_pairs)} document(s). "
             )
 
     if force:
@@ -377,9 +373,8 @@ def delete_credential_for_user(
     """Delete a credential that belongs to a specific user"""
     credential = fetch_credential_by_id_for_user(credential_id, user, db_session)
     if credential is None:
-        raise OnyxError(
-            OnyxErrorCode.CREDENTIAL_NOT_FOUND,
-            f"Credential {credential_id} does not exist or does not belong to user",
+        raise ValueError(
+            f"Credential by provided id {credential_id} does not exist or does not belong to user"
         )
 
     _delete_credential_internal(credential, credential_id, db_session, force)
@@ -393,10 +388,7 @@ def delete_credential(
     """Delete a credential regardless of ownership (admin function)"""
     credential = fetch_credential_by_id(credential_id, db_session)
     if credential is None:
-        raise OnyxError(
-            OnyxErrorCode.CREDENTIAL_NOT_FOUND,
-            f"Credential {credential_id} does not exist",
-        )
+        raise ValueError(f"Credential by provided id {credential_id} does not exist")
 
     _delete_credential_internal(credential, credential_id, db_session, force)
 

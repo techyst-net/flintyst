@@ -1,38 +1,17 @@
 // Shared test utilities for tool/action management and greetings
 
-import { Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
 export const TOOL_IDS = {
   actionToggle: '[data-testid="action-management-toggle"]',
   options: '[data-testid="tool-options"]',
+  // These IDs are derived from tool.name in the app
+  searchOption: '[data-testid="tool-option-internal_search"]',
+  webSearchOption: '[data-testid="tool-option-web_search"]',
+  imageGenerationOption: '[data-testid="tool-option-generate_image"]',
   // Generic toggle selector used inside tool options
   toggleInput: 'input[type="checkbox"], input[type="radio"], [role="switch"]',
 } as const;
-
-/**
- * The labels the built-in tools carry in the popover.
- *
- * A row is found by the name it shows, not by a test id: it renders as a
- * `role="button"` labelled by the tool, so the test asks for what the user
- * sees. `DISPLAY_NAME` on the backend tool classes is the source of truth
- * (e.g. `SearchTool.DISPLAY_NAME`).
- */
-export const TOOL_NAMES = {
-  internalSearch: "Internal Search",
-  webSearch: "Web Search",
-  imageGeneration: "Image Generation",
-} as const;
-
-/**
- * One tool row in the open actions popover.
- *
- * Matched on a substring rather than the exact name: the row is named by its
- * whole subtree, so its trailing action buttons ("Disable", "Configure
- * Connectors") end up in the accessible name too.
- */
-export function toolOption(page: Page, name: string): Locator {
-  return page.locator(TOOL_IDS.options).getByRole("button", { name });
-}
 
 export { GREETING_MESSAGES } from "../../../src/lib/chat/greetingMessages";
 
@@ -68,9 +47,13 @@ export async function isActionTogglePresent(page: Page): Promise<boolean> {
  * The button is hidden until hover; we hover first, then force-click
  * using aria-label which matches the button's current state.
  */
-export async function toggleToolDisabled(row: Locator): Promise<void> {
-  await row.hover();
-  const slashButton = row.locator(
+export async function toggleToolDisabled(
+  page: Page,
+  toolSelector: string
+): Promise<void> {
+  const toolOption = page.locator(toolSelector);
+  await toolOption.hover();
+  const slashButton = toolOption.locator(
     'button[aria-label="Disable"], button[aria-label="Enable"]'
   );
   await slashButton.first().click({ force: true });
@@ -81,7 +64,8 @@ export async function toggleToolDisabled(row: Locator): Promise<void> {
  * Assumes the ToolsPopover is already open.
  */
 export async function openSourceManagement(page: Page): Promise<void> {
-  await toolOption(page, TOOL_NAMES.internalSearch)
+  const searchOption = page.locator(TOOL_IDS.searchOption);
+  await searchOption
     .locator('button[aria-label="Configure Connectors"]')
     .click();
   // Wait for the source list Back button (indicates secondary view is open)

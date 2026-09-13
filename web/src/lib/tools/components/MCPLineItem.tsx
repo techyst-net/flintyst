@@ -1,7 +1,13 @@
 "use client";
 
 import React from "react";
-import { LineItemButton } from "@opal/components";
+import {
+  MCPAuthenticationType,
+  MCPAuthenticationPerformer,
+  ToolSnapshot,
+} from "@/lib/tools/types";
+import LineItem from "@/refresh-components/buttons/LineItem";
+import { noProp } from "@/lib/utils";
 import { cn } from "@opal/utils";
 import type { IconProps } from "@opal/types";
 import {
@@ -12,13 +18,7 @@ import {
   SvgServer,
   SvgSimpleLoader,
 } from "@opal/icons";
-
 import { Section } from "@/layouts/general-layouts";
-import {
-  MCPAuthenticationType,
-  MCPAuthenticationPerformer,
-  ToolSnapshot,
-} from "@/lib/tools/types";
 import EnabledCount from "@/refresh-components/EnabledCount";
 
 export interface MCPServer {
@@ -80,25 +80,26 @@ export default function MCPLineItem({
     )) as React.FunctionComponent<IconProps>;
   }
 
-  function handleClick() {
+  const handleClick = noProp(() => {
     if (canClickIntoServer) {
       onSelect();
       return;
     }
-    if (showAuthTrigger) onAuthenticate();
-  }
+    if (showAuthTrigger) {
+      onAuthenticate();
+    }
+  });
 
   const allToolsDisabled = enabledTools.length === 0 && tools.length > 0;
 
   return (
-    <LineItemButton
-      title={server.name}
+    <LineItem
+      data-mcp-server-id={server.id}
+      data-mcp-server-name={server.name}
       icon={getServerIcon()}
-      sizePreset="main-ui"
-      variant="section"
-      state={isActive ? "selected" : "empty"}
-      strikethrough={allToolsDisabled}
       onClick={handleClick}
+      strikethrough={allToolsDisabled}
+      selected={isActive}
       rightChildren={
         <Section gap={1} flexDirection="row">
           {isAuthenticated &&
@@ -128,6 +129,8 @@ export default function MCPLineItem({
           )}
         </Section>
       }
-    />
+    >
+      {server.name}
+    </LineItem>
   );
 }

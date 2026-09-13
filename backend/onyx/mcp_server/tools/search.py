@@ -12,8 +12,6 @@ from onyx.configs.app_configs import MCP_SERVER_API_REQUEST_TIMEOUT_SECONDS
 from onyx.configs.constants import DocumentSource
 from onyx.mcp_server.api import mcp_server
 from onyx.mcp_server.utils import (
-    AgentEntry,
-    get_accessible_agents,
     get_http_client,
     get_indexed_sources,
     require_access_token,
@@ -89,7 +87,7 @@ def _extract_error_detail(response: httpx.Response) -> str:
         if detail := body.get("detail"):
             return str(detail)
     except Exception as exc:
-        logger.debug("Onyx MCP Server: error body was not JSON (%s)", exc)
+        logger.debug("Zeshan MCP Server: error body was not JSON (%s)", exc)
     return f"Request failed with status {response.status_code}"
 
 
@@ -99,34 +97,6 @@ def _error_payload(error: str) -> dict[str, Any]:
 
 
 _TIME_CUTOFF_ADAPTER: TypeAdapter[datetime | None] = TypeAdapter(datetime | None)
-
-# Keeps the unknown-agent error readable when a tenant has many agents.
-_MAX_AGENT_NAMES_IN_ERROR = 50
-
-
-def _match_agents(agent: str, agents: list[AgentEntry]) -> list[AgentEntry]:
-    """Match an agent by name, preferring an exact hit over a case-fold one."""
-    exact = [entry for entry in agents if entry.name == agent]
-    if exact:
-        return exact
-    folded = agent.casefold()
-    return [entry for entry in agents if entry.name.casefold() == folded]
-
-
-def _unknown_agent_error(agent: str, agents: list[AgentEntry]) -> str:
-    """Name the valid agents so the caller can retry without a lookup call.
-
-    An unresolvable agent has to fail rather than fall back to an unscoped
-    search — the wrong scope returned as if it were right is worse than an
-    error.
-    """
-    if not agents:
-        return f"Agent '{agent}' not found. No agents are accessible to this user."
-
-    names = sorted(entry.name for entry in agents)
-    shown = names[:_MAX_AGENT_NAMES_IN_ERROR]
-    suffix = f" (and {len(names) - len(shown)} more)" if len(names) > len(shown) else ""
-    return f"Agent '{agent}' not found. Available agents: {', '.join(shown)}{suffix}."
 
 
 def _record_requested_sources(source_types: list[str] | None) -> None:
@@ -147,7 +117,6 @@ async def search_indexed_documents(
     document_set_names: list[str] | None = None,
     time_cutoff: str | None = None,
     skip_query_expansion: bool = False,
-    agent: str | None = None,
 ) -> dict[str, Any]:
     """
     Search the user's knowledge base indexed in Flintyst.
@@ -193,23 +162,14 @@ async def search_indexed_documents(
         "time_cutoff": "2025-11-24T00:00:00Z",
     }
     ```
-
-    Scoping the same question to an agent instead:
-    ```
-    {
-        "query": "What is the latest status of PROJ-1234?",
-        "agent": "Engineering Support",
-    }
-    ```
     """
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_INDEXED_DOCUMENTS
     logger.info(
-        "Onyx MCP Server: document search: query='%s', sources=%s, document_sets=%s, agent=%s",
+        "Zeshan MCP Server: document search: query='%s', sources=%s, document_sets=%s",
         query,
         source_types,
         document_set_names,
-        agent,
     )
 
     _record_requested_sources(source_types)
@@ -219,7 +179,6 @@ async def search_indexed_documents(
     # "no filter" (None).
     source_types = source_types or None
     document_set_names = document_set_names or None
-    agent = (agent or "").strip() or None
 
     # Get authenticated user from FastMCP's access token
     access_token = require_access_token()
@@ -227,15 +186,15 @@ async def search_indexed_documents(
     result_count: int | None = None
 
     try:
-        # _build_index_filters lets explicit document sets *replace* the
-        # agent's own sets rather than narrow them, so honouring both would
-        # silently search outside the agent's knowledge scope.
-        if agent is not None and document_set_names is not None:
-            return _error_payload(
-                "Pass either `agent` or `document_set_names`, not both. Explicit "
-                "document sets replace an agent's knowledge scope instead of "
-                "narrowing it, so the results would not be scoped to the agent."
+        try:
+            sources = await get_indexed_sources(access_token)
+        except Exception as err:
+            logger.error(
+                "Zeshan MCP Server: Error checking indexed sources: %s",
+                err,
+                exc_info=True,
             )
+            return _error_payload(f"Failed to check indexed sources: {str(err)}")
 
         # Resolve the agent before the indexed-sources guard below: a bad name
         # deserves its own actionable error, and an agent can carry attached
@@ -288,7 +247,7 @@ async def search_indexed_documents(
                     source_type_enums.append(DocumentSource(source_str.lower()))
                 except ValueError:
                     logger.warning(
-                        "Onyx MCP Server: Invalid source type '%s' - skipping",
+                        "Zeshan MCP Server: Invalid source type '%s' - skipping",
                         source_str,
                     )
 
@@ -296,7 +255,7 @@ async def search_indexed_documents(
             parsed_cutoff = _TIME_CUTOFF_ADAPTER.validate_python(time_cutoff)
         except ValidationError as err:
             logger.warning(
-                "Onyx MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
+                "Zeshan MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
                 time_cutoff,
                 err,
             )
@@ -308,7 +267,6 @@ async def search_indexed_documents(
             document_sets=document_set_names,
             time_cutoff=parsed_cutoff,
             skip_query_expansion=skip_query_expansion,
-            persona_id=persona_id,
         )
         endpoint = f"{build_api_server_url_for_http_requests(respect_env_override_if_set=True)}/search"
         response = await _post_model(endpoint, request, access_token)
@@ -320,11 +278,11 @@ async def search_indexed_documents(
         outcome = MCPToolCallStatus.SUCCESS
         result_count = len(results)
         logger.info(
-            "Onyx MCP Server: Internal search returned %s results", len(results)
+            "Zeshan MCP Server: Internal search returned %s results", len(results)
         )
         return {"results": results}
     except Exception as err:
-        logger.error("Onyx MCP Server: Document search error: %s", err, exc_info=True)
+        logger.error("Zeshan MCP Server: Document search error: %s", err, exc_info=True)
         return _error_payload(f"Document search failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)
@@ -354,7 +312,7 @@ async def search_web(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_WEB
-    logger.info("Onyx MCP Server: Web search: query='%s', limit=%s", query, limit)
+    logger.info("Zeshan MCP Server: Web search: query='%s', limit=%s", query, limit)
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -380,7 +338,7 @@ async def search_web(
             "query": query,
         }
     except Exception as e:
-        logger.error("Onyx MCP Server: Web search error: %s", e, exc_info=True)
+        logger.error("Zeshan MCP Server: Web search error: %s", e, exc_info=True)
         return {
             "error": f"Web search failed: {str(e)}",
             "results": [],
@@ -414,7 +372,7 @@ async def open_urls(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.OPEN_URLS
-    logger.info("Onyx MCP Server: Open URL: fetching %s URLs", len(urls))
+    logger.info("Zeshan MCP Server: Open URL: fetching %s URLs", len(urls))
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -433,7 +391,7 @@ async def open_urls(
             "results": [result.model_dump(mode="json") for result in payload.results],
         }
     except Exception as err:
-        logger.error("Onyx MCP Server: URL fetch error: %s", err, exc_info=True)
+        logger.error("Zeshan MCP Server: URL fetch error: %s", err, exc_info=True)
         return _error_payload(f"URL fetch failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)

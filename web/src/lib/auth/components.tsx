@@ -27,7 +27,13 @@ import {
   passwordHasSpecialChar,
   passwordMeetsLengthRequirements,
 } from "@/lib/auth/utils";
-import { AuthLayouts, Content, InputVertical, toast } from "@opal/layouts";
+import {
+  AuthLayouts,
+  Content,
+  InputVertical,
+  type AuthSubmitLabel,
+  toast,
+} from "@opal/layouts";
 import InputTypeInField from "@/refresh-components/form/InputTypeInField";
 import PasswordInputTypeInField from "@/refresh-components/form/PasswordInputTypeInField";
 import { markdown } from "@opal/utils";
@@ -264,20 +270,12 @@ interface FormValues {
   password: string;
 }
 
-const SUBMIT_LABEL_KEYS = {
-  submit: "emailPasswordForm.signInButton.label",
-  create: "emailPasswordForm.createAccountButton.label",
-  join: "emailPasswordForm.joinButton.label",
-} as const;
-
-export type EmailPasswordFormLabel = keyof typeof SUBMIT_LABEL_KEYS;
-
 export interface EmailPasswordFormProps {
   shouldVerify?: boolean;
   referralSource?: string;
   nextUrl?: string | null;
   defaultEmail?: string | null;
-  label: EmailPasswordFormLabel;
+  label: AuthSubmitLabel;
 }
 
 export function EmailPasswordForm({
@@ -488,12 +486,11 @@ export function EmailPasswordForm({
             </AuthLayouts.Fields>
 
             <AuthLayouts.Submit
+              label={label}
               isSubmitting={isSubmitting}
               isValid={isValid && (!isSignup || Boolean(authTypeMetadata))}
               dirty={dirty}
-            >
-              {t(SUBMIT_LABEL_KEYS[label])}
-            </AuthLayouts.Submit>
+            />
 
             {user?.is_anonymous_user && (
               <Link

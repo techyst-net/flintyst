@@ -6,7 +6,6 @@ import pytest
 
 from ee.onyx.db.user_group import rename_user_group
 from onyx.db.models import UserGroup
-from onyx.error_handling.exceptions import OnyxError
 
 
 class TestRenameUserGroup:
@@ -47,7 +46,7 @@ class TestRenameUserGroup:
         mock_group.is_up_to_date = False
         mock_session.scalar.return_value = mock_group
 
-        with pytest.raises(OnyxError, match="currently syncing"):
+        with pytest.raises(ValueError, match="currently syncing"):
             rename_user_group(mock_session, user_group_id=1, new_name="New Name")
 
         mock_session.commit.assert_not_called()

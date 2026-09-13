@@ -568,24 +568,6 @@ def list_llm_providers(
     )
 
 
-@admin_router.get("/provider/{provider_id}")
-def get_llm_provider(
-    provider_id: int,
-    _: User = Depends(require_permission(Permission.MANAGE_LLMS)),
-    db_session: Session = Depends(get_session),
-) -> LLMProviderView:
-    """Read one provider without listing (and decrypting) every provider."""
-    llm_provider_model = fetch_existing_llm_provider_by_id(provider_id, db_session)
-    if llm_provider_model is None:
-        raise OnyxError(
-            OnyxErrorCode.NOT_FOUND, f"LLM provider {provider_id} does not exist"
-        )
-
-    provider_view = LLMProviderView.from_model(llm_provider_model)
-    _mask_provider_credentials(provider_view)
-    return provider_view
-
-
 @admin_router.put("/provider")
 def put_llm_provider(
     llm_provider_upsert_request: LLMProviderUpsertRequest,
@@ -737,16 +719,12 @@ def delete_llm_provider(
     db_session: Session = Depends(get_session),
 ) -> None:
     if not force:
-        # Only the chat default blocks a provider delete. Deleting a provider
-        # that holds another flow's default clears that default deliberately —
-        # see test_delete_default_vision_provider_clears_vision_default.
         model = fetch_default_llm_model(db_session)
 
         if model and model.llm_provider_id == provider_id:
             raise OnyxError(
-                OnyxErrorCode.RESOURCE_IN_USE,
-                "Cannot delete this provider: it holds the deployment's chat "
-                "default model. Repoint that default first, or pass force=true.",
+                OnyxErrorCode.VALIDATION_ERROR,
+                "Cannot delete the default LLM provider",
             )
 
     try:

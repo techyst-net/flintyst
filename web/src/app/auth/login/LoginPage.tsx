@@ -38,7 +38,6 @@ export default function LoginPage({
   const ssoProviders = authTypeMetadata?.ssoProviders ?? [];
   // Kill switch off: hide password login/signup. Backend refuses regardless.
   const passwordAuthEnabled = authTypeMetadata?.passwordAuthEnabled !== false;
-  const orDivider = t("login.orDivider.text");
 
   return (
     <div className="flex flex-col w-full justify-center">
@@ -55,7 +54,7 @@ export default function LoginPage({
             <SignInButton authorizeUrl={authUrl} />
           )}
           <CloudSSOSignIn nextUrl={effectiveNextUrl} />
-          <AuthLayouts.OrSeparator title={orDivider} />
+          <AuthLayouts.OrSeparator />
           {/* Password sign-in is never hidden on cloud: it is the only route
               that does not need a workspace resolved first. */}
           <EmailPasswordForm
@@ -85,9 +84,7 @@ export default function LoginPage({
                   />
                 ))}
               </div>
-              {passwordAuthEnabled && (
-                <AuthLayouts.OrSeparator title={orDivider} />
-              )}
+              {passwordAuthEnabled && <AuthLayouts.OrSeparator />}
             </>
           )}
           {passwordAuthEnabled && (

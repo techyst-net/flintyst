@@ -1,6 +1,8 @@
-MIT License
-
 Copyright (c) 2023-present DanswerAI, Inc.
+
+This provider is distributed under the "MIT Expat" license, the same terms the
+Onyx monorepo applies to content outside its "ee" directories. It contains no
+Enterprise-licensed code.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

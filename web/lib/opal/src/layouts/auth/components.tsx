@@ -91,15 +91,11 @@ function FormBody({ children }: FormBodyProps) {
 }
 
 // ---------------------------------------------------------------------------
-// OrSeparator: caller-supplied label flanked by two divider lines
+// OrSeparator — "or" label flanked by two divider lines
 // ---------------------------------------------------------------------------
 
-interface OrSeparatorProps {
-  title: string | RichStr;
-}
-
-function OrSeparator({ title }: OrSeparatorProps) {
-  return <EndOfList title={title} />;
+function OrSeparator() {
+  return <EndOfList title="or" />;
 }
 
 // ---------------------------------------------------------------------------
@@ -118,21 +114,34 @@ function Fields({ children }: FieldsProps) {
 // Submit — full-width submit button
 // ---------------------------------------------------------------------------
 
+type SubmitLabel =
+  | "submit"
+  | "create"
+  | "join"
+  | "reset"
+  | "impersonate"
+  | "logout"
+  | "continue";
+
 interface SubmitProps {
-  children: string;
+  label: SubmitLabel;
   isSubmitting?: boolean;
   isValid?: boolean;
   dirty?: boolean;
   onClick?: () => void;
 }
 
-function Submit({
-  children,
-  isSubmitting,
-  isValid,
-  dirty,
-  onClick,
-}: SubmitProps) {
+const SUBMIT_LABEL_TEXT: Record<SubmitLabel, string> = {
+  submit: "Sign In",
+  create: "Create Account",
+  join: "Join",
+  reset: "Reset Password",
+  impersonate: "Impersonate",
+  logout: "Sign Out",
+  continue: "Continue",
+};
+
+function Submit({ label, isSubmitting, isValid, dirty, onClick }: SubmitProps) {
   return (
     <Button
       type="submit"
@@ -146,7 +155,7 @@ function Submit({
       icon={isSubmitting ? SvgSimpleLoader : undefined}
       rightIcon={SvgArrowRightCircle}
     >
-      {children}
+      {SUBMIT_LABEL_TEXT[label]}
     </Button>
   );
 }
@@ -183,10 +192,10 @@ export {
   Card,
   type FormBodyProps,
   FormBody,
-  type OrSeparatorProps,
   OrSeparator,
   type FieldsProps,
   Fields,
+  type SubmitLabel,
   type SubmitProps,
   Submit,
   type MessageType,

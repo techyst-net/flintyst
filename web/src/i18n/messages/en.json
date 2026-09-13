@@ -64,9 +64,6 @@
       "addConnectors": {
         "label": "Add Connectors"
       },
-      "authenticate": {
-        "label": "Authenticate"
-      },
       "configure": {
         "tooltip": "Configure"
       },
@@ -656,35 +653,6 @@
       "showEnabledButton": {
         "ariaLabel": "Show only enabled tools",
         "tooltip": "Show only enabled"
-      }
-    },
-    "toolNames": {
-      "internalSearch": {
-        "label": "Internal Search"
-      },
-      "imageGeneration": {
-        "label": "Image Generation"
-      },
-      "webSearch": {
-        "label": "Web Search"
-      },
-      "knowledgeGraph": {
-        "label": "Knowledge Graph Search"
-      },
-      "openUrl": {
-        "label": "Open URL"
-      },
-      "codeInterpreter": {
-        "label": "Code Interpreter"
-      },
-      "fileReader": {
-        "label": "File Reader"
-      },
-      "addMemory": {
-        "label": "Add Memory"
-      },
-      "codingAgent": {
-        "label": "Coding Agent"
       }
     },
     "toolsPopover": {
@@ -5142,10 +5110,6 @@
           "title": "Self-hosted & Custom"
         }
       },
-      "hideProviderGrouping": {
-        "description": "Show all models as one list when choosing models in chat. Best with a small model set.",
-        "title": "Hide Provider Grouping"
-      },
       "modals": {
         "access": {
           "admin": {
@@ -5607,8 +5571,6 @@
       "toasts": {
         "providerDeleteFailed": "Failed to delete provider: {message}",
         "providerDeleted": "Provider deleted successfully!",
-        "settingsUpdateFailed": "Failed to update settings",
-        "settingsUpdated": "Settings updated",
         "unknownError": "Unknown error"
       }
     },
@@ -6102,10 +6064,6 @@
         },
         "section": {
           "title": "Authentication"
-        },
-        "subjectRelink": {
-          "description": "Let users whose provider issued them a new subject ID sign back in to the account linked to their email. Turn on only while changing the OIDC client or app registration.",
-          "title": "Relink Accounts After an OIDC Client Change"
         }
       },
       "jwt": {
@@ -8564,9 +8522,6 @@
       "continueAsGuest": {
         "label": "or continue as guest"
       },
-      "createAccountButton": {
-        "label": "Create Account"
-      },
       "email": {
         "label": "Email Address",
         "placeholder": "email@yourcompany.com"
@@ -8576,9 +8531,6 @@
       },
       "invalidCredentials": {
         "error": "Invalid email or password"
-      },
-      "joinButton": {
-        "label": "Join"
       },
       "noPassword": {
         "error": "Create an account to set a password"
@@ -8607,9 +8559,6 @@
       },
       "passwordUppercase": {
         "error": "Password must contain at least one uppercase letter"
-      },
-      "signInButton": {
-        "label": "Sign In"
       },
       "tooManyRequests": {
         "error": "Too many requests. Please try again later."
@@ -8738,17 +8687,11 @@
       }
     },
     "login": {
-      "continueButton": {
-        "label": "Continue"
-      },
       "createAccountButton": {
         "label": "Create an account"
       },
       "noSsoProviders": {
         "error": "No SSO sign-in is set up for that address. Try Google or your password below."
-      },
-      "orDivider": {
-        "text": "or"
       },
       "resetPasswordButton": {
         "label": "Reset Password"
@@ -8773,12 +8716,6 @@
       },
       "verifiedMessage": {
         "title": "Your email has been verified! Please sign in to continue."
-      },
-      "welcomeHeading": {
-        "title": "Welcome to {appName}"
-      },
-      "welcomeSubtitle": {
-        "text": "Your open source AI platform for work"
       },
       "workEmailField": {
         "label": "Work Email"

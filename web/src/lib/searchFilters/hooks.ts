@@ -54,12 +54,6 @@ interface UseSourcePreferencesProps {
   availableSources: ValidSources[];
   selectedSources: SourceMetadata[];
   setSelectedSources: (sources: SourceMetadata[]) => void;
-  /**
-   * Whether `availableSources` is the complete set yet. Initialising against a
-   * partial list persists that subset as the user's own choice. Defaults to
-   * true, so a caller whose sources have already settled passes nothing.
-   */
-  ready?: boolean;
 }
 
 interface SourcePreferencesSnapshot {
@@ -72,7 +66,6 @@ export function useSourcePreferences({
   availableSources,
   selectedSources,
   setSelectedSources,
-  ready = true,
 }: UseSourcePreferencesProps) {
   const [sourcesInitialized, setSourcesInitialized] = useState(false);
 
@@ -137,7 +130,7 @@ export function useSourcePreferences({
 
   // Initialize sources - load from localStorage or enable all by default
   useEffect(() => {
-    if (ready && !sourcesInitialized && availableSources.length > 0) {
+    if (!sourcesInitialized && availableSources.length > 0) {
       const savedSources = loadSavedSourcePreferences();
 
       if (savedSources !== null) {
@@ -175,7 +168,6 @@ export function useSourcePreferences({
   }, [
     availableSources,
     configuredSources,
-    ready,
     sourcesInitialized,
     setSelectedSources,
   ]);

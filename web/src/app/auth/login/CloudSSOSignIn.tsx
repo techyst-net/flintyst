@@ -96,12 +96,11 @@ export default function CloudSSOSignIn({ nextUrl }: CloudSSOSignInProps) {
                 </InputVertical>
               </AuthLayouts.Fields>
               <AuthLayouts.Submit
+                label="continue"
                 isSubmitting={isSubmitting}
                 isValid={isValid}
                 dirty={dirty}
-              >
-                {t("login.continueButton.label")}
-              </AuthLayouts.Submit>
+              />
             </AuthLayouts.FormBody>
           )}
         </Formik>
