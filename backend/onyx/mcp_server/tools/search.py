@@ -87,7 +87,7 @@ def _extract_error_detail(response: httpx.Response) -> str:
         if detail := body.get("detail"):
             return str(detail)
     except Exception as exc:
-        logger.debug("Zeshan MCP Server: error body was not JSON (%s)", exc)
+        logger.debug("Flintyst MCP Server: error body was not JSON (%s)", exc)
     return f"Request failed with status {response.status_code}"
 
 
@@ -166,7 +166,7 @@ async def search_indexed_documents(
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_INDEXED_DOCUMENTS
     logger.info(
-        "Zeshan MCP Server: document search: query='%s', sources=%s, document_sets=%s",
+        "Flintyst MCP Server: document search: query='%s', sources=%s, document_sets=%s",
         query,
         source_types,
         document_set_names,
@@ -190,7 +190,7 @@ async def search_indexed_documents(
             sources = await get_indexed_sources(access_token)
         except Exception as err:
             logger.error(
-                "Zeshan MCP Server: Error checking indexed sources: %s",
+                "Flintyst MCP Server: Error checking indexed sources: %s",
                 err,
                 exc_info=True,
             )
@@ -247,7 +247,7 @@ async def search_indexed_documents(
                     source_type_enums.append(DocumentSource(source_str.lower()))
                 except ValueError:
                     logger.warning(
-                        "Zeshan MCP Server: Invalid source type '%s' - skipping",
+                        "Flintyst MCP Server: Invalid source type '%s' - skipping",
                         source_str,
                     )
 
@@ -255,7 +255,7 @@ async def search_indexed_documents(
             parsed_cutoff = _TIME_CUTOFF_ADAPTER.validate_python(time_cutoff)
         except ValidationError as err:
             logger.warning(
-                "Zeshan MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
+                "Flintyst MCP Server: invalid time_cutoff '%s' (%s); continuing without time filter",
                 time_cutoff,
                 err,
             )
@@ -278,11 +278,11 @@ async def search_indexed_documents(
         outcome = MCPToolCallStatus.SUCCESS
         result_count = len(results)
         logger.info(
-            "Zeshan MCP Server: Internal search returned %s results", len(results)
+            "Flintyst MCP Server: Internal search returned %s results", len(results)
         )
         return {"results": results}
     except Exception as err:
-        logger.error("Zeshan MCP Server: Document search error: %s", err, exc_info=True)
+        logger.error("Flintyst MCP Server: Document search error: %s", err, exc_info=True)
         return _error_payload(f"Document search failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)
@@ -312,7 +312,7 @@ async def search_web(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.SEARCH_WEB
-    logger.info("Zeshan MCP Server: Web search: query='%s', limit=%s", query, limit)
+    logger.info("Flintyst MCP Server: Web search: query='%s', limit=%s", query, limit)
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -338,7 +338,7 @@ async def search_web(
             "query": query,
         }
     except Exception as e:
-        logger.error("Zeshan MCP Server: Web search error: %s", e, exc_info=True)
+        logger.error("Flintyst MCP Server: Web search error: %s", e, exc_info=True)
         return {
             "error": f"Web search failed: {str(e)}",
             "results": [],
@@ -372,7 +372,7 @@ async def open_urls(
     """
     _start = time.monotonic()
     tool = MCPServerToolName.OPEN_URLS
-    logger.info("Zeshan MCP Server: Open URL: fetching %s URLs", len(urls))
+    logger.info("Flintyst MCP Server: Open URL: fetching %s URLs", len(urls))
 
     access_token = require_access_token()
     outcome = MCPToolCallStatus.ERROR
@@ -391,7 +391,7 @@ async def open_urls(
             "results": [result.model_dump(mode="json") for result in payload.results],
         }
     except Exception as err:
-        logger.error("Zeshan MCP Server: URL fetch error: %s", err, exc_info=True)
+        logger.error("Flintyst MCP Server: URL fetch error: %s", err, exc_info=True)
         return _error_payload(f"URL fetch failed: {str(err)}")
     finally:
         record_mcp_server_tool_outcome(tool, _start, outcome)
