@@ -3,18 +3,18 @@
 page_title: "onyx_mcp_server Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  An MCP server Zeshan connects to, so its tools can be attached to agents.
+  An MCP server Flintyst connects to, so its tools can be attached to agents.
   Only servers that need no interactive sign-in can be managed here: NONE and API_TOKEN. An OAuth server is refused while the plan is built, because the flow needs a browser round-trip that Terraform cannot perform.
-  Which tools the server exposes is not part of this resource. Zeshan learns them by calling the server, and both the tool selection and the Craft approval policies are rejected for a tool it has never seen.
+  Which tools the server exposes is not part of this resource. Flintyst learns them by calling the server, and both the tool selection and the Craft approval policies are rejected for a tool it has never seen.
 ---
 
 # onyx_mcp_server (Resource)
 
-An MCP server Zeshan connects to, so its tools can be attached to agents.
+An MCP server Flintyst connects to, so its tools can be attached to agents.
 
 Only servers that need no interactive sign-in can be managed here: `NONE` and `API_TOKEN`. An OAuth server is refused while the plan is built, because the flow needs a browser round-trip that Terraform cannot perform.
 
-Which tools the server exposes is not part of this resource. Zeshan learns them by calling the server, and both the tool selection and the Craft approval policies are rejected for a tool it has never seen.
+Which tools the server exposes is not part of this resource. Flintyst learns them by calling the server, and both the tool selection and the Craft approval policies are rejected for a tool it has never seen.
 
 ## Example Usage
 
@@ -26,7 +26,7 @@ resource "onyx_mcp_server" "docs" {
   server_url  = "https://mcp.example.com/mcp"
 }
 
-# A server behind one shared API token. Zeshan returns the token masked, so the
+# A server behind one shared API token. Flintyst returns the token masked, so the
 # configuration is the only record of it: rotate it here, never in the UI.
 resource "onyx_mcp_server" "weather" {
   name           = "Weather"
@@ -62,36 +62,36 @@ resource "onyx_mcp_server" "tickets" {
 
 ### Required
 
-- `name` (String) Display name. Zeshan does not require it to be unique, so two servers may share a name.
-- `server_url` (String) URL Zeshan calls the server on. Zeshan refuses loopback and link-local addresses whatever the SSRF protection level, so a server on the Zeshan host itself cannot be reached by name.
+- `name` (String) Display name. Flintyst does not require it to be unique, so two servers may share a name.
+- `server_url` (String) URL Flintyst calls the server on. Flintyst refuses loopback and link-local addresses whatever the SSRF protection level, so a server on the Flintyst host itself cannot be reached by name.
 
 ### Optional
 
 > **NOTE**: [Write-only arguments](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments) are supported in Terraform 1.11 and later.
 
-- `admin_credentials` (Map of String, Sensitive) Values for the `auth_template_headers` placeholders, required with `auth_performer = "PER_USER"` and rejected otherwise — a shared token is set through `api_token`. Zeshan stores them against the identity that applied, not the server, and returns them masked. Prefer `admin_credentials_wo`, which keeps the value out of state entirely; the two cannot be set together.
+- `admin_credentials` (Map of String, Sensitive) Values for the `auth_template_headers` placeholders, required with `auth_performer = "PER_USER"` and rejected otherwise — a shared token is set through `api_token`. Flintyst stores them against the identity that applied, not the server, and returns them masked. Prefer `admin_credentials_wo`, which keeps the value out of state entirely; the two cannot be set together.
 - `admin_credentials_wo` (Map of String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Values for the `auth_template_headers` placeholders, held only in configuration. Terraform sends them on every apply and stores nothing, so they never reach state. Pair with `admin_credentials_wo_version` to rotate them. Needs Terraform 1.11 or later.
 - `admin_credentials_wo_version` (Number) Rotation counter for `admin_credentials_wo`. Terraform never stores a write-only value and so cannot tell that the secret changed; raise this number to make the next apply send the current one. Do not derive it from the secret itself — unlike the secret, this number is kept in state.
-- `api_token` (String, Sensitive) Shared API token, for `auth_type = "API_TOKEN"` with `auth_performer = "ADMIN"`. Zeshan returns it masked, so Terraform never reads it back: the configured value is the only record, and an imported server has none. Prefer `api_token_wo`, which keeps the value out of state entirely; the two cannot be set together.
+- `api_token` (String, Sensitive) Shared API token, for `auth_type = "API_TOKEN"` with `auth_performer = "ADMIN"`. Flintyst returns it masked, so Terraform never reads it back: the configured value is the only record, and an imported server has none. Prefer `api_token_wo`, which keeps the value out of state entirely; the two cannot be set together.
 - `api_token_wo` (String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Shared API token, held only in configuration. Terraform sends it on every apply and stores nothing, so the token never reaches state. Pair it with `api_token_wo_version` to rotate it. Needs Terraform 1.11 or later.
 - `api_token_wo_version` (Number) Rotation counter for `api_token_wo`. Terraform never stores a write-only value and so cannot tell that the secret changed; raise this number to make the next apply send the current one. Do not derive it from the secret itself — unlike the secret, this number is kept in state.
 - `auth_performer` (String) Who supplies the credentials: `ADMIN` for one shared token, `PER_USER` for a token each user provides.
-- `auth_template_headers` (Map of String, Sensitive) Headers Zeshan sends to the server, for `auth_performer = "PER_USER"`. A `{placeholder}` in a value names a field each user fills in. Zeshan writes this itself for a shared token, and keeps whatever it holds when a request states none, so switching a server from per-user to a shared token leaves the per-user headers in place. Recreate the server to start over.
+- `auth_template_headers` (Map of String, Sensitive) Headers Flintyst sends to the server, for `auth_performer = "PER_USER"`. A `{placeholder}` in a value names a field each user fills in. Flintyst writes this itself for a shared token, and keeps whatever it holds when a request states none, so switching a server from per-user to a shared token leaves the per-user headers in place. Recreate the server to start over.
 - `auth_type` (String) `NONE` or `API_TOKEN`.
-- `available_in_craft` (Boolean) Whether the Craft agent may use this server. Zeshan keeps this on a different endpoint from the rest, so setting it costs a second call.
+- `available_in_craft` (Boolean) Whether the Craft agent may use this server. Flintyst keeps this on a different endpoint from the rest, so setting it costs a second call.
 - `description` (String) Free-text description.
-- `groups` (Set of Number) User group ids that may use the server when it is not public. Zeshan refuses the built-in `Admin` group here and asks for a public server instead. The configuration owns this list: removing it clears the groups on the server, including any added from the admin panel.
+- `groups` (Set of Number) User group ids that may use the server when it is not public. Flintyst refuses the built-in `Admin` group here and asks for a public server instead. The configuration owns this list: removing it clears the groups on the server, including any added from the admin panel.
 - `is_public` (Boolean) Whether every user may use the server. When `false`, only `users` and `groups` may.
 - `transport` (String) `STREAMABLE_HTTP` or the deprecated `SSE`.
 - `users` (Set of String) User ids (UUIDs) that may use the server when it is not public. The configuration owns this list: removing it clears the users on the server, including any added from the admin panel.
 
 ### Read-Only
 
-- `id` (String) Server id, assigned by Zeshan.
-- `last_refreshed_at` (String) When Zeshan last listed the server's tools.
+- `id` (String) Server id, assigned by Flintyst.
+- `last_refreshed_at` (String) When Flintyst last listed the server's tools.
 - `owner` (String) Identity that configured the server. For a Terraform run this is the API key's synthetic address, not a real mailbox.
-- `status` (String) Connection state, which Zeshan cycles on its own: `CREATED`, `AWAITING_AUTH`, `FETCHING_TOOLS`, `CONNECTED` or `DISCONNECTED`.
-- `tool_count` (Number) How many tools Zeshan has discovered on the server.
+- `status` (String) Connection state, which Flintyst cycles on its own: `CREATED`, `AWAITING_AUTH`, `FETCHING_TOOLS`, `CONNECTED` or `DISCONNECTED`.
+- `tool_count` (Number) How many tools Flintyst has discovered on the server.
 
 ## Import
 

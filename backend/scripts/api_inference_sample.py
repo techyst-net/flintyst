@@ -1,5 +1,5 @@
 # This file is used to demonstrate how to use the backend APIs directly
-# In this case, the equivalent of asking a question in Zeshan Chat in a new chat session
+# In this case, the equivalent of asking a question in Flintyst Chat in a new chat session
 import argparse
 import json
 import os
@@ -68,17 +68,17 @@ if __name__ == "__main__":
         "--onyx-url",
         type=str,
         default="http://localhost:80",
-        help="Zeshan URL, should point to Zeshan nginx.",
+        help="Flintyst URL, should point to Flintyst nginx.",
     )
     parser.add_argument(
         "--test-question",
         type=str,
-        default="What is Zeshan?",
+        default="What is Flintyst?",
         help="Test question for new Chat Session.",
     )
 
     # Not needed if Auth is disabled
-    # Or for Zeshan MIT API key must be replaced with session cookie
+    # Or for Flintyst MIT API key must be replaced with session cookie
     api_key = os.environ.get("DANSWER_API_KEY")
 
     args = parser.parse_args()

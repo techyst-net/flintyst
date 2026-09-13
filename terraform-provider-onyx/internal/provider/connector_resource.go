@@ -52,7 +52,7 @@ func (r *connectorResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "A connector definition: what to index and how often. A connector on its own " +
 			"indexes nothing — pair it with an `onyx_credential` to start indexing.\n\n" +
-			"Access control is not set here. Zeshan applies it when a credential is associated, so it " +
+			"Access control is not set here. Flintyst applies it when a credential is associated, so it " +
 			"belongs to the connector-credential pair.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -69,7 +69,7 @@ func (r *connectorResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 			"source": schema.StringAttribute{
 				Required: true,
 				MarkdownDescription: "Source system, lowercase, e.g. `web`, `confluence`, `google_drive`. " +
-					"Zeshan rejects sources excluded by `ENABLED_CONNECTOR_TYPES`.",
+					"Flintyst rejects sources excluded by `ENABLED_CONNECTOR_TYPES`.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -97,7 +97,7 @@ func (r *connectorResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 			"prune_freq": schema.Int64Attribute{
 				Optional: true,
 				Computed: true,
-				MarkdownDescription: "Seconds between pruning runs. Zeshan rewrites an unset value to its " +
+				MarkdownDescription: "Seconds between pruning runs. Flintyst rewrites an unset value to its " +
 					"default of 604800 (7 days) on the first update, and Terraform then keeps that value.",
 				PlanModifiers: []planmodifier.Int64{
 					ServerDefaultedInt64(),
@@ -106,7 +106,7 @@ func (r *connectorResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 			"indexing_start": schema.StringAttribute{
 				Optional: true,
 				MarkdownDescription: "Earliest document timestamp to index, RFC 3339, e.g. " +
-					"`2026-01-01T00:00:00Z`. Zeshan ignores it on update, so changing it replaces the connector.",
+					"`2026-01-01T00:00:00Z`. Flintyst ignores it on update, so changing it replaces the connector.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -182,14 +182,14 @@ func (r *connectorResource) Create(ctx context.Context, req resource.CreateReque
 
 	id, err := r.client.CreateConnector(ctx, upsert)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Zeshan connector", err.Error())
+		resp.Diagnostics.AddError("Failed to create Flintyst connector", err.Error())
 		return
 	}
 
 	// Create returns only the id, so read back for the computed attributes.
 	remote, err := r.client.GetConnector(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read back the new Zeshan connector", err.Error())
+		resp.Diagnostics.AddError("Failed to read back the new Flintyst connector", err.Error())
 		// Persist the id so the next apply updates instead of creating a duplicate.
 		plan.ID = types.StringValue(strconv.FormatInt(id, 10))
 		resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
@@ -219,7 +219,7 @@ func (r *connectorResource) Read(ctx context.Context, req resource.ReadRequest, 
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Zeshan connector", err.Error())
+		resp.Diagnostics.AddError("Failed to read Flintyst connector", err.Error())
 		return
 	}
 	if !applyRemote(ctx, &state, remote, &resp.Diagnostics) {
@@ -247,7 +247,7 @@ func (r *connectorResource) Update(ctx context.Context, req resource.UpdateReque
 
 	remote, err := r.client.UpdateConnector(ctx, id, upsert)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to update Zeshan connector", err.Error())
+		resp.Diagnostics.AddError("Failed to update Flintyst connector", err.Error())
 		return
 	}
 	if !applyRemote(ctx, &plan, remote, &resp.Diagnostics) {
@@ -269,7 +269,7 @@ func (r *connectorResource) Delete(ctx context.Context, req resource.DeleteReque
 	}
 
 	if err := r.client.DeleteConnector(ctx, id); err != nil && !client.IsNotFound(err) {
-		resp.Diagnostics.AddError("Failed to delete Zeshan connector", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Flintyst connector", err.Error())
 	}
 }
 

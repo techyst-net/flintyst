@@ -1,4 +1,4 @@
-"""Utility helpers for the Zeshan MCP server."""
+"""Utility helpers for the Flintyst MCP server."""
 
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ def require_access_token() -> AccessToken:
     access_token = get_access_token()
     if not access_token:
         raise ValueError(
-            "MCP Server requires an Zeshan access token to authenticate your request"
+            "MCP Server requires a Flintyst access token to authenticate your request"
         )
     return access_token
 
@@ -98,14 +98,14 @@ async def get_indexed_sources(
     except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
         # Re-raise known exception types (httpx errors and validation errors)
         logger.error(
-            "Zeshan MCP Server: Failed to fetch indexed sources",
+            "Flintyst MCP Server: Failed to fetch indexed sources",
             exc_info=True,
         )
         raise
     except Exception as exc:
         # Wrap unexpected exceptions
         logger.error(
-            "Zeshan MCP Server: Unexpected error fetching indexed sources",
+            "Flintyst MCP Server: Unexpected error fetching indexed sources",
             exc_info=True,
         )
         raise RuntimeError(f"Failed to fetch indexed sources: {exc}") from exc
@@ -128,13 +128,13 @@ async def get_accessible_document_sets(
         return _DOCUMENT_SET_ENTRIES_ADAPTER.validate_json(response.content)
     except (httpx.HTTPStatusError, httpx.RequestError, ValueError):
         logger.error(
-            "Zeshan MCP Server: Failed to fetch document sets",
+            "Flintyst MCP Server: Failed to fetch document sets",
             exc_info=True,
         )
         raise
     except Exception as exc:
         logger.error(
-            "Zeshan MCP Server: Unexpected error fetching document sets",
+            "Flintyst MCP Server: Unexpected error fetching document sets",
             exc_info=True,
         )
         raise RuntimeError(f"Failed to fetch document sets: {exc}") from exc

@@ -18,7 +18,7 @@ sys.path.append(parent_dir)
 # pylint: disable=E402
 # flake8: noqa: E402
 
-# Now import Zeshan modules
+# Now import Flintyst modules
 from onyx.configs.constants import DocumentSource
 from onyx.db.connector import fetch_connector_by_id
 from onyx.db.connector_credential_pair import (
@@ -153,7 +153,7 @@ def _unsafe_deletion(
 def _delete_connector(cc_pair_id: int, db_session: Session) -> None:
     user_input = input(
         "DO NOT USE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. \
-        IT MAY CAUSE ISSUES with your Zeshan instance! \
+        IT MAY CAUSE ISSUES with your Flintyst instance! \
         Are you SURE you want to continue? (enter 'Y' to continue): "
     )
     if user_input != "Y":

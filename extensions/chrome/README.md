@@ -1,23 +1,23 @@
-# Zeshan Chrome Extension
+# Flintyst Chrome Extension
 
-The Zeshan chrome extension lets you research, create, and automate with LLMs powered by your team's unique knowledge. Just hit Ctrl + O on Mac or Alt + O on Windows to instantly access Zeshan in your browser:
+The Flintyst chrome extension lets you research, create, and automate with LLMs powered by your team's unique knowledge. Just hit Ctrl + O on Mac or Alt + O on Windows to instantly access Flintyst in your browser:
 
-💡 Know what your company knows, instantly with the Zeshan sidebar
-💬 Chat: Zeshan provides a natural language chat interface as the main way of interacting with the features.
-🌎 Internal Search: Ask questions and get answers from all your team's knowledge, powered by Zeshan's 50+ connectors to all the tools your team uses
+💡 Know what your company knows, instantly with the Flintyst sidebar
+💬 Chat: Flintyst provides a natural language chat interface as the main way of interacting with the features.
+🌎 Internal Search: Ask questions and get answers from all your team's knowledge, powered by Flintyst's 50+ connectors to all the tools your team uses
 🚀 With a simple Ctrl + O on Mac or Alt + O on Windows - instantly summarize information from any work application
 
 ⚡️ Get quick access to the work resources you need.
-🆕 Zeshan new tab page puts all of your company’s knowledge at your fingertips
+🆕 Flintyst new tab page puts all of your company’s knowledge at your fingertips
 🤖 Access custom AI Agents for unique use cases, and give them access to tools to take action.
 
 —
 
-Zeshan connects with dozens of popular workplace apps like Google Drive, Jira, Confluence, Slack, and more. Use this extension if you have an account created by your team admin.
+Flintyst connects with dozens of popular workplace apps like Google Drive, Jira, Confluence, Slack, and more. Use this extension if you have an account created by your team admin.
 
 ## Installation
 
-For Zeshan Cloud Users, please visit the Chrome Plugin Store (pending approval still)
+For Flintyst Cloud Users, please visit the Chrome Plugin Store (pending approval still)
 
 ## Development
 

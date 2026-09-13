@@ -99,7 +99,7 @@ func (c *Client) GetDocumentSet(ctx context.Context, id int64) (*DocumentSet, er
 // UpdateDocumentSet full-replaces a document set.
 //
 // Not replayable, though it is a PATCH: a committed write leaves the set
-// syncing, and Zeshan rejects a change to a syncing set. A replay would report
+// syncing, and Flintyst rejects a change to a syncing set. A replay would report
 // failure for a change that already landed.
 func (c *Client) UpdateDocumentSet(ctx context.Context, req DocumentSetUpdate) error {
 	return c.doJSON(nonReplayable(ctx), http.MethodPatch, "/manage/admin/document-set", req, nil)
@@ -109,7 +109,7 @@ func (c *Client) UpdateDocumentSet(ctx context.Context, req DocumentSetUpdate) e
 // the background sync clears it, so callers poll GetDocumentSet until 404.
 //
 // Not replayable for the same reason as the update: this DELETE is not
-// idempotent, because it leaves the set syncing and Zeshan then rejects a second
+// idempotent, because it leaves the set syncing and Flintyst then rejects a second
 // delete.
 func (c *Client) DeleteDocumentSet(ctx context.Context, id int64) error {
 	path := fmt.Sprintf("/manage/admin/document-set/%d", id)

@@ -70,7 +70,7 @@ export default function ConfigureProviderModal({
   const associationPatch = existingAssociationDirty
     ? { associated_skill_ids: selectedSkillIds }
     : {};
-  // Managed built-ins (cloud): Zeshan owns creds/config, so the modal only edits
+  // Managed built-ins (cloud): Flintyst owns creds/config, so the modal only edits
   // policies — cred fields are hidden and the backend ignores them anyway.
   const managed = existingApp?.is_onyx_managed ?? false;
 

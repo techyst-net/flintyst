@@ -11,7 +11,7 @@ _LANG_CODE_RE = re.compile(r"^[a-z]{2}(?:[-_][A-Za-z]{2,4})?$")
 
 
 def slugify_family_key(name: str, fallback: str = "metadata") -> str:
-    """Turn a metadata family display name into a stable Zeshan metadata key.
+    """Turn a metadata family display name into a stable Flintyst metadata key.
 
     e.g. "News type" -> "news_type", "Country" -> "country". Names with no
     ASCII alphanumerics (e.g. non-Latin family names) slugify to nothing and

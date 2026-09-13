@@ -73,7 +73,7 @@ spec:
               {{- if or (not (hasKey .Values.api "runStartupMigrations")) .Values.api.runStartupMigrations }}
               alembic upgrade head &&
               {{- end }}
-              echo "Starting Zeshan Api Server" &&
+              echo "Starting Flintyst Api Server" &&
               uvicorn onyx.main:app --host {{ .Values.global.host }} --port {{ .Values.api.containerPorts.server }}{{ if gt (int (.Values.api.workers | default 1)) 1 }} --workers {{ .Values.api.workers }}{{ end }}{{ if .Values.api.limitConcurrency }} --limit-concurrency {{ .Values.api.limitConcurrency }}{{ end }}
           ports:
             - name: api-server-port

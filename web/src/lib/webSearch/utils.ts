@@ -225,11 +225,11 @@ export function getSingleConfigFieldValueForForm(
 
 export const CONTENT_PROVIDER_DETAILS: Record<string, ContentProviderDetail> = {
   onyx_web_crawler: {
-    label: "Zeshan Web Crawler",
+    label: "Flintyst Web Crawler",
     subtitle:
       "Built-in web crawler. Works for most pages but less performant in edge cases.",
     description:
-      "Zeshan's built-in crawler processes URLs returned by your search engine.",
+      "Flintyst's built-in crawler processes URLs returned by your search engine.",
   },
   firecrawl: {
     label: "Firecrawl",

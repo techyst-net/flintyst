@@ -17,7 +17,7 @@ export default function SignupScreen() {
   return (
     <AuthScreenShell
       title="Create account"
-      subtitle="Get started with Zeshan"
+      subtitle="Get started with Flintyst"
       footer={
         <AuthSwitchLink
           prompt="Already have an account?"

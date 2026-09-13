@@ -75,7 +75,7 @@ func (r *settingsResource) Metadata(_ context.Context, req resource.MetadataRequ
 
 func (r *settingsResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "The Zeshan workspace settings singleton. Only attributes set in " +
+		MarkdownDescription: "The Flintyst workspace settings singleton. Only attributes set in " +
 			"configuration are managed: unset attributes are left untouched server-side, and " +
 			"removing an attribute from configuration stops managing it rather than resetting it. " +
 			"Deleting the resource only removes it from state — the live settings are not changed. " +
@@ -166,7 +166,7 @@ func (r *settingsResource) Schema(_ context.Context, _ resource.SchemaRequest, r
 			},
 			"craft_default_enabled": schema.BoolAttribute{
 				Optional:            true,
-				MarkdownDescription: "Workspace default for Zeshan Craft access (per-user overrides win).",
+				MarkdownDescription: "Workspace default for Flintyst Craft access (per-user overrides win).",
 			},
 			"craft_instructions": schema.StringAttribute{
 				Optional:            true,
@@ -398,7 +398,7 @@ func (r *settingsResource) apply(ctx context.Context, plan settingsResourceModel
 func settingsErrorDetail(err error) string {
 	var apiErr *client.APIError
 	if errors.As(err, &apiErr) && apiErr.ErrorCode == "FEATURE_NOT_AVAILABLE" {
-		return err.Error() + "\n\nThis setting requires a higher Zeshan license tier (see the `tier` attribute)."
+		return err.Error() + "\n\nThis setting requires a higher Flintyst license tier (see the `tier` attribute)."
 	}
 	return err.Error()
 }
@@ -412,7 +412,7 @@ func (r *settingsResource) Create(ctx context.Context, req resource.CreateReques
 
 	state, patched, err := r.apply(ctx, plan)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to apply Zeshan settings", settingsErrorDetail(err))
+		resp.Diagnostics.AddError("Failed to apply Flintyst settings", settingsErrorDetail(err))
 		if !patched {
 			return
 		}
@@ -430,7 +430,7 @@ func (r *settingsResource) Read(ctx context.Context, req resource.ReadRequest, r
 
 	server, err := r.client.GetSettings(ctx)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Zeshan settings", err.Error())
+		resp.Diagnostics.AddError("Failed to read Flintyst settings", err.Error())
 		return
 	}
 	state.ID = types.StringValue(settingsResourceID)
@@ -447,7 +447,7 @@ func (r *settingsResource) Update(ctx context.Context, req resource.UpdateReques
 
 	state, patched, err := r.apply(ctx, plan)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to apply Zeshan settings", settingsErrorDetail(err))
+		resp.Diagnostics.AddError("Failed to apply Flintyst settings", settingsErrorDetail(err))
 		if !patched {
 			return
 		}
@@ -459,7 +459,7 @@ func (r *settingsResource) Delete(ctx context.Context, _ resource.DeleteRequest,
 	// Resetting workspace-wide settings to factory defaults on destroy would
 	// be a far larger blast radius than removing one resource warrants.
 	resp.Diagnostics.AddWarning(
-		"Zeshan settings left unchanged",
+		"Flintyst settings left unchanged",
 		"onyx_settings was removed from Terraform state, but the live workspace settings were NOT "+
 			"reset. Re-add the resource (or use the admin panel) to manage them again.",
 	)

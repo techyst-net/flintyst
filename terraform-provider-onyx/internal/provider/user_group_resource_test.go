@@ -248,7 +248,7 @@ resource "onyx_user_group" "second" {
 	})
 }
 
-// A manager is stored on the membership row, so Zeshan cannot make one out of a
+// A manager is stored on the membership row, so Flintyst cannot make one out of a
 // non-member. The resource says so at plan time rather than failing the apply.
 func TestAccUserGroupRejectsAManagerWhoIsNotAMember(t *testing.T) {
 	testAccPreCheck(t)

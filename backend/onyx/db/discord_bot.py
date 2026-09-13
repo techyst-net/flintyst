@@ -79,7 +79,7 @@ def get_or_create_discord_service_api_key(
     """Get existing Discord service API key or create one.
 
     The API key is used by the Discord bot to authenticate with the
-    Zeshan API pods when sending chat requests.
+    Flintyst API pods when sending chat requests.
 
     Args:
         db_session: Database session for the tenant.

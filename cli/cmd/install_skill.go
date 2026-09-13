@@ -32,9 +32,9 @@ func newInstallSkillCmd(ios *iostreams.IOStreams) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "install-skill",
-		Short: "Install the Zeshan CLI agent skill file",
+		Short: "Install the Flintyst CLI agent skill file",
 		Long: `Install the bundled SKILL.md so that AI coding agents can discover and use
-the Zeshan CLI as a tool.
+the Flintyst CLI as a tool.
 
 Files are written to the canonical .agents/skills/onyx-cli/ directory. For
 agents that use their own skill directory (e.g. Claude Code uses .claude/skills/),

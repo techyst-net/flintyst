@@ -287,9 +287,9 @@ def deploy_vespa_schemas(
     headers = {"Content-Type": "application/zip"}
     response = requests.post(deploy_url, headers=headers, data=zip_file)
     if response.status_code != 200:
-        logger.error("Failed to prepare Vespa Zeshan Index. Response: %s", response.text)
+        logger.error("Failed to prepare Vespa Flintyst Index. Response: %s", response.text)
         raise RuntimeError(
-            f"Failed to prepare Vespa Zeshan Index. Response: {response.text}"
+            f"Failed to prepare Vespa Flintyst Index. Response: {response.text}"
         )
 
 
@@ -377,7 +377,7 @@ def register_multitenant_vespa_indices(
     response = requests.post(deploy_url, headers=headers, data=zip_file)
     if response.status_code != 200:
         raise RuntimeError(
-            f"Failed to prepare Vespa Zeshan Indexes. Response: {response.text}"
+            f"Failed to prepare Vespa Flintyst Indexes. Response: {response.text}"
         )
 
 

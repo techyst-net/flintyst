@@ -1,5 +1,5 @@
 /**
- * Zeshan Chat Widget - Entry Point
+ * Flintyst Chat Widget - Entry Point
  * Exports the main web component
  */
 

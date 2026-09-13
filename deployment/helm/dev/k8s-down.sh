@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# k8s-down.sh — tear down the Zeshan dev cluster.
+# k8s-down.sh — tear down the Flintyst dev cluster.
 #
 # Default: uninstall the helm release and delete the kind cluster (wipes data).
 # --keep-cluster preserves the cluster and its PVCs for reinstall.
@@ -12,7 +12,7 @@
 # Flags:
 #   --cluster-name <name>   kind cluster name (default: onyx-dev)
 #   --namespace <ns>        k8s namespace (default: onyx)
-#   --keep-cluster          uninstall Zeshan but keep the kind cluster
+#   --keep-cluster          uninstall Flintyst but keep the kind cluster
 
 set -euo pipefail
 

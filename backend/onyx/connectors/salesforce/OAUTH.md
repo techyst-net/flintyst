@@ -1,16 +1,16 @@
 # Salesforce OAuth setup
 
-Zeshan uses the OAuth 2.0 authorization code flow with S256 PKCE. Use a
+Flintyst uses the OAuth 2.0 authorization code flow with S256 PKCE. Use a
 Salesforce External Client App (ECA). Salesforce recommends ECAs for new
 integrations.
 
 ## Choose the deployment model
 
-Zeshan Cloud uses an Zeshan-managed packaged ECA. All cloud tenants use one
+Flintyst Cloud uses a Flintyst-managed packaged ECA. All cloud tenants use one
 canonical callback and client configuration. A Salesforce administrator
 installs the package and applies local access policies.
 
-A self-hosted Zeshan deployment uses a customer-owned local ECA. Its callback
+A self-hosted Flintyst deployment uses a customer-owned local ECA. Its callback
 must match that deployment's `WEB_DOMAIN`. Do not reuse the client configuration
 for a different domain.
 
@@ -19,10 +19,10 @@ for a different domain.
 - Use a stable HTTPS `WEB_DOMAIN`.
 - Enable My Domain in the Salesforce organization.
 - Use a Salesforce administrator account to create and configure the ECA.
-- Decide which users or permission sets can authorize Zeshan.
+- Decide which users or permission sets can authorize Flintyst.
 - Store the ECA consumer secret in a secret manager.
 
-## Create a local ECA for self-hosted Zeshan
+## Create a local ECA for self-hosted Flintyst
 
 1. In Salesforce Setup, open **External Client App Manager**.
 2. Select **New External Client App**.
@@ -39,7 +39,7 @@ for a different domain.
    - **Perform requests at any time** (`refresh_token`)
 7. Require a secret for the web server flow.
 8. Require a secret for the refresh token flow.
-9. Require PKCE for supported authorization flows. Zeshan uses S256.
+9. Require PKCE for supported authorization flows. Flintyst uses S256.
 10. Enable refresh token rotation.
 11. Save the ECA. Copy its consumer key and consumer secret.
 
@@ -54,12 +54,12 @@ Use the ECA **Policies** tab to select a permitted-user policy.
 
 For controlled deployments, select **Admin approved users are pre-authorized**.
 Assign the ECA to the required profiles or permission sets. Each authorizing
-user also needs access to the Salesforce objects that Zeshan will index.
+user also needs access to the Salesforce objects that Flintyst will index.
 
 Use **All users may self-authorize** only when organization policy permits it.
 Salesforce still applies each user's object and field permissions.
 
-## Configure Zeshan
+## Configure Flintyst
 
 Set both variables on the API server and all background workers:
 
@@ -68,9 +68,9 @@ SALESFORCE_CLIENT_ID=<ECA consumer key>
 SALESFORCE_CLIENT_SECRET=<ECA consumer secret>
 ```
 
-Restart the affected Zeshan services after a configuration change.
+Restart the affected Flintyst services after a configuration change.
 
-In the Zeshan Salesforce connector form, select OAuth and enter the Salesforce
+In the Flintyst Salesforce connector form, select OAuth and enter the Salesforce
 My Domain URL. Use only the organization root, for example:
 
 ```text
@@ -85,23 +85,23 @@ https://company--dev.sandbox.my.salesforce.com
 
 Do not enter `login.salesforce.com`, a path, a query, or a custom port.
 
-## Zeshan Cloud
+## Flintyst Cloud
 
-Zeshan Cloud supplies the packaged ECA client configuration. Do not create a
+Flintyst Cloud supplies the packaged ECA client configuration. Do not create a
 separate local ECA for the cloud callback.
 
-Install the Zeshan package in the Salesforce organization. Then configure the
+Install the Flintyst package in the Salesforce organization. Then configure the
 subscriber policies and permitted users. Enter the organization's My Domain URL
-in Zeshan before authorization.
+in Flintyst before authorization.
 
 ## Token behavior
 
 Salesforce returns an access token and a refresh token after authorization.
-Zeshan encrypts both tokens in PostgreSQL.
+Flintyst encrypts both tokens in PostgreSQL.
 
-Zeshan refreshes credentials after Salesforce reports an invalid session. If
-Salesforce rotates the refresh token, Zeshan stores the new token. If Salesforce
-returns no new refresh token, Zeshan keeps the current token.
+Flintyst refreshes credentials after Salesforce reports an invalid session. If
+Salesforce rotates the refresh token, Flintyst stores the new token. If Salesforce
+returns no new refresh token, Flintyst keeps the current token.
 
 Revoking the app, changing its scopes, changing its permitted-user policy, or
 expiring a refresh token can require authorization again.
@@ -155,7 +155,7 @@ again if required.
 ### OAuth state is invalid
 
 OAuth state is one-use and expires after ten minutes. Start authorization again
-in the same Zeshan tenant.
+in the same Flintyst tenant.
 
 ## Salesforce references
 

@@ -1,4 +1,4 @@
-// Package paths resolves where an Zeshan docker compose deployment lives on
+// Package paths resolves where a Flintyst docker compose deployment lives on
 // disk. New installs default to ~/.config/onyx (XDG-style, matching the CLI's
 // own config dir convention); legacy installs created by install.sh in
 // ./onyx_data are detected and managed in place.
@@ -57,7 +57,7 @@ func DefaultDir() string {
 	return filepath.Join(home, ".config", "onyx")
 }
 
-// IsInstall reports whether dir contains an Zeshan deployment: a compose file
+// IsInstall reports whether dir contains a Flintyst deployment: a compose file
 // (the base one, or the standalone prod file) or a .env under deployment/
 // (the markers install.sh itself checks before operating on a directory).
 func IsInstall(dir string) bool {

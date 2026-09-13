@@ -1,11 +1,11 @@
 # DEVCONTAINER OVERLAY
 
-Running **inside the Zeshan dev container**. These notes are additive to the root
+Running **inside the Flintyst dev container**. These notes are additive to the root
 `/workspace/CLAUDE.md`; on conflict with a host-oriented instruction there, prefer these.
 
 ## No Docker daemon in here
 
-Don't use `docker` / `docker exec` / `docker compose`. Zeshan services run as sibling
+Don't use `docker` / `docker exec` / `docker compose`. Flintyst services run as sibling
 containers on the `onyx_default` network, reachable directly by hostname — the root
 guide's `psql` command works as-is here (the env vars below plus `POSTGRES_PASSWORD`
 are exported); its `docker exec` fallback won't.

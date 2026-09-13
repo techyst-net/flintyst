@@ -1,12 +1,14 @@
 {
   "name": "@onyx-ai/shared",
   "version": "0.1.0",
-  "description": "Platform-agnostic shared design tokens, types, contracts, and utilities for Zeshan web + mobile.",
+  "description": "Platform-agnostic shared design tokens, types, contracts, and utilities for Flintyst web + mobile.",
   "license": "MIT",
   "private": true,
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -39,12 +41,12 @@
   "scripts": {
     "build:tokens": "node style-dictionary.config.mjs",
     "build:ts": "node ./node_modules/typescript/bin/tsc -p tsconfig.build.json",
-    "build": "bun run build:tokens && bun run build:ts",
+    "build": "npm run build:tokens && npm run build:ts",
     "verify:tokens": "node scripts/verify-opal-parity.mjs",
     "dev": "node scripts/watch.mjs",
     "typecheck": "node ./node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
     "clean": "rm -rf dist",
-    "prepare": "bun run build"
+    "prepare": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {

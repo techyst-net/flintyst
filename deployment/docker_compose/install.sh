@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Zeshan installer — a bootstrap for `onyx-cli deploy install`.
+# Flintyst installer — a bootstrap for `onyx-cli deploy install`.
 #
-# The guided install itself lives in the Zeshan CLI (Go). This script only
+# The guided install itself lives in the Flintyst CLI (Go). This script only
 # installs that CLI and hands over; every argument is forwarded untouched.
 #
 #   curl -fsSL https://raw.githubusercontent.com/onyx-dot-app/onyx/main/deployment/docker_compose/install.sh | bash
@@ -27,7 +27,7 @@ REPO="onyx-dot-app/onyx"
 RELEASES_URL="https://github.com/${REPO}/releases"
 # Rolling release that always carries the newest CLI under version-less asset
 # names. The repo-global releases/latest alias can't be used: it resolves to
-# the Zeshan app releases, not the CLI ones.
+# the Flintyst app releases, not the CLI ones.
 LATEST_TAG="cli-latest"
 
 # Colors for output
@@ -54,17 +54,17 @@ print_warning() {
 }
 
 show_help() {
-    echo "Zeshan Installation Script"
+    echo "Flintyst Installation Script"
     echo ""
-    echo "Installs the Zeshan CLI and runs its guided deployment:"
+    echo "Installs the Flintyst CLI and runs its guided deployment:"
     echo "  onyx-cli deploy install [OPTIONS]"
     echo ""
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Common options (forwarded to the CLI):"
-    echo "  --lite           Deploy Zeshan Lite (no OpenSearch, Redis, or model servers)"
-    echo "  --include-craft  Enable Zeshan Craft (AI-powered web app building)"
-    echo "  --tag <tag>      Image tag to deploy (default: the latest Zeshan release)"
+    echo "  --lite           Deploy Flintyst Lite (no OpenSearch, Redis, or model servers)"
+    echo "  --include-craft  Enable Flintyst Craft (AI-powered web app building)"
+    echo "  --tag <tag>      Image tag to deploy (default: the latest Flintyst release)"
     echo "  --local          Use existing config files instead of downloading them"
     echo "  --no-prompt      Run non-interactively with defaults (for CI/automation)"
     echo "  --dry-run        Show what would be done without making changes"
@@ -139,7 +139,7 @@ case "$OS" in
         ;;
     *)
         print_error "Unsupported operating system: ${OS}"
-        echo "  Zeshan supports Linux and macOS. See https://docs.onyx.app/deployment/overview" >&2
+        echo "  Flintyst supports Linux and macOS. See https://docs.onyx.app/deployment/overview" >&2
         exit 1
         ;;
 esac
@@ -349,7 +349,7 @@ persist_path() {
     if ! mkdir -p "$(dirname "$profile")" 2>/dev/null; then
         return 1
     fi
-    if ! printf '\n# Added by the Zeshan installer\n%s\n' "$line" >> "$profile" 2>/dev/null; then
+    if ! printf '\n# Added by the Flintyst installer\n%s\n' "$line" >> "$profile" 2>/dev/null; then
         return 1
     fi
     print_success "Added ${BIN_DIR} to PATH in ${profile}"

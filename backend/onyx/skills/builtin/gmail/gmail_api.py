@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Gmail wrapper for the Zeshan Craft sandbox.
+"""Gmail wrapper for the Flintyst Craft sandbox.
 
 Common operations exposed as subcommands. Output is JSON on stdout. The
-Authorization header is injected by the Zeshan egress gateway from the connected
+Authorization header is injected by the Flintyst egress gateway from the connected
 user's credentials, so no token handling happens here.
 """
 

@@ -3,7 +3,7 @@
 # Alembic DB Migrations
 
 These files are for creating/updating the tables in the Relational DB (Postgres).
-Zeshan migrations use a generic single-database configuration with an async dbapi.
+Flintyst migrations use a generic single-database configuration with an async dbapi.
 
 ## To generate new migrations:
 

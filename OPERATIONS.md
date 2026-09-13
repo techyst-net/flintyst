@@ -1,4 +1,4 @@
-# Zeshan Search — Operations
+# Flintyst Search — Operations
 
 > Shared infrastructure (Postgres, Redis, S3, SMTP, LLM …) is wired in
 > already — see [../INFRA.md](../INFRA.md). This app runs at http://localhost:3050, http://localhost:8085.

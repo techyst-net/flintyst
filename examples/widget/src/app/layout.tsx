@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Example Zeshan Widget",
-  description: "Example Zeshan Widget",
+  title: "Example Flintyst Widget",
+  description: "Example Flintyst Widget",
 };
 
 export default function RootLayout({

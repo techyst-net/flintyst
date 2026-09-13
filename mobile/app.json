@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Zeshan",
+    "name": "Flintyst",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -103,7 +103,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow Zeshan to access your photos so you can add them to a project.",
+          "photosPermission": "Allow Flintyst to access your photos so you can add them to a project.",
           "microphonePermission": false,
           "cameraPermission": false
         }

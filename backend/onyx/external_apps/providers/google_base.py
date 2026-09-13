@@ -18,7 +18,7 @@ _TOKEN_URL = "https://oauth2.googleapis.com/token"
 
 # Google's restricted scopes (all of Gmail bar `gmail.send`/`gmail.labels`, all
 # of Drive bar `drive.file`) put the OAuth client under an annual third-party
-# security assessment. Cloud runs Zeshan's verified client, so each provider picks
+# security assessment. Cloud runs Flintyst's verified client, so each provider picks
 # a restricted-free scope there and marks the actions it can't cover
 # `requires_self_hosted_scope`.
 
@@ -49,7 +49,7 @@ def _setup_instructions(google_api_name: str) -> str:
         f"{google_api_name} under APIs & Services → Library, configure the "
         "OAuth consent screen (External for personal Google accounts, Internal "
         "for Workspace), then under APIs & Services → Credentials create an "
-        "OAuth 2.0 Client ID of type Web application. Add this Zeshan instance's "
+        "OAuth 2.0 Client ID of type Web application. Add this Flintyst instance's "
         "callback URL (/craft/v1/apps/oauth/callback) to Authorized redirect "
         "URIs. Then paste the Client ID and Client Secret below."
     )

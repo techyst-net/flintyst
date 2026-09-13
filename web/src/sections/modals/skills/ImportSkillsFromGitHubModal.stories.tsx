@@ -24,7 +24,7 @@ const preview = {
       path: "skills/pptx",
       name: "pptx",
       description: "Create and edit presentation files.",
-      unavailable_reason: "A built-in Zeshan skill already uses this name.",
+      unavailable_reason: "A built-in Flintyst skill already uses this name.",
     },
   ],
 };

@@ -122,7 +122,7 @@ def _build_upstream_request(
         # arbitrary URLs under our account; refuse rather than forward.
         raise OnyxError(
             OnyxErrorCode.INVALID_INPUT,
-            "mcp_servers is not supported by the Zeshan gateway.",
+            "mcp_servers is not supported by the Flintyst gateway.",
         )
     body["model"] = model_name
     if stream is not None:
@@ -142,7 +142,7 @@ def _build_upstream_headers(
     provider: LLMProviderView, http_request: Request
 ) -> dict[str, str]:
     # Fresh dict only — never copy client headers wholesale; the inbound
-    # Authorization header is an Zeshan PAT, not an Anthropic key.
+    # Authorization header is a Flintyst PAT, not an Anthropic key.
     if not provider.api_key:
         raise OnyxError(
             OnyxErrorCode.BAD_GATEWAY,

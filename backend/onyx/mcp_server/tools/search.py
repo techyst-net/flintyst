@@ -48,7 +48,7 @@ async def _post_model(
     body: BaseModel,
     access_token: AccessToken,
 ) -> httpx.Response:
-    """POST a Pydantic model as JSON to the Zeshan backend."""
+    """POST a Pydantic model as JSON to the Flintyst backend."""
     return await get_http_client().post(
         url,
         content=body.model_dump_json(exclude_unset=True),
@@ -150,13 +150,13 @@ async def search_indexed_documents(
     agent: str | None = None,
 ) -> dict[str, Any]:
     """
-    Search the user's knowledge base indexed in Zeshan.
+    Search the user's knowledge base indexed in Flintyst.
     Use this tool for information that is not public knowledge and specific to the user,
     their team, their work, or their organization/company.
 
-    Runs the full Zeshan search pipeline (LLM query expansion, hybrid retrieval,
+    Runs the full Flintyst search pipeline (LLM query expansion, hybrid retrieval,
     document selection, context expansion) — the same search quality as the
-    Zeshan chat interface.
+    Flintyst chat interface.
 
     To find a list of available sources, use the `indexed_sources` resource.
     `document_set_names` restricts results to documents belonging to the named
@@ -169,7 +169,7 @@ async def search_indexed_documents(
     `skip_query_expansion` bypasses the LLM query-expansion step; useful when
     you already know the exact phrase to search for (faster, no LLM call for
     expansion).
-    `agent` runs the search as a named Zeshan agent, applying that agent's
+    `agent` runs the search as a named Flintyst agent, applying that agent's
     knowledge scope (its document sets, attached documents and start date) and
     its configured model. Pass the name the user gave you — no lookup call is
     needed first. If the name does not resolve, the error names the agents
@@ -277,7 +277,7 @@ async def search_indexed_documents(
                 result_count = 0
                 return _error_payload(
                     "No document sources are indexed yet. Add connectors or upload data "
-                    "through Zeshan before calling search_indexed_documents."
+                    "through Flintyst before calling search_indexed_documents."
                 )
 
         source_type_enums: list[DocumentSource] | None = None

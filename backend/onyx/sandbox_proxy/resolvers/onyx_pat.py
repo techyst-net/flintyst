@@ -1,6 +1,6 @@
-"""Zeshan-API PAT credential resolver.
+"""Flintyst-API PAT credential resolver.
 
-Claims requests bound for the Zeshan API host (the host of ``ONYX_SERVER_URL``)
+Claims requests bound for the Flintyst API host (the host of ``ONYX_SERVER_URL``)
 and sets both auth headers to the sandbox's real per-sandbox PAT, read
 encrypted off ``Sandbox.encrypted_pat``. The tenant is embedded in the PAT
 itself, so no separate tenant header is injected.
@@ -32,7 +32,7 @@ logger = setup_logger()
 
 
 class OnyxPatResolver(CredentialResolver):
-    """Injects the sandbox's Zeshan API PAT on requests to the configured API host."""
+    """Injects the sandbox's Flintyst API PAT on requests to the configured API host."""
 
     def __init__(self) -> None:
         parsed = urlparse(ONYX_SERVER_URL) if ONYX_SERVER_URL else None

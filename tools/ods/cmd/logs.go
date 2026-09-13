@@ -17,8 +17,8 @@ func NewLogsCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "logs [service...]",
-		Short: "View logs from Zeshan docker containers",
-		Long: `View logs from running Zeshan docker containers.
+		Short: "View logs from Flintyst docker containers",
+		Long: `View logs from running Flintyst docker containers.
 
 All arguments are treated as service names to filter logs.
 If no services are specified, logs from all services are shown.

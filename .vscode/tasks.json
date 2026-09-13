@@ -54,7 +54,7 @@
     },
     {
       "type": "shell",
-      "label": "Generate Zeshan OpenAPI Python client",
+      "label": "Generate Flintyst OpenAPI Python client",
       "cwd": "${workspaceFolder}/backend",
       "envFile": "${workspaceFolder}/.env",
       "options": {
@@ -119,7 +119,7 @@
     },
     {
       "label": "k8s: cluster up",
-      "detail": "Create the kind cluster + helm install Zeshan. Idempotent.",
+      "detail": "Create the kind cluster + helm install Flintyst. Idempotent.",
       "type": "shell",
       "command": "${workspaceFolder}/deployment/helm/dev/k8s-up.sh",
       "options": {
@@ -234,7 +234,7 @@
     },
     {
       "label": "craft: up (cluster + sandbox image + .env.k8s)",
-      "detail": "One-command Craft setup: kind cluster + Zeshan helm install + sandbox image build/load + .env.k8s bootstrap. Idempotent.",
+      "detail": "One-command Craft setup: kind cluster + Flintyst helm install + sandbox image build/load + .env.k8s bootstrap. Idempotent.",
       "type": "shell",
       "command": "${workspaceFolder}/deployment/helm/dev/craft-up.sh",
       "options": {

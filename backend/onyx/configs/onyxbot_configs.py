@@ -1,20 +1,20 @@
 import os
 
 #####
-# Zeshan Slack Bot Configs
+# Flintyst Slack Bot Configs
 #####
 ONYX_BOT_NUM_RETRIES = int(os.environ.get("ONYX_BOT_NUM_RETRIES", "5"))
 # Number of docs to display in "Reference Documents"
 ONYX_BOT_NUM_DOCS_TO_DISPLAY = int(os.environ.get("ONYX_BOT_NUM_DOCS_TO_DISPLAY", "5"))
-# If the LLM fails to answer, Zeshan can still show the "Reference Documents"
+# If the LLM fails to answer, Flintyst can still show the "Reference Documents"
 ONYX_BOT_DISABLE_DOCS_ONLY_ANSWER = os.environ.get(
     "ONYX_BOT_DISABLE_DOCS_ONLY_ANSWER", ""
 ).lower() not in ["false", ""]
-# When Zeshan is considering a message, what emoji does it react with
+# When Flintyst is considering a message, what emoji does it react with
 ONYX_BOT_REACT_EMOJI = os.environ.get("ONYX_BOT_REACT_EMOJI") or "eyes"
 # When User needs more help, what should the emoji be
 ONYX_BOT_FOLLOWUP_EMOJI = os.environ.get("ONYX_BOT_FOLLOWUP_EMOJI") or "sos"
-# What kind of message should be shown when someone gives an AI answer feedback to OnyxBot
+# What kind of message should be shown when someone gives an AI answer feedback to FlintystBot
 # Defaults to Private if not provided or invalid
 # Private: Only visible to user clicking the feedback
 # Anonymous: Public but anonymous
@@ -22,14 +22,14 @@ ONYX_BOT_FOLLOWUP_EMOJI = os.environ.get("ONYX_BOT_FOLLOWUP_EMOJI") or "sos"
 ONYX_BOT_FEEDBACK_VISIBILITY = (
     os.environ.get("ONYX_BOT_FEEDBACK_VISIBILITY") or "private"
 )
-# Should OnyxBot send an apology message if it's not able to find an answer
-# That way the user isn't confused as to why OnyxBot reacted but then said nothing
+# Should FlintystBot send an apology message if it's not able to find an answer
+# That way the user isn't confused as to why FlintystBot reacted but then said nothing
 # Off by default to be less intrusive (don't want to give a notif that just says we couldnt help)
 NOTIFY_SLACKBOT_NO_ANSWER = (
     os.environ.get("NOTIFY_SLACKBOT_NO_ANSWER", "").lower() == "true"
 )
 # Mostly for debugging purposes but it's for explaining what went wrong
-# if OnyxBot couldn't find an answer
+# if FlintystBot couldn't find an answer
 ONYX_BOT_DISPLAY_ERROR_MSGS = os.environ.get(
     "ONYX_BOT_DISPLAY_ERROR_MSGS", ""
 ).lower() not in [
@@ -47,7 +47,7 @@ ONYX_BOT_MAX_WAIT_TIME = int(os.environ.get("ONYX_BOT_MAX_WAIT_TIME") or 180)
 ONYX_BOT_FEEDBACK_REMINDER = int(os.environ.get("ONYX_BOT_FEEDBACK_REMINDER") or 0)
 
 # ONYX_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD is the number of
-# responses OnyxBot can send in a given time period.
+# responses FlintystBot can send in a given time period.
 # Set to 0 to disable the limit.
 ONYX_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD = int(
     os.environ.get("ONYX_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD", "5000")

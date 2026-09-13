@@ -74,7 +74,7 @@ func (in *installer) runStatus(ctx context.Context, jsonOut bool) error {
 		if jsonOut {
 			return in.emitStatus(st, exitcodes.NotAvailable)
 		}
-		in.infof("No Zeshan install found at %s", in.root.Dir)
+		in.infof("No Flintyst install found at %s", in.root.Dir)
 		for _, alt := range in.root.Ambiguous {
 			in.infof("(another install exists at %s — pass --dir to inspect it)", alt)
 		}
@@ -137,7 +137,7 @@ func (in *installer) runStatus(ctx context.Context, jsonOut bool) error {
 		return in.emitStatus(st, code)
 	}
 
-	in.plainf("Zeshan deployment at %s (%s)", st.Dir, st.Source)
+	in.plainf("Flintyst deployment at %s (%s)", st.Dir, st.Source)
 	in.plainf("  Mode: %s%s%s", st.Mode,
 		map[bool]string{true: " + craft", false: ""}[st.IncludeCraft],
 		map[bool]string{true: " + dev", false: ""}[st.Dev])
@@ -163,7 +163,7 @@ func (in *installer) runStatus(ctx context.Context, jsonOut bool) error {
 	}
 	in.plainf("")
 	if st.AccessURL != "" {
-		in.infof("Access Zeshan at: %s", st.AccessURL)
+		in.infof("Access Flintyst at: %s", st.AccessURL)
 	}
 	// One count, one list: every service that isn't up is worth naming,
 	// whichever way it isn't. Splitting the verdict by kind used to drop the
@@ -249,7 +249,7 @@ func (in *installer) inspectContainers(ctx context.Context) (services []Service,
 			svc.Service = parts[4]
 		}
 		services = append(services, svc)
-		// Only Zeshan app images carry the deployment version; infrastructure
+		// Only Flintyst app images carry the deployment version; infrastructure
 		// containers (nginx, postgres, redis, ...) have their own tags.
 		if runningTag == "" && strings.HasPrefix(svc.Status, "Up") &&
 			strings.Contains(svc.Image, "onyxdotapp/onyx") {

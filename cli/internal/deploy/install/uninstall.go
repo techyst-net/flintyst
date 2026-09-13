@@ -23,11 +23,11 @@ func (in *installer) runUninstall(ctx context.Context) error {
 	in.root = paths.Resolve(in.opts.Dir)
 	if len(in.root.Ambiguous) > 0 {
 		return exitcodes.Newf(exitcodes.BadRequest,
-			"multiple Zeshan installs found (%s and %s) — pass --dir to pick one",
+			"multiple Flintyst installs found (%s and %s) — pass --dir to pick one",
 			in.root.Dir, in.root.Ambiguous[0])
 	}
 	if _, err := os.Stat(in.root.Dir); os.IsNotExist(err) {
-		in.warnf("No Zeshan data directory found at %s. Nothing to remove.", in.root.Dir)
+		in.warnf("No Flintyst data directory found at %s. Nothing to remove.", in.root.Dir)
 		return nil
 	}
 	// The directory is about to be removed recursively, and --dir,
@@ -37,20 +37,20 @@ func (in *installer) runUninstall(ctx context.Context) error {
 	// question: a deployment/ under $HOME marks $HOME.
 	if !paths.IsInstall(in.root.Dir) && !state.Exists(in.root.Dir) {
 		return exitcodes.Newf(exitcodes.BadRequest,
-			"%s doesn't look like an Zeshan deployment (no deployment/docker-compose.yml, deployment/.env or %s) — refusing to delete it",
+			"%s doesn't look like a Flintyst deployment (no deployment/docker-compose.yml, deployment/.env or %s) — refusing to delete it",
 			in.root.Dir, state.FileName)
 	}
 	if err := paths.CheckDeletable(in.root.Dir); err != nil {
 		return exitcodes.Newf(exitcodes.BadRequest,
-			"refusing to delete everything under %s: %v — point --dir at the deployment directory itself, or remove it by hand if Zeshan really lives there",
+			"refusing to delete everything under %s: %v — point --dir at the deployment directory itself, or remove it by hand if Flintyst really lives there",
 			in.root.Dir, err)
 	}
 
 	in.plainf("")
-	in.plainf("=== WARNING: This will permanently delete all Zeshan data ===")
+	in.plainf("=== WARNING: This will permanently delete all Flintyst data ===")
 	in.plainf("")
 	in.warnf("This action will remove:")
-	in.plainf("  • All Zeshan containers and volumes")
+	in.plainf("  • All Flintyst containers and volumes")
 	in.plainf("  • All files and configuration in %s", in.root.Dir)
 	in.plainf("  • All user data and documents")
 	in.plainf("")
@@ -79,7 +79,7 @@ func (in *installer) runUninstall(ctx context.Context) error {
 		if err := in.attachDockerCompose(ctx); err != nil {
 			return err
 		}
-		in.infof("Removing Zeshan containers and volumes...")
+		in.infof("Removing Flintyst containers and volumes...")
 		cmd := in.compose.Command(in.deploymentDir(), stopFallbackEnv(), in.composeFileNames(true), "down", "-v")
 		cmd.Stdout, cmd.Stderr = in.deps.IOS.Out, in.deps.IOS.ErrOut
 		if _, err := in.deps.Runner.Run(ctx, cmd); err != nil {
@@ -95,7 +95,7 @@ func (in *installer) runUninstall(ctx context.Context) error {
 			in.warnf("Deleting %s anyway (--force) — clean up leftovers with %s",
 				in.root.Dir, in.paint.Accent(fmt.Sprintf("docker compose -p %s down -v", in.projectName())))
 		} else {
-			in.successf("Zeshan containers and volumes removed")
+			in.successf("Flintyst containers and volumes removed")
 		}
 	}
 
@@ -105,6 +105,6 @@ func (in *installer) runUninstall(ctx context.Context) error {
 	}
 	in.successf("Data directories removed")
 	in.plainf("")
-	in.successf("All Zeshan data has been permanently deleted!")
+	in.successf("All Flintyst data has been permanently deleted!")
 	return nil
 }

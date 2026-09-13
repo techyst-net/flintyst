@@ -89,7 +89,7 @@ If you don't want the bundled Redis (recommended for production environments usi
 managed Redis like AWS ElastiCache), see [Using an external Redis](#using-an-external-redis)
 below and set `redis.enabled: false` to skip the operator entirely.
 
-## Zeshan Craft with Kubernetes sandboxes
+## Flintyst Craft with Kubernetes sandboxes
 
 When `configMap.ENABLE_CRAFT="true"`, the target cluster must run Kubernetes
 `>= 1.33`. Craft Helm deployments provision Kubernetes sandbox pods; Docker
@@ -107,7 +107,7 @@ installs.
 
 ## Using an external Redis
 
-To point Zeshan at an externally-managed Redis (e.g. AWS ElastiCache) and skip
+To point Flintyst at an externally-managed Redis (e.g. AWS ElastiCache) and skip
 the bundled Redis + operator entirely:
 
 ```yaml
@@ -217,7 +217,7 @@ surface.
 
 # Values that come from docker-compose (do not copy them)
 
-The Zeshan docker-compose stack uses service-name hostnames like `api_server`,
+The Flintyst docker-compose stack uses service-name hostnames like `api_server`,
 `inference_model_server`, and `cache`. Those names contain underscores, which
 are **invalid in Kubernetes DNS labels** — DNS lookups for them will fail and
 the symptom is often a blank login page or `TypeError: fetch failed` in web
@@ -245,7 +245,7 @@ Other docker-compose-style values you should set deliberately:
 
 # Local testing
 
-> This section covers chart-maintainer testing; for the Zeshan Craft local-kind developer workflow, see [docs/craft/dev/local-kubernetes.md](/docs/craft/dev/local-kubernetes.md).
+> This section covers chart-maintainer testing; for the Flintyst Craft local-kind developer workflow, see [docs/craft/dev/local-kubernetes.md](/docs/craft/dev/local-kubernetes.md).
 
 ## One time setup
 * brew install kind
@@ -301,7 +301,7 @@ By default, some onyx containers run as root. If you'd like to explicitly run th
     ```
 
 ## Resourcing
-In the helm charts, we have resource suggestions for all Zeshan-owned components. 
+In the helm charts, we have resource suggestions for all Flintyst-owned components. 
 These are simply initial suggestions, and may need to be tuned for your specific use case.
 
 Please talk to us in Slack if you have any questions!
@@ -312,7 +312,7 @@ The chart renders Kubernetes HorizontalPodAutoscalers by default. To keep this b
 
 If you would like to use KEDA ScaledObjects instead:
 
-1. Install and manage the KEDA operator in your cluster yourself (for example via the official KEDA Helm chart). KEDA is no longer packaged as a dependency of the Zeshan chart.
+1. Install and manage the KEDA operator in your cluster yourself (for example via the official KEDA Helm chart). KEDA is no longer packaged as a dependency of the Flintyst chart.
 2. Set `autoscaling.engine: keda` in your `values.yaml` and enable autoscaling for the components you want to scale.
 
 When `autoscaling.engine` is set to `keda`, the chart will render the existing ScaledObject templates; otherwise HPAs will be rendered.

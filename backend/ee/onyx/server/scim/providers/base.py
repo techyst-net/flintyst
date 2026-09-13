@@ -77,10 +77,10 @@ class ScimProvider(ABC):
         scim_username: str | None = None,
         fields: ScimMappingFields | None = None,
     ) -> ScimUserResource:
-        """Build a SCIM User response from an Zeshan User.
+        """Build a SCIM User response from a Flintyst User.
 
         Args:
-            user: The Zeshan user model.
+            user: The Flintyst user model.
             external_id: The IdP's external identifier for this user.
             groups: List of ``(group_id, group_name)`` tuples for the
                 ``groups`` read-only attribute. Pass ``None`` or ``[]``
@@ -139,7 +139,7 @@ class ScimProvider(ABC):
         members: list[tuple[UUID, str | None]],
         external_id: str | None = None,
     ) -> ScimGroupResource:
-        """Build a SCIM Group response from an Zeshan UserGroup."""
+        """Build a SCIM Group response from a Flintyst UserGroup."""
         scim_members = [
             ScimGroupMember(value=str(uid), display=email) for uid, email in members
         ]

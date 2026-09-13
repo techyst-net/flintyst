@@ -1,5 +1,5 @@
 """
-Standardized error codes for the Zeshan backend.
+Standardized error codes for the Flintyst backend.
 
 Usage:
     from onyx.error_handling.error_codes import OnyxErrorCode

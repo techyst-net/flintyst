@@ -198,12 +198,12 @@ def main() -> None:
         "--url",
         type=str,
         default="http://localhost:3000/api",
-        help="Zeshan URL",
+        help="Flintyst URL",
     )
     parser.add_argument(
         "--api-key",
         type=str,
-        help="Zeshan Basic/Admin Level API key",
+        help="Flintyst Basic/Admin Level API key",
     )
     parser.add_argument(
         "--concurrent",

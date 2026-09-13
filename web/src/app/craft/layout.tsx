@@ -12,7 +12,7 @@ export interface LayoutProps {
  * Build Layout - Minimal wrapper that handles authentication and feature flag check
  *
  * Child routes (/craft and /craft/v1) handle their own UI structure.
- * Redirects to /app if Zeshan Craft is disabled via feature flag.
+ * Redirects to /app if Flintyst Craft is disabled via feature flag.
  */
 export default async function Layout({ children }: LayoutProps) {
   noStore();
@@ -24,7 +24,7 @@ export default async function Layout({ children }: LayoutProps) {
     redirect(authResult.redirect as Route);
   }
 
-  // Check if Zeshan Craft is enabled via feature flag
+  // Check if Flintyst Craft is enabled via feature flag
   // Only explicit true enables the feature; false or undefined = disabled
   const settings = await fetchSettingsSS();
   if (settings?.settings?.onyx_craft_enabled !== true) {

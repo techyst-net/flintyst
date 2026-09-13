@@ -27,7 +27,7 @@ func NewOpenAPICommand() *cobra.Command {
 		Short: "OpenAPI schema and client generation",
 		Long: `OpenAPI schema and client generation commands.
 
-Generate the OpenAPI schema from the Zeshan API without starting the server,
+Generate the OpenAPI schema from the Flintyst API without starting the server,
 and optionally generate a Python client from the schema.
 
 Requirements:
@@ -56,7 +56,7 @@ func NewOpenAPISchemaCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "schema",
 		Short: "Generate OpenAPI schema JSON",
-		Long: `Generate the OpenAPI schema JSON file from the Zeshan API.
+		Long: `Generate the OpenAPI schema JSON file from the Flintyst API.
 
 This extracts the API schema without starting the full API server.
 The schema can be used for documentation, client generation, and API validation.

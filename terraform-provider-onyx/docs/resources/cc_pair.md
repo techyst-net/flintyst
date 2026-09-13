@@ -5,7 +5,7 @@ subcategory: ""
 description: |-
   A connector-credential pair: the object that actually indexes. It joins an onyx_connector to an onyx_credential and carries the access control for the documents they produce.
   Creating a pair starts indexing. Destroying one removes the indexed documents too, which runs in the background — Terraform waits for it to finish.
-  ~> Drift blind spot. Zeshan does not report groups, auto_sync_options or processing_mode back on read, so Terraform cannot detect changes made to them elsewhere. They are recorded from the configuration at create time. After terraform import they are empty, and setting them then replaces the pair.
+  ~> Drift blind spot. Flintyst does not report groups, auto_sync_options or processing_mode back on read, so Terraform cannot detect changes made to them elsewhere. They are recorded from the configuration at create time. After terraform import they are empty, and setting them then replaces the pair.
 ---
 
 # onyx_cc_pair (Resource)
@@ -14,7 +14,7 @@ A connector-credential pair: the object that actually indexes. It joins an `onyx
 
 Creating a pair starts indexing. Destroying one removes the indexed documents too, which runs in the background — Terraform waits for it to finish.
 
-~> **Drift blind spot.** Zeshan does not report `groups`, `auto_sync_options` or `processing_mode` back on read, so Terraform cannot detect changes made to them elsewhere. They are recorded from the configuration at create time. After `terraform import` they are empty, and setting them then replaces the pair.
+~> **Drift blind spot.** Flintyst does not report `groups`, `auto_sync_options` or `processing_mode` back on read, so Terraform cannot detect changes made to them elsewhere. They are recorded from the configuration at create time. After `terraform import` they are empty, and setting them then replaces the pair.
 
 ## Example Usage
 
@@ -46,7 +46,7 @@ resource "onyx_cc_pair" "hr_handbook" {
   paused = false
 }
 
-# Destroying a pair also removes the documents it indexed, which Zeshan does in
+# Destroying a pair also removes the documents it indexed, which Flintyst does in
 # the background. Raise the timeout for a connector holding many documents.
 resource "onyx_cc_pair" "large_archive" {
   name          = "large-archive"
@@ -66,7 +66,7 @@ resource "onyx_cc_pair" "large_archive" {
 
 - `connector_id` (String) Id of the connector to pair, e.g. `onyx_connector.docs.id`.
 - `credential_id` (String) Id of the credential to pair, e.g. `onyx_credential.docs.id`.
-- `name` (String) Pair name, shown in the admin panel. Zeshan does not require it to be unique, but a connector and credential can only be paired once.
+- `name` (String) Pair name, shown in the admin panel. Flintyst does not require it to be unique, but a connector and credential can only be paired once.
 
 ### Optional
 
@@ -82,7 +82,7 @@ resource "onyx_cc_pair" "large_archive" {
 - `id` (String) Numeric connector-credential pair id.
 - `last_index_attempt_status` (String) Status of the most recent index attempt, or null before the first one runs.
 - `num_docs_indexed` (Number) Documents currently indexed by this pair.
-- `status` (String) Server status: `SCHEDULED`, `INITIAL_INDEXING`, `ACTIVE`, `PAUSED`, `DELETING` or `INVALID`. Zeshan cycles it as indexing progresses; use `paused` to change it.
+- `status` (String) Server status: `SCHEDULED`, `INITIAL_INDEXING`, `ACTIVE`, `PAUSED`, `DELETING` or `INVALID`. Flintyst cycles it as indexing progresses; use `paused` to change it.
 
 <a id="nestedblock--timeouts"></a>
 ### Nested Schema for `timeouts`
@@ -101,7 +101,7 @@ The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/c
 #!/bin/sh
 # Import by numeric connector-credential pair id.
 #
-# Zeshan does not report groups, auto_sync_options or processing_mode, so they
+# Flintyst does not report groups, auto_sync_options or processing_mode, so they
 # are empty after an import. Setting them afterwards replaces the pair.
 terraform import onyx_cc_pair.confluence_wiki 12
 ```

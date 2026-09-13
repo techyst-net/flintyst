@@ -193,18 +193,18 @@ class ExternalAppProvider(ABC):
 
 
 class OnyxManagedExtApp(ExternalAppProvider, abstract=True):
-    """Interface for a built-in provider whose OAuth client credentials Zeshan
+    """Interface for a built-in provider whose OAuth client credentials Flintyst
     owns. On managed cloud these are seeded per tenant and locked down (admins
     may only enable/disable + set policies — never edit credentials/config or
     delete). A non-managed built-in (admin/user-configurable) simply doesn't
-    inherit this, so it carries no Zeshan-owned credentials and stays editable.
+    inherit this, so it carries no Flintyst-owned credentials and stays editable.
 
     A concrete managed provider declares its operator-supplied credentials in
     ``managed_org_credentials``, keyed by the same fields as its
     ``required_org_credential_fields`` (validated in ``__init_subclass__``).
     """
 
-    # Zeshan-owned credential values, sourced from the ``EXT_APP_<APP_TYPE>_<FIELD>``
+    # Flintyst-owned credential values, sourced from the ``EXT_APP_<APP_TYPE>_<FIELD>``
     # constants in ``app_configs``. Keys must match the spec's required fields.
     managed_org_credentials: ClassVar[dict[str, str]] = {}
 
@@ -227,7 +227,7 @@ class OnyxManagedExtApp(ExternalAppProvider, abstract=True):
             )
 
     def configured_managed_credentials(self) -> dict[str, str] | None:
-        """This provider's Zeshan-owned credentials if fully configured, else None."""
+        """This provider's Flintyst-owned credentials if fully configured, else None."""
         creds = {k: v.strip() for k, v in self.managed_org_credentials.items()}
         if not any(creds.values()):
             return None  # nothing configured

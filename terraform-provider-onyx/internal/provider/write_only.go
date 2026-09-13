@@ -24,7 +24,7 @@ import (
 //
 // Terraform keeps write-only values out of plan and state, so configuration is
 // the only place to read them from. That also makes them available on every
-// apply, which matters here because the Zeshan APIs replace all fields on update
+// apply, which matters here because the Flintyst APIs replace all fields on update
 // and would otherwise clear a stored secret.
 func resolveWriteOnly[T attr.Value](
 	ctx context.Context,

@@ -11,12 +11,12 @@
 # =============================================================================
 # ONYX DOCKER COMPOSE
 # =============================================================================
-# This is the default configuration for Zeshan. This file is fairly configurable,
+# This is the default configuration for Flintyst. This file is fairly configurable,
 # also see env.template for possible settings.
 #
 # PRODUCTION DEPLOYMENT CHECKLIST:
 # To convert this setup to a production deployment following best practices,
-# follow the checklist below. Note that there are other ways to secure the Zeshan
+# follow the checklist below. Note that there are other ways to secure the Flintyst
 # deployment so these are not strictly necessary for all teams.
 #
 # 1. SECURITY HARDENING:
@@ -60,7 +60,7 @@ services:
       target: runtime
     command: >
       /bin/sh -c "alembic upgrade head &&
-      echo \"Starting Zeshan Api Server\" &&
+      echo \"Starting Flintyst Api Server\" &&
       uvicorn onyx.main:app --host 0.0.0.0 --port 8080"
     #!for default
     # Check env.template and copy to .env for env vars
@@ -114,7 +114,7 @@ services:
       #!value prod,no-letsencrypt: - S3_AWS_SECRET_ACCESS_KEY=${S3_AWS_SECRET_ACCESS_KEY:?set a strong value in .env, not minioadmin}
       - S3_AWS_SECRET_ACCESS_KEY=${S3_AWS_SECRET_ACCESS_KEY:-minioadmin}
       #!for default
-      # Zeshan Craft configuration (disabled by default, set ENABLE_CRAFT=true in .env to enable)
+      # Flintyst Craft configuration (disabled by default, set ENABLE_CRAFT=true in .env to enable)
       # Use --include-craft with install script, or manually set in .env file
       - ENABLE_CRAFT=${ENABLE_CRAFT:-false}
       #!endfor
@@ -210,7 +210,7 @@ services:
       - API_SERVER_PROTOCOL=${API_SERVER_PROTOCOL:-http}
       - API_SERVER_HOST=${API_SERVER_HOST:-api_server}
       #!for default
-      # Zeshan Craft configuration (set up automatically on container startup)
+      # Flintyst Craft configuration (set up automatically on container startup)
       - ENABLE_CRAFT=${ENABLE_CRAFT:-false}
       #!endfor
     #!value prod,no-letsencrypt: # Uncomment the line below to use if IAM_AUTH is true and you are using iam auth for postgres
@@ -251,7 +251,7 @@ services:
         - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
         # Enterprise Edition only
         - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
-        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Zeshan.
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
         - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
         - NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=4096"}
     env_file:
@@ -280,7 +280,7 @@ services:
       retries: 5
       start_period: 30s
 
-  # Uncomment the block below to enable the MCP server for Zeshan.
+  # Uncomment the block below to enable the MCP server for Flintyst.
   # mcp_server:
   #   image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
   #   build:

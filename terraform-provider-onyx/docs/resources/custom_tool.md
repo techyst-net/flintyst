@@ -5,8 +5,8 @@ subcategory: ""
 description: |-
   A custom action: an external HTTP API, described by an OpenAPI schema, that assistants can call.
   Attach one to an assistant through tool_ids on onyx_persona.
-  ~> Deleting an action detaches it from every agent that uses it, including agents Terraform does not manage. Zeshan does not refuse the delete or warn about it.
-  ~> custom_headers holds secrets. Zeshan masks the values on reads, but they are stored in Terraform state in clear text. Supply them from a secret store rather than literals, or use custom_headers_wo to keep them out of state entirely. Masked reads also mean a rotation made outside Terraform is only visible when its mask differs, so rotate values through Terraform, ideally custom_headers_wo with its version attribute.
+  ~> Deleting an action detaches it from every agent that uses it, including agents Terraform does not manage. Flintyst does not refuse the delete or warn about it.
+  ~> custom_headers holds secrets. Flintyst masks the values on reads, but they are stored in Terraform state in clear text. Supply them from a secret store rather than literals, or use custom_headers_wo to keep them out of state entirely. Masked reads also mean a rotation made outside Terraform is only visible when its mask differs, so rotate values through Terraform, ideally custom_headers_wo with its version attribute.
 ---
 
 # onyx_custom_tool (Resource)
@@ -15,14 +15,14 @@ A custom action: an external HTTP API, described by an OpenAPI schema, that assi
 
 Attach one to an assistant through `tool_ids` on `onyx_persona`.
 
-~> **Deleting an action detaches it from every agent that uses it**, including agents Terraform does not manage. Zeshan does not refuse the delete or warn about it.
+~> **Deleting an action detaches it from every agent that uses it**, including agents Terraform does not manage. Flintyst does not refuse the delete or warn about it.
 
-~> **`custom_headers` holds secrets.** Zeshan masks the values on reads, but they are stored in Terraform state in clear text. Supply them from a secret store rather than literals, or use `custom_headers_wo` to keep them out of state entirely. Masked reads also mean a rotation made outside Terraform is only visible when its mask differs, so rotate values through Terraform, ideally `custom_headers_wo` with its version attribute.
+~> **`custom_headers` holds secrets.** Flintyst masks the values on reads, but they are stored in Terraform state in clear text. Supply them from a secret store rather than literals, or use `custom_headers_wo` to keep them out of state entirely. Masked reads also mean a rotation made outside Terraform is only visible when its mask differs, so rotate values through Terraform, ideally `custom_headers_wo` with its version attribute.
 
 ## Example Usage
 
 ```terraform
-# A custom action lets an assistant call an external HTTP API. Zeshan derives one
+# A custom action lets an assistant call an external HTTP API. Flintyst derives one
 # callable method per operation, so every operation needs an operationId and
 # either a summary or a description.
 resource "onyx_custom_tool" "weather" {
@@ -66,7 +66,7 @@ resource "onyx_custom_tool" "billing" {
   name       = "billing"
   definition = file("${path.module}/openapi/billing.json")
 
-  # Forward the calling user's Zeshan credentials instead of a fixed key, so the
+  # Forward the calling user's Flintyst credentials instead of a fixed key, so the
   # API applies that user's own permissions. It cannot be combined with an
   # Authorization header above.
   passthrough_auth = true
@@ -86,24 +86,24 @@ resource "onyx_custom_tool" "legacy_lookup" {
 
 ### Required
 
-- `definition` (String) The OpenAPI schema describing the API, as JSON. Zeshan derives one callable method per operation, so every operation needs an `operationId`. Use `jsonencode(...)` or `file(...)` to supply it.
+- `definition` (String) The OpenAPI schema describing the API, as JSON. Flintyst derives one callable method per operation, so every operation needs an `operationId`. Use `jsonencode(...)` or `file(...)` to supply it.
 - `name` (String) Action name, shown to admins and to the model.
 
 ### Optional
 
 > **NOTE**: [Write-only arguments](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments) are supported in Terraform 1.11 and later.
 
-- `custom_headers` (Map of String, Sensitive) Headers sent with every call the action makes, such as an API key. Cannot carry an `Authorization` header while `passthrough_auth` is enabled. Zeshan returns these values in full, so Terraform refreshes them and reports changes made elsewhere. Prefer `custom_headers_wo`, which keeps the value out of state entirely; the two cannot be set together.
-- `custom_headers_wo` (Map of String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Headers sent with every call the action makes, held only in configuration. Terraform sends them on every apply and stores nothing, so they never reach state — and, unlike `custom_headers`, they are not refreshed from Zeshan either, so a change made elsewhere goes unreported until the next apply overwrites it. Pair with `custom_headers_wo_version` to rotate them. Needs Terraform 1.11 or later.
+- `custom_headers` (Map of String, Sensitive) Headers sent with every call the action makes, such as an API key. Cannot carry an `Authorization` header while `passthrough_auth` is enabled. Flintyst returns these values in full, so Terraform refreshes them and reports changes made elsewhere. Prefer `custom_headers_wo`, which keeps the value out of state entirely; the two cannot be set together.
+- `custom_headers_wo` (Map of String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Headers sent with every call the action makes, held only in configuration. Terraform sends them on every apply and stores nothing, so they never reach state — and, unlike `custom_headers`, they are not refreshed from Flintyst either, so a change made elsewhere goes unreported until the next apply overwrites it. Pair with `custom_headers_wo_version` to rotate them. Needs Terraform 1.11 or later.
 - `custom_headers_wo_version` (Number) Rotation counter for `custom_headers_wo`. Terraform never stores a write-only value and so cannot tell that the secret changed; raise this number to make the next apply send the current one. Do not derive it from the secret itself — unlike the secret, this number is kept in state.
 - `description` (String) What the action does.
 - `enabled` (Boolean) Whether assistants may call the action. A disabled action keeps its configuration but never runs.
 - `oauth_config_id` (String) Id of an OAuth configuration the action authenticates with. OAuth configurations are created in the admin panel; Terraform does not manage them yet.
-- `passthrough_auth` (Boolean) Forward the calling user's Zeshan credentials to the API instead of using a fixed credential. Use it when the API enforces per-user permissions.
+- `passthrough_auth` (Boolean) Forward the calling user's Flintyst credentials to the API instead of using a fixed credential. Use it when the API enforces per-user permissions.
 
 ### Read-Only
 
-- `display_name` (String) Name shown in the chat UI. Zeshan derives it from `name`.
+- `display_name` (String) Name shown in the chat UI. Flintyst derives it from `name`.
 - `id` (String) Numeric action id.
 
 ## Import

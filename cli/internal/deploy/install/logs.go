@@ -28,7 +28,7 @@ func RunLogs(ctx context.Context, deps Deps, opts Options, logOpts LogOptions) e
 func (in *installer) runLogs(ctx context.Context, l LogOptions) error {
 	in.root = paths.Resolve(in.opts.Dir)
 	if !paths.IsInstall(in.root.Dir) {
-		in.infof("No Zeshan install found at %s", in.root.Dir)
+		in.infof("No Flintyst install found at %s", in.root.Dir)
 		for _, alt := range in.root.Ambiguous {
 			in.infof("(another install exists at %s — pass --dir to read its logs)", alt)
 		}

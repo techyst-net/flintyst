@@ -193,7 +193,7 @@ def main() -> None:
         "--braintrust-project",
         type=str,
         help="Braintrust project name",
-        default="Zeshan",
+        default="Flintyst",
     )
 
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output")

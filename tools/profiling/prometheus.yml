@@ -8,7 +8,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  # Zeshan API server — exposes /metrics via prometheus-fastapi-instrumentator
+  # Flintyst API server — exposes /metrics via prometheus-fastapi-instrumentator
   # Port matches the API Server launch config in .vscode/launch.json
   - job_name: 'onyx-api-server'
     scrape_interval: 5s
@@ -16,7 +16,7 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:8080']
 
-  # Zeshan celery workers — each exposes /metrics on a dedicated port
+  # Flintyst celery workers — each exposes /metrics on a dedicated port
   - job_name: 'onyx-monitoring-worker'
     scrape_interval: 5s
     metrics_path: /metrics

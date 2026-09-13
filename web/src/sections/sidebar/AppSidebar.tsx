@@ -262,7 +262,7 @@ export default function AppSidebar() {
   const [showMoveCustomAgentModal, setShowMoveCustomAgentModal] =
     useState(false);
 
-  // Check if Zeshan Craft is enabled via settings (backed by PostHog feature flag)
+  // Check if Flintyst Craft is enabled via settings (backed by PostHog feature flag)
   // Only explicit true enables the feature; false or undefined = disabled
   const isOnyxCraftEnabled = combinedSettingsData?.onyx_craft_enabled === true;
 
@@ -271,7 +271,7 @@ export default function AppSidebar() {
     enabled: isOnyxCraftEnabled,
   });
 
-  // Find build_mode feature announcement notification (only if Zeshan Craft is enabled)
+  // Find build_mode feature announcement notification (only if Flintyst Craft is enabled)
   const buildModeNotification = isOnyxCraftEnabled
     ? notifications?.find(
         (n) =>

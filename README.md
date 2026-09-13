@@ -1,4 +1,4 @@
-# Zeshan Search
+# Flintyst Search
 
 Enterprise search and AI chat over your own data: 40+ connectors (Confluence,
 Salesforce, Slack, Google Drive, GitHub, …), hybrid vector search, an agentic

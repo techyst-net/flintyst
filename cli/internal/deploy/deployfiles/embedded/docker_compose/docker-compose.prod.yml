@@ -17,7 +17,7 @@ services:
       target: runtime
     command: >
       /bin/sh -c "alembic upgrade head &&
-      echo \"Starting Zeshan Api Server\" &&
+      echo \"Starting Flintyst Api Server\" &&
       uvicorn onyx.main:app --host 0.0.0.0 --port 8080"
     env_file:
       - path: .env
@@ -167,7 +167,7 @@ services:
         - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
         # Enterprise Edition only
         - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
-        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Zeshan.
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
         - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
         - NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=4096"}
     env_file:
@@ -196,7 +196,7 @@ services:
       retries: 5
       start_period: 30s
 
-  # Uncomment the block below to enable the MCP server for Zeshan.
+  # Uncomment the block below to enable the MCP server for Flintyst.
   # mcp_server:
   #   image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
   #   build:

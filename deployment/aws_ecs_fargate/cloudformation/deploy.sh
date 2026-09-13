@@ -186,7 +186,7 @@ deploy_services_stacks() {
     done
 }
 
-echo "Starting deployment of Zeshan to ECS Fargate Cluster..."
+echo "Starting deployment of Flintyst to ECS Fargate Cluster..."
 deploy_infra_stacks
 deploy_services_stacks
 

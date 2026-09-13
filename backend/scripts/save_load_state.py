@@ -99,12 +99,12 @@ def load_vespa(filename: str) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Zeshan checkpoint saving and loading.")
+    parser = argparse.ArgumentParser(description="Flintyst checkpoint saving and loading.")
     parser.add_argument(
-        "--save", action="store_true", help="Save Zeshan state to directory."
+        "--save", action="store_true", help="Save Flintyst state to directory."
     )
     parser.add_argument(
-        "--load", action="store_true", help="Load Zeshan state from save directory."
+        "--load", action="store_true", help="Load Flintyst state from save directory."
     )
     parser.add_argument(
         "--postgres_container_name",

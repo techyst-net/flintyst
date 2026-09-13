@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# k8s-up.sh — bring up an Zeshan dev cluster on the local machine.
+# k8s-up.sh — bring up a Flintyst dev cluster on the local machine.
 #
 # Idempotent. See docs/craft/dev/local-kubernetes.md for the full workflow.
 #
@@ -14,7 +14,7 @@
 #   --opensearch-password <pw>     admin password on first install
 #                                  (default: generated, printed at the end)
 #   --skip-cluster-create          skip kind create (use an existing cluster)
-#   --skip-helm                    only create the cluster, don't install Zeshan
+#   --skip-helm                    only create the cluster, don't install Flintyst
 
 set -euo pipefail
 
@@ -223,7 +223,7 @@ next steps:
          --namespace $NAMESPACE \\
          --port 8080:8080
 
-  4. open vscode and run the "Run All Zeshan Services" launch profile.
+  4. open vscode and run the "Run All Flintyst Services" launch profile.
      Before first run, copy .vscode/.env.k8s.template to .vscode/.env.k8s
      and fill in the <REPLACE THIS> values.
 

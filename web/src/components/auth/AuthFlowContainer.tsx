@@ -21,7 +21,7 @@ export default function AuthFlowContainer({
     <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="w-full max-w-md flex items-start flex-col bg-background-tint-00 rounded-16 shadow-lg shadow-box-02 p-6">
         {/* logo_display_style only governs the sidebar; auth pages always show
-            the logo mark (custom when uploaded, Zeshan otherwise) */}
+            the logo mark (custom when uploaded, Flintyst otherwise) */}
         {logoUrl ? (
           <div
             className="aspect-square rounded-full overflow-hidden relative"

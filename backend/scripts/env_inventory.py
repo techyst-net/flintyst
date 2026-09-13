@@ -1,4 +1,4 @@
-"""Environment-variable inventory for the Zeshan backend.
+"""Environment-variable inventory for the Flintyst backend.
 
 AST-walks the backend (and optionally the frontend) to build a canonical
 manifest of every environment variable the code actually reads, then

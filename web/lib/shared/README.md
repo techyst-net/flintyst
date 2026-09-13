@@ -1,6 +1,6 @@
 # @onyx-ai/shared
 
-Platform-agnostic code shared between Zeshan **web** and the future **mobile** app.
+Platform-agnostic code shared between Flintyst **web** and the future **mobile** app.
 
 It holds four things, none of which depend on any UI framework:
 
@@ -36,7 +36,7 @@ When extending it:
 
 ## Tokens
 
-This package is the **single source of truth for Zeshan's design tokens** (colors,
+This package is the **single source of truth for Flintyst's design tokens** (colors,
 spacing, radius, padding, weights, backdrop-blur, and typography metrics + font
 families + presets). Opal consumes them via `@import "@onyx-ai/shared/tokens.css"` and
 defines no design-token values of its own; mobile consumes the NativeWind fragment +

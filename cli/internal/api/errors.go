@@ -2,7 +2,7 @@ package api
 
 import "fmt"
 
-// OnyxAPIError is returned when an Zeshan API call fails.
+// OnyxAPIError is returned when a Flintyst API call fails.
 type OnyxAPIError struct {
 	StatusCode int
 	Detail     string

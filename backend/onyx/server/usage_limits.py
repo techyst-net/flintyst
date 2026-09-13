@@ -33,7 +33,7 @@ from shared_configs.configs import (
 
 logger = setup_logger()
 
-# Collect all Zeshan-managed default API keys for comparison
+# Collect all Flintyst-managed default API keys for comparison
 _ONYX_MANAGED_API_KEYS: set[str] = set()
 for key in [
     OPENAI_DEFAULT_API_KEY,
@@ -46,7 +46,7 @@ for key in [
 
 
 def is_onyx_managed_api_key(api_key: str | None) -> bool:
-    """Check if the given API key is one of Zeshan's managed default keys."""
+    """Check if the given API key is one of Flintyst's managed default keys."""
     return bool(api_key) and api_key in _ONYX_MANAGED_API_KEYS
 
 
@@ -179,9 +179,9 @@ def check_llm_cost_limit_for_provider(
     llm_provider_api_key: str | None,
 ) -> None:
     """
-    Check if the LLM cost limit would be exceeded for a provider using Zeshan-managed keys.
+    Check if the LLM cost limit would be exceeded for a provider using Flintyst-managed keys.
 
-    Only enforces limits when the provider uses Zeshan-managed API keys.
+    Only enforces limits when the provider uses Flintyst-managed API keys.
     Users with their own API keys are not subject to LLM cost limits.
 
     Args:
@@ -195,7 +195,7 @@ def check_llm_cost_limit_for_provider(
     if not is_usage_limits_enabled():
         return
 
-    # Only enforce limits for Zeshan-managed API keys
+    # Only enforce limits for Flintyst-managed API keys
     if not is_onyx_managed_api_key(llm_provider_api_key):
         return
 

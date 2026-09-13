@@ -1,4 +1,4 @@
-// Package client is a minimal hand-written HTTP client for the Zeshan admin
+// Package client is a minimal hand-written HTTP client for the Flintyst admin
 // API endpoints the Terraform provider manages.
 package client
 
@@ -21,7 +21,7 @@ const (
 	retryWaitMax   = 30 * time.Second
 )
 
-// Config holds everything NewClient needs to reach an Zeshan deployment.
+// Config holds everything NewClient needs to reach a Flintyst deployment.
 type Config struct {
 	// ServerURL is the server origin, e.g. https://cloud.onyx.app.
 	ServerURL string
@@ -34,7 +34,7 @@ type Config struct {
 	Version string
 }
 
-// Client talks to the Zeshan backend API.
+// Client talks to the Flintyst backend API.
 type Client struct {
 	baseURL    string
 	apiKey     string
@@ -118,11 +118,11 @@ func (c *Client) newRequest(ctx context.Context, method, path string, body io.Re
 	}
 	req.Header.Set("User-Agent", c.userAgent)
 	if c.apiKey != "" {
-		// X-Zeshan-Authorization is checked first server-side and survives
+		// X-Flintyst-Authorization is checked first server-side and survives
 		// proxies that consume the Authorization header.
 		bearer := "Bearer " + c.apiKey
 		req.Header.Set("Authorization", bearer)
-		req.Header.Set("X-Zeshan-Authorization", bearer)
+		req.Header.Set("X-Flintyst-Authorization", bearer)
 	}
 	return req, nil
 }

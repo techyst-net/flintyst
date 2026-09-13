@@ -3,7 +3,7 @@
   "app": {
     "windows": [
       {
-        "title": "Zeshan",
+        "title": "Flintyst",
         "label": "main",
         "url": "index.html",
         "create": false,

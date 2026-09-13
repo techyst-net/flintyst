@@ -79,3 +79,24 @@ services:
       options:
         max-size: 10m
         max-file: '3'
+  # Upstream serves the frontend and the API from one hostname (see
+  # deployment/data/nginx/app.conf.template): the browser calls /api on the same
+  # origin it loaded the page from, so there is no cross-origin auth to arrange.
+  # Caddy reproduces that split in front of these two containers.
+  web_server:
+    image: ${REGISTRY:-docker.io}/${DOCKERHUB_USER:?set DOCKERHUB_USER}/techyst-onyx-web_server:${TAG:-latest}
+    env_file:
+    - ./.env
+    environment:
+      INTERNAL_URL: http://api_server:8080
+    depends_on:
+    - api_server
+    restart: unless-stopped
+    pull_policy: always
+    ports:
+    - 127.0.0.1:3050:3000
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'

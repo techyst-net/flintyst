@@ -13,7 +13,7 @@ import (
 // ccPairDependencies is the connector and credential every pair needs.
 //
 // The source is mock_connector because creating a pair runs the connector's
-// real validate_connector_settings, which reaches the source system. Zeshan
+// real validate_connector_settings, which reaches the source system. Flintyst
 // short-circuits that check for mock_connector and ingestion_api, so the test
 // exercises the whole lifecycle without a live source.
 const ccPairDependencies = `
@@ -63,7 +63,7 @@ resource "onyx_cc_pair" "test" {
 				ResourceName:      "onyx_cc_pair.test",
 				ImportState:       true,
 				ImportStateVerify: true,
-				// Zeshan cycles these on its own as indexing progresses, so they
+				// Flintyst cycles these on its own as indexing progresses, so they
 				// change between the apply and the import.
 				ImportStateVerifyIgnore: []string{
 					"status", "last_index_attempt_status", "num_docs_indexed",

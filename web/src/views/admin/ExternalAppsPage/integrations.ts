@@ -103,7 +103,7 @@ export function externalAppToIntegration(
       : descriptor
         ? () => onEdit(descriptor)
         : null,
-    // Zeshan-managed built-ins are provisioned by Zeshan.
+    // Flintyst-managed built-ins are provisioned by Flintyst.
     remove: app.is_onyx_managed
       ? null
       : {

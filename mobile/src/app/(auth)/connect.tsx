@@ -47,10 +47,10 @@ export default function ConnectScreen() {
   }
 
   return (
-    <AuthScreenShell title="Connect to Zeshan">
+    <AuthScreenShell title="Connect to Flintyst">
       <InputLayouts.Vertical
         title="Root Domain"
-        description="The root URL for your Zeshan instance"
+        description="The root URL for your Flintyst instance"
         error={error ?? undefined}
       >
         <TextInput

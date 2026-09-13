@@ -261,6 +261,6 @@ def get_engine_for_tenant(tenant_id: str) -> Engine:
     """Engine for the database holding this tenant's schema.
 
     With one shard configured this is the default engine, i.e. exactly the behavior
-    Zeshan has always had.
+    Flintyst has always had.
     """
     return get_engine_for_shard(get_shard_for_tenant(tenant_id))

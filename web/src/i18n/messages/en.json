@@ -274,7 +274,7 @@
         },
         "placeholder": "Select method",
         "ptOauth": {
-          "description": "Forward the user's OAuth access token used to authenticate Zeshan.",
+          "description": "Forward the user's OAuth access token used to authenticate Flintyst.",
           "label": "OAuth Pass-through"
         },
         "required": "Authentication type is required"
@@ -313,11 +313,11 @@
         "title": "No authentication for this MCP server"
       },
       "oauthInfo": {
-        "discovery": "Client ID and secret are optional. During automatic discovery, Zeshan uses a Client ID Metadata Document (CIMD) when supported and falls back to Dynamic Client Registration (DCR).",
-        "manualRegistration": "If your server supports neither method, register your Zeshan instance with the server provider first. Grant Zeshan the necessary scopes for your actions."
+        "discovery": "Client ID and secret are optional. During automatic discovery, Flintyst uses a Client ID Metadata Document (CIMD) when supported and falls back to Dynamic Client Registration (DCR).",
+        "manualRegistration": "If your server supports neither method, register your Flintyst instance with the server provider first. Grant Flintyst the necessary scopes for your actions."
       },
       "passThroughNotice": {
-        "description": "Zeshan will forward the user's OAuth access token directly to the server as an Authorization header. Make sure the server supports authentication with the same provider.",
+        "description": "Flintyst will forward the user's OAuth access token directly to the server as an Authorization header. Make sure the server supports authentication with the same provider.",
         "title": "Use pass-through for services with shared identity provider."
       },
       "providerMode": {
@@ -471,7 +471,7 @@
         },
         "placeholder": "Select method",
         "ptOauth": {
-          "description": "Forward the user's OAuth access token used to authenticate Zeshan.",
+          "description": "Forward the user's OAuth access token used to authenticate Flintyst.",
           "label": "OAuth Pass-through"
         },
         "required": "Authentication method is required"
@@ -519,7 +519,7 @@
         "description": "OAuth pass-through requires an OAuth-capable login method (Google or OIDC)."
       },
       "passThroughNotice": {
-        "description": "Zeshan will forward the user's OAuth access token directly to the server as an Authorization header. Make sure the server supports authentication with the same provider.",
+        "description": "Flintyst will forward the user's OAuth access token directly to the server as an Authorization header. Make sure the server supports authentication with the same provider.",
         "title": "Use pass-through for services with shared identity provider."
       },
       "redirectUri": {
@@ -1025,7 +1025,7 @@
         "title": "Feedback"
       },
       "page": {
-        "description": "Understand how your workspace uses Zeshan across queries, feedback, and agents."
+        "description": "Understand how your workspace uses Flintyst across queries, feedback, and agents."
       },
       "reports": {
         "calendar": {
@@ -1092,8 +1092,8 @@
       },
       "slackChannelChart": {
         "description": "Total Queries vs Auto Resolved",
-        "empty": "No OnyxBot activity in this workspace for the selected time range.",
-        "error": "Failed to fetch OnyxBot data.",
+        "empty": "No FlintystBot activity in this workspace for the selected time range.",
+        "error": "Failed to fetch FlintystBot data.",
         "series": {
           "autoResolved": {
             "label": "Automatically Resolved"
@@ -1285,7 +1285,7 @@
         "close": {
           "label": "Close"
         },
-        "description": "Manually add and activate a license for this Zeshan instance.",
+        "description": "Manually add and activate a license for this Flintyst instance.",
         "emptyKey": {
           "error": "Please enter a license key"
         },
@@ -1296,7 +1296,7 @@
           "label": "License key expired"
         },
         "keyField": {
-          "description": "Paste or attach your license key file you received from Zeshan.",
+          "description": "Paste or attach your license key file you received from Flintyst.",
           "title": "License Key"
         },
         "updateKey": {
@@ -1592,7 +1592,7 @@
           "placeholder": "In days",
           "restoreTooltip": "Restore Default"
         },
-        "description": "Specify how long Zeshan should retain chats in your organization.",
+        "description": "Specify how long Flintyst should retain chats in your organization.",
         "enterprisePlanTag": {
           "label": "Enterprise Plan"
         },
@@ -1654,7 +1654,7 @@
       },
       "teamContext": {
         "description": "Users can also provide additional individual context in their personal settings.",
-        "placeholder": "Describe your team and how Zeshan should behave.",
+        "placeholder": "Describe your team and how Flintyst should behave.",
         "title": "Team Context"
       },
       "teamName": {
@@ -1774,7 +1774,7 @@
     "connector": {
       "accessType": {
         "autoSyncOption": {
-          "description": "We will automatically sync permissions from the source. A document will be searchable in Zeshan if and only if the user performing the search has permission to access the document in the source.",
+          "description": "We will automatically sync permissions from the source. A document will be searchable in Flintyst if and only if the user performing the search has permission to access the document in the source.",
           "disabledReason": "Current credential auth method doesn't support Auto Sync Permissions. Please change the credential auth method to a supported one.",
           "name": "Auto Sync Permissions"
         },
@@ -1787,7 +1787,7 @@
           "name": "Private"
         },
         "publicOption": {
-          "description": "Everyone with an account on Zeshan can access the documents pulled in by this connector",
+          "description": "Everyone with an account on Flintyst can access the documents pulled in by this connector",
           "name": "Public"
         }
       },
@@ -2813,7 +2813,7 @@
         "title": "No users found"
       },
       "header": {
-        "description": "Control who can use Craft, Zeshan's agentic app builder.",
+        "description": "Control who can use Craft, Flintyst's agentic app builder.",
         "title": "Access"
       },
       "perUserAccess": {
@@ -2844,7 +2844,7 @@
         }
       },
       "unavailable": {
-        "description": "Craft is enabled per deployment by Zeshan. Contact your Zeshan representative to get access.",
+        "description": "Craft is enabled per deployment by Flintyst. Contact your Flintyst representative to get access.",
         "title": "Craft isn't available on this deployment"
       },
       "usersLoadError": {
@@ -2930,7 +2930,7 @@
         "label": "Try in Craft"
       },
       "unavailable": {
-        "description": "Craft is enabled per deployment by Zeshan. Contact your Zeshan representative to get access.",
+        "description": "Craft is enabled per deployment by Flintyst. Contact your Flintyst representative to get access.",
         "title": "Craft isn't available on this deployment"
       }
     },
@@ -3074,10 +3074,10 @@
     },
     "customAnalytics": {
       "intro": {
-        "description": "This allows you to bring your own analytics tool to Zeshan! Copy the Web snippet from your analytics provider into the box below, and we'll start sending usage events."
+        "description": "This allows you to bring your own analytics tool to Flintyst! Copy the Web snippet from your analytics provider into the box below, and we'll start sending usage events."
       },
       "notEnabled": {
-        "description": "To set up custom analytics scripts, please work with the team who setup Zeshan in your team to set the <i>CUSTOM_ANALYTICS_SECRET_KEY</i> environment variable.",
+        "description": "To set up custom analytics scripts, please work with the team who setup Flintyst in your team to set the <i>CUSTOM_ANALYTICS_SECRET_KEY</i> environment variable.",
         "title": "Custom Analytics is not enabled."
       },
       "script": {
@@ -3086,7 +3086,7 @@
         "label": "Script"
       },
       "secretKey": {
-        "description": "For security reasons, you must provide a secret key to update this script. This should be the value of the <i>CUSTOM_ANALYTICS_SECRET_KEY</i> environment variable set when initially setting up Zeshan.",
+        "description": "For security reasons, you must provide a secret key to update this script. This should be the value of the <i>CUSTOM_ANALYTICS_SECRET_KEY</i> environment variable set when initially setting up Flintyst.",
         "label": "Secret Key"
       },
       "updateButton": {
@@ -3315,7 +3315,7 @@
       },
       "page": {
         "header": {
-          "description": "Connect Zeshan to your Discord servers. Users can ask questions directly in Discord channels."
+          "description": "Connect Flintyst to your Discord servers. Users can ask questions directly in Discord channels."
         }
       },
       "registrationKey": {
@@ -3352,7 +3352,7 @@
           "label": "Delete API Key"
         },
         "deleteHint": "Delete the current API key before updating.",
-        "description": "Unstructured extracts and transforms complex data from formats like .pdf, .docx, .png, .pptx, etc. into clean text for Zeshan to ingest. Provide an API key to enable Unstructured document processing.",
+        "description": "Unstructured extracts and transforms complex data from formats like .pdf, .docx, .png, .pptx, etc. into clean text for Flintyst to ingest. Provide an API key to enable Unstructured document processing.",
         "learnMore": "Learn more about Unstructured <link>here</link>.",
         "note": "<label>Note:</label> this will send documents to Unstructured servers for processing.",
         "saveButton": {
@@ -3429,7 +3429,7 @@
         "deleteScheduled": {
           "toast": "Document set \"{name}\" scheduled for deletion"
         },
-        "description": "**Document Sets** allow you to group logically connected documents into a single bundle. These can then be used as a filter when performing searches to control the scope of information Zeshan searches over.",
+        "description": "**Document Sets** allow you to group logically connected documents into a single bundle. These can then be used as a filter when performing searches to control the scope of information Flintyst searches over.",
         "edit": {
           "header": {
             "title": "Edit Document Set"
@@ -3577,7 +3577,7 @@
         "title": "Export logs"
       },
       "header": {
-        "description": "Download a zip of server log files to attach to an Zeshan support thread."
+        "description": "Download a zip of server log files to attach to a Flintyst support thread."
       },
       "receipt": {
         "duplicateHost": {
@@ -3692,7 +3692,7 @@
         "noCustomSkills": "no custom skills",
         "orgCredentialsSet": "org credentials set",
         "perUserCredentials": "per-user credentials",
-        "providedByOnyx": "provided by Zeshan",
+        "providedByOnyx": "provided by Flintyst",
         "tools": "{count, plural, one {# tool} other {# tools}}",
         "upstreamPatterns": "{count, plural, one {# upstream pattern} other {# upstream patterns}}"
       },
@@ -3941,7 +3941,7 @@
           "tooltip": "Document embeddings are being updated due to recent changes to this group."
         },
         "systemGroup": {
-          "description": "Zeshan manages this group. Members are the only thing it holds, and the only thing you can change.",
+          "description": "Flintyst manages this group. Members are the only thing it holds, and the only thing you can change.",
           "title": "System group"
         },
         "toasts": {
@@ -4054,7 +4054,7 @@
         }
       },
       "permissionsChanged": {
-        "description": "Zeshan now uses group-based permissions. Access is configured per group, so a user's permissions are the combination of every group they belong to.",
+        "description": "Flintyst now uses group-based permissions. Access is configured per group, so a user's permissions are the combination of every group they belong to.",
         "learnMore": {
           "label": "Learn more"
         },
@@ -4117,7 +4117,7 @@
           "placeholder": "Cost limit",
           "unit": "(USD)"
         },
-        "disabledTooltip": "Token rate limits are available on the [Enterprise version of Zeshan](/admin/billing) only.",
+        "disabledTooltip": "Token rate limits are available on the [Enterprise version of Flintyst](/admin/billing) only.",
         "section": {
           "description": "Limit number of tokens this group can use within a given time period.",
           "title": "Token Rate Limit"
@@ -4180,7 +4180,7 @@
       },
       "disconnectModal": {
         "body": {
-          "description": "Zeshan will stop calling this endpoint for hook ***{name}***. In-flight requests will continue to run. The external endpoint may still retain data previously sent to it. You can reconnect this hook later if needed."
+          "description": "Flintyst will stop calling this endpoint for hook ***{name}***. In-flight requests will continue to run. The external endpoint may still retain data previously sent to it. You can reconnect this hook later if needed."
         },
         "deleteNote": {
           "description": "You can also delete this hook. Deletion cannot be undone."
@@ -4200,7 +4200,7 @@
       },
       "form": {
         "apiKey": {
-          "description": "Zeshan will use this key to authenticate with your API endpoint.",
+          "description": "Flintyst will use this key to authenticate with your API endpoint.",
           "keepCurrent": {
             "placeholder": "Leave blank to keep current key"
           },
@@ -4250,10 +4250,10 @@
           "label": "Save Changes"
         },
         "softStrategy": {
-          "description": "If the endpoint returns an error, Zeshan logs it and continues the pipeline as normal, ignoring the hook result."
+          "description": "If the endpoint returns an error, Flintyst logs it and continues the pipeline as normal, ignoring the hook result."
         },
         "timeout": {
-          "description": "Maximum time Zeshan will wait for the endpoint to respond before applying the fail strategy. Must be greater than 0 and at most {max} seconds.",
+          "description": "Maximum time Flintyst will wait for the endpoint to respond before applying the fail strategy. Must be greater than 0 and at most {max} seconds.",
           "revert": {
             "tooltip": "Revert to Default"
           },
@@ -4318,7 +4318,7 @@
         }
       },
       "page": {
-        "description": "Extend Zeshan pipelines by registering external API endpoints as callbacks at predefined hook points.",
+        "description": "Extend Flintyst pipelines by registering external API endpoints as callbacks at predefined hook points.",
         "empty": {
           "title": "No hook points available"
         },
@@ -4460,7 +4460,7 @@
           "message": "API key validation failed"
         },
         "authMethod": {
-          "idle": "Choose how Zeshan should authenticate with Google Vertex AI.",
+          "idle": "Choose how Flintyst should authenticate with Google Vertex AI.",
           "label": "Authentication Method",
           "required": "Authentication method is required",
           "serviceAccount": {
@@ -4504,7 +4504,7 @@
           "required": "Location is required"
         },
         "projectId": {
-          "idle": "The GCP project where Vertex AI is enabled. Zeshan authenticates with the pod's bound service account (GKE Workload Identity).",
+          "idle": "The GCP project where Vertex AI is enabled. Flintyst authenticates with the pod's bound service account (GKE Workload Identity).",
           "label": "GCP Project ID",
           "required": "Project ID is required"
         },
@@ -4594,7 +4594,7 @@
           "title": "Deployment Name"
         },
         "modelName": {
-          "description": "A label for this model in Zeshan. Azure routes requests by deployment name, so this only needs to be a unique identifier."
+          "description": "A label for this model in Flintyst. Azure routes requests by deployment name, so this only needs to be a unique identifier."
         },
         "targetUrl": {
           "title": "Target URL"
@@ -4629,7 +4629,7 @@
         }
       },
       "cloudDisabled": {
-        "tooltip": "This setting is managed by Zeshan Cloud."
+        "tooltip": "This setting is managed by Flintyst Cloud."
       },
       "contextualModel": {
         "description": "This model will be used to generate context for chunks.",
@@ -4643,9 +4643,9 @@
       },
       "embeddingModel": {
         "cloudManaged": {
-          "title": "Embedding model and settings are managed by Zeshan Cloud."
+          "title": "Embedding model and settings are managed by Flintyst Cloud."
         },
-        "description": "Zeshan uses this model to encode documents for search and retrieval.",
+        "description": "Flintyst uses this model to encode documents for search and retrieval.",
         "title": "Embedding Model"
       },
       "errorsModal": {
@@ -4693,7 +4693,7 @@
         },
         "modelName": {
           "placeholder": "model-name",
-          "selfHostedDescription": "Zeshan will connect to this model on your self-hosted endpoint.",
+          "selfHostedDescription": "Flintyst will connect to this model on your self-hosted endpoint.",
           "title": "Model Name"
         },
         "normalize": {
@@ -4737,7 +4737,7 @@
           "title": "API Base URL"
         },
         "modelName": {
-          "description": "Zeshan will connect to this model on your {provider} proxy."
+          "description": "Flintyst will connect to this model on your {provider} proxy."
         }
       },
       "maxImageSize": {
@@ -4953,7 +4953,7 @@
       "wontPortConsentModal": {
         "title": "{count, plural, one {This connector will be deleted} other {These # connectors will be deleted}}",
         "submit": "Delete & Re-index",
-        "description": "{count, plural, one {Re-indexing skips paused and invalid connectors, so this one won't be moved to the new index. Zeshan deletes it, along with the documents it indexed:} other {Re-indexing skips paused and invalid connectors, so these # won't be moved to the new index. Zeshan deletes them, along with the documents they indexed:}}",
+        "description": "{count, plural, one {Re-indexing skips paused and invalid connectors, so this one won't be moved to the new index. Flintyst deletes it, along with the documents it indexed:} other {Re-indexing skips paused and invalid connectors, so these # won't be moved to the new index. Flintyst deletes them, along with the documents they indexed:}}",
         "connector": "{name} — {status}",
         "statusInvalid": "invalid",
         "statusPaused": "paused",
@@ -5118,7 +5118,7 @@
         "title": "New LLM configuration temporarily unavailable."
       },
       "defaultModel": {
-        "description": "This model will be used by Zeshan by default in your chats.",
+        "description": "This model will be used by Flintyst by default in your chats.",
         "title": "Default Model"
       },
       "deleteModal": {
@@ -5132,7 +5132,7 @@
       },
       "groups": {
         "addProvider": {
-          "description": "Zeshan supports both popular providers and self-hosted models.",
+          "description": "Flintyst supports both popular providers and self-hosted models.",
           "title": "Add Provider"
         },
         "gateways": {
@@ -5210,7 +5210,7 @@
               "description": "For non-AWS environments",
               "label": "Access Key"
             },
-            "description": "Choose how Zeshan should authenticate with Bedrock.",
+            "description": "Choose how Flintyst should authenticate with Bedrock.",
             "iam": {
               "description": "Recommended for AWS environments",
               "label": "Environment IAM Role"
@@ -5222,7 +5222,7 @@
             "title": "Authentication Method"
           },
           "iamNotice": {
-            "title": "Zeshan will use the IAM role attached to the environment it’s running in to authenticate."
+            "title": "Flintyst will use the IAM role attached to the environment it’s running in to authenticate."
           },
           "longTermApiKeyField": {
             "placeholder": "Your long-term API key",
@@ -5493,7 +5493,7 @@
         },
         "setup": {
           "apiBaseField": {
-            "containerizedNote": "With Zeshan running in a container, use `host.docker.internal` in place of `localhost` to reach a service on your host.",
+            "containerizedNote": "With Flintyst running in a container, use `host.docker.internal` in place of `localhost` to reach a service on your host.",
             "title": "API Base URL"
           },
           "apiKeyField": {
@@ -5546,7 +5546,7 @@
         },
         "vertexAi": {
           "authMethodField": {
-            "description": "Choose how Zeshan should authenticate with Google Vertex AI.",
+            "description": "Choose how Flintyst should authenticate with Google Vertex AI.",
             "serviceAccount": {
               "description": "Upload a GCP service account key JSON file",
               "label": "Service Account JSON"
@@ -5575,7 +5575,7 @@
             "projectRequired": "GCP Project ID is required"
           },
           "workloadIdentityNotice": {
-            "title": "Zeshan will use the pod's ambient Google Cloud credentials (via google.auth.default). Ensure the Kubernetes ServiceAccount is bound to a GCP Service Account with access to Vertex AI."
+            "title": "Flintyst will use the pod's ambient Google Cloud credentials (via google.auth.default). Ensure the Kubernetes ServiceAccount is bound to a GCP Service Account with access to Vertex AI."
           }
         }
       },
@@ -5643,7 +5643,7 @@
         },
         "requestSentBody": "Your join request has been sent. You can explore as your own team while waiting for an admin of {domain} to approve your request.",
         "tryOnyxButton": {
-          "label": "Try Zeshan while waiting"
+          "label": "Try Flintyst while waiting"
         }
       },
       "newTenant": {
@@ -6202,7 +6202,7 @@
     },
     "serviceAccounts": {
       "deleteModal": {
-        "description": "Any application using the API key of account *{name}* (`{keyDisplay}`) will lose access to Zeshan.",
+        "description": "Any application using the API key of account *{name}* (`{keyDisplay}`) will lose access to Flintyst.",
         "submit": {
           "label": "Delete"
         },
@@ -6249,7 +6249,7 @@
         "cancelButton": {
           "label": "Cancel"
         },
-        "description": "Use service account API key to programmatically access Zeshan API with user-level permissions. You can modify the account details later.",
+        "description": "Use service account API key to programmatically access Flintyst API with user-level permissions. You can modify the account details later.",
         "groups": {
           "empty": {
             "description": "No groups assigned to this service account.",
@@ -6311,7 +6311,7 @@
         }
       },
       "page": {
-        "description": "Use service accounts to programmatically access Zeshan API.",
+        "description": "Use service accounts to programmatically access Flintyst API.",
         "error": {
           "description": "Please check the console for more details.",
           "title": "Failed to load service accounts."
@@ -6381,7 +6381,7 @@
         }
       },
       "liteModeNotice": {
-        "description": "This deployment runs Zeshan Lite, which has no vector database — connectors and document indexing are disabled, and nothing is indexed. To connect data sources and index documents, deploy Zeshan in **Standard mode**. See the [deployment guide]({docsUrl}) to get started.",
+        "description": "This deployment runs Flintyst Lite, which has no vector database — connectors and document indexing are disabled, and nothing is indexed. To connect data sources and index documents, deploy Flintyst in **Standard mode**. See the [deployment guide]({docsUrl}) to get started.",
         "title": "Indexing is unavailable in Lite mode"
       },
       "providerCard": {
@@ -6407,10 +6407,10 @@
     "slackBots": {
       "channelConfig": {
         "createError": {
-          "toast": "Error creating OnyxBot config - {error}"
+          "toast": "Error creating FlintystBot config - {error}"
         },
         "updateError": {
-          "toast": "Error updating OnyxBot config - {error}"
+          "toast": "Error updating FlintystBot config - {error}"
         }
       },
       "channels": {
@@ -6528,16 +6528,16 @@
         },
         "disableDefault": {
           "label": "Disable Default Configuration",
-          "warning": "Warning: Disabling the default configuration means OnyxBot won't respond in Slack channels unless they are explicitly configured. Additionally, OnyxBot will not respond to DMs."
+          "warning": "Warning: Disabling the default configuration means FlintystBot won't respond in Slack channels unless they are explicitly configured. Additionally, FlintystBot will not respond to DMs."
         },
         "documentSets": {
           "autoSyncedDisabled": {
-            "tooltip": "Unable to use this document set because it contains a connector with auto-sync permissions. OnyxBot's responses in this channel are visible to all Slack users, so mirroring the asker's permissions could inadvertently expose private information."
+            "tooltip": "Unable to use this document set because it contains a connector with auto-sync permissions. FlintystBot's responses in this channel are visible to all Slack users, so mirroring the asker's permissions could inadvertently expose private information."
           },
           "autoSyncedNote": {
             "text": "These document sets cannot be attached as they have auto-synced docs:"
           },
-          "description": "Select the document sets OnyxBot will use while answering questions in Slack.",
+          "description": "Select the document sets FlintystBot will use while answering questions in Slack.",
           "hideUnselectableButton": {
             "label": "Hide un-selectable document sets"
           },
@@ -6562,12 +6562,12 @@
         },
         "isEphemeral": {
           "label": "Respond to user in a private (ephemeral) message",
-          "tooltip": "If set, OnyxBot will respond only to the user in a private (ephemeral) message. If you also chose 'Search' Agent above, selecting this option will make documents that are private to the user available for their queries."
+          "tooltip": "If set, FlintystBot will respond only to the user in a private (ephemeral) message. If you also chose 'Search' Agent above, selecting this option will make documents that are private to the user available for their queries."
         },
         "knowledgeSource": {
           "allPublic": {
             "label": "All Public Knowledge",
-            "sublabel": "Let OnyxBot respond based on information from all public connectors"
+            "sublabel": "Let FlintystBot respond based on information from all public connectors"
           },
           "documentSets": {
             "label": "Specific Document Sets",
@@ -6584,7 +6584,7 @@
           }
         },
         "nonSearchAgent": {
-          "description": "Select the non-search agent OnyxBot will use while answering questions in Slack."
+          "description": "Select the non-search agent FlintystBot will use while answering questions in Slack."
         },
         "privacyAlert": {
           "connectors": {
@@ -6595,7 +6595,7 @@
         },
         "questionmarkPrefilter": {
           "label": "Only respond to questions",
-          "tooltip": "If set, OnyxBot will only respond to messages that contain a question mark"
+          "tooltip": "If set, FlintystBot will only respond to messages that contain a question mark"
         },
         "removedDocumentSets": {
           "toast": "We removed one or more document sets from your selection because they are no longer valid. Please review and update your configuration."
@@ -6605,15 +6605,15 @@
             "tooltip": "Disabled while 'Respond to user in a private (ephemeral) message' is on — ephemeral responses target a single user only."
           },
           "label": "(Optional) Respond to Certain Users / Groups",
-          "subtext": "If specified, only these users / groups can invoke OnyxBot in this channel, and responses are visible only to them."
+          "subtext": "If specified, only these users / groups can invoke FlintystBot in this channel, and responses are visible only to them."
         },
         "respondTagOnly": {
-          "label": "Respond to @OnyxBot Only",
-          "tooltip": "If set, OnyxBot will only respond when directly tagged"
+          "label": "Respond to @FlintystBot Only",
+          "tooltip": "If set, FlintystBot will only respond when directly tagged"
         },
         "respondToBots": {
           "label": "Respond to Bot messages",
-          "tooltip": "If not set, OnyxBot will always ignore messages from Bots"
+          "tooltip": "If not set, FlintystBot will always ignore messages from Bots"
         },
         "responseType": {
           "detailed": {
@@ -6623,10 +6623,10 @@
           "standard": {
             "label": "Standard"
           },
-          "tooltip": "Controls the format of OnyxBot's responses."
+          "tooltip": "Controls the format of FlintystBot's responses."
         },
         "searchAgent": {
-          "description": "Select the search-enabled agent OnyxBot will use while answering questions in Slack."
+          "description": "Select the search-enabled agent FlintystBot will use while answering questions in Slack."
         },
         "searchConfig": {
           "section": {
@@ -6635,14 +6635,14 @@
         },
         "showContinueInWebUi": {
           "label": "Show Continue in Web UI button",
-          "tooltip": "If set, will show a button at the bottom of the response that allows the user to continue the conversation in the Zeshan Web UI"
+          "tooltip": "If set, will show a button at the bottom of the response that allows the user to continue the conversation in the Flintyst Web UI"
         },
         "stillNeedHelp": {
           "label": "Give a \"Still need help?\" button",
           "section": {
             "prompt": "Configure Still Need Help Button"
           },
-          "tooltip": "OnyxBot's response will include a button at the bottom of the response that asks the user if they still need help."
+          "tooltip": "FlintystBot's response will include a button at the bottom of the response that asks the user if they still need help."
         },
         "syncEnabledAgents": {
           "hideButton": {
@@ -6663,17 +6663,17 @@
       },
       "intro": {
         "autoAnswer": {
-          "item": "Setup OnyxBot to automatically answer questions in certain channels."
+          "item": "Setup FlintystBot to automatically answer questions in certain channels."
         },
-        "description": "Setup Slack bots that connect to Zeshan. Once setup, you will be able to ask questions to Zeshan directly from Slack. Additionally, you can:",
+        "description": "Setup Slack bots that connect to Flintyst. Once setup, you will be able to ask questions to Flintyst directly from Slack. Additionally, you can:",
         "directMessage": {
-          "item": "Directly message OnyxBot to search just as you would in the web UI."
+          "item": "Directly message FlintystBot to search just as you would in the web UI."
         },
         "docsPrompt": {
-          "text": "Follow the <link>guide</link> found in the Zeshan documentation to get started!"
+          "text": "Follow the <link>guide</link> found in the Flintyst documentation to get started!"
         },
         "documentSets": {
-          "item": "Choose which document sets OnyxBot should answer from, depending on the channel the question is being asked."
+          "item": "Choose which document sets FlintystBot should answer from, depending on the channel the question is being asked."
         }
       },
       "list": {
@@ -6691,7 +6691,7 @@
       },
       "newChannel": {
         "header": {
-          "title": "Configure OnyxBot for Slack Channel"
+          "title": "Configure FlintystBot for Slack Channel"
         }
       },
       "table": {
@@ -6708,7 +6708,7 @@
           "badge": "Disabled"
         },
         "empty": {
-          "message": "Please add a New Slack Bot to begin chatting with Zeshan!"
+          "message": "Please add a New Slack Bot to begin chatting with Flintyst!"
         },
         "enabled": {
           "badge": "Enabled"
@@ -7115,13 +7115,13 @@
         "label": "Pop-up Notice at First Visit"
       },
       "appName": {
-        "description": "This name will show across the app and replace \"Zeshan\" in the UI.",
+        "description": "This name will show across the app and replace \"Flintyst\" in the UI.",
         "label": "Application Display Name"
       },
       "branding": {
-        "description": "Remove “powered by Zeshan” and other Zeshan branding presence in the app.",
-        "enterpriseTooltip": "Hiding Zeshan branding is an Enterprise Plan feature.",
-        "label": "Hide Zeshan Branding"
+        "description": "Remove “powered by Flintyst” and other Flintyst branding presence in the app.",
+        "enterpriseTooltip": "Hiding Flintyst branding is an Enterprise Plan feature.",
+        "label": "Hide Flintyst Branding"
       },
       "chatFooter": {
         "description": "Add markdown content for disclaimers or additional information.",
@@ -7146,7 +7146,7 @@
         "label": "Greeting Message"
       },
       "helpLink": {
-        "description": "Add a custom help link in the user menu in addition to the Zeshan documentation.",
+        "description": "Add a custom help link in the user menu in addition to the Flintyst documentation.",
         "enterpriseTooltip": "Custom help link is an Enterprise Plan feature.",
         "label": "Custom Help Link"
       },
@@ -7564,7 +7564,7 @@
         }
       },
       "activateModal": {
-        "description": "<strong>{email}</strong> will regain access to Zeshan.",
+        "description": "<strong>{email}</strong> will regain access to Flintyst.",
         "submit": {
           "label": "Activate"
         },
@@ -7574,7 +7574,7 @@
         }
       },
       "cancelInviteModal": {
-        "description": "<strong>{email}</strong> will no longer be able to join Zeshan with this invite.",
+        "description": "<strong>{email}</strong> will no longer be able to join Flintyst with this invite.",
         "submit": {
           "label": "Cancel Invite"
         },
@@ -7584,7 +7584,7 @@
         }
       },
       "deactivateModal": {
-        "description": "<strong>{email}</strong> will immediately lose access to Zeshan. Their sessions and agents will be preserved. Their license seat will be freed. You can reactivate this account later.",
+        "description": "<strong>{email}</strong> will immediately lose access to Flintyst. Their sessions and agents will be preserved. Their license seat will be freed. You can reactivate this account later.",
         "submit": {
           "label": "Deactivate"
         },
@@ -7594,7 +7594,7 @@
         }
       },
       "deleteModal": {
-        "description": "<strong>{email}</strong> will be permanently removed from Zeshan. All of their session history will be deleted. Deletion cannot be undone.",
+        "description": "<strong>{email}</strong> will be permanently removed from Flintyst. All of their session history will be deleted. Deletion cannot be undone.",
         "submit": {
           "label": "Delete"
         },
@@ -7719,7 +7719,7 @@
         "title": "Users & Requests"
       },
       "permissionsNotice": {
-        "description": "Zeshan now uses group-based permissions. The Curator and Global Curator roles have been replaced by configurable group permissions, with per-group managers for scoped administration.",
+        "description": "Flintyst now uses group-based permissions. The Curator and Global Curator roles have been replaced by configurable group permissions, with per-group managers for scoped administration.",
         "learnMoreButton": {
           "label": "Learn more"
         },
@@ -7946,12 +7946,12 @@
           "label": "STT Model"
         },
         "targetUri": {
-          "description": "Paste the endpoint shown in [Azure Portal (Keys and Endpoint)]({portalUrl}). Zeshan extracts the speech region from this URL. Examples: `https://westus.api.cognitive.microsoft.com/` or `https://westus.tts.speech.microsoft.com/`.",
+          "description": "Paste the endpoint shown in [Azure Portal (Keys and Endpoint)]({portalUrl}). Flintyst extracts the speech region from this URL. Examples: `https://westus.api.cognitive.microsoft.com/` or `https://westus.tts.speech.microsoft.com/`.",
           "label": "Target URI",
           "required": "Target URI is required"
         },
         "ttsModel": {
-          "description": "This model will be used by Zeshan by default for text-to-speech.",
+          "description": "This model will be used by Flintyst by default for text-to-speech.",
           "label": "Default Model"
         },
         "updateButton": {
@@ -8014,7 +8014,7 @@
           "message": "{label} disconnected"
         },
         "fallback": {
-          "description": "Zeshan will fall back to the built-in web crawler."
+          "description": "Flintyst will fall back to the built-in web crawler."
         },
         "header": {
           "description": "This will remove the stored credentials for this provider.",
@@ -8438,7 +8438,7 @@
           "title": "Conversation Starters"
         },
         "defaultModel": {
-          "description": "This model will be used by Zeshan by default in your chats.",
+          "description": "This model will be used by Flintyst by default in your chats.",
           "title": "Default Model"
         },
         "featured": {
@@ -8539,7 +8539,7 @@
         "label": "Create New Organization"
       },
       "createTeamOption": {
-        "text": "Create a new Zeshan team"
+        "text": "Create a new Flintyst team"
       },
       "differentEmailPrompt": {
         "text": "Have an account with a different email?"
@@ -8548,10 +8548,10 @@
         "title": "Account Not Found"
       },
       "inviteOption": {
-        "text": "Be invited to an existing Zeshan team"
+        "text": "Be invited to an existing Flintyst team"
       },
       "notFound": {
-        "description": "We couldn't find your account in our records. To access Zeshan, you need to either:"
+        "description": "We couldn't find your account in our records. To access Flintyst, you need to either:"
       },
       "signInLink": {
         "label": "Sign in"
@@ -8620,7 +8620,7 @@
         "description": "Account access restrictions or permissions"
       },
       "cloudSupportPrompt": {
-        "text": "If you continue to experience problems, please reach out to the Zeshan team at <link>support@onyx.app</link>"
+        "text": "If you continue to experience problems, please reach out to the Flintyst team at <link>support@onyx.app</link>"
       },
       "code": {
         "accessDenied": "Access was denied by your identity provider.",
@@ -8919,7 +8919,7 @@
         "label": "How did you hear about us?"
       },
       "subtitle": {
-        "text": "Get started with Zeshan"
+        "text": "Get started with Flintyst"
       }
     },
     "verifyEmail": {
@@ -9153,7 +9153,7 @@
       },
       "healthBanner": {
         "backendUnavailable": {
-          "description": "If this is your initial setup or you just updated your Zeshan deployment, this is likely because the backend is still starting up. Give it a minute or two, and then refresh the page. If that does not work, make sure the backend is setup and/or contact an administrator.",
+          "description": "If this is your initial setup or you just updated your Flintyst deployment, this is likely because the backend is still starting up. Give it a minute or two, and then refresh the page. If that does not work, make sure the backend is setup and/or contact an administrator.",
           "title": "The backend is currently unavailable"
         }
       },
@@ -9258,7 +9258,7 @@
           "placeholder": "How can I help you today?",
           "queuedPlaceholder": "Press up to edit queued messages",
           "searchPlaceholder": "Search connected sources",
-          "speakingPlaceholder": "Zeshan is speaking..."
+          "speakingPlaceholder": "Flintyst is speaking..."
         },
         "sendButton": {
           "processingFilesTooltip": "Waiting for attached file(s) to finish processing"
@@ -9379,7 +9379,7 @@
       },
       "sharedAppInputBar": {
         "input": {
-          "placeholder": "How can Zeshan help you today"
+          "placeholder": "How can Flintyst help you today"
         },
         "startSessionButton": {
           "label": "Start New Session"
@@ -10307,7 +10307,7 @@
           "loginButton": {
             "label": "Log in"
           },
-          "title": "Welcome to Zeshan"
+          "title": "Welcome to Flintyst"
         },
         "noResubmitMessage": {
           "toast": "No previously-submitted user message found."
@@ -10325,8 +10325,8 @@
           "confirmButton": {
             "label": "Turn off"
           },
-          "description": "You'll see your browser's default new tab page instead. You can turn it back on anytime in your Zeshan settings.",
-          "title": "Turn off Zeshan new tab page?"
+          "description": "You'll see your browser's default new tab page instead. You can turn it back on anytime in your Flintyst settings.",
+          "title": "Turn off Flintyst new tab page?"
         }
       },
       "settingsPanel": {
@@ -10352,7 +10352,7 @@
           "title": "Settings"
         },
         "newTabToggle": {
-          "label": "Use Zeshan as new tab page"
+          "label": "Use Flintyst as new tab page"
         },
         "themeToggle": {
           "tooltip": "{mode, select, light {Switch to light theme} other {Switch to dark theme}}"
@@ -10363,7 +10363,7 @@
           "tooltip": "New chat"
         },
         "openInOnyxButton": {
-          "tooltip": "Open in Zeshan"
+          "tooltip": "Open in Flintyst"
         }
       }
     },
@@ -10375,7 +10375,7 @@
         "error": "You need to agree to the terms to access the application."
       },
       "header": {
-        "title": "Welcome to Zeshan!"
+        "title": "Welcome to Flintyst!"
       },
       "logoIcon": {
         "alt": "Logo"
@@ -10739,10 +10739,10 @@
           "title": "Access Restricted"
         },
         "licenseLapse": {
-          "description": "Your access to Zeshan has been temporarily suspended due to a lapse in your license."
+          "description": "Your access to Flintyst has been temporarily suspended due to a lapse in your license."
         },
         "licenseRequired": {
-          "description": "A license is required to use Zeshan. Your data is protected and will be available once a license is activated."
+          "description": "A license is required to use Flintyst. Your data is protected and will be available once a license is activated."
         },
         "logoutButton": {
           "label": "Log out"
@@ -10754,7 +10754,7 @@
           "description": "To get started, please contact your system administrator to obtain a license."
         },
         "renewLicense": {
-          "description": "To reinstate your access and continue using Zeshan, please contact your system administrator to renew your license."
+          "description": "To reinstate your access and continue using Flintyst, please contact your system administrator to renew your license."
         },
         "resubscribeButton": {
           "label": "Resubscribe",
@@ -10773,10 +10773,10 @@
           "description": "Your organization has exceeded its licensed seat count ({used} users / {seats} seats). Access is restricted until the number of users is reduced or your license is upgraded."
         },
         "subscriptionLapse": {
-          "description": "Your access to Zeshan has been temporarily suspended due to a lapse in your subscription."
+          "description": "Your access to Flintyst has been temporarily suspended due to a lapse in your subscription."
         },
         "updatePayment": {
-          "description": "To reinstate your access and continue benefiting from Zeshan's powerful features, please update your payment information."
+          "description": "To reinstate your access and continue benefiting from Flintyst's powerful features, please update your payment information."
         }
       },
       "configError": {
@@ -10784,7 +10784,7 @@
           "text": "If you're an admin, please review our <docsLink>documentation</docsLink> for proper configuration steps. If you're a user, please contact your admin for assistance."
         },
         "heading": {
-          "description": "It seems there was a problem loading your Zeshan settings. This could be due to a configuration issue or incomplete setup.",
+          "description": "It seems there was a problem loading your Flintyst settings. This could be due to a configuration issue or incomplete setup.",
           "title": "We encountered an issue"
         }
       },
@@ -10793,7 +10793,7 @@
           "description": "We apologize for any inconvenience this may cause and appreciate your patience."
         },
         "checkBack": {
-          "description": "Zeshan is currently in a maintenance window. Please check back in a couple of minutes."
+          "description": "Flintyst is currently in a maintenance window. Please check back in a couple of minutes."
         },
         "heading": {
           "title": "Maintenance in Progress"
@@ -11074,7 +11074,7 @@
         "alt": "Logo"
       },
       "poweredBy": {
-        "label": "Powered by Zeshan"
+        "label": "Powered by Flintyst"
       }
     },
     "nonSelectableConnectors": {
@@ -11271,8 +11271,8 @@
             "label": "Name"
           }
         },
-        "managedDescription": "Provided by Zeshan — configure what the agent may do.",
-        "managedNote": "This app is provided by Zeshan — credentials are managed for you. Choose what the agent may do below. Users connect it from the Apps page.",
+        "managedDescription": "Provided by Flintyst — configure what the agent may do.",
+        "managedNote": "This app is provided by Flintyst — credentials are managed for you. Choose what the agent may do below. Users connect it from the Apps page.",
         "saveButton": "Save"
       },
       "customApp": {
@@ -11357,14 +11357,14 @@
           "startAuthFailed": "Failed to start authorization"
         },
         "header": {
-          "description": "Connect the tools Zeshan Craft can use as context while it works.",
+          "description": "Connect the tools Flintyst Craft can use as context while it works.",
           "manageButton": "Manage apps",
           "searchPlaceholder": "Search apps...",
           "title": "Apps"
         },
         "kinds": {
           "app": {
-            "blurb": "Integrations Zeshan supports directly. Each comes with skills that teach Craft how to use it — start here.",
+            "blurb": "Integrations Flintyst supports directly. Each comes with skills that teach Craft how to use it — start here.",
             "empty": "No apps are configured for your organization yet.",
             "emptyTitle": "No apps yet",
             "tabLabel": "Apps · {count}"
@@ -11739,7 +11739,7 @@
       },
       "llmLocked": {
         "backToChatButton": "Back to Chat",
-        "description": "Zeshan Craft needs a model provider, and only admins can set one up. Ask your admin to connect Anthropic, OpenAI, or OpenRouter.",
+        "description": "Flintyst Craft needs a model provider, and only admins can set one up. Ask your admin to connect Anthropic, OpenAI, or OpenRouter.",
         "title": "An LLM provider is required"
       },
       "llmSetup": {
@@ -11884,7 +11884,7 @@
         "ariaLabel": "Copy link"
       },
       "organization": {
-        "description": "Anyone logged into your Zeshan can view this app.",
+        "description": "Anyone logged into your Flintyst can view this app.",
         "label": "Organization"
       },
       "private": {
@@ -12420,7 +12420,7 @@
         "placeholder": "Filter files..."
       },
       "processing": {
-        "description": "Zeshan is still processing your uploaded files. You can create the agent now, but it will not have access to all files until processing completes."
+        "description": "Flintyst is still processing your uploaded files. You can create the agent now, but it will not have access to all files until processing completes."
       }
     },
     "search": {
@@ -12499,7 +12499,7 @@
         "button": {
           "label": "Web Search"
         },
-        "description": "Enable Zeshan to search the internet for information.",
+        "description": "Enable Flintyst to search the internet for information.",
         "title": "Select web search provider"
       }
     },
@@ -12519,7 +12519,7 @@
         "subtitle": "LiteLLM Compatible APIs",
         "title": "Custom LLM Provider"
       },
-      "description": "Zeshan supports both self-hosted models and popular providers.",
+      "description": "Flintyst supports both self-hosted models and popular providers.",
       "edit": {
         "ariaLabel": "Edit LLM providers"
       },
@@ -12539,7 +12539,7 @@
       "input": {
         "placeholder": "Your name"
       },
-      "title": "What should Zeshan call you?"
+      "title": "What should Flintyst call you?"
     },
     "nonAdminStep": {
       "confirmation": {
@@ -12665,7 +12665,7 @@
         "searchPlaceholder": "Search..."
       },
       "revokeModal": {
-        "description": "Any application using the token {name} ({tokenDisplay}) will lose access to Zeshan. This action cannot be undone.",
+        "description": "Any application using the token {name} ({tokenDisplay}) will lose access to Flintyst. This action cannot be undone.",
         "question": "Are you sure you want to revoke this token?",
         "submit": "Revoke",
         "title": "Revoke Access Token"
@@ -12731,7 +12731,7 @@
         "title": "Default App Mode"
       },
       "defaultModel": {
-        "description": "This model will be used by Zeshan by default in your chats.",
+        "description": "This model will be used by Flintyst by default in your chats.",
         "title": "Default Model"
       },
       "defaultReasoningLevel": {
@@ -12756,7 +12756,7 @@
       "connectButton": "Connect",
       "disconnectModal": {
         "continueNote": "You can still continue existing sessions referencing {name} content.",
-        "description": "Zeshan will no longer be able to access or search content from your {name} account.",
+        "description": "Flintyst will no longer be able to access or search content from your {name} account.",
         "disconnecting": "Disconnecting...",
         "submit": "Disconnect",
         "title": "Disconnect *{name}*"
@@ -12803,7 +12803,7 @@
         "copy": "Copy",
         "copyError": "Could not copy value."
       },
-      "description": "Connect external tools to the models available to you in Zeshan.",
+      "description": "Connect external tools to the models available to you in Flintyst.",
       "guideButton": "Guide",
       "loadError": {
         "description": "Please refresh the page and try again.",
@@ -12866,7 +12866,7 @@
         "maxReached": "Maximum of {count} memories reached"
       },
       "empty": {
-        "description": "Add personal note or memory that Zeshan should remember.",
+        "description": "Add personal note or memory that Flintyst should remember.",
         "getStarted": "No memories yet. Click \"Add Line\" to get started.",
         "noMatches": "No memories match your search."
       },
@@ -12877,11 +12877,11 @@
         "label": "{count, plural, one {Line} other {Lines}}"
       },
       "modal": {
-        "description": "Let Zeshan reference these stored notes and memories in chats.",
+        "description": "Let Flintyst reference these stored notes and memories in chats.",
         "searchPlaceholder": "Search..."
       },
       "referenceStoredMemories": {
-        "description": "Let Zeshan reference stored memories in chats.",
+        "description": "Let Flintyst reference stored memories in chats.",
         "title": "Reference Stored Memories"
       },
       "removeLineButton": {
@@ -12893,7 +12893,7 @@
         "saved": "Preferences saved"
       },
       "updateMemories": {
-        "description": "Let Zeshan generate and update stored memories.",
+        "description": "Let Flintyst generate and update stored memories.",
         "title": "Update Memories"
       },
       "viewAll": {
@@ -13171,10 +13171,10 @@
     },
     "adminSidebar": {
       "businessOrEnterpriseOnly": {
-        "tooltip": "This feature is available on the [Business or Enterprise version of Zeshan](/admin/billing) only."
+        "tooltip": "This feature is available on the [Business or Enterprise version of Flintyst](/admin/billing) only."
       },
       "enterpriseOnly": {
-        "tooltip": "This feature is available on the [Enterprise version of Zeshan](/admin/billing) only."
+        "tooltip": "This feature is available on the [Enterprise version of Flintyst](/admin/billing) only."
       },
       "exitAdminPanel": {
         "label": "Exit Admin Panel"
@@ -13715,7 +13715,7 @@
           "title": "Import from GitHub"
         },
         "scratch": {
-          "description": "Write the instructions and add supporting files in Zeshan.",
+          "description": "Write the instructions and add supporting files in Flintyst.",
           "title": "Start from scratch"
         },
         "trigger": {

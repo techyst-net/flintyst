@@ -1,17 +1,17 @@
 # Third-party trademark notice
 
 The `@onyx-ai/opal/logos` subpath ships brand marks (logos, wordmarks) of
-third-party products and services that Zeshan integrates with — including
+third-party products and services that Flintyst integrates with — including
 but not limited to Anthropic, OpenAI, Google, Microsoft, Slack, GitHub,
 GitLab, Notion, Confluence, Dropbox, Salesforce, and others.
 
-All such marks remain the property of their respective owners. Zeshan
+All such marks remain the property of their respective owners. Flintyst
 makes **no claim of ownership, sponsorship, endorsement, affiliation,
 or trademark** over any third-party mark distributed in this package.
 
 These marks are shipped solely for **nominative use** — to identify the
-external products, integrations, and providers that Zeshan connects to —
-inside Zeshan's first-party UI and consumers of `@onyx-ai/opal`.
+external products, integrations, and providers that Flintyst connects to —
+inside Flintyst's first-party UI and consumers of `@onyx-ai/opal`.
 
 If you are a trademark owner and would like a mark adjusted or removed,
 please open an issue at <https://github.com/onyx-dot-app/onyx/issues>.

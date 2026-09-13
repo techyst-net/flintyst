@@ -1,4 +1,4 @@
-# Security guidance for Zeshan
+# Security guidance for Flintyst
 
 Additional review rules for this repository. Built-in vulnerability checks
 still apply; the rules below are repo-specific and should be treated as
@@ -6,7 +6,7 @@ high-signal findings.
 
 ## Multi-tenancy
 
-- Zeshan is multi-tenant. Database access on per-tenant data must go
+- Flintyst is multi-tenant. Database access on per-tenant data must go
   through the tenant-aware SQLAlchemy session that the request/Celery
   middleware sets up; new code paths that obtain a session by other
   means and read tenant data are suspect. Reads from the public schema

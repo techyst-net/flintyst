@@ -1,6 +1,6 @@
 # Frontend Standards
 
-This file is the single source of truth for frontend coding standards across all Zeshan frontend
+This file is the single source of truth for frontend coding standards across all Flintyst frontend
 projects (including, but not limited to, `/web`, `/desktop`).
 
 # Components
@@ -296,7 +296,7 @@ export const GitbookIcon = createLogoIcon(gitbookLightIcon, {
 
 **ONLY use icons from the `web/src/icons` directory. Do NOT use icons from `react-icons`, `lucide`, or other external libraries.**
 
-**Reason:** We have a very carefully curated selection of icons that match our Zeshan guidelines. We do NOT want to muddy those up with different aesthetic stylings.
+**Reason:** We have a very carefully curated selection of icons that match our Flintyst guidelines. We do NOT want to muddy those up with different aesthetic stylings.
 
 ```typescript
 // ✅ Good
@@ -335,7 +335,7 @@ function UserCard({ name }: { name: string }) {
 import { markdown } from "@opal/utils";
 
 <Text font="main-ui-body" color="text-05">
-  {markdown("*Hello*, **world**! Visit [Zeshan](https://onyx.app) and run `onyx start`.")}
+  {markdown("*Hello*, **world**! Visit [Flintyst](https://onyx.app) and run `onyx start`.")}
 </Text>
 
 // ✅ Good — plain strings are never parsed as markdown
@@ -405,7 +405,7 @@ interface InfoCardProps {
 
 **Heavily avoid raw HTML input components. Always use components from the `web/src/refresh-components` or `web/lib/opal/src` directory.**
 
-**Reason:** We've put in a lot of effort to unify the components that are rendered in the Zeshan app. Using raw components breaks the entire UI of the application, and leaves it in a muddier state than before.
+**Reason:** We've put in a lot of effort to unify the components that are rendered in the Flintyst app. Using raw components breaks the entire UI of the application, and leaves it in a muddier state than before.
 
 ```typescript
 // ✅ Good
@@ -449,7 +449,7 @@ function ContactForm() {
 - **Theme:** `theme-primary-XX`, `theme-red-XX`, `theme-blue-XX`, etc.
 
 ```typescript
-// ✅ Good - Use custom Zeshan color classes
+// ✅ Good - Use custom Flintyst color classes
 <div className="bg-background-neutral-01 border border-border-02" />
 <div className="bg-background-tint-02 border border-border-01" />
 <div className="bg-status-success-01" />

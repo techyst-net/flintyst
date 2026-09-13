@@ -5,7 +5,7 @@ powers chat mode. Returns ranked results without generating an LLM answer.
 
 Intended for programmatic consumers (onyx-cli, Craft sandbox, integrations).
 
-Not the same as the Zeshan Search UI backend at /api/search/send-search-message
+Not the same as the Flintyst Search UI backend at /api/search/send-search-message
 (ee/onyx/server/query_and_chat/search_backend.py), which calls search_pipeline()
 directly — a lighter-weight flow with optional query expansion.
 """

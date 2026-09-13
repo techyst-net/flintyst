@@ -57,7 +57,7 @@ func MaybePrompt() {
 	// Mark before asking so Ctrl+C won't cause a re-prompt.
 	markPrompted()
 
-	fmt.Print("Enjoying Zeshan? Star the repo on GitHub? [Y/n] ")
+	fmt.Print("Enjoying Flintyst? Star the repo on GitHub? [Y/n] ")
 	reader := bufio.NewReader(os.Stdin)
 	answer, _ := reader.ReadString('\n')
 	answer = strings.TrimSpace(strings.ToLower(answer))

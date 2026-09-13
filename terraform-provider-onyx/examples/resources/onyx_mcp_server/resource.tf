@@ -5,7 +5,7 @@ resource "onyx_mcp_server" "docs" {
   server_url  = "https://mcp.example.com/mcp"
 }
 
-# A server behind one shared API token. Zeshan returns the token masked, so the
+# A server behind one shared API token. Flintyst returns the token masked, so the
 # configuration is the only record of it: rotate it here, never in the UI.
 resource "onyx_mcp_server" "weather" {
   name           = "Weather"

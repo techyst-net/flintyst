@@ -31,7 +31,7 @@ class FileAttachmentUser(OnyxChatUser):
     def setup_files(self) -> None:
         kb = env_int("ONYX_FILE_KB", 512)
         # ~1KB repeating unit, truncated to the requested size.
-        unit = b"Zeshan load-test attachment payload. Lorem ipsum dolor sit. " * 18
+        unit = b"Flintyst load-test attachment payload. Lorem ipsum dolor sit. " * 18
         blob = (unit * max(1, kb))[: kb * 1024]
         filename = f"loadtest-{uuid.uuid4().hex[:8]}.txt"
 

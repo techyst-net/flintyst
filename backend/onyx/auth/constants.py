@@ -16,5 +16,5 @@ SCIM_TOKEN_LENGTH = 48
 
 # Shared header constants
 API_KEY_HEADER_NAME = "Authorization"
-API_KEY_HEADER_ALTERNATIVE_NAME = "X-Zeshan-Authorization"
+API_KEY_HEADER_ALTERNATIVE_NAME = "X-Flintyst-Authorization"
 BEARER_PREFIX = "Bearer "

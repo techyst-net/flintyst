@@ -55,11 +55,11 @@ def _build_provider_extra_headers(
             )
         }
 
-    # Passing these will put Zeshan on the OpenRouter leaderboard
+    # Passing these will put Flintyst on the OpenRouter leaderboard
     elif provider == LlmProviderNames.OPENROUTER:
         return {
             "HTTP-Referer": "https://onyx.app",
-            "X-Title": "Zeshan",
+            "X-Title": "Flintyst",
         }
 
     return {}

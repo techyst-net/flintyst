@@ -244,7 +244,7 @@ export default function NRFPage({ isSidePanel = false }: NRFPageProps) {
     setSettingsOpen((prev) => !prev);
   };
 
-  // If user toggles the "Use Zeshan" switch to off, prompt a modal
+  // If user toggles the "Use Flintyst" switch to off, prompt a modal
   const handleUseOnyxToggle = (checked: boolean) => {
     if (!checked) {
       setShowTurnOffModal(true);

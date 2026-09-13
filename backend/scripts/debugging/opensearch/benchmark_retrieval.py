@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Benchmarks OpenSearchDocumentIndex latency.
 
-Requires Zeshan to be running as it reads search settings from the database.
+Requires Flintyst to be running as it reads search settings from the database.
 
 Usage:
     source .venv/bin/activate

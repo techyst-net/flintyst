@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Defaults for the convergence polls. Several Zeshan writes only schedule work
+// Defaults for the convergence polls. Several Flintyst writes only schedule work
 // for Celery, so the API answers long before the change is real.
 const (
 	pollInitialInterval = 2 * time.Second
@@ -36,7 +36,7 @@ func (e *TimeoutError) Error() string {
 		msg += ": " + e.LastState
 	}
 	return msg + ". The operation runs in the background and may still finish; " +
-		"check the Zeshan admin panel, and raise the timeout if this deployment is slow"
+		"check the Flintyst admin panel, and raise the timeout if this deployment is slow"
 }
 
 // Poll calls check until it reports done, it returns an error, the context

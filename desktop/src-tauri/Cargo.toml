@@ -1,7 +1,7 @@
 [package]
 name = "onyx"
 version = "0.0.0-dev"
-description = "Lightweight desktop app for Zeshan Cloud"
+description = "Lightweight desktop app for Flintyst Cloud"
 authors = ["you"]
 edition = "2021"
 license = "MIT"

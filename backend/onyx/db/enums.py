@@ -347,7 +347,7 @@ class OpenSearchTenantMigrationStatus(str, PyEnum):
     COMPLETED = "completed"
 
 
-# Zeshan Build Mode Enums
+# Flintyst Build Mode Enums
 class BuildSessionStatus(str, PyEnum):
     """Lifecycle of a build session.
 

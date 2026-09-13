@@ -3,12 +3,12 @@
 page_title: "onyx_llm_provider Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  An Zeshan LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its enabled models. model_configurations is the full list of record: models omitted from it are removed server-side on apply, and removing the model that is currently the deployment default fails validation — repoint the default first. api_key and custom_config are masked by the API on read, so out-of-band changes to them cannot be detected as drift.
+  A Flintyst LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its enabled models. model_configurations is the full list of record: models omitted from it are removed server-side on apply, and removing the model that is currently the deployment default fails validation — repoint the default first. api_key and custom_config are masked by the API on read, so out-of-band changes to them cannot be detected as drift.
 ---
 
 # onyx_llm_provider (Resource)
 
-An Zeshan LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its enabled models. `model_configurations` is the full list of record: models omitted from it are removed server-side on apply, and removing the model that is currently the deployment default fails validation — repoint the default first. `api_key` and `custom_config` are masked by the API on read, so out-of-band changes to them cannot be detected as drift.
+A Flintyst LLM provider (OpenAI, Anthropic, Azure, Bedrock, ...) with its enabled models. `model_configurations` is the full list of record: models omitted from it are removed server-side on apply, and removing the model that is currently the deployment default fails validation — repoint the default first. `api_key` and `custom_config` are masked by the API on read, so out-of-band changes to them cannot be detected as drift.
 
 ## Example Usage
 
@@ -51,7 +51,7 @@ resource "onyx_llm_provider" "openai" {
 > **NOTE**: [Write-only arguments](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments) are supported in Terraform 1.11 and later.
 
 - `api_base` (String) Custom API base URL (e.g. for Azure or self-hosted gateways).
-- `api_key` (String, Sensitive) Provider API key. The Zeshan API masks this on read, so Terraform cannot detect out-of-band changes; the configured value is authoritative. Prefer `api_key_wo`, which keeps the value out of state entirely; the two cannot be set together.
+- `api_key` (String, Sensitive) Provider API key. The Flintyst API masks this on read, so Terraform cannot detect out-of-band changes; the configured value is authoritative. Prefer `api_key_wo`, which keeps the value out of state entirely; the two cannot be set together.
 - `api_key_wo` (String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Provider API key, held only in configuration. Terraform sends it on every apply and stores nothing, so the key never reaches state. Pair it with `api_key_wo_version` to rotate it. Needs Terraform 1.11 or later.
 - `api_key_wo_version` (Number) Rotation counter for `api_key_wo`. Terraform never stores a write-only value and so cannot tell that the secret changed; raise this number to make the next apply send the current one. Do not derive it from the secret itself — unlike the secret, this number is kept in state.
 - `api_version` (String) API version (Azure).
@@ -61,7 +61,7 @@ resource "onyx_llm_provider" "openai" {
 - `deployment_name` (String) Deployment name (Azure).
 - `force_delete` (Boolean) Allow destroying this provider even while it holds the deployment default model. Defaults to false, where such a destroy fails.
 - `groups` (Set of Number) User group ids the provider is restricted to (EE).
-- `is_auto_mode` (Boolean) Zeshan Auto mode: the model list is managed by Zeshan. When enabled, the server owns `model_configurations`: Terraform stops drift-checking the list, and updates re-assert the server's current models instead of the configured ones, so registry-managed models are never removed.
+- `is_auto_mode` (Boolean) Flintyst Auto mode: the model list is managed by Flintyst. When enabled, the server owns `model_configurations`: Terraform stops drift-checking the list, and updates re-assert the server's current models instead of the configured ones, so registry-managed models are never removed.
 - `is_public` (Boolean) Whether the provider is available to all users.
 - `name` (String) Display name for the provider configuration.
 - `personas` (Set of Number) Persona ids the provider is restricted to.
@@ -83,8 +83,8 @@ Optional:
 - `display_name` (String) Source-API display name (dynamic providers such as OpenRouter/Ollama).
 - `is_visible` (Boolean) Whether the model is selectable in the UI.
 - `max_input_tokens` (Number) Override for the model's max input tokens; unset uses the model's known default.
-- `supports_image_input` (Boolean) Override for image-input support; unset lets Zeshan infer it.
-- `supports_reasoning` (Boolean) Override for reasoning-model classification; unset lets Zeshan infer it.
+- `supports_image_input` (Boolean) Override for image-input support; unset lets Flintyst infer it.
+- `supports_reasoning` (Boolean) Override for reasoning-model classification; unset lets Flintyst infer it.
 
 ## Import
 

@@ -45,7 +45,7 @@ resource "onyx_persona" "hr_private" {
   users     = [var.hr_lead_user_id]
 }
 
-# Zeshan promotes a featured agent to users. Ignoring documents from before a
+# Flintyst promotes a featured agent to users. Ignoring documents from before a
 # migration keeps an agent off stale material.
 resource "onyx_persona" "onboarding" {
   name          = "Onboarding"

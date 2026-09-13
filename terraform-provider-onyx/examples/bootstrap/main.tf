@@ -1,4 +1,4 @@
-# A day-one Zeshan configuration: a chat model, one indexed source, a document
+# A day-one Flintyst configuration: a chat model, one indexed source, a document
 # set built from it, and an agent that answers from that set.
 #
 # Everything here works on Community Edition. The user group at the bottom is
@@ -120,13 +120,13 @@ resource "onyx_persona" "docs" {
 # ---------------------------------------------------------------------------
 
 # User groups need Enterprise Edition. Leave enable_enterprise_features off on
-# Community Edition: Zeshan rejects these routes there.
+# Community Edition: Flintyst rejects these routes there.
 resource "onyx_user_group" "platform" {
   count = var.enable_enterprise_features ? 1 : 0
 
   name = "Platform"
 
-  # Permissions use Zeshan's own tokens, not the enum names.
+  # Permissions use Flintyst's own tokens, not the enum names.
   permissions = [
     "manage:connectors",
     "manage:document_sets",

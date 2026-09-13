@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Slack Web API wrapper for the Zeshan Craft sandbox.
+"""Slack Web API wrapper for the Flintyst Craft sandbox.
 
 Common Slack operations exposed as subcommands. Output is JSON on stdout.
 Slack signals failure with {"ok": false, "error": "..."} (still HTTP 200).

@@ -1,4 +1,4 @@
-// Package exitcodes defines semantic exit codes for the Zeshan CLI.
+// Package exitcodes defines semantic exit codes for the Flintyst CLI.
 package exitcodes
 
 import "fmt"

@@ -77,7 +77,7 @@ func (r *credentialResource) Schema(_ context.Context, _ resource.SchemaRequest,
 			"name": schema.StringAttribute{
 				Optional: true,
 				Computed: true,
-				MarkdownDescription: "Display name. Zeshan has no API to clear a name, so removing this " +
+				MarkdownDescription: "Display name. Flintyst has no API to clear a name, so removing this " +
 					"attribute keeps the last value instead of planning a change.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -106,7 +106,7 @@ func (r *credentialResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(true),
-				MarkdownDescription: "Whether every admin can use this credential. Zeshan has no API to change " +
+				MarkdownDescription: "Whether every admin can use this credential. Flintyst has no API to change " +
 					"it later. Leaving it `true` also keeps the credential readable: the API hides a private " +
 					"credential from admins other than its creator, and Terraform cannot tell that apart from " +
 					"a deleted one.",
@@ -194,7 +194,7 @@ func (r *credentialResource) Create(ctx context.Context, req resource.CreateRequ
 
 	id, err := r.client.CreateCredential(ctx, upsert)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Zeshan credential", err.Error())
+		resp.Diagnostics.AddError("Failed to create Flintyst credential", err.Error())
 		return
 	}
 
@@ -220,7 +220,7 @@ func (r *credentialResource) Read(ctx context.Context, req resource.ReadRequest,
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Zeshan credential", err.Error())
+		resp.Diagnostics.AddError("Failed to read Flintyst credential", err.Error())
 		return
 	}
 
@@ -265,13 +265,13 @@ func (r *credentialResource) Update(ctx context.Context, req resource.UpdateRequ
 	// the merge that follows is a no-op.
 	if payloadChanged {
 		if err := r.client.ReplaceCredentialJSON(ctx, id, upsert); err != nil {
-			resp.Diagnostics.AddError("Failed to update the Zeshan credential payload", err.Error())
+			resp.Diagnostics.AddError("Failed to update the Flintyst credential payload", err.Error())
 			return
 		}
 	}
 	if !plan.Name.Equal(state.Name) && !plan.Name.IsNull() {
 		if err := r.client.SetCredentialName(ctx, id, plan.Name.ValueString(), upsert.CredentialJSON); err != nil {
-			resp.Diagnostics.AddError("Failed to rename the Zeshan credential", err.Error())
+			resp.Diagnostics.AddError("Failed to rename the Flintyst credential", err.Error())
 			// The payload replacement above may have landed already.
 			resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 			return
@@ -299,7 +299,7 @@ func (r *credentialResource) Delete(ctx context.Context, req resource.DeleteRequ
 		if _, getErr := r.client.GetCredential(ctx, id); client.IsNotFound(getErr) {
 			return
 		}
-		resp.Diagnostics.AddError("Failed to delete Zeshan credential", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Flintyst credential", err.Error())
 	}
 }
 

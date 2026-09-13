@@ -8,7 +8,7 @@ quotas are enforced cluster-wide.
 
 Check+increment is performed in a single Redis Lua script so two
 concurrent replicas cannot both pass the pre-check and both increment
-past the limit. When Redis is unavailable (e.g. Zeshan Lite deployments
+past the limit. When Redis is unavailable (e.g. Flintyst Lite deployments
 where Redis is an opt-in `--profile redis` service), the rate limiter
 fails open with a logged warning so core invite flows continue to work.
 """
@@ -105,7 +105,7 @@ def _run_atomic(redis_client: TenantRedisClient, buckets: list[_Bucket]) -> None
 
     On Redis connection / timeout errors the rate limiter fails open: the
     request is allowed through and the failure is logged. This keeps the
-    invite flow usable on Zeshan Lite deployments (Redis is opt-in there)
+    invite flow usable on Flintyst Lite deployments (Redis is opt-in there)
     and during transient Redis outages in full deployments.
     """
     if not buckets:

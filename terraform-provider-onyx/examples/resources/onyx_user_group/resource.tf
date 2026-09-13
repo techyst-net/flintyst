@@ -7,9 +7,9 @@ resource "onyx_user_group" "everyone_uk" {
 # A team that administers connectors and document sets, with two of its members
 # managing the roster.
 #
-# Permissions use Zeshan's own tokens, not the enum names. Only toggleable ones
+# Permissions use Flintyst's own tokens, not the enum names. Only toggleable ones
 # can be set: `basic`, `admin`, `craft_sandbox` and `manage:skills` are managed
-# by Zeshan and are refused here.
+# by Flintyst and are refused here.
 resource "onyx_user_group" "data_platform" {
   name = "Data Platform"
 
@@ -19,7 +19,7 @@ resource "onyx_user_group" "data_platform" {
     "c1a94e08-7f2d-4b63-8e15-9d0c3a6f4b27",
   ]
 
-  # Every manager must also appear in user_ids: Zeshan stores the flag on the
+  # Every manager must also appear in user_ids: Flintyst stores the flag on the
   # membership row, so a manager is always a member.
   manager_ids = [
     "3f6c1e2a-0b4d-4c8e-9a1f-2d5b7c9e0a13",

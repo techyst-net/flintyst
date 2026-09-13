@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Google Calendar wrapper for the Zeshan Craft sandbox.
+"""Google Calendar wrapper for the Flintyst Craft sandbox.
 
 Common operations exposed as subcommands. Output is JSON on stdout.
 """

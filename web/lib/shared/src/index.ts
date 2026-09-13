@@ -1,5 +1,5 @@
 /**
- * @onyx-ai/shared — platform-agnostic code shared between Zeshan web and mobile.
+ * @onyx-ai/shared — platform-agnostic code shared between Flintyst web and mobile.
  *
  * Design tokens are NOT re-exported here: they are generated build artifacts,
  * consumed via the dedicated subpaths "@onyx-ai/shared/tokens.css" (web/Opal CSS

@@ -75,7 +75,7 @@ func groupListing(t *testing.T, ccPairIDs []int64, upToDate bool) string {
 	return "[" + groupObject(t, ccPairIDs, upToDate) + "]"
 }
 
-// A roster that only gains members goes through add-users, where Zeshan keeps
+// A roster that only gains members goes through add-users, where Flintyst keeps
 // the connector links itself inside the transaction that holds the membership
 // lock. That removes this client's read-modify-write, and with it the window
 // where a connector share made at the same moment would be overwritten.
@@ -98,7 +98,7 @@ func TestSetUserGroupMembersAddsThroughTheAddUsersRoute(t *testing.T) {
 
 	body := bodyAsMap(t, (*seen)[1].Body)
 	if _, present := body["cc_pair_ids"]; present {
-		t.Error("add-users must not carry connector ids; Zeshan preserves them itself")
+		t.Error("add-users must not carry connector ids; Flintyst preserves them itself")
 	}
 	users, ok := body["user_ids"].([]any)
 	if !ok || len(users) != 2 {
@@ -197,7 +197,7 @@ func TestLookupUserGroupReportsAMissingGroup(t *testing.T) {
 	}
 }
 
-// Zeshan has no bulk form: each manager change is its own call.
+// Flintyst has no bulk form: each manager change is its own call.
 func TestSetGroupManagerCallsThePerUserRoute(t *testing.T) {
 	c, seen := newRoutingTestServer(t, map[string]string{
 		"PUT /manage/admin/user-group/4/manager": `null`,
@@ -226,7 +226,7 @@ func TestSetUserGroupPermissionsSendsAnEmptyList(t *testing.T) {
 	}
 }
 
-// The delete is asynchronous on a normal deployment and inline when Zeshan runs
+// The delete is asynchronous on a normal deployment and inline when Flintyst runs
 // without a vector database. Both end with the group out of the listing.
 func TestWaitForUserGroupDeletedAcceptsAnAlreadyGoneGroup(t *testing.T) {
 	c, _ := newRoutingTestServer(t, map[string]string{listPath: `[]`})

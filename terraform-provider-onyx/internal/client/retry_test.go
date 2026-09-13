@@ -82,7 +82,7 @@ func TestRetriesNonCreatingPut(t *testing.T) {
 	}
 }
 
-// A document set write leaves the set syncing, and Zeshan rejects a change to a
+// A document set write leaves the set syncing, and Flintyst rejects a change to a
 // syncing set — so neither mutation may be replayed even though one is a PATCH
 // and the other a DELETE.
 func TestNeverReplaysDocumentSetMutations(t *testing.T) {

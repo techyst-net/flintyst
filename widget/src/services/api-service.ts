@@ -1,5 +1,5 @@
 /**
- * API Service - Handles all communication with Zeshan backend
+ * API Service - Handles all communication with Flintyst backend
  */
 
 import {

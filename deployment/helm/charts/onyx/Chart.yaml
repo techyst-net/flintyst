@@ -1,6 +1,6 @@
 apiVersion: v2
 name: onyx
-description: Zeshan application and Craft sandbox deployment chart
+description: Flintyst application and Craft sandbox deployment chart
 home: https://www.onyx.app/
 sources:
   - "https://github.com/onyx-dot-app/onyx"

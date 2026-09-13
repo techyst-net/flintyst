@@ -1,6 +1,6 @@
-# Zeshan Local Monitoring Stack
+# Flintyst Local Monitoring Stack
 
-Prometheus + Grafana for local development. Pre-loaded with dashboards for the Zeshan backend.
+Prometheus + Grafana for local development. Pre-loaded with dashboards for the Flintyst backend.
 
 ## Usage
 
@@ -16,9 +16,9 @@ docker compose up -d
 
 ## Dashboards
 
-- **Zeshan DB Pool Health** — PostgreSQL connection pool utilization
-- **Zeshan Indexing Pipeline v2** — Per-connector indexing throughput, queue depth, task latency
-- **Zeshan Permission Sync** — Doc permission sync and external group sync duration, throughput, errors, and Celery task metrics
+- **Flintyst DB Pool Health** — PostgreSQL connection pool utilization
+- **Flintyst Indexing Pipeline v2** — Per-connector indexing throughput, queue depth, task latency
+- **Flintyst Permission Sync** — Doc permission sync and external group sync duration, throughput, errors, and Celery task metrics
 
 ## Scrape targets
 

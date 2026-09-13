@@ -33,9 +33,9 @@ PUBLIC_ENDPOINT_SPECS = [
     # just returns auth type, needs to be accessible before the user is logged
     # in to determine what flow to give the user
     ("/auth/type", {"GET"}),
-    # just gets the version of Zeshan (e.g. 0.3.11)
+    # just gets the version of Flintyst (e.g. 0.3.11)
     ("/version", {"GET"}),
-    # Gets stable and beta versions for Zeshan docker images
+    # Gets stable and beta versions for Flintyst docker images
     ("/versions", {"GET"}),
     # stuff related to basic auth
     ("/auth/refresh", {"POST"}),

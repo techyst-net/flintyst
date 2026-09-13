@@ -1,5 +1,5 @@
 #!/bin/bash
-# Icon generation script for Zeshan Desktop
+# Icon generation script for Flintyst Desktop
 # Requires: ImageMagick (brew install imagemagick)
 
 set -e

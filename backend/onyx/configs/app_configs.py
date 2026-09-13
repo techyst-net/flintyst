@@ -42,7 +42,7 @@ APP_API_PREFIX = os.environ.get("API_PREFIX", "")
 # Certain services need to make HTTP requests to the API server, such as the MCP server and Discord bot
 API_SERVER_PROTOCOL = os.environ.get("API_SERVER_PROTOCOL", "http")
 API_SERVER_HOST = os.environ.get("API_SERVER_HOST", "127.0.0.1")
-# This override allows self-hosting the MCP server with Zeshan Cloud backend.
+# This override allows self-hosting the MCP server with Flintyst Cloud backend.
 API_SERVER_URL_OVERRIDE_FOR_HTTP_REQUESTS = os.environ.get(
     "API_SERVER_URL_OVERRIDE_FOR_HTTP_REQUESTS"
 )
@@ -80,7 +80,7 @@ DISABLE_USER_KNOWLEDGE = os.environ.get("DISABLE_USER_KNOWLEDGE", "").lower() ==
 DISABLE_VECTOR_DB = os.environ.get("DISABLE_VECTOR_DB", "").lower() == "true"
 
 # TEMPORARY (will be removed soon): operator-forced Search-UI scope (self-hosted only) —
-# comma-separated document set NAMES. When set, the Zeshan Search UI is restricted to those sets
+# comma-separated document set NAMES. When set, the Flintyst Search UI is restricted to those sets
 # (AND'd on top of any persona/user scope; ACL still enforced) — chat/other flows are unaffected,
 # and it is disabled under MULTI_TENANT. Empty = no restriction. Names match the index directly; a
 # name that doesn't exist matches nothing (fail-closed) and is logged. Read at import — restart to change.
@@ -128,7 +128,7 @@ HIDE_QUERY_HISTORY_FROM_ADMIN_PANEL = (
 # Web Configs
 #####
 # WEB_DOMAIN is used to set the redirect_uri after login flows
-# NOTE: if you are having problems accessing the Zeshan web UI locally (especially
+# NOTE: if you are having problems accessing the Flintyst web UI locally (especially
 # on Windows, try  setting this to `http://127.0.0.1:3000` instead and see if that
 # fixes it)
 WEB_DOMAIN = os.environ.get("WEB_DOMAIN") or "http://localhost:3000"
@@ -159,7 +159,7 @@ PASSWORD_REQUIRE_SPECIAL_CHAR = (
 
 # Encryption key secret is used to encrypt connector credentials, api keys, and other sensitive
 # information. This provides an extra layer of security on top of Postgres access controls
-# and is available in Zeshan EE
+# and is available in Flintyst EE
 ENCRYPTION_KEY_SECRET = os.environ.get("ENCRYPTION_KEY_SECRET") or ""
 
 # Turn off mask if admin users should see full credentials for data connectors.
@@ -179,8 +179,8 @@ SESSION_EXPIRE_TIME_SECONDS = int(
 REQUEST_TIMEOUT_SECONDS = int(os.environ.get("REQUEST_TIMEOUT_SECONDS") or 60)
 
 # set `VALID_EMAIL_DOMAINS` to a comma seperated list of domains in order to
-# restrict access to Zeshan to only users with emails from those domains.
-# E.g. `VALID_EMAIL_DOMAINS=example.com,example.org` will restrict Zeshan
+# restrict access to Flintyst to only users with emails from those domains.
+# E.g. `VALID_EMAIL_DOMAINS=example.com,example.org` will restrict Flintyst
 # signups to users with either an @example.com or an @example.org email.
 # NOTE: maintaining `VALID_EMAIL_DOMAIN` to keep backwards compatibility
 _VALID_EMAIL_DOMAIN = os.environ.get("VALID_EMAIL_DOMAIN", "")
@@ -411,7 +411,7 @@ EMAIL_ARCHIVE_BCC_ADDRESSES = tuple(
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY") or ""
 EMAIL_CONFIGURED = (bool(SMTP_SERVER) and bool(EMAIL_FROM)) or bool(SENDGRID_API_KEY)
 
-# If set, Zeshan will listen to the `expires_at` returned by the identity
+# If set, Flintyst will listen to the `expires_at` returned by the identity
 # provider (e.g. Okta, Google, etc.) and force the user to re-authenticate
 # after this time has elapsed. Disabled since by default many auth providers
 # have very short expiry times (e.g. 1 hour) which provide a poor user experience
@@ -541,7 +541,7 @@ OPENSEARCH_TEXT_ANALYZER = os.environ.get("OPENSEARCH_TEXT_ANALYZER") or "englis
 # This is the "base" config for now, the idea is that at least for our dev
 # environments we always want to be dual indexing into both OpenSearch and Vespa
 # to stress test the new codepaths. Only enable this if there is some instance
-# of OpenSearch running for the relevant Zeshan instance.
+# of OpenSearch running for the relevant Flintyst instance.
 # NOTE: Now enabled on by default, unless the env indicates otherwise.
 ENABLE_OPENSEARCH_INDEXING_FOR_ONYX = (
     os.environ.get("ENABLE_OPENSEARCH_INDEXING_FOR_ONYX", "true").lower() == "true"
@@ -620,7 +620,7 @@ POSTGRES_DB = os.environ.get("POSTGRES_DB") or "postgres"
 AWS_REGION_NAME = os.environ.get("AWS_REGION_NAME") or "us-east-2"
 
 # --- Tenant sharding (multi-database) ---------------------------------------
-# Zeshan addresses a tenant by schema (`schema_translate_map`). These settings let
+# Flintyst addresses a tenant by schema (`schema_translate_map`). These settings let
 # tenants additionally be spread across separate physical databases ("shards").
 #
 # ONYX_DB_SHARDS is a JSON object of shard name -> connection overrides, e.g.
@@ -628,7 +628,7 @@ AWS_REGION_NAME = os.environ.get("AWS_REGION_NAME") or "us-east-2"
 # Keys not supplied for a shard fall back to the POSTGRES_* values above.
 #
 # When unset, exactly one shard exists (named by ONYX_DB_DEFAULT_SHARD, built
-# from POSTGRES_*), which is the single-database behavior Zeshan has always had.
+# from POSTGRES_*), which is the single-database behavior Flintyst has always had.
 ONYX_DB_SHARDS_JSON = os.environ.get("ONYX_DB_SHARDS", "").strip()
 # Shard that hosts tenants with no explicit mapping.
 ONYX_DB_DEFAULT_SHARD = os.environ.get("ONYX_DB_DEFAULT_SHARD") or "default"
@@ -1675,7 +1675,7 @@ MCP_TOOL_CALL_TIMEOUT_SECONDS = int(
 # Miscellaneous
 #####
 JOB_TIMEOUT = int(os.environ.get("JOB_TIMEOUT_SECONDS") or 60 * 60 * 6)  # default 6h
-# Logs Zeshan only model interactions like prompts, responses, messages etc.
+# Logs Flintyst only model interactions like prompts, responses, messages etc.
 LOG_ONYX_MODEL_INTERACTIONS = (
     os.environ.get("LOG_ONYX_MODEL_INTERACTIONS", "").lower() == "true"
 )
@@ -1707,7 +1707,7 @@ DISABLE_TELEMETRY = os.environ.get("DISABLE_TELEMETRY", "").lower() == "true"
 # Braintrust Configuration
 #####
 # Braintrust project name
-BRAINTRUST_PROJECT = os.environ.get("BRAINTRUST_PROJECT", "Zeshan")
+BRAINTRUST_PROJECT = os.environ.get("BRAINTRUST_PROJECT", "Flintyst")
 # Braintrust API key - if provided, Braintrust tracing will be enabled
 BRAINTRUST_API_KEY = os.environ.get("BRAINTRUST_API_KEY") or ""
 # Optional custom Braintrust API URL (self-hosted / non-default deployments)
@@ -1820,7 +1820,7 @@ AUTO_LLM_UPDATE_INTERVAL_SECONDS = int(
 #####
 # NOTE: this should only be enabled if you have purchased an enterprise license.
 # if you're interested in an enterprise license, please reach out to us at
-# founders@onyx.app OR message Chris Weaver or Yuhong Sun in the Zeshan
+# founders@onyx.app OR message Chris Weaver or Yuhong Sun in the Flintyst
 # Discord community https://discord.gg/4NA5SbzrWb
 ENTERPRISE_EDITION_ENABLED = (
     os.environ.get("ENABLE_PAID_ENTERPRISE_EDITION_FEATURES", "").lower() == "true"
@@ -2094,7 +2094,7 @@ VESPA_LANGUAGE_OVERRIDE = os.environ.get("VESPA_LANGUAGE_OVERRIDE")
 
 #####
 # Default LLM API Keys (for cloud deployments)
-# These are Zeshan-managed API keys provided to tenants by default
+# These are Flintyst-managed API keys provided to tenants by default
 #####
 OPENAI_DEFAULT_API_KEY = os.environ.get("OPENAI_DEFAULT_API_KEY")
 ANTHROPIC_DEFAULT_API_KEY = os.environ.get("ANTHROPIC_DEFAULT_API_KEY")
@@ -2110,14 +2110,14 @@ AUTO_PROVISION_DEFAULT_LLM_PROVIDERS = (
     os.environ.get("AUTO_PROVISION_DEFAULT_LLM_PROVIDERS", "true").lower() == "true"
 )
 
-# Auto-create Zeshan-managed built-in external app rows (disabled, Zeshan-owned creds)
+# Auto-create Flintyst-managed built-in external app rows (disabled, Flintyst-owned creds)
 # per tenant. Default False; set True on cloud so tenants can enable built-ins
 # without registering their own OAuth app.
 AUTO_PROVISION_DEFAULT_EXTERNAL_APPS = (
     os.environ.get("AUTO_PROVISION_DEFAULT_EXTERNAL_APPS", "false").lower() == "true"
 )
 
-# Zeshan-owned OAuth credentials for built-in external apps (managed cloud)
+# Flintyst-owned OAuth credentials for built-in external apps (managed cloud)
 EXT_APP_SLACK_CLIENT_ID = os.environ.get("EXT_APP_SLACK_CLIENT_ID", "")
 EXT_APP_SLACK_CLIENT_SECRET = os.environ.get("EXT_APP_SLACK_CLIENT_SECRET", "")
 EXT_APP_GMAIL_CLIENT_ID = os.environ.get("EXT_APP_GMAIL_CLIENT_ID", "")

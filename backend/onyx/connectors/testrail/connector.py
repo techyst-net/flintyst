@@ -544,7 +544,7 @@ class TestRailConnector(LoadConnector, PollConnector):
         if doc_batch:
             yield doc_batch
 
-    # ---- Zeshan interfaces ----
+    # ---- Flintyst interfaces ----
     def load_from_state(self) -> GenerateDocumentsOutput:
         return self._generate_documents(start=None, end=None)
 

@@ -1,7 +1,7 @@
 /*
   Desktop (Tauri) native title-bar reservation.
 
-  The Zeshan desktop app is a Tauri wrapper that loads this web app remotely and
+  The Flintyst desktop app is a Tauri wrapper that loads this web app remotely and
   uses macOS `titleBarStyle: "Overlay"` — the traffic lights float over the web
   content, so the app must keep the top strip clear. The desktop wrapper injects
   a `titlebar.js` shim to do this, but that shim ships frozen inside installed

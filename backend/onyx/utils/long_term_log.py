@@ -92,7 +92,7 @@ class LongTermLogger:
             )
             thread.start()
         except Exception:
-            # Should never interfere with normal functions of Zeshan
+            # Should never interfere with normal functions of Flintyst
             pass
 
     def fetch_category(

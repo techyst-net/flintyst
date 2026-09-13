@@ -2,7 +2,7 @@ import { css } from "lit";
 import { colors } from "./colors";
 
 /**
- * Zeshan Design System - Theme
+ * Flintyst Design System - Theme
  * Typography, spacing, and layout tokens from Figma
  */
 export const theme = css`

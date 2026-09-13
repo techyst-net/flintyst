@@ -204,7 +204,7 @@ def from_litellm_model_response_stream(
     response: "LiteLLMModelResponseStream",
 ) -> ModelResponseStream:
     """
-    Convert a LiteLLM ModelResponseStream into the simplified Zeshan representation.
+    Convert a LiteLLM ModelResponseStream into the simplified Flintyst representation.
     """
     response_data = response.model_dump()
     response_id, created = _extract_id_and_created(
@@ -244,7 +244,7 @@ def from_litellm_model_response(
     response: "LiteLLMModelResponse",
 ) -> ModelResponse:
     """
-    Convert a LiteLLM ModelResponse into the simplified Zeshan representation.
+    Convert a LiteLLM ModelResponse into the simplified Flintyst representation.
     """
     response_data = response.model_dump()
     response_id, created = _extract_id_and_created(response_data, "LiteLLM response")

@@ -1,5 +1,5 @@
 """
-Script to upload files from a directory as individual file connectors in Zeshan.
+Script to upload files from a directory as individual file connectors in Flintyst.
 Each file gets its own connector named after the file.
 
 Usage:
@@ -224,7 +224,7 @@ def get_authenticated_session(api_key: str) -> requests.Session:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Upload files as individual Zeshan file connectors."
+        description="Upload files as individual Flintyst file connectors."
     )
     parser.add_argument(
         "--data-dir",
@@ -234,7 +234,7 @@ def main() -> None:
     parser.add_argument(
         "--api-base",
         default="http://localhost:3000",
-        help="Base URL for the Zeshan API (default: http://localhost:3000).",
+        help="Base URL for the Flintyst API (default: http://localhost:3000).",
     )
     parser.add_argument(
         "--api-key",

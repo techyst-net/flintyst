@@ -13,7 +13,7 @@ A cloud embedding provider credential (one per provider type). `api_key` is mask
 ## Example Usage
 
 ```terraform
-# Keep api_key set in configuration: the Zeshan API replaces all fields on
+# Keep api_key set in configuration: the Flintyst API replaces all fields on
 # update, so applying without it clears the stored key.
 resource "onyx_embedding_provider" "cohere" {
   provider_type = "cohere"

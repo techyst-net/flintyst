@@ -1,4 +1,4 @@
-"""OnyxError — the single exception type for all Zeshan business errors.
+"""OnyxError — the single exception type for all Flintyst business errors.
 
 Raise ``OnyxError`` instead of ``HTTPException`` in business code.  A global
 FastAPI exception handler (registered via ``register_onyx_exception_handlers``)

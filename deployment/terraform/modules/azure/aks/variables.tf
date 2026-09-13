@@ -164,7 +164,7 @@ variable "node_pools" {
       min_count = 1
       max_count = 5
     }
-    # Zeshan runs its document index in-cluster on Azure, because Azure has no
+    # Flintyst runs its document index in-cluster on Azure, because Azure has no
     # managed OpenSearch. This pool is the one the index lands on.
     index = {
       vm_size         = "Standard_E8ds_v5"

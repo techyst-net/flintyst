@@ -1,7 +1,7 @@
 import { css } from "lit";
 
 /**
- * Zeshan Chat Widget - Component Styles
+ * Flintyst Chat Widget - Component Styles
  * All styling for the main widget component
  */
 export const widgetStyles = css`

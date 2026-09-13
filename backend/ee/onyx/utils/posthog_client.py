@@ -35,7 +35,7 @@ elif MULTI_TENANT:
         "PostHog telemetry and feature flags will be disabled"
     )
 
-# For cross referencing between cloud and www Zeshan sites
+# For cross referencing between cloud and www Flintyst sites
 # NOTE: These clients are separate because they are separate posthog projects.
 # We should eventually unify them into a single posthog project,
 # which would no longer require this workaround

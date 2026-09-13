@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""HubSpot CRM (REST v3) wrapper for the Zeshan Craft sandbox.
+"""HubSpot CRM (REST v3) wrapper for the Flintyst Craft sandbox.
 
 Common CRM operations exposed as subcommands. Authentication is handled by
 the egress proxy, which injects the connected user's bearer token on the

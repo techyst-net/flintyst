@@ -256,15 +256,15 @@
     "type": "color"
   },
   "blue-80": {
-    "value": "#312e81",
+    "value": "#0e1648",
     "type": "color"
   },
   "blue-60": {
-    "value": "#4338ca",
+    "value": "#16226f",
     "type": "color"
   },
   "blue-50": {
-    "value": "#6366f1",
+    "value": "#5164dc",
     "type": "color"
   },
   "blue-45": {
@@ -272,19 +272,19 @@
     "type": "color"
   },
   "blue-40": {
-    "value": "#818cf8",
+    "value": "#4054d9",
     "type": "color"
   },
   "blue-20": {
-    "value": "#c7d2fe",
+    "value": "#bbc2f1",
     "type": "color"
   },
   "blue-10": {
-    "value": "#e0e7ff",
+    "value": "#dde1f8",
     "type": "color"
   },
   "blue-05": {
-    "value": "#eef2ff",
+    "value": "#f0f2fc",
     "type": "color"
   },
   "blue-01": {

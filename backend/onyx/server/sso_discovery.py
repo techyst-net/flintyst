@@ -60,7 +60,7 @@ class SSODiscoveryResponse(BaseModel):
 
 async def _enforce_discovery_rate_limit(request: Request) -> None:
     # Single-tenant has one workspace to enumerate and runs without Redis on
-    # Zeshan-lite, so the bound applies only on cloud, where it is the sole limit
+    # Flintyst-lite, so the bound applies only on cloud, where it is the sole limit
     # on address enumeration.
     if not MULTI_TENANT:
         return

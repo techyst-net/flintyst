@@ -47,7 +47,7 @@ services:
     healthcheck:
       start_interval: 1s
 
-  # Uncomment the block below to enable the MCP server for Zeshan.
+  # Uncomment the block below to enable the MCP server for Flintyst.
   # mcp_server:
   #   ports:
   #     - "8090:8090"

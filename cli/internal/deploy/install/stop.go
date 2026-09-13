@@ -18,7 +18,7 @@ func RunStop(ctx context.Context, deps Deps, opts Options) error {
 func (in *installer) runStop(ctx context.Context) error {
 	in.root = paths.Resolve(in.opts.Dir)
 	if !in.hasComposeFile() {
-		in.warnf("No Zeshan deployment found at %s. Nothing to shut down.", in.root.Dir)
+		in.warnf("No Flintyst deployment found at %s. Nothing to shut down.", in.root.Dir)
 		return nil
 	}
 	in.resolveProjectFromDisk()
@@ -27,7 +27,7 @@ func (in *installer) runStop(ctx context.Context) error {
 		return err
 	}
 
-	in.infof("Stopping Zeshan containers...")
+	in.infof("Stopping Flintyst containers...")
 	// Overlays are auto-detected from disk so users don't need to remember
 	// which flags they installed with; HOST_PORT/IMAGE_TAG fall back to safe
 	// defaults because compose only needs them to resolve the file, not to
@@ -38,7 +38,7 @@ func (in *installer) runStop(ctx context.Context) error {
 		in.errorf("Failed to stop containers")
 		return exitcodes.Newf(exitcodes.General, "docker compose stop failed: %v", err)
 	}
-	in.successf("Zeshan containers stopped (paused)")
+	in.successf("Flintyst containers stopped (paused)")
 	in.plainf("")
 	in.infof("Start them again with: %s", in.paint.Accent("onyx-cli deploy install"))
 	return nil

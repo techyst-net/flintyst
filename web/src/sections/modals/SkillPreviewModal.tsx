@@ -36,7 +36,7 @@ interface MetadataRow {
 function metadataRows(preview: SkillPreview): MetadataRow[] {
   const rows: MetadataRow[] = [];
   if (preview.source === "builtin") {
-    rows.push({ labelKey: "preview.metadata.createdBy.label", value: "Zeshan" });
+    rows.push({ labelKey: "preview.metadata.createdBy.label", value: "Flintyst" });
   } else if (preview.author_email) {
     rows.push({
       labelKey: "preview.metadata.createdBy.label",

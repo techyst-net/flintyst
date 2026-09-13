@@ -27,7 +27,7 @@ var (
 	_ resource.ResourceWithValidateConfig = (*documentSetResource)(nil)
 )
 
-// Bounds for the background sync waits. Zeshan rejects a change to a set that is
+// Bounds for the background sync waits. Flintyst rejects a change to a set that is
 // still syncing, so every mutation waits for the previous one to land.
 const (
 	defaultDocumentSetUpdateTimeout = 10 * time.Minute
@@ -75,7 +75,7 @@ func (r *documentSetResource) Schema(ctx context.Context, _ resource.SchemaReque
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "A document set: a named group of connector-credential pairs that users and " +
 			"assistants can search as one unit.\n\n" +
-			"Zeshan propagates changes to the search index in the background. `is_up_to_date` reports " +
+			"Flintyst propagates changes to the search index in the background. `is_up_to_date` reports " +
 			"whether that has finished, and usually reads `false` right after an apply.\n\n" +
 			"~> **Private sets need Enterprise Edition.** `users` and `groups` are rejected on " +
 			"Community Edition. `is_public = false` with neither set makes a set nobody can use.",
@@ -100,14 +100,14 @@ func (r *documentSetResource) Schema(ctx context.Context, _ resource.SchemaReque
 			"cc_pair_ids": schema.SetAttribute{
 				Required:            true,
 				ElementType:         types.StringType,
-				MarkdownDescription: "Ids of the connector-credential pairs in the set, e.g. `[onyx_cc_pair.docs.id]`. Zeshan rejects a set with no pairs and no federated connectors, so this may only be empty when `federated_connectors` is not.",
+				MarkdownDescription: "Ids of the connector-credential pairs in the set, e.g. `[onyx_cc_pair.docs.id]`. Flintyst rejects a set with no pairs and no federated connectors, so this may only be empty when `federated_connectors` is not.",
 			},
 			"is_public": schema.BoolAttribute{
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(true),
 				MarkdownDescription: "Whether every user can see the set. When `false`, only the `users` and " +
-					"`groups` below can. Zeshan defaults new sets to public.",
+					"`groups` below can. Flintyst defaults new sets to public.",
 			},
 			"users": schema.SetAttribute{
 				Optional:    true,
@@ -123,8 +123,8 @@ func (r *documentSetResource) Schema(ctx context.Context, _ resource.SchemaReque
 			},
 			"is_up_to_date": schema.BoolAttribute{
 				Computed: true,
-				MarkdownDescription: "Whether Zeshan has finished applying the set to the search index. " +
-					"Reads `false` while the background sync is pending. Zeshan refuses to change or " +
+				MarkdownDescription: "Whether Flintyst has finished applying the set to the search index. " +
+					"Reads `false` while the background sync is pending. Flintyst refuses to change or " +
 					"delete a set that is still syncing, so Terraform waits for this before it does either.",
 			},
 			"federated_connectors": schema.SetNestedAttribute{
@@ -155,7 +155,7 @@ func (r *documentSetResource) Configure(_ context.Context, req resource.Configur
 	r.client = clientFromResourceConfigure(req, resp)
 }
 
-// ValidateConfig rejects an empty set at plan time. Zeshan refuses to create or
+// ValidateConfig rejects an empty set at plan time. Flintyst refuses to create or
 // update a document set that holds no connectors of either kind, and catching
 // it here reports the problem before anything is applied.
 func (r *documentSetResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
@@ -175,12 +175,12 @@ func (r *documentSetResource) ValidateConfig(ctx context.Context, req resource.V
 	resp.Diagnostics.AddAttributeError(
 		path.Root("cc_pair_ids"),
 		"Document set has no connectors",
-		"Zeshan rejects a document set that holds nothing. Give it at least one entry in "+
+		"Flintyst rejects a document set that holds nothing. Give it at least one entry in "+
 			"cc_pair_ids or in federated_connectors.",
 	)
 }
 
-// waitForDocumentSetSync waits until Zeshan has applied the set to the search
+// waitForDocumentSetSync waits until Flintyst has applied the set to the search
 // index. Both update and delete are rejected outright while a previous change
 // is still syncing, and a create leaves the set syncing, so every mutation
 // waits first rather than failing an otherwise valid apply.
@@ -352,13 +352,13 @@ func (r *documentSetResource) Create(ctx context.Context, req resource.CreateReq
 		FederatedConnectors: federated,
 	})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to create Flintyst document set", err.Error())
 		return
 	}
 
 	remote, err := r.client.GetDocumentSet(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read back the new Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to read back the new Flintyst document set", err.Error())
 		// Persist the id so the next apply updates instead of creating a duplicate.
 		plan.ID = types.StringValue(strconv.FormatInt(id, 10))
 		resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
@@ -388,7 +388,7 @@ func (r *documentSetResource) Read(ctx context.Context, req resource.ReadRequest
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to read Flintyst document set", err.Error())
 		return
 	}
 	if !applyRemoteDocumentSet(ctx, &state, remote, &resp.Diagnostics) {
@@ -424,7 +424,7 @@ func (r *documentSetResource) Update(ctx context.Context, req resource.UpdateReq
 	defer cancel()
 
 	if err := r.waitForDocumentSetSync(ctx, id, updateTimeout); err != nil {
-		resp.Diagnostics.AddError("Failed to update Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to update Flintyst document set", err.Error())
 		return
 	}
 
@@ -439,13 +439,13 @@ func (r *documentSetResource) Update(ctx context.Context, req resource.UpdateReq
 		FederatedConnectors: federated,
 	})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to update Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to update Flintyst document set", err.Error())
 		return
 	}
 
 	remote, err := r.client.GetDocumentSet(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read back the Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to read back the Flintyst document set", err.Error())
 		return
 	}
 	if !applyRemoteDocumentSet(ctx, &plan, remote, &resp.Diagnostics) {
@@ -476,7 +476,7 @@ func (r *documentSetResource) Delete(ctx context.Context, req resource.DeleteReq
 	defer cancel()
 
 	if err := r.waitForDocumentSetSync(ctx, id, deleteTimeout); err != nil {
-		resp.Diagnostics.AddError("Failed to delete Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Flintyst document set", err.Error())
 		return
 	}
 
@@ -485,7 +485,7 @@ func (r *documentSetResource) Delete(ctx context.Context, req resource.DeleteReq
 		return
 	}
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to delete Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Flintyst document set", err.Error())
 		return
 	}
 
@@ -503,7 +503,7 @@ func (r *documentSetResource) Delete(ctx context.Context, req resource.DeleteReq
 			return false, "the document set is still marked for deletion", nil
 		})
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to delete Zeshan document set", err.Error())
+		resp.Diagnostics.AddError("Failed to delete Flintyst document set", err.Error())
 	}
 }
 

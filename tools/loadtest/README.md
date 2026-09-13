@@ -1,13 +1,13 @@
-# Zeshan Chat Load Tests (Locust)
+# Flintyst Chat Load Tests (Locust)
 
 Load tests for the critical chat path: streaming chat turns, search-tool
 turns, and deep research, measured by per-milestone latency.
 
-**Guiding principle:** these tests measure Zeshan's application code and
+**Guiding principle:** these tests measure Flintyst's application code and
 infrastructure under load — never LLM answer quality. The LLM is a
 controllable dependency: the bundled mock LLM server provides unlimited,
 zero-cost, deterministic call volume so every regression is attributable to
-Zeshan code.
+Flintyst code.
 
 Locust's dependencies live in the root project's optional **`loadtest`
 dependency group** (not synced by default), so its gevent/flask tree only
@@ -32,7 +32,7 @@ cd tools/loadtest
 uv run --group loadtest uvicorn mock_llm.app:app --port 8001
 ```
 
-Register it in Zeshan (Admin Panel → LLM, or `PUT /api/admin/llm/provider`) as
+Register it in Flintyst (Admin Panel → LLM, or `PUT /api/admin/llm/provider`) as
 provider type **`openai_compatible`** — NOT `openai`, which litellm routes
 through the OpenAI Responses API bridge that the mock doesn't implement —
 with `api_base` pointing at the server (e.g. `http://localhost:8001`), any
@@ -51,7 +51,7 @@ Behavior knobs ride in the model name (litellm passes it through verbatim):
 | `tools<n>` | `mock-tools1` | call up to `n` retrieval tools (in parallel for `n>1`) on the first AUTO cycle |
 | `agents<n>` | `mock-agents2` | parallel research agents per DR orchestrator cycle |
 
-The mock understands Zeshan's LLM-loop contract: `tool_choice` none/auto/
+The mock understands Flintyst's LLM-loop contract: `tool_choice` none/auto/
 required/forced, the deep-research phase sequence (clarification →
 plan → orchestrator → research agents → reports), and `max_tokens` caps.
 Contract tests: `uv run --group loadtest pytest tests/ -q`.
@@ -59,7 +59,7 @@ Contract tests: `uv run --group loadtest pytest tests/ -q`.
 ### Provider profiles
 
 Knob combinations imitate real provider latency profiles — register each as
-a model configuration and select per scenario to test how Zeshan behaves when
+a model configuration and select per scenario to test how Flintyst behaves when
 the provider is fast, slow, or degraded (slow providers hold streams and
 their resources open longer, which is exactly what stresses the api-server):
 
@@ -111,7 +111,7 @@ mode. Each maps to a real production incident class:
   `disconnect:disconnected`, separate from success/failure.
 - **CompressionUser** (`compress:*`) — long session (default 60 turns) of
   large messages (`ONYX_MSG_CHARS`, default 8000) so the history crosses the
-  model's input-token limit and Zeshan summarizes/recompresses it every turn —
+  model's input-token limit and Flintyst summarizes/recompresses it every turn —
   the history-driven slowdown / compression death-spiral path. **Point it at a
   mock model registered with a small `max_input_tokens` (e.g. 16k) via
   `ONYX_LONGCONV_MODEL`**, otherwise the default 200k window needs an

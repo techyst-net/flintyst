@@ -21,7 +21,7 @@ _OLD_DESCRIPTION = "Generate images using nano banana."
 
 _NEW_DESCRIPTION = (
     "Generate or edit images with onyx-cli using the image generation provider "
-    "configured in Zeshan."
+    "configured in Flintyst."
 )
 
 _skill_table = sa.table(

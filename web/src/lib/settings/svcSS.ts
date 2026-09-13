@@ -130,7 +130,7 @@ export async function fetchSettingsSS(): Promise<CombinedSettings | null> {
       customAnalyticsScript,
       webVersion: settings.version ?? getWebVersion(),
       webDomain: HOST_URL,
-      appName: enterpriseSettings?.application_name?.trim() || "Zeshan",
+      appName: enterpriseSettings?.application_name?.trim() || "Flintyst",
     };
   } catch (error) {
     console.error("fetchSettingsSS exception: ", error);

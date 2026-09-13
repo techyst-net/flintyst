@@ -54,13 +54,13 @@ resource "onyx_credential" "confluence_write_only" {
 
 > **NOTE**: [Write-only arguments](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments) are supported in Terraform 1.11 and later.
 
-- `admin_public` (Boolean) Whether every admin can use this credential. Zeshan has no API to change it later. Leaving it `true` also keeps the credential readable: the API hides a private credential from admins other than its creator, and Terraform cannot tell that apart from a deleted one.
+- `admin_public` (Boolean) Whether every admin can use this credential. Flintyst has no API to change it later. Leaving it `true` also keeps the credential readable: the API hides a private credential from admins other than its creator, and Terraform cannot tell that apart from a deleted one.
 - `credential_json` (String, Sensitive) Secret payload as a JSON object, e.g. `jsonencode({ confluence_username = "...", confluence_access_token = "..." })`. The required keys depend on the source. Set exactly one of this and `credential_json_wo`, which keeps the payload out of state entirely.
 - `credential_json_wo` (String, Sensitive, [Write-only](https://developer.hashicorp.com/terraform/language/resources/ephemeral#write-only-arguments)) Secret payload as a JSON object, held only in configuration. Terraform stores nothing, so the payload never reaches state. Pair it with `credential_json_wo_version` to rotate it. Needs Terraform 1.11 or later.
 - `credential_json_wo_version` (Number) Rotation counter for `credential_json_wo`. Terraform never stores a write-only value and so cannot tell that the secret changed; raise this number to make the next apply send the current one. Do not derive it from the secret itself — unlike the secret, this number is kept in state.
 - `curator_public` (Boolean) Whether curators of the assigned groups can use this credential. Create-only.
 - `groups` (List of Number) Enterprise user-group ids allowed to use this credential. Create-only, and not returned by the API, so Terraform cannot detect changes made elsewhere.
-- `name` (String) Display name. Zeshan has no API to clear a name, so removing this attribute keeps the last value instead of planning a change.
+- `name` (String) Display name. Flintyst has no API to clear a name, so removing this attribute keeps the last value instead of planning a change.
 
 ### Read-Only
 
@@ -74,7 +74,7 @@ The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/c
 
 ```shell
 #!/bin/sh
-# Import by numeric credential id. Zeshan only returns the payload masked, so
+# Import by numeric credential id. Flintyst only returns the payload masked, so
 # credential_json stays at its configured value and is never refreshed.
 terraform import onyx_credential.confluence 12
 ```

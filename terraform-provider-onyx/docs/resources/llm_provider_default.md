@@ -3,12 +3,12 @@
 page_title: "onyx_llm_provider_default Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  The deployment-wide default LLM model — a singleton pointer at one provider + model pair (plus optional vision and chat auto-naming defaults). Managing it as its own resource lets depends_on ordering repoint the default before the provider holding it is deleted or shrunk. Zeshan has no unset API for the text and vision defaults, so destroying this resource leaves them in place; the chat-naming default is cleared when managed.
+  The deployment-wide default LLM model — a singleton pointer at one provider + model pair (plus optional vision and chat auto-naming defaults). Managing it as its own resource lets depends_on ordering repoint the default before the provider holding it is deleted or shrunk. Flintyst has no unset API for the text and vision defaults, so destroying this resource leaves them in place; the chat-naming default is cleared when managed.
 ---
 
 # onyx_llm_provider_default (Resource)
 
-The deployment-wide default LLM model — a singleton pointer at one provider + model pair (plus optional vision and chat auto-naming defaults). Managing it as its own resource lets `depends_on` ordering repoint the default before the provider holding it is deleted or shrunk. Zeshan has no unset API for the text and vision defaults, so destroying this resource leaves them in place; the chat-naming default is cleared when managed.
+The deployment-wide default LLM model — a singleton pointer at one provider + model pair (plus optional vision and chat auto-naming defaults). Managing it as its own resource lets `depends_on` ordering repoint the default before the provider holding it is deleted or shrunk. Flintyst has no unset API for the text and vision defaults, so destroying this resource leaves them in place; the chat-naming default is cleared when managed.
 
 ## Example Usage
 

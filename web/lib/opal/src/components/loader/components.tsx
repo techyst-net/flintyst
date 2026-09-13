@@ -51,7 +51,7 @@ interface IconLoaderProps {
 /**
  * Generic loader: continuously spins the given icon. Pass any `@opal/icons`
  * icon, or use the default spinner. Holds still under `prefers-reduced-motion`.
- * For the Zeshan-branded octagon mark, use `OnyxLoader`.
+ * For the Flintyst-branded octagon mark, use `OnyxLoader`.
  */
 function IconLoader({
   icon: Icon = SvgLoader,
@@ -107,7 +107,7 @@ const MARK_PATHS = [
 ];
 
 /**
- * Zeshan-branded loading mark: rotates a full turn while crossfading between the
+ * Flintyst-branded loading mark: rotates a full turn while crossfading between the
  * octagon outline and the diamond logo (2s loop), holding the static outline
  * under `prefers-reduced-motion`. Uses `currentColor`, so `color` themes it.
  * For a full-page loading state with a label, use `PageLoader`.

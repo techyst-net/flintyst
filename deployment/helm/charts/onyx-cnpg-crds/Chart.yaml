@@ -1,7 +1,7 @@
 apiVersion: v2
 name: onyx-cnpg-crds
 description: |
-  CloudNativePG CRDs for the Zeshan chart, isolated in a CRDs-only subchart so
+  CloudNativePG CRDs for the Flintyst chart, isolated in a CRDs-only subchart so
   they can be toggled via the parent's postgresql.installCRDs value. Helm still
   gives crds/ its special pre-install treatment (applied before the main
   manifest is built), so the CNPG Cluster CR in the parent chart passes

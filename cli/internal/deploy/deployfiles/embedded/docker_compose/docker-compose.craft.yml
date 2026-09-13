@@ -1,4 +1,4 @@
-# Zeshan Craft Docker-sandbox overlay. Layer on top of docker-compose.yml.
+# Flintyst Craft Docker-sandbox overlay. Layer on top of docker-compose.yml.
 # install.sh --include-craft wires this in automatically.
 #
 # Trust boundary: api_server, background, and sandbox-proxy all bind-mount

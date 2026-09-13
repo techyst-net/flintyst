@@ -74,11 +74,11 @@ resource "onyx_document_set" "test" {
 			},
 			{
 				// This runs directly after the create on purpose. A new set is
-				// left syncing, and Zeshan rejects a change to a syncing set, so
+				// left syncing, and Flintyst rejects a change to a syncing set, so
 				// the update has to wait for convergence before it writes.
 				//
 				// A full-replace update: rename, drop the description, make it
-				// private, and swap the pair it holds. Zeshan rejects a set with
+				// private, and swap the pair it holds. Flintyst rejects a set with
 				// no connectors at all, so the list is replaced, not emptied.
 				Config: documentSetDependencies + `
 resource "onyx_document_set" "test" {

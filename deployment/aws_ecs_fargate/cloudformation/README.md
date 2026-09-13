@@ -1,6 +1,6 @@
-# Zeshan AWS ECS Fargate CloudFormation Deployment
+# Flintyst AWS ECS Fargate CloudFormation Deployment
 
-This directory contains CloudFormation templates and scripts to deploy Zeshan on AWS ECS Fargate.
+This directory contains CloudFormation templates and scripts to deploy Flintyst on AWS ECS Fargate.
 
 ## Configuration
 
@@ -24,12 +24,12 @@ Example:
 ### Required Parameters
 
 - `Environment`: Used to prefix all stack names during deployment. This is required.
-- `OnyxNamespace`: Namespace for the Zeshan deployment.
+- `OnyxNamespace`: Namespace for the Flintyst deployment.
 - `EFSName`: Name for the Elastic File System.
 - `AWSRegion`: AWS region where resources will be deployed.
-- `VpcID`: ID of the VPC where Zeshan will be deployed.
+- `VpcID`: ID of the VPC where Flintyst will be deployed.
 - `SubnetIDs`: Comma-separated list of subnet IDs for deployment.
-- `DomainName`: Domain name for the Zeshan deployment.
+- `DomainName`: Domain name for the Flintyst deployment.
 - `ValidationMethod`: Method for domain validation (typically "DNS").
 - [optional] `HostedZoneId`: Route 53 hosted zone ID (only if using Route 53 for DNS).
 

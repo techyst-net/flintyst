@@ -23,7 +23,7 @@ from typing import Any
 
 # Dedicated audit logger. We intentionally use a plain ``logging.getLogger``
 # rather than ``setup_logger`` so the record message is exactly one clean JSON
-# object (the Zeshan standard formatter prepends a human-readable prefix, which
+# object (the Flintyst standard formatter prepends a human-readable prefix, which
 # would make machine parsing harder). The logger propagates to the root so it
 # still reaches the configured handlers / log files.
 AUDIT_LOGGER_NAME = "onyx.audit.credential_access"

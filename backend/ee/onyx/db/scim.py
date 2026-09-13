@@ -160,7 +160,7 @@ class ScimDAL(DAL):
         )
 
     def get_user_mapping_by_user_id(self, user_id: UUID) -> ScimUserMapping | None:
-        """Look up a user mapping by the Zeshan user ID."""
+        """Look up a user mapping by the Flintyst user ID."""
         return self._session.scalar(
             select(ScimUserMapping).where(ScimUserMapping.user_id == user_id)
         )
@@ -481,7 +481,7 @@ class ScimDAL(DAL):
         external_id: str,
         user_group_id: int,
     ) -> ScimGroupMapping:
-        """Create a mapping between a SCIM externalId and an Zeshan user group."""
+        """Create a mapping between a SCIM externalId and a Flintyst user group."""
         mapping = ScimGroupMapping(external_id=external_id, user_group_id=user_group_id)
         self._session.add(mapping)
         self._session.flush()
@@ -498,7 +498,7 @@ class ScimDAL(DAL):
     def get_group_mapping_by_group_id(
         self, user_group_id: int
     ) -> ScimGroupMapping | None:
-        """Look up a group mapping by the Zeshan user group ID."""
+        """Look up a group mapping by the Flintyst user group ID."""
         return self._session.scalar(
             select(ScimGroupMapping).where(
                 ScimGroupMapping.user_group_id == user_group_id

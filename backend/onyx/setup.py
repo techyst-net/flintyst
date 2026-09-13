@@ -90,7 +90,7 @@ def setup_onyx(
     cohere_enabled: bool = False,  # noqa: ARG001
 ) -> None:
     """
-    Setup Zeshan for a particular tenant. In the Single Tenant case, it will set it up for the default schema
+    Setup Flintyst for a particular tenant. In the Single Tenant case, it will set it up for the default schema
     on server startup. In the MT case, it will be called when the tenant is created.
 
     The Tenant Service calls the tenants/create endpoint which runs this.

@@ -1,4 +1,4 @@
-// enriched-markdown needs concrete style values, not NativeWind classes — resolve Zeshan tokens here.
+// enriched-markdown needs concrete style values, not NativeWind classes — resolve Flintyst tokens here.
 import { useMemo } from "react";
 import { useColorScheme } from "react-native";
 import { StreamdownText } from "react-native-streamdown";
@@ -26,7 +26,7 @@ function buildMarkdownStyle(
 ): MarkdownStyle {
   const vars = scheme === "dark" ? varsDark : varsLight;
   const color = (token: string): string => vars[token] ?? "#000000";
-  // Fenced code has no Zeshan token; use Atom One's flat base color (no per-token highlighting).
+  // Fenced code has no Flintyst token; use Atom One's flat base color (no per-token highlighting).
   const codeBaseColor = scheme === "dark" ? "#e2e6eb" : "#383a42";
   const muted = variant === "muted";
   const bodyColor = color(muted ? "--text-03" : "--text-05");

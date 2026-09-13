@@ -1,6 +1,6 @@
-"""Zeshan Search UI backend (/api/search/send-search-message et al.).
+"""Flintyst Search UI backend (/api/search/send-search-message et al.).
 
-These endpoints power the "Zeshan Search" UI.  They call search_pipeline()
+These endpoints power the "Flintyst Search" UI.  They call search_pipeline()
 directly with optional LLM query expansion and document selection.  Supports
 streaming (SSE) and search history.
 
@@ -89,7 +89,7 @@ def search_flow_classification(
     return SearchFlowClassificationResponse(is_search_flow=is_search_flow)
 
 
-# NOTE: This endpoint is used for the core flow of the Zeshan application, any
+# NOTE: This endpoint is used for the core flow of the Flintyst application, any
 # changes to it should be reviewed and approved by an experienced team member.
 # It is very important to 1. avoid bloat and 2. that this remains backwards
 # compatible across versions.

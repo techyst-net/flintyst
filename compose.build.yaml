@@ -33,3 +33,14 @@ services:
       dockerfile: Dockerfile.model_server
       cache_from:
       - ${REGISTRY:-docker.io}/${DOCKERHUB_USER:?set DOCKERHUB_USER}/techyst-onyx-indexing_model_server:latest
+  web_server:
+    image: ${REGISTRY:-docker.io}/${DOCKERHUB_USER:?set DOCKERHUB_USER}/techyst-onyx-web_server:${TAG:-latest}
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      args:
+      - NEXT_PUBLIC_ONYX_BACKEND_URL=
+      - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=true
+      - NEXT_PUBLIC_THEME=dark
+      cache_from:
+      - ${REGISTRY:-docker.io}/${DOCKERHUB_USER:?set DOCKERHUB_USER}/techyst-onyx-web_server:latest

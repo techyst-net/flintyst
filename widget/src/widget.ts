@@ -1,5 +1,5 @@
 /**
- * Zeshan Chat Widget - Main Component
+ * Flintyst Chat Widget - Main Component
  * Orchestrates launcher/inline modes and manages widget lifecycle
  */
 
@@ -686,7 +686,7 @@ export class OnyxChatWidget extends LitElement {
             target="_blank"
             rel="noopener noreferrer"
             style="text-decoration: underline;"
-            >Zeshan</a
+            >Flintyst</a
           >
         </div>
       </div>

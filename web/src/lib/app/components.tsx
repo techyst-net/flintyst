@@ -15,8 +15,8 @@ export interface LogoProps {
   folded?: boolean;
   size?: number;
   className?: string;
-  // Always render the real Zeshan logo, ignoring enterprise white-label settings
-  // (custom logo / application name). Used by Zeshan-branded surfaces like Craft.
+  // Always render the real Flintyst logo, ignoring enterprise white-label settings
+  // (custom logo / application name). Used by Flintyst-branded surfaces like Craft.
   onyxBranded?: boolean;
 }
 

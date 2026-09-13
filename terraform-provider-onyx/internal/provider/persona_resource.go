@@ -78,7 +78,7 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 			"Agent names are unique. Creating one under a name another agent already holds fails; " +
 			"creating one under the name of a *deleted* agent revives that agent instead, keeping its " +
 			"original id.\n\n" +
-			"~> **Deleting an agent leaves a tombstone.** Zeshan marks it deleted rather than removing " +
+			"~> **Deleting an agent leaves a tombstone.** Flintyst marks it deleted rather than removing " +
 			"the row, so the name stays taken. Creating an agent under that name later revives the " +
 			"tombstone, which is why a destroy followed by an apply returns the same agent id.",
 		Attributes: map[string]schema.Attribute{
@@ -115,7 +115,7 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Optional: true,
 				Computed: true,
 				Default:  booldefault.StaticBool(false),
-				MarkdownDescription: "Use `system_prompt` on its own instead of adding it to Zeshan's " +
+				MarkdownDescription: "Use `system_prompt` on its own instead of adding it to Flintyst's " +
 					"base prompt. Replacing the base prompt drops the instructions that make " +
 					"citations and search work, so leave it off unless the agent needs full control.",
 			},
@@ -134,7 +134,7 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Optional:    true,
 				ElementType: types.StringType,
 				MarkdownDescription: "Ids of the actions the agent can call, e.g. `[onyx_custom_tool.weather.id]`. " +
-					"Zeshan keeps two built-in actions out of its own API responses, so attaching one of " +
+					"Flintyst keeps two built-in actions out of its own API responses, so attaching one of " +
 					"those produces a permanent difference; attach custom actions and the ordinary " +
 					"built-ins instead.",
 			},
@@ -149,20 +149,20 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Computed: true,
 				Default:  booldefault.StaticBool(true),
 				MarkdownDescription: "Whether the agent appears in the assistant list. A hidden agent still " +
-					"works for anyone holding a link to it. Zeshan sets this through its own endpoint, so " +
+					"works for anyone holding a link to it. Flintyst sets this through its own endpoint, so " +
 					"Terraform applies it as a second call after the agent is written.",
 			},
 			"is_featured": schema.BoolAttribute{
 				Optional:            true,
 				Computed:            true,
 				Default:             booldefault.StaticBool(false),
-				MarkdownDescription: "Whether Zeshan promotes the agent to users. Requires agent-management permission.",
+				MarkdownDescription: "Whether Flintyst promotes the agent to users. Requires agent-management permission.",
 			},
 			"display_priority": schema.Int64Attribute{
 				Optional: true,
 				Computed: true,
 				MarkdownDescription: "Sort position in the assistant list. Lower sorts first. " +
-					"Zeshan reads this from the agent only when it is created, so a later change is " +
+					"Flintyst reads this from the agent only when it is created, so a later change is " +
 					"applied through its own endpoint as a second call. Removing the attribute " +
 					"leaves the last value in place rather than clearing it.",
 			},
@@ -184,7 +184,7 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Optional: true,
 				MarkdownDescription: "Ignore documents older than this date, as `YYYY-MM-DD` or a full " +
 					"timestamp.\n\n" +
-					"~> Zeshan does not return this field, so Terraform cannot detect a change made " +
+					"~> Flintyst does not return this field, so Terraform cannot detect a change made " +
 					"outside it. The configured value is re-sent on every apply.",
 			},
 			"users": schema.SetAttribute{
@@ -201,7 +201,7 @@ func (r *personaResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 			},
 			"builtin_persona": schema.BoolAttribute{
 				Computed: true,
-				MarkdownDescription: "Whether Zeshan ships the agent as a built-in. Built-in agents are " +
+				MarkdownDescription: "Whether Flintyst ships the agent as a built-in. Built-in agents are " +
 					"configured in the deployment, not through the API.",
 			},
 			"starter_messages": schema.ListNestedAttribute{
@@ -303,7 +303,7 @@ func (r *personaResource) writeFromModel(
 
 // applyRemotePersona copies the server's view into the model.
 //
-// search_start_date is left alone. Zeshan parses it into a timestamp and returns
+// search_start_date is left alone. Flintyst parses it into a timestamp and returns
 // that, so reading it back would rewrite a plain date into a form the
 // configuration never used and report a change on every plan.
 func applyRemotePersona(ctx context.Context, model *personaResourceModel, remote *client.Persona, diags *diag.Diagnostics) bool {
@@ -458,7 +458,7 @@ func (r *personaResource) Create(ctx context.Context, req resource.CreateRequest
 
 	remote, err := r.client.CreatePersona(ctx, write)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to create Zeshan agent", err.Error())
+		resp.Diagnostics.AddError("Failed to create Flintyst agent", err.Error())
 		return
 	}
 
@@ -475,7 +475,7 @@ func (r *personaResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 	resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 	if listedErr != nil {
-		resp.Diagnostics.AddError("Failed to set whether the new Zeshan agent is listed", listedErr.Error())
+		resp.Diagnostics.AddError("Failed to set whether the new Flintyst agent is listed", listedErr.Error())
 	}
 }
 
@@ -493,7 +493,7 @@ func (r *personaResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	remote, found, err := r.client.LookupPersona(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read Zeshan agent", err.Error())
+		resp.Diagnostics.AddError("Failed to read Flintyst agent", err.Error())
 		return
 	}
 	if !found {
@@ -536,7 +536,7 @@ func (r *personaResource) Update(ctx context.Context, req resource.UpdateRequest
 	// with it.
 	current, err := r.client.GetPersona(ctx, id)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to read the Zeshan agent before updating it", err.Error())
+		resp.Diagnostics.AddError("Failed to read the Flintyst agent before updating it", err.Error())
 		return
 	}
 	write.HierarchyNodeIDs = current.HierarchyNodeIDs()
@@ -544,7 +544,7 @@ func (r *personaResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	remote, err := r.client.UpdatePersona(ctx, id, write)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to update Zeshan agent", err.Error())
+		resp.Diagnostics.AddError("Failed to update Flintyst agent", err.Error())
 		return
 	}
 
@@ -560,7 +560,7 @@ func (r *personaResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 	resp.Diagnostics.Append(resp.State.Set(ctx, plan)...)
 	if listedErr != nil {
-		resp.Diagnostics.AddError("Failed to finish updating the Zeshan agent", listedErr.Error())
+		resp.Diagnostics.AddError("Failed to finish updating the Flintyst agent", listedErr.Error())
 	}
 }
 
@@ -586,7 +586,7 @@ func (r *personaResource) Delete(ctx context.Context, req resource.DeleteRequest
 	if _, found, lookupErr := r.client.LookupPersona(ctx, id); lookupErr == nil && !found {
 		return
 	}
-	resp.Diagnostics.AddError("Failed to delete Zeshan agent", err.Error())
+	resp.Diagnostics.AddError("Failed to delete Flintyst agent", err.Error())
 }
 
 func (r *personaResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {

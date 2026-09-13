@@ -31,7 +31,7 @@ async def document_sets_resource() -> str:
     )
 
     logger.info(
-        "Zeshan MCP Server: document_sets resource returning %s entries",
+        "Flintyst MCP Server: document_sets resource returning %s entries",
         len(document_sets),
     )
 

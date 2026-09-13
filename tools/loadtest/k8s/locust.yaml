@@ -1,4 +1,4 @@
-# Locust master + workers for the Zeshan chat load tests, using the harness
+# Locust master + workers for the Flintyst chat load tests, using the harness
 # image built from ../Dockerfile (locustfile + scenarios baked in).
 #
 # Prereqs in the target namespace:

@@ -7,7 +7,7 @@ matching provider rows exist.
 Provider rows are per-workspace, and on cloud a login request carries no session
 to resolve the workspace from. Both halves of the flow therefore name it
 explicitly: authorize takes the signed pin discovery issued, and the callback
-reads it back out of the OAuth state Zeshan signed on the way out.
+reads it back out of the OAuth state Flintyst signed on the way out.
 """
 
 import hashlib

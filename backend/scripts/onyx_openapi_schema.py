@@ -116,7 +116,7 @@ def generate_client(openapi_json_path: str, strip_tags: bool = True) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Export OpenAPI schema for Zeshan API (does not require starting API server)"
+        description="Export OpenAPI schema for Flintyst API (does not require starting API server)"
     )
     parser.add_argument(
         "--filename", "-f", help="Filename to write to", default="openapi.json"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Linear (GraphQL) wrapper for the Zeshan Craft sandbox.
+"""Linear (GraphQL) wrapper for the Flintyst Craft sandbox.
 
 Common operations exposed as subcommands. User input is passed as
 GraphQL *variables* (never string-formatted into the query), so there

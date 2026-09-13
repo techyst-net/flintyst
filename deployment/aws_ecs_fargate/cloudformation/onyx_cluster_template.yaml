@@ -132,27 +132,27 @@ Resources:
 
 Outputs:
   OutputEcsCluster:
-    Description: Zeshan ECS Cluster
+    Description: Flintyst ECS Cluster
     Value: !Ref ECSCluster
     Export:
       Name: !Sub ${AWS::StackName}-ECSClusterName
   OutputECSTaskRole:
-    Description: Zeshan ECS Task Role
+    Description: Flintyst ECS Task Role
     Value: !Ref ECSTaskRole
     Export:
       Name: !Sub ${AWS::StackName}-ECSTaskRole
   OutputECSTaskExecutionRole:
-    Description: Zeshan ECS TaskExecutionRole
+    Description: Flintyst ECS TaskExecutionRole
     Value: !Ref ECSTaskExecutionRole
     Export:
       Name: !Sub ${AWS::StackName}-ECSTaskExecutionRole
   OutputOnyxNamespace:
-    Description: Zeshan CloudMap namespace ID for ECS service discvoery.
+    Description: Flintyst CloudMap namespace ID for ECS service discvoery.
     Value: !Ref PrivateDnsNamespace
     Export:
       Name: !Sub ${AWS::StackName}-OnyxNamespace
   OutputOnyxNamespaceName:
-    Description: Zeshan CloudMap namespace domain name for ECS service discvoery.
+    Description: Flintyst CloudMap namespace domain name for ECS service discvoery.
     Value: !Ref OnyxNamespace
     Export:
       Name: !Sub ${AWS::StackName}-OnyxNamespaceName

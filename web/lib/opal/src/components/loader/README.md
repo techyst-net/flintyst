@@ -2,11 +2,11 @@
 
 **Import:** `import { IconLoader, OnyxLoader } from "@opal/components";`
 
-Two loaders: a generic `IconLoader` that spins any icon, and the Zeshan-branded `OnyxLoader`. Both take a `color` token (default `border-02`) and hold still under `prefers-reduced-motion`.
+Two loaders: a generic `IconLoader` that spins any icon, and the Flintyst-branded `OnyxLoader`. Both take a `color` token (default `border-02`) and hold still under `prefers-reduced-motion`.
 
 ## IconLoader
 
-The generic loader. Spins the `icon` you pass, or the default `SvgLoader` spinner. Use it when you want a loader with your own icon and no Zeshan branding.
+The generic loader. Spins the `icon` you pass, or the default `SvgLoader` spinner. Use it when you want a loader with your own icon and no Flintyst branding.
 
 ```tsx
 import { IconLoader } from "@opal/components";
@@ -21,7 +21,7 @@ Props: `icon` (`IconFunctionComponent`, default `SvgLoader`), `size` (px, defaul
 
 ## OnyxLoader
 
-The Zeshan-branded mark: the octagon outline and diamond logo crossfade while rotating a full turn on a 2s loop. Use it for Zeshan-branded loading states.
+The Flintyst-branded mark: the octagon outline and diamond logo crossfade while rotating a full turn on a 2s loop. Use it for Flintyst-branded loading states.
 
 ```tsx
 <OnyxLoader />

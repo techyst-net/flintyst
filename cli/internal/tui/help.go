@@ -1,6 +1,6 @@
 package tui
 
-const helpText = `Zeshan CLI Commands
+const helpText = `Flintyst CLI Commands
 
   /help              Show this help message
   /clear             Clear chat and start a new session
@@ -10,9 +10,9 @@ const helpText = `Zeshan CLI Commands
   /sessions          Browse and resume previous sessions
   /configure         Re-run connection setup
   /connectors        Open connectors page in browser
-  /settings          Open Zeshan settings in browser
+  /settings          Open Flintyst settings in browser
   /experiments       List experimental features and their status
-  /quit              Exit Zeshan CLI
+  /quit              Exit Flintyst CLI
 
 Keyboard Shortcuts
 

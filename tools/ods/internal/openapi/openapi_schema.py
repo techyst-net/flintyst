@@ -1,4 +1,4 @@
-"""Generate OpenAPI schema and Python client for Zeshan API.
+"""Generate OpenAPI schema and Python client for Flintyst API.
 
 This script is bundled with the ods wheel and executed by the Go binary
 to generate the OpenAPI schema without starting the full API server.
@@ -156,7 +156,7 @@ def generate_client(
 
 def main() -> int:  # noqa: PLR0911
     parser = argparse.ArgumentParser(
-        description="Generate OpenAPI schema and Python client for Zeshan API"
+        description="Generate OpenAPI schema and Python client for Flintyst API"
     )
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 

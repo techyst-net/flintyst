@@ -71,12 +71,12 @@ export const OrphanedProvider: Story = {
   },
 };
 
-/** Zeshan-managed built-in: editable policies, never deletable. */
+/** Flintyst-managed built-in: editable policies, never deletable. */
 export const OnyxManaged: Story = {
   args: {
     integration: {
       ...APP,
-      facts: ["provided by Zeshan", "7 actions", "no custom skills"],
+      facts: ["provided by Flintyst", "7 actions", "no custom skills"],
       remove: null,
     },
   },

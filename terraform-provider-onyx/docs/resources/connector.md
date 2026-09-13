@@ -4,14 +4,14 @@ page_title: "onyx_connector Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
   A connector definition: what to index and how often. A connector on its own indexes nothing — pair it with an onyx_credential to start indexing.
-  Access control is not set here. Zeshan applies it when a credential is associated, so it belongs to the connector-credential pair.
+  Access control is not set here. Flintyst applies it when a credential is associated, so it belongs to the connector-credential pair.
 ---
 
 # onyx_connector (Resource)
 
 A connector definition: what to index and how often. A connector on its own indexes nothing — pair it with an `onyx_credential` to start indexing.
 
-Access control is not set here. Zeshan applies it when a credential is associated, so it belongs to the connector-credential pair.
+Access control is not set here. Flintyst applies it when a credential is associated, so it belongs to the connector-credential pair.
 
 ## Example Usage
 
@@ -41,12 +41,12 @@ resource "onyx_connector" "docs_site" {
 - `connector_specific_config` (String) Source-specific settings as a JSON object, e.g. `jsonencode({ base_url = "https://example.com", web_connector_type = "recursive" })`.
 - `input_type` (String) How the connector reads: `load_state`, `poll`, `event`, or `slim_retrieval`.
 - `name` (String) Connector name. Must be unique for the source.
-- `source` (String) Source system, lowercase, e.g. `web`, `confluence`, `google_drive`. Zeshan rejects sources excluded by `ENABLED_CONNECTOR_TYPES`.
+- `source` (String) Source system, lowercase, e.g. `web`, `confluence`, `google_drive`. Flintyst rejects sources excluded by `ENABLED_CONNECTOR_TYPES`.
 
 ### Optional
 
-- `indexing_start` (String) Earliest document timestamp to index, RFC 3339, e.g. `2026-01-01T00:00:00Z`. Zeshan ignores it on update, so changing it replaces the connector.
-- `prune_freq` (Number) Seconds between pruning runs. Zeshan rewrites an unset value to its default of 604800 (7 days) on the first update, and Terraform then keeps that value.
+- `indexing_start` (String) Earliest document timestamp to index, RFC 3339, e.g. `2026-01-01T00:00:00Z`. Flintyst ignores it on update, so changing it replaces the connector.
+- `prune_freq` (Number) Seconds between pruning runs. Flintyst rewrites an unset value to its default of 604800 (7 days) on the first update, and Terraform then keeps that value.
 - `refresh_freq` (Number) Seconds between index runs. Unset means index once, with no refresh.
 
 ### Read-Only

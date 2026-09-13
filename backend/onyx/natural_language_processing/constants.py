@@ -15,7 +15,7 @@ DEFAULT_VERTEX_MODEL = "text-embedding-005"
 
 
 class EmbeddingModelTextType:
-    """Mapping of Zeshan text types to provider-specific text types."""
+    """Mapping of Flintyst text types to provider-specific text types."""
 
     PROVIDER_TEXT_TYPE_MAP = {
         EmbeddingProvider.COHERE: {

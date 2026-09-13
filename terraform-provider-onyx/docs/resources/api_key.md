@@ -3,19 +3,19 @@
 page_title: "onyx_api_key Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
-  An Zeshan API key. The key material is returned by the API exactly once at creation and is kept in Terraform state (api_key, sensitive) from then on; it can never be re-read, so after terraform import the attribute stays null. Note the chicken-and-egg: the key the provider itself authenticates with must be created out-of-band (admin UI or curl).
+  A Flintyst API key. The key material is returned by the API exactly once at creation and is kept in Terraform state (api_key, sensitive) from then on; it can never be re-read, so after terraform import the attribute stays null. Note the chicken-and-egg: the key the provider itself authenticates with must be created out-of-band (admin UI or curl).
 ---
 
 # onyx_api_key (Resource)
 
-An Zeshan API key. The key material is returned by the API exactly once at creation and is kept in Terraform state (`api_key`, sensitive) from then on; it can never be re-read, so after `terraform import` the attribute stays null. Note the chicken-and-egg: the key the provider itself authenticates with must be created out-of-band (admin UI or curl).
+A Flintyst API key. The key material is returned by the API exactly once at creation and is kept in Terraform state (`api_key`, sensitive) from then on; it can never be re-read, so after `terraform import` the attribute stays null. Note the chicken-and-egg: the key the provider itself authenticates with must be created out-of-band (admin UI or curl).
 
 ## Example Usage
 
 ```terraform
 variable "ingest_group_id" {
   type        = number
-  description = "Id of an existing Zeshan user group; ids are assigned per deployment."
+  description = "Id of an existing Flintyst user group; ids are assigned per deployment."
 }
 
 # A key for an internal integration. The key material is in

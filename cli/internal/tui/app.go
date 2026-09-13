@@ -1,4 +1,4 @@
-// Package tui implements the Bubble Tea TUI for Zeshan CLI.
+// Package tui implements the Bubble Tea TUI for Flintyst CLI.
 package tui
 
 import (

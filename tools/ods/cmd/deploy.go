@@ -10,7 +10,7 @@ func NewDeployCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deploy",
 		Short: "Trigger deployments",
-		Long:  "Trigger deployments to Zeshan-managed environments.",
+		Long:  "Trigger deployments to Flintyst-managed environments.",
 	}
 
 	cmd.AddCommand(NewDeployCloudCommand())

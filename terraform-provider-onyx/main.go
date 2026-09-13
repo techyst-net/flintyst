@@ -1,5 +1,5 @@
-// terraform-provider-onyx manages Zeshan application configuration via the
-// admin API (for the infrastructure under Zeshan, see deployment/terraform).
+// terraform-provider-onyx manages Flintyst application configuration via the
+// admin API (for the infrastructure under Flintyst, see deployment/terraform).
 package main
 
 import (

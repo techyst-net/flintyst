@@ -102,7 +102,7 @@ Resources:
 
 Outputs:
   OutputOnyxEfsId:
-    Description: Zeshan Filesystem Id
+    Description: Flintyst Filesystem Id
     Value: !Ref OnyxEfs
     Export:
       Name: !Sub ${AWS::StackName}-OnyxEfsId

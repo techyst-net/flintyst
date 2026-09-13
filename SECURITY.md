@@ -1,12 +1,12 @@
 # Security Policy
 
-We take the security of Zeshan and our users seriously. Thank you for helping
-keep Zeshan and its community safe by practicing responsible disclosure.
+We take the security of Flintyst and our users seriously. Thank you for helping
+keep Flintyst and its community safe by practicing responsible disclosure.
 
 ## Supported Versions
 
 Security fixes are applied to the `main` branch and the latest tagged release.
-We strongly recommend running the most recent release of Zeshan. Older releases
+We strongly recommend running the most recent release of Flintyst. Older releases
 are not guaranteed to receive backported security patches.
 
 ## Reporting a Vulnerability
@@ -25,7 +25,7 @@ Please include as much of the following as you can — it helps us triage
 faster:
 
 - A description of the issue and the impact you believe it has.
-- The Zeshan version, deployment type (self-hosted, Zeshan Cloud, Docker, Helm,
+- The Flintyst version, deployment type (self-hosted, Flintyst Cloud, Docker, Helm,
   etc.), and any relevant configuration.
 - Step-by-step reproduction instructions or a proof-of-concept.
 - Any logs, screenshots, or sample payloads that demonstrate the issue.
@@ -48,9 +48,9 @@ After you report a vulnerability:
 
 In scope:
 
-- The Zeshan application code in this repository (backend, web, desktop, CLI,
+- The Flintyst application code in this repository (backend, web, desktop, CLI,
   connectors, deployment manifests).
-- Official Zeshan-published Docker images and Helm charts.
+- Official Flintyst-published Docker images and Helm charts.
 
 Out of scope:
 
@@ -70,4 +70,4 @@ We will not pursue or support legal action against researchers who:
 - Give us a reasonable opportunity to remediate before any public
   disclosure.
 
-Thank you for helping keep Zeshan and our community secure.
+Thank you for helping keep Flintyst and our community secure.

@@ -17,7 +17,7 @@ logger = setup_logger()
 # Supervisord captures each worker program's stdout to
 # ``/var/log/<program>.log`` in the Compose ``background`` container. Only the
 # top level is searched: its subdirectories hold system logs (e.g. ``apt/``),
-# not Zeshan logs.
+# not Flintyst logs.
 SUPERVISORD_LOG_DIRECTORY = Path("/var/log")
 
 

@@ -1,4 +1,4 @@
-# Zeshan local-dev overlay for kind/minikube/k3d.
+# Flintyst local-dev overlay for kind/minikube/k3d.
 #
 # Shrinks resources and disables prod-only features so the chart fits on a
 # laptop. Pairs with telepresence intercept so api_server / celery / web run

@@ -183,7 +183,7 @@ export default function WebSearchPage() {
       if (providerType === "onyx_web_crawler") {
         return {
           id: -1,
-          name: "Zeshan Web Crawler",
+          name: "Flintyst Web Crawler",
           provider_type: "onyx_web_crawler",
           is_active: true,
           config: null,

@@ -1,4 +1,4 @@
-// Package cmd implements Cobra CLI commands for the Zeshan CLI.
+// Package cmd implements Cobra CLI commands for the Flintyst CLI.
 package cmd
 
 import (
@@ -72,12 +72,12 @@ func Execute() error {
 
 	rootCmd := &cobra.Command{
 		Use:   "onyx-cli",
-		Short: "CLI for Zeshan knowledge and search",
+		Short: "CLI for Flintyst knowledge and search",
 		// main.go prints the error; without these, cobra prints it a second
 		// time and dumps the full usage text after every runtime failure.
 		SilenceErrors: true,
 		SilenceUsage:  true,
-		Long:          "Zeshan CLI — query enterprise knowledge from the terminal or as an agent tool.",
+		Long:          "Flintyst CLI — query enterprise knowledge from the terminal or as an agent tool.",
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			if opts.Debug {
 				log.SetLevel(log.DebugLevel)

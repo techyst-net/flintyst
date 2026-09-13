@@ -4,7 +4,7 @@ page_title: "onyx_user_group Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
   A user group: a roster of people, the managers among them, and the permissions the group grants. Enterprise Edition only — the routes do not exist on Community Edition, where every call answers 404.
-  Permissions in Zeshan come only from group grants, so this resource is how a person gets any authority at all.
+  Permissions in Flintyst come only from group grants, so this resource is how a person gets any authority at all.
   What the group can see is not set here. Connectors, document sets, agents, LLM providers, MCP servers and credentials each carry their own groups attribute, and they own that link. This resource reads those back but never writes them, so the two sides cannot fight over the same edge.
 ---
 
@@ -12,7 +12,7 @@ description: |-
 
 A user group: a roster of people, the managers among them, and the permissions the group grants. **Enterprise Edition only** — the routes do not exist on Community Edition, where every call answers 404.
 
-Permissions in Zeshan come only from group grants, so this resource is how a person gets any authority at all.
+Permissions in Flintyst come only from group grants, so this resource is how a person gets any authority at all.
 
 What the group can *see* is not set here. Connectors, document sets, agents, LLM providers, MCP servers and credentials each carry their own `groups` attribute, and they own that link. This resource reads those back but never writes them, so the two sides cannot fight over the same edge.
 
@@ -28,9 +28,9 @@ resource "onyx_user_group" "everyone_uk" {
 # A team that administers connectors and document sets, with two of its members
 # managing the roster.
 #
-# Permissions use Zeshan's own tokens, not the enum names. Only toggleable ones
+# Permissions use Flintyst's own tokens, not the enum names. Only toggleable ones
 # can be set: `basic`, `admin`, `craft_sandbox` and `manage:skills` are managed
-# by Zeshan and are refused here.
+# by Flintyst and are refused here.
 resource "onyx_user_group" "data_platform" {
   name = "Data Platform"
 
@@ -40,7 +40,7 @@ resource "onyx_user_group" "data_platform" {
     "c1a94e08-7f2d-4b63-8e15-9d0c3a6f4b27",
   ]
 
-  # Every manager must also appear in user_ids: Zeshan stores the flag on the
+  # Every manager must also appear in user_ids: Flintyst stores the flag on the
   # membership row, so a manager is always a member.
   manager_ids = [
     "3f6c1e2a-0b4d-4c8e-9a1f-2d5b7c9e0a13",
@@ -70,28 +70,28 @@ resource "onyx_cc_pair" "sales_drive" {
 
 ### Required
 
-- `name` (String) Group name, unique across the deployment. Renaming is a separate call that Zeshan refuses while the group is syncing, so the provider waits first.
+- `name` (String) Group name, unique across the deployment. Renaming is a separate call that Flintyst refuses while the group is syncing, so the provider waits first.
 
 ### Optional
 
 - `incognito_enabled` (Boolean) Whether members may start incognito chats. Only takes effect while the deployment restricts incognito access to groups, but it is always storable so a roster can be staged before the mode is flipped. Writing it needs full admin access, so the provider only calls the endpoint when it changes.
-- `manager_ids` (Set of String) User ids that manage the group. Every manager must also appear in `user_ids` — Zeshan stores the flag on the membership row, so a manager is always a member.
-- `permissions` (Set of String) Permission grants, written as Zeshan's own tokens: `manage:connectors`, `manage:document_sets`, `manage:llms`, `manage:actions`, `manage:agents`, `add:agents`, `manage:user_groups`, `manage:bots`, `manage:service_account_api_keys`, `create:user_api_keys`, `read:agent_analytics`, `read:query_history`. Note these are the wire values, not the enum names.
+- `manager_ids` (Set of String) User ids that manage the group. Every manager must also appear in `user_ids` — Flintyst stores the flag on the membership row, so a manager is always a member.
+- `permissions` (Set of String) Permission grants, written as Flintyst's own tokens: `manage:connectors`, `manage:document_sets`, `manage:llms`, `manage:actions`, `manage:agents`, `add:agents`, `manage:user_groups`, `manage:bots`, `manage:service_account_api_keys`, `create:user_api_keys`, `read:agent_analytics`, `read:query_history`. Note these are the wire values, not the enum names.
 
 The configuration owns the list, so leaving it out revokes every grant the group has.
 
-Only toggleable permissions may be set. Zeshan manages the rest itself (`basic`, `admin`, `craft_sandbox`, `manage:skills` and the implied read tokens); they are neither read back here nor writable, and naming one is refused. Writing this attribute needs full admin access, so the provider only calls the endpoint when the set actually changes.
+Only toggleable permissions may be set. Flintyst manages the rest itself (`basic`, `admin`, `craft_sandbox`, `manage:skills` and the implied read tokens); they are neither read back here nor writable, and naming one is refused. Writing this attribute needs full admin access, so the provider only calls the endpoint when the set actually changes.
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `user_ids` (Set of String) Member user ids (UUIDs). The configuration owns this list: leaving it out empties the group.
 
-Zeshan refuses a removal that would leave someone in no group at all, because a person with no group has no permissions and would keep a login that can do nothing.
+Flintyst refuses a removal that would leave someone in no group at all, because a person with no group has no permissions and would keep a login that can do nothing.
 
 ### Read-Only
 
 - `cc_pair_ids` (Set of String) Connector-credential pairs shared with this group. Read-only here: `onyx_cc_pair` owns the link through its own `groups` attribute.
 - `document_set_ids` (Set of String) Document sets shared with this group. Read-only here: `onyx_document_set` owns the link.
-- `id` (String) Group id, assigned by Zeshan.
-- `is_default` (Boolean) Whether this is one of the seeded system groups (`Admin`, `Basic`). A default group holds members and nothing else: Zeshan refuses to rename it, delete it, or change its permissions or incognito setting. Importing one and managing its roster works; anything else fails at apply time.
+- `id` (String) Group id, assigned by Flintyst.
+- `is_default` (Boolean) Whether this is one of the seeded system groups (`Admin`, `Basic`). A default group holds members and nothing else: Flintyst refuses to rename it, delete it, or change its permissions or incognito setting. Importing one and managing its roster works; anything else fails at apply time.
 - `persona_ids` (Set of String) Agents shared with this group. Read-only here: `onyx_persona` owns the link.
 
 <a id="nestedblock--timeouts"></a>
@@ -113,6 +113,6 @@ The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/c
 # Import by numeric group id.
 #
 # The seeded Admin and Basic groups can be imported and their rosters managed,
-# but Zeshan refuses to rename or delete one, or to change its permissions.
+# but Flintyst refuses to rename or delete one, or to change its permissions.
 terraform import onyx_user_group.data_platform 4
 ```

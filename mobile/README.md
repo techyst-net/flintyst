@@ -1,6 +1,6 @@
-# Zeshan Mobile (Expo)
+# Flintyst Mobile (Expo)
 
-A standalone React Native app for Zeshan, under `mobile/` — independent of `web/` (its own
+A standalone React Native app for Flintyst, under `mobile/` — independent of `web/` (its own
 dependencies, lockfile, and tooling). Scaffolded with `create-expo-app` (Expo Router template).
 
 ## Stack
@@ -71,5 +71,5 @@ Not wired yet. Tokens, theme, and shared utilities will be imported from the `@o
 package once it lands (see the `Subash-Mohan/shared-package-mobile-web` branch). Nothing is
 vendored locally — the package owns the Style Dictionary build and the design tokens.
 
-> The splash logo (`assets/images/splash-icon.png`) is a placeholder on the Zeshan-blue background
-> (`#208AEF`) — replace it with the real Zeshan logo art.
+> The splash logo (`assets/images/splash-icon.png`) is a placeholder on the Flintyst-blue background
+> (`#208AEF`) — replace it with the real Flintyst logo art.

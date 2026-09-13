@@ -2,7 +2,7 @@
 
 Builds on LongConversationUser: keeps one session alive for many turns and
 sends large messages (default ONYX_MSG_CHARS), so the history quickly crosses
-the model's input-token limit and Zeshan summarizes/recompresses it every turn.
+the model's input-token limit and Flintyst summarizes/recompresses it every turn.
 This is the path behind history-driven slowdowns and the compression
 death-spiral incident (orphaned summaries → full recompression + giant
 prompts each turn).

@@ -54,16 +54,16 @@ def get_provider_for_app(app: ExternalApp) -> ExternalAppProvider | None:
 
 
 def get_onyx_managed_provider(app_type: ExternalAppType) -> OnyxManagedExtApp | None:
-    """The Zeshan-managed provider for ``app_type``, or None when the app_type is
-    CUSTOM/unregistered or its provider isn't Zeshan-managed. Not gated on
+    """The Flintyst-managed provider for ``app_type``, or None when the app_type is
+    CUSTOM/unregistered or its provider isn't Flintyst-managed. Not gated on
     ``MULTI_TENANT`` — callers add that for the cloud-only lockdown (``is not
-    None`` is the "is this app Zeshan-managed" check)."""
+    None`` is the "is this app Flintyst-managed" check)."""
     provider = PROVIDERS.get(app_type)
     return provider if isinstance(provider, OnyxManagedExtApp) else None
 
 
 def uses_cloud_scope(app_type: ExternalAppType) -> bool:
-    """Whether this app connects with Zeshan's cloud OAuth client rather than
+    """Whether this app connects with Flintyst's cloud OAuth client rather than
     credentials the deployment owns. That client is verified with the upstream
     provider, so providers narrow their scope there (see ``GoogleOAuthProvider``)
     and the actions it can't cover drop out of the catalog."""
@@ -127,7 +127,7 @@ def get_endpoint_catalog(app_type: ExternalAppType) -> list[EndpointSpec]:
 
 
 def withheld_on_cloud(app_type: ExternalAppType) -> list[EndpointSpec]:
-    """The catalog actions this app cannot offer on cloud, where Zeshan's own
+    """The catalog actions this app cannot offer on cloud, where Flintyst's own
     OAuth client must avoid Google's restricted scopes — every endpoint marked
     ``requires_self_hosted_scope``. Empty when the deployment uses its own
     credentials."""
@@ -222,7 +222,7 @@ def fetch_available_built_in_apps() -> list[BuiltInExternalAppDescriptor]:
 
 
 def fetch_onyx_managed_built_in_apps() -> list[BuiltInExternalAppDescriptor]:
-    """Built-in providers Zeshan owns the credentials for — the apps cloud
+    """Built-in providers Flintyst owns the credentials for — the apps cloud
     provisioning seeds per tenant. Excludes non-managed built-ins."""
     return [
         _descriptor_for(cls)

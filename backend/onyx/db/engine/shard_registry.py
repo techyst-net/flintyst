@@ -1,6 +1,6 @@
 """Physical database ("shard") registry for tenant routing.
 
-Zeshan addresses a tenant by *schema* via ``schema_translate_map``. This module adds
+Flintyst addresses a tenant by *schema* via ``schema_translate_map``. This module adds
 the orthogonal axis: which *database* that schema lives in.
 
 Design notes:

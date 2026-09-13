@@ -1,6 +1,6 @@
 """License API endpoints for self-hosted deployments.
 
-These endpoints allow self-hosted Zeshan instances to:
+These endpoints allow self-hosted Flintyst instances to:
 1. Claim a license after Stripe checkout (via cloud data plane proxy)
 2. Upload a license file manually (for air-gapped deployments)
 3. View license status and seat usage
@@ -183,7 +183,7 @@ async def upload_license(
     Upload a license file manually (self-hosted only).
 
     Used for air-gapped deployments where the cloud data plane is not accessible.
-    The license file must be cryptographically signed by Zeshan.
+    The license file must be cryptographically signed by Flintyst.
     """
     if MULTI_TENANT:
         raise OnyxError(

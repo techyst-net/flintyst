@@ -1,4 +1,4 @@
-// Package release resolves Zeshan app release tags and fetches deployment files
+// Package release resolves Flintyst app release tags and fetches deployment files
 // for a pinned ref from GitHub, so a deployment can match versions other than
 // the snapshot embedded in this binary.
 package release
@@ -27,7 +27,7 @@ const (
 	defaultRetryDelay = 2 * time.Second
 )
 
-// appTagPattern matches Zeshan app release tags (vX.Y.Z, optionally suffixed
+// appTagPattern matches Flintyst app release tags (vX.Y.Z, optionally suffixed
 // like v4.4.6-beta.1), as opposed to tool releases such as cli/v1.2.3.
 var appTagPattern = regexp.MustCompile(`^v\d+\.\d+\.\d+`)
 
@@ -128,7 +128,7 @@ type releaseInfo struct {
 	Prerelease bool   `json:"prerelease"`
 }
 
-// LatestAppTag returns the newest Zeshan app release tag (vX.Y.Z).
+// LatestAppTag returns the newest Flintyst app release tag (vX.Y.Z).
 //
 // /releases/latest is repo-global: this repo also publishes desktop and tool
 // releases (cli/v*, ods/v*) under the same namespace, so the result is
@@ -146,7 +146,7 @@ func (c *Client) LatestAppTag(ctx context.Context) (string, error) {
 
 	var releases []releaseInfo
 	if err := c.getJSON(ctx, c.APIBase+"/repos/"+owner+"/"+repo+"/releases?per_page=100", &releases); err != nil {
-		return "", fmt.Errorf("failed to look up the latest Zeshan release: %w", err)
+		return "", fmt.Errorf("failed to look up the latest Flintyst release: %w", err)
 	}
 	for _, r := range releases {
 		if r.Draft || r.Prerelease {
@@ -156,7 +156,7 @@ func (c *Client) LatestAppTag(ctx context.Context) (string, error) {
 			return r.TagName, nil
 		}
 	}
-	return "", fmt.Errorf("no Zeshan app release found among the repository's releases")
+	return "", fmt.Errorf("no Flintyst app release found among the repository's releases")
 }
 
 // ErrNotFound reports that the ref is reachable but doesn't carry the file.

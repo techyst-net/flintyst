@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 import requests
 
-API_SERVER_URL = "http://localhost:3000"  # Adjust this to your Zeshan server URL
+API_SERVER_URL = "http://localhost:3000"  # Adjust this to your Flintyst server URL
 HEADERS = {"Content-Type": "application/json"}
 API_KEY = "onyx-api-key"  # API key here, if auth is enabled
 

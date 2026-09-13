@@ -4,7 +4,7 @@ page_title: "onyx_document_set Resource - terraform-provider-onyx"
 subcategory: ""
 description: |-
   A document set: a named group of connector-credential pairs that users and assistants can search as one unit.
-  Zeshan propagates changes to the search index in the background. is_up_to_date reports whether that has finished, and usually reads false right after an apply.
+  Flintyst propagates changes to the search index in the background. is_up_to_date reports whether that has finished, and usually reads false right after an apply.
   ~> Private sets need Enterprise Edition. users and groups are rejected on Community Edition. is_public = false with neither set makes a set nobody can use.
 ---
 
@@ -12,7 +12,7 @@ description: |-
 
 A document set: a named group of connector-credential pairs that users and assistants can search as one unit.
 
-Zeshan propagates changes to the search index in the background. `is_up_to_date` reports whether that has finished, and usually reads `false` right after an apply.
+Flintyst propagates changes to the search index in the background. `is_up_to_date` reports whether that has finished, and usually reads `false` right after an apply.
 
 ~> **Private sets need Enterprise Edition.** `users` and `groups` are rejected on Community Edition. `is_public = false` with neither set makes a set nobody can use.
 
@@ -45,7 +45,7 @@ resource "onyx_document_set" "hr_private" {
   users     = [var.hr_lead_user_id]
 }
 
-# Zeshan rejects a set that holds nothing, so a set built only from federated
+# Flintyst rejects a set that holds nothing, so a set built only from federated
 # connectors still needs at least one entry there.
 #
 # `entities` follows the schema of the connector it points at. Slack is the
@@ -71,7 +71,7 @@ resource "onyx_document_set" "support_channels" {
 
 ### Required
 
-- `cc_pair_ids` (Set of String) Ids of the connector-credential pairs in the set, e.g. `[onyx_cc_pair.docs.id]`. Zeshan rejects a set with no pairs and no federated connectors, so this may only be empty when `federated_connectors` is not.
+- `cc_pair_ids` (Set of String) Ids of the connector-credential pairs in the set, e.g. `[onyx_cc_pair.docs.id]`. Flintyst rejects a set with no pairs and no federated connectors, so this may only be empty when `federated_connectors` is not.
 - `name` (String) Document set name. Must be unique across the deployment.
 
 ### Optional
@@ -79,14 +79,14 @@ resource "onyx_document_set" "support_channels" {
 - `description` (String) What the set contains, shown in the admin panel.
 - `federated_connectors` (Attributes Set) Federated connectors searched as part of this set. (see [below for nested schema](#nestedatt--federated_connectors))
 - `groups` (Set of Number) User group ids that may use the set when it is not public. Enterprise Edition only — Community Edition rejects a set with users or groups.
-- `is_public` (Boolean) Whether every user can see the set. When `false`, only the `users` and `groups` below can. Zeshan defaults new sets to public.
+- `is_public` (Boolean) Whether every user can see the set. When `false`, only the `users` and `groups` below can. Flintyst defaults new sets to public.
 - `timeouts` (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - `users` (Set of String) User ids (UUIDs) that may use the set when it is not public. Enterprise Edition only — Community Edition rejects a set with users or groups.
 
 ### Read-Only
 
 - `id` (String) Numeric document set id.
-- `is_up_to_date` (Boolean) Whether Zeshan has finished applying the set to the search index. Reads `false` while the background sync is pending. Zeshan refuses to change or delete a set that is still syncing, so Terraform waits for this before it does either.
+- `is_up_to_date` (Boolean) Whether Flintyst has finished applying the set to the search index. Reads `false` while the background sync is pending. Flintyst refuses to change or delete a set that is still syncing, so Terraform waits for this before it does either.
 
 <a id="nestedatt--federated_connectors"></a>
 ### Nested Schema for `federated_connectors`

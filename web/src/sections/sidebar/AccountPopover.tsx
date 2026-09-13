@@ -187,7 +187,7 @@ function SettingsPopover({
             orientation="reverse"
             icon={SvgOnyxLogo}
             title={markdown(
-              `[Zeshan ${
+              `[Flintyst ${
                 settings.version ?? "dev"
               }](https://docs.onyx.app/changelog)`
             )}

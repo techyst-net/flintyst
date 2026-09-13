@@ -203,15 +203,15 @@ if __name__ == "__main__":
         "--url",
         type=str,
         default="http://localhost:8080",
-        help="Zeshan URL, should point to Zeshan nginx.",
+        help="Flintyst URL, should point to Flintyst nginx.",
     )
 
     # Not needed if Auth is disabled?
-    # Or for Zeshan MIT Edition API key must be replaced with session cookie
+    # Or for Flintyst MIT Edition API key must be replaced with session cookie
     parser.add_argument(
         "--api-key",
         type=str,
-        help="Zeshan Admin Level API key",
+        help="Flintyst Admin Level API key",
     )
 
     args = parser.parse_args()

@@ -39,12 +39,12 @@ func (in *installer) runUpgrade(ctx context.Context) error {
 	in.root = paths.Resolve(in.opts.Dir)
 	if len(in.root.Ambiguous) > 0 {
 		return exitcodes.Newf(exitcodes.BadRequest,
-			"multiple Zeshan installs found (%s and %s) — pass --dir to pick one",
+			"multiple Flintyst installs found (%s and %s) — pass --dir to pick one",
 			in.root.Dir, in.root.Ambiguous[0])
 	}
 	if !paths.IsInstall(in.root.Dir) {
 		return exitcodes.Newf(exitcodes.NotAvailable,
-			"no Zeshan deployment found at %s — run `onyx-cli deploy install` first", in.root.Dir)
+			"no Flintyst deployment found at %s — run `onyx-cli deploy install` first", in.root.Dir)
 	}
 
 	// --tag is checked before the wizard takes over the screen, so a typo
@@ -60,7 +60,7 @@ func (in *installer) runUpgrade(ctx context.Context) error {
 
 	// Upgrades share the install wizard (dry runs stay line-oriented).
 	if in.fancy() && !in.opts.DryRun {
-		in.wiz = ui.StartWizard(in.deps.IOS.Out, "Zeshan Upgrade", in.deps.CLIVersion, in.cancel)
+		in.wiz = ui.StartWizard(in.deps.IOS.Out, "Flintyst Upgrade", in.deps.CLIVersion, in.cancel)
 		defer in.wiz.Abort()
 	}
 
@@ -226,7 +226,7 @@ func (in *installer) runUpgrade(ctx context.Context) error {
 	}
 	// Reuse the port the deployment already runs on — scanning for a free one
 	// here would collide with our own still-running nginx and silently move
-	// Zeshan to another port. Installs created by install.sh never recorded
+	// Flintyst to another port. Installs created by install.sh never recorded
 	// HOST_PORT, so fall back to the port they are publishing right now.
 	// Prod skips all of it: the overlay publishes 80/443, HOST_PORT unread.
 	hostPort := 0
@@ -289,10 +289,10 @@ func (in *installer) printUpgradeSuccess(hostPort int, from, to string) {
 	if in.prod {
 		url = in.prodAccessURL()
 	}
-	headline := fmt.Sprintf("Zeshan upgraded: %s → %s", from, to)
+	headline := fmt.Sprintf("Flintyst upgraded: %s → %s", from, to)
 	var tail []string
 	if url != "" {
-		tail = []string{"Access Zeshan at: " + ui.Accent(url), ""}
+		tail = []string{"Access Flintyst at: " + ui.Accent(url), ""}
 	}
 	tail = append(tail, manageLines()...)
 	if in.wiz != nil {
@@ -337,7 +337,7 @@ func (in *installer) downgradeGuard(installedTag, targetTag string) error {
 	if !okInstalled || !okTarget || !target.LessThan(installed) {
 		return nil
 	}
-	in.warnf("Target %s is OLDER than the installed %s. Downgrades are not supported by Zeshan and may corrupt data written by newer schema versions.", targetTag, installedTag)
+	in.warnf("Target %s is OLDER than the installed %s. Downgrades are not supported by Flintyst and may corrupt data written by newer schema versions.", targetTag, installedTag)
 	if in.opts.AllowDowngrade {
 		in.infof("Proceeding anyway (--allow-downgrade).")
 		return nil

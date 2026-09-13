@@ -72,7 +72,7 @@ func (d *embeddingProvidersDataSource) Configure(_ context.Context, req datasour
 func (d *embeddingProvidersDataSource) Read(ctx context.Context, _ datasource.ReadRequest, resp *datasource.ReadResponse) {
 	remote, err := d.client.ListEmbeddingProviders(ctx)
 	if err != nil {
-		resp.Diagnostics.AddError("Failed to list Zeshan embedding providers", err.Error())
+		resp.Diagnostics.AddError("Failed to list Flintyst embedding providers", err.Error())
 		return
 	}
 

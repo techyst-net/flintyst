@@ -3,7 +3,7 @@
 //
 // This gate asserts that token values are IDENTICAL to the base branch. The
 // brand colours here were deliberately changed (the blue-* primitives now
-// carry the Zeshan indigo ramp), so running it against an upstream baseline
+// carry the Flintyst indigo ramp), so running it against an upstream baseline
 // reports those differences as failures — by design, not as a regression.
 //
 // It remains useful for its other assertions: the variable-NAME set matching,

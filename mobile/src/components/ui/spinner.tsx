@@ -6,7 +6,7 @@ import SvgLoader from "@/icons/loader";
 
 interface SpinnerProps {
   size?: number;
-  // Zeshan text-color class for the arc, e.g. "text-status-error-05".
+  // Flintyst text-color class for the arc, e.g. "text-status-error-05".
   className?: string;
 }
 

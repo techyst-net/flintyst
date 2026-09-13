@@ -82,7 +82,7 @@ def _sync_expired_license(
     A sales-issued license has no control plane to ask.
     """
     if stored.source == LicenseSource.MANUAL_UPLOAD:
-        return stored, "This license is managed by Zeshan sales. Contact your rep."
+        return stored, "This license is managed by Flintyst sales. Contact your rep."
 
     try:
         renewed = reclaim_license_from_control_plane(db_session)
@@ -92,7 +92,7 @@ def _sync_expired_license(
         return stored, "No license is installed on this instance."
     except (requests.RequestException, ValueError) as e:
         logger.warning("License renewal check failed: %s", e)
-        return stored, "Zeshan could not be reached to check for a renewal."
+        return stored, "Flintyst could not be reached to check for a renewal."
 
     if renewed.issued_at <= stored.issued_at:
         # Same license back: the subscription did not renew. Whether that is a

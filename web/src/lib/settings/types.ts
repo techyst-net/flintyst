@@ -60,7 +60,7 @@ export interface Settings {
   // Default Assistant settings
   disable_default_assistant?: boolean;
 
-  // Zeshan Craft (Build Mode) feature flag
+  // Flintyst Craft (Build Mode) feature flag
   onyx_craft_enabled?: boolean;
 
   // Deployment-level Craft availability, ignoring workspace/per-user policy.
@@ -151,7 +151,7 @@ export interface EnterpriseSettings {
   custom_help_link_url: string | null;
   custom_help_link_label: string | null;
 
-  // Hide the "Powered by Zeshan" tagline under the sidebar logo.
+  // Hide the "Powered by Flintyst" tagline under the sidebar logo.
   hide_onyx_branding: boolean | null;
 }
 
@@ -194,10 +194,10 @@ export function toSettings({
 export interface AppSettings extends Settings {
   /** Raw enterprise settings — null when EE is disabled or not yet loaded. */
   enterprise: EnterpriseSettings | null;
-  /** Resolved display name: enterprise.application_name || "Zeshan". */
+  /** Resolved display name: enterprise.application_name || "Flintyst". */
   appName: string;
   /**
-   * URL of the logo image to render, or `null` to use the default Zeshan SVG.
+   * URL of the logo image to render, or `null` to use the default Flintyst SVG.
    * Includes a cache-buster that updates whenever enterprise settings are
    * revalidated, forcing the browser to re-fetch after an admin uploads a
    * new logo.

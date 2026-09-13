@@ -9,7 +9,7 @@ const onyxLogo = `   ██████╗ ███╗   ██╗██╗   �
   ╚██████╔╝██║ ╚████║   ██║   ██╔╝ ██╗
    ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝`
 
-const tagline = "Your terminal interface for Zeshan"
+const tagline = "Your terminal interface for Flintyst"
 const splashHint = "Type a message to begin  ·  /help for commands"
 
 // renderSplash renders the splash screen centered for the given dimensions.

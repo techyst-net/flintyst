@@ -1,6 +1,6 @@
 # Bootstrap example
 
-A day-one Zeshan configuration. It creates a chat model, indexes one public
+A day-one Flintyst configuration. It creates a chat model, indexes one public
 documentation site, groups the result into a document set, and adds an agent
 that answers from it.
 
@@ -10,7 +10,7 @@ the one exception and stays off unless you set
 
 ## Get an API key
 
-The provider authenticates with an Zeshan API key. A key's access comes from the
+The provider authenticates with a Flintyst API key. A key's access comes from the
 groups it belongs to, so the key must be in the `Admin` group.
 
 Create one in the admin panel under **Settings -> Service Accounts**, or run:
@@ -76,6 +76,6 @@ admin panel under **Connectors**.
 terraform destroy
 ```
 
-Destroying the pair also removes the documents it indexed, which Zeshan does in
+Destroying the pair also removes the documents it indexed, which Flintyst does in
 the background. `onyx_settings` is the exception: destroying it stops managing
 the settings but does not reset them.

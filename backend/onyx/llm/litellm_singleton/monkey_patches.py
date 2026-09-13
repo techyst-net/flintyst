@@ -76,7 +76,7 @@ Status checked against LiteLLM v1.93.0 (2026-07-20):
      registry (valid provider prefix + known tail, mode "chat"), so an explicit
      "responses/" prefix is left attached and the request is sent to
      /chat/completions with the mangled model name
-   - The prefix is only ever set deliberately (Zeshan API-surface routing for
+   - The prefix is only ever set deliberately (Flintyst API-surface routing for
      OpenAI-compatible gateways such as Bifrost and Portkey), so honor it
      unconditionally and pass the remainder through as the literal model id
    STATUS: STILL NEEDED - v1.93.0 consults the registry before honoring the prefix.

@@ -1,8 +1,8 @@
 <!-- ONYX_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/backend/onyx/connectors/README.md"} -->
 
-# Writing a new Zeshan Connector
+# Writing a new Flintyst Connector
 
-This README covers how to contribute a new Connector for Zeshan. It includes an overview of the design, interfaces,
+This README covers how to contribute a new Connector for Flintyst. It includes an overview of the design, interfaces,
 and required changes.
 
 Thank you for your contribution!
@@ -116,7 +116,7 @@ indexing them by following the shared convention:
 #### Docs Changes
 
 Create the new connector page (with guiding images!) with how to get the connector credentials and how to set up the
-connector in Zeshan. Then create a Pull Request in [https://github.com/onyx-dot-app/documentation](https://github.com/onyx-dot-app/documentation).
+connector in Flintyst. Then create a Pull Request in [https://github.com/onyx-dot-app/documentation](https://github.com/onyx-dot-app/documentation).
 
 ### Before opening PR
 

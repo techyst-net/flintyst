@@ -1,4 +1,4 @@
-"""Provision Zeshan-managed built-in external apps for existing tenants (cloud only)
+"""Provision Flintyst-managed built-in external apps for existing tenants (cloud only)
 
 Backfills the built-in external apps (Slack, Linear, GitHub, Gmail, Google
 Calendar, Google Drive, HubSpot) for tenants created before those apps existed,
@@ -41,7 +41,7 @@ depends_on = None
 
 logger = logging.getLogger("alembic.runtime.migration")
 
-# Frozen snapshot of the Zeshan-managed built-in app catalog. Every managed app
+# Frozen snapshot of the Flintyst-managed built-in app catalog. Every managed app
 # authenticates the upstream with a bearer access token and is keyed in env by
 # EXT_APP_<APP_TYPE>_CLIENT_ID / _CLIENT_SECRET.
 _AUTH_TEMPLATE = {"Authorization": "Bearer {access_token}"}
@@ -52,7 +52,7 @@ _BUILT_IN_APPS: list[dict] = [
         "slug": "slack",
         "name": "Slack",
         "description": (
-            "Read your Slack messages and channels as context inside Zeshan Craft."
+            "Read your Slack messages and channels as context inside Flintyst Craft."
         ),
         "upstream_url_patterns": ["https://slack\\.com/api/.*"],
     },
@@ -61,7 +61,7 @@ _BUILT_IN_APPS: list[dict] = [
         "slug": "google-calendar",
         "name": "Google Calendar",
         "description": (
-            "Read and create events on your Google Calendar from inside Zeshan Craft."
+            "Read and create events on your Google Calendar from inside Flintyst Craft."
         ),
         "upstream_url_patterns": ["https://www\\.googleapis\\.com/calendar/.*"],
     },
@@ -71,7 +71,7 @@ _BUILT_IN_APPS: list[dict] = [
         "name": "Google Drive",
         "description": (
             "Search, read, create, and edit files and Google Docs in your Google "
-            "Drive inside Zeshan Craft."
+            "Drive inside Flintyst Craft."
         ),
         "upstream_url_patterns": [
             "https://www\\.googleapis\\.com/drive/.*",
@@ -85,7 +85,7 @@ _BUILT_IN_APPS: list[dict] = [
         "name": "Gmail",
         "description": (
             "Read, search, send, and draft email from your Gmail account inside "
-            "Zeshan Craft."
+            "Flintyst Craft."
         ),
         "upstream_url_patterns": ["https://gmail\\.googleapis\\.com/gmail/.*"],
     },

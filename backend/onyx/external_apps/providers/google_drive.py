@@ -204,7 +204,7 @@ _ENDPOINTS: list[EndpointSpec] = [
 # gated by per-action ASK approval.
 _SELF_HOSTED_SCOPE = "https://www.googleapis.com/auth/drive"
 # Every Drive-wide scope is restricted, so cloud pairs per-file access (files
-# Zeshan created or the user opened with it) with the Docs, Sheets, and Slides
+# Flintyst created or the user opened with it) with the Docs, Sheets, and Slides
 # APIs, whose sensitive (not restricted) scopes each reach any file of their
 # type by id.
 _CLOUD_SCOPE = (

@@ -38,9 +38,9 @@ class SlackMessageInfo(BaseModel):
     thread_to_respond: str | None
     sender_id: str | None
     email: str | None
-    bypass_filters: bool  # User has tagged @OnyxBot
-    is_slash_command: bool  # User is using /OnyxBot
-    is_bot_dm: bool  # User is direct messaging to OnyxBot
+    bypass_filters: bool  # User has tagged @FlintystBot
+    is_slash_command: bool  # User is using /FlintystBot
+    is_bot_dm: bool  # User is direct messaging to FlintystBot
     slack_context: SlackContext | None = None
 
 

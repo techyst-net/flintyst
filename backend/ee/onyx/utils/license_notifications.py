@@ -40,20 +40,20 @@ def _build_trial_copy(
     is a subscription starting rather than access being lost."""
     if stage == ExpiryWarningStage.GRACE:
         return (
-            f"Zeshan trial ended. {grace_days_remaining} grace days remaining",
+            f"Flintyst trial ended. {grace_days_remaining} grace days remaining",
             f"Your trial ended on {expires_str} and billing has not started. "
             f"You have {grace_days_remaining} day(s) of access remaining. Check "
-            "your payment method in Plans & Billing to keep Zeshan running.",
-            f"Zeshan trial ended. {grace_days_remaining} grace days remaining",
+            "your payment method in Plans & Billing to keep Flintyst running.",
+            f"Flintyst trial ended. {grace_days_remaining} grace days remaining",
         )
     when = (
         "within 24 hours" if stage == ExpiryWarningStage.T_1D else f"on {expires_str}"
     )
     return (
-        f"Zeshan trial ends {expires_str}",
+        f"Flintyst trial ends {expires_str}",
         f"Your trial ends {when} and billing begins then. Visit Plans & "
         "Billing to change your plan or cancel.",
-        f"Your Zeshan trial ends {expires_str}",
+        f"Your Flintyst trial ends {expires_str}",
     )
 
 
@@ -70,50 +70,50 @@ def _build_copy(
     expires_str = expires_at.strftime("%Y-%m-%d")
     if renewal_error and is_trial:
         return (
-            "Zeshan could not start your subscription",
+            "Flintyst could not start your subscription",
             f"Your trial ended on {expires_str} and billing could not start: "
             f"{renewal_error} You have {grace_days_remaining} day(s) of grace "
             "access remaining.",
-            "Action required: Zeshan could not start your subscription",
+            "Action required: Flintyst could not start your subscription",
         )
     if renewal_error:
         return (
-            "Zeshan could not renew your license",
+            "Flintyst could not renew your license",
             f"Your license expired on {expires_str} and the automatic renewal "
             f"failed: {renewal_error} You have {grace_days_remaining} day(s) of "
             "grace access remaining.",
-            "Action required: Zeshan license renewal failed",
+            "Action required: Flintyst license renewal failed",
         )
     if is_trial:
         return _build_trial_copy(stage, expires_str, grace_days_remaining)
     if stage == ExpiryWarningStage.T_30D:
         return (
-            f"Zeshan license expires {expires_str}",
+            f"Flintyst license expires {expires_str}",
             "Your license will expire in approximately 30 days. Contact your "
-            "Zeshan representative to renew.",
-            "Action required: Zeshan license expires in ~30 days",
+            "Flintyst representative to renew.",
+            "Action required: Flintyst license expires in ~30 days",
         )
     if stage == ExpiryWarningStage.T_14D:
         return (
-            f"Zeshan license expires {expires_str}",
+            f"Flintyst license expires {expires_str}",
             "Your license will expire in approximately 2 weeks. Renewal must "
             "be completed soon to avoid service interruption.",
-            "Action required: Zeshan license expires in ~2 weeks",
+            "Action required: Flintyst license expires in ~2 weeks",
         )
     if stage == ExpiryWarningStage.T_1D:
         return (
-            f"Zeshan license expires tomorrow ({expires_str})",
+            f"Flintyst license expires tomorrow ({expires_str})",
             "Your license expires within 24 hours. Renew immediately to avoid "
             "service interruption.",
-            "URGENT: Zeshan license expires within 24 hours",
+            "URGENT: Flintyst license expires within 24 hours",
         )
     if stage == ExpiryWarningStage.GRACE:
         return (
-            f"Zeshan license expired. {grace_days_remaining} grace days remaining",
+            f"Flintyst license expired. {grace_days_remaining} grace days remaining",
             f"Your license expired on {expires_str}. You have "
             f"{grace_days_remaining} day(s) of grace access remaining before "
             "the instance is gated. Renew now.",
-            f"Zeshan license expired. {grace_days_remaining} grace days remaining",
+            f"Flintyst license expired. {grace_days_remaining} grace days remaining",
         )
     raise ValueError(f"Unsupported stage for notification copy: {stage}")
 
@@ -179,7 +179,7 @@ def notify_admins_for_stage(
     """Create in-app notifications + send emails for admins not already notified.
 
     renewal_error replaces the copy with why the automatic renewal failed, so an
-    admin is told to fix billing rather than to renew something Zeshan already
+    admin is told to fix billing rather than to renew something Flintyst already
     tried to renew for them.
 
     is_trial reframes the same stages around a trial ending, so a customer two

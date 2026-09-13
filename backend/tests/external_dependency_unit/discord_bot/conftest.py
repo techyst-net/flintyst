@@ -136,7 +136,7 @@ def mock_bot_user() -> MagicMock:
     """Mock Discord bot user."""
     user = MagicMock(spec=discord.ClientUser)
     user.id = 987654321
-    user.display_name = "OnyxBot"
+    user.display_name = "FlintystBot"
     user.bot = True
     return user
 

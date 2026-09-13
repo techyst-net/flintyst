@@ -544,12 +544,12 @@ class LitellmLLM(LLM):
 
     def _track_llm_cost(self, usage: Usage) -> None:
         """
-        Track LLM usage cost for Zeshan-managed API keys.
+        Track LLM usage cost for Flintyst-managed API keys.
 
         This is called after every LLM call completes (streaming or non-streaming).
         Cost is only tracked if:
         1. Usage limits are enabled for this deployment
-        2. The API key is one of Zeshan's managed default keys
+        2. The API key is one of Flintyst's managed default keys
         """
 
         from onyx.server.usage_limits import is_usage_limits_enabled
@@ -1183,7 +1183,7 @@ class LitellmLLM(LLM):
 
             model_response = from_litellm_model_response(response)
 
-            # Track LLM cost for Zeshan-managed API keys
+            # Track LLM cost for Flintyst-managed API keys
             if model_response.usage:
                 self._track_llm_cost(model_response.usage)
 

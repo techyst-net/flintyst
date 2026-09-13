@@ -10,7 +10,10 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  output: "standalone",
+  // `standalone` is for the Docker image, which runs server.js directly. Vercel
+  // does its own output tracing and fails the build when standalone replaces it
+  // ("ENOENT: .next/next-server.js.nft.json"), so it is set only off-Vercel.
+  ...(process.env.VERCEL ? {} : { output: "standalone" }),
   typescript: {
     ignoreBuildErrors: process.env.SKIP_TYPE_CHECK === "1",
   },
@@ -100,6 +103,28 @@ const nextConfig = {
         destination: `${
           process.env.INTERNAL_URL || "http://localhost:8080"
         }/openapi.json`,
+      },
+      // Everything else under /api goes to the backend with the prefix removed,
+      // which is what upstream's nginx does (`rewrite ^/api(/.*)$ $1 break`).
+      // Without this the browser would have to call the backend host directly
+      // and the session would become cross-origin.
+      {
+        source: "/api/:path*",
+        destination: `${
+          process.env.INTERNAL_URL || "http://localhost:8080"
+        }/:path*`,
+      },
+      {
+        source: "/auth/saml/:path*",
+        destination: `${
+          process.env.INTERNAL_URL || "http://localhost:8080"
+        }/auth/saml/:path*`,
+      },
+      {
+        source: "/scim/:path*",
+        destination: `${
+          process.env.INTERNAL_URL || "http://localhost:8080"
+        }/scim/:path*`,
       },
     ];
   },

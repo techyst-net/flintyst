@@ -9,7 +9,7 @@ import (
 )
 
 // NewReleaseCommand creates the parent `ods release` command. Subcommands hang
-// off it (e.g. `ods release opal`) and cut releases of Zeshan-published
+// off it (e.g. `ods release opal`) and cut releases of Flintyst-published
 // packages; --check validates an existing release tag instead.
 func NewReleaseCommand() *cobra.Command {
 	var check bool
@@ -17,8 +17,8 @@ func NewReleaseCommand() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "release",
-		Short: "Cut releases of Zeshan-published packages",
-		Long: `Cut releases of Zeshan-published packages.
+		Short: "Cut releases of Flintyst-published packages",
+		Long: `Cut releases of Flintyst-published packages.
 
 With --check, no tag is cut. Instead the command validates an existing release
 tag:

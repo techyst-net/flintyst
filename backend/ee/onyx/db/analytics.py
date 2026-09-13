@@ -98,7 +98,7 @@ def fetch_onyxbot_analytics(
 ) -> Sequence[tuple[int, int, datetime.date]]:
     """Gets the:
     Date of each set of aggregated statistics
-    Number of OnyxBot Queries (Chat Sessions)
+    Number of FlintystBot Queries (Chat Sessions)
     Number of instances of Negative feedback OR Needing additional help
         (only counting the last feedback)
     """

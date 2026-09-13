@@ -144,7 +144,7 @@ def check_message_limit() -> bool:
         _ONYX_BOT_COUNT_START_TIME = time.time()
     if (_ONYX_BOT_MESSAGE_COUNT + 1) > ONYX_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD:
         logger.error(
-            "OnyxBot has reached the message limit %s"
+            "FlintystBot has reached the message limit %s"
             " for the time period %s seconds."
             " These limits are configurable in backend/onyx/configs/onyxbot_configs.py",
             ONYX_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD,
@@ -232,7 +232,7 @@ def _build_error_block(error_message: str) -> Block:
     the error without completely breaking
     """
     display_text = (
-        "There was an error displaying all of the Zeshan answers."
+        "There was an error displaying all of the Flintyst answers."
         f" Please let an admin or an onyx developer know. Error: {error_message}"
     )
     return SectionBlock(text=display_text)
@@ -588,16 +588,16 @@ def read_slack_thread(
                 is_onyx_bot_response = True
 
             if is_onyx_bot_response:
-                # OnyxBot response
+                # FlintystBot response
                 message_type = MessageType.ASSISTANT
                 user_sem_id = "Assistant"
 
-                # OnyxBot responses have both text and blocks
+                # FlintystBot responses have both text and blocks
                 # The useful content is in the blocks, specifically the first block unless there are
                 # auto-detected filters
                 blocks = reply.get("blocks")
                 if not blocks:
-                    logger.warning("OnyxBot response has no blocks: %s", reply)
+                    logger.warning("FlintystBot response has no blocks: %s", reply)
                     continue
 
                 message = blocks[0].get("text", {}).get("text")
@@ -608,11 +608,11 @@ def read_slack_thread(
                     if len(blocks) < 2:
                         logger.warning("Only filter blocks found: %s", reply)
                         continue
-                    # This is the OnyxBot answer format, if there is a change to how we respond,
+                    # This is the FlintystBot answer format, if there is a change to how we respond,
                     # this will need to be updated to get the correct "answer" portion
                     message = reply["blocks"][1].get("text", {}).get("text")
             else:
-                # Other bots are not counted as the LLM response which only comes from Zeshan
+                # Other bots are not counted as the LLM response which only comes from Flintyst
                 message_type = MessageType.USER
                 bot_user_name = fetch_user_semantic_id_from_id(
                     reply.get("user"), client
@@ -661,7 +661,7 @@ def slack_usage_report(action: str, sender_id: str | None, client: WebClient) ->
     optional_telemetry(
         record_type=RecordType.USAGE,
         data={"action": action},
-        user_id=str(onyx_user.id) if onyx_user else "Non-Zeshan-Or-No-Auth-User",
+        user_id=str(onyx_user.id) if onyx_user else "Non-Flintyst-Or-No-Auth-User",
     )
 
 

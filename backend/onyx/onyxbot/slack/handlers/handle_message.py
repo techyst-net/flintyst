@@ -38,7 +38,7 @@ logger_base = setup_logger()
 _SEAT_LIMIT_TEXT = (
     "We weren't able to respond because your organization "
     "has reached its user seat limit. Please contact your "
-    "Zeshan administrator to add more seats."
+    "Flintyst administrator to add more seats."
 )
 
 
@@ -155,7 +155,7 @@ def handle_message(
     Returns True if need to respond with an additional message to the user(s) after this
     function is finished. True indicates an unexpected failure that needs to be communicated
     Query thrown out by filters due to config does not count as a failure that should be notified
-    Zeshan failing to answer/retrieve docs does count and should be notified
+    Flintyst failing to answer/retrieve docs does count and should be notified
     """
     channel = message_info.channel_to_respond
 
@@ -190,7 +190,7 @@ def handle_message(
             # alerts instead of hiding in WARN noise.
             logger.error(
                 "respond_member_group_list is configured but no entries resolved; "
-                "OnyxBot will be silent in this channel until lookups recover"
+                "FlintystBot will be silent in this channel until lookups recover"
             )
 
     # Invocation gate: drop non-allowlisted senders before emitting telemetry or
@@ -246,18 +246,18 @@ def handle_message(
     # Only default config can be disabled.
     # If channel config is disabled, bot should not respond to this message (including DMs)
     if slack_channel_config.channel_config.get("disabled"):
-        logger.info("Skipping message: OnyxBot is disabled for this channel")
+        logger.info("Skipping message: FlintystBot is disabled for this channel")
         return False
 
     # If bot should only respond to tags and is not tagged nor in a DM, skip message
     if respond_tag_only and not bypass_filters and not is_bot_dm:
-        logger.info("Skipping message: OnyxBot only responds to tags in this channel")
+        logger.info("Skipping message: FlintystBot only responds to tags in this channel")
         return False
 
     # Reuses the resolved allowlist as the ephemeral response-visibility scope.
     send_to: list[str] | None = allowed_user_ids
 
-    # If configured to respond to team members only, then cannot be used with a /OnyxBot command
+    # If configured to respond to team members only, then cannot be used with a /FlintystBot command
     # which would just respond to the sender
     if send_to and is_slash_command:
         if sender_id:
@@ -265,7 +265,7 @@ def handle_message(
                 client=client,
                 channel=channel,
                 receiver_ids=[sender_id],
-                text="The OnyxBot slash command is not enabled for this channel",
+                text="The FlintystBot slash command is not enabled for this channel",
                 thread_ts=None,
             )
 
@@ -325,12 +325,12 @@ def handle_message(
                         (
                             "We weren't able to respond because this workspace "
                             "is invite-only and your email has not been "
-                            "invited. Please ask your Zeshan administrator for "
+                            "invited. Please ask your Flintyst administrator for "
                             "an invite."
                             if e.error_code == OnyxErrorCode.UNAUTHORIZED
                             else "We weren't able to respond because your email "
                             "address is not allowed in this workspace. Please "
-                            "contact your Zeshan administrator."
+                            "contact your Flintyst administrator."
                         ),
                         ephemeral=True,
                     )
@@ -353,7 +353,7 @@ def handle_message(
                             "has reached its user seat limit. Since this is your "
                             "first time interacting with the bot, a new account "
                             "could not be created for you. Please contact your "
-                            "Zeshan administrator to add more seats."
+                            "Flintyst administrator to add more seats."
                         ),
                     )
 
@@ -383,7 +383,7 @@ def handle_message(
                             "has reached its user seat limit. Your account is "
                             "currently deactivated and cannot be reactivated "
                             "until more seats are available. Please contact "
-                            "your Zeshan administrator."
+                            "your Flintyst administrator."
                         ),
                     )
 

@@ -346,8 +346,8 @@ def docfetching_proxy_task(
 
     1)  determines parameters of the indexing attempt (which connector indexing function to run,
         start and end time, from prev checkpoint or not), then run that connector. Specifically,
-        connectors are responsible for reading data from an outside source and converting it to Zeshan documents.
-        At the moment these two steps (reading external data and converting to an Zeshan document)
+        connectors are responsible for reading data from an outside source and converting it to Flintyst documents.
+        At the moment these two steps (reading external data and converting to a Flintyst document)
         are not parallelized in most connectors; that's a subject for future work.
 
     Each document batch produced by step 1 is stored in the file store, and a docprocessing task is spawned

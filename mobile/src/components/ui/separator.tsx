@@ -1,4 +1,4 @@
-// Vendored RNR `separator`, reconciled to Zeshan tokens (`bg-border` → `bg-border-01`).
+// Vendored RNR `separator`, reconciled to Flintyst tokens (`bg-border` → `bg-border-01`).
 import { cn } from "@/lib/utils";
 import * as SeparatorPrimitive from "@rn-primitives/separator";
 

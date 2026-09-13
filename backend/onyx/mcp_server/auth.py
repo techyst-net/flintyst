@@ -1,4 +1,4 @@
-"""Authentication helpers for the Zeshan MCP server."""
+"""Authentication helpers for the Flintyst MCP server."""
 
 from typing import Optional
 

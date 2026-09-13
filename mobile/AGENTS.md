@@ -1,6 +1,6 @@
 # Mobile App Standards (React Native + Expo)
 
-Source of truth for AI agents working in `mobile/` (the Zeshan React Native + Expo app).
+Source of truth for AI agents working in `mobile/` (the Flintyst React Native + Expo app).
 It **complements but does not inherit** `web/AGENTS.md`: the mobile app has no DOM, uses
 NativeWind (not web Tailwind), expo-router, and RN primitives — so web rules about HTML/CSS,
 `useSWR`, Opal components, etc. do **not** apply here. Only the cross-platform design-token
@@ -55,7 +55,7 @@ Web is different: web uses **Tailwind's default step scale**, where `p-6` = step
   but prefer `@/components/ui/text-input` for fields.
 - Icons are default-exported from `@/icons/*`, rendered via `@/components/ui/icon` `Icon`
   (`<Icon as={SvgFoo} size={…} className="text-text-…" />`).
-- Colors: use Zeshan semantic classes (`bg-background-*`, `text-text-*`, `border-border-*`). They
+- Colors: use Flintyst semantic classes (`bg-background-*`, `text-text-*`, `border-border-*`). They
   resolve at runtime through the `vars()` provider in `app/_layout.tsx` (light/dark from
   `@onyx-ai/shared/native`). **No `dark:` modifier; no raw Tailwind colors.**
 

@@ -182,7 +182,7 @@ func (in *installer) runInstall(ctx context.Context) error {
 	in.resolveProject(manifest)
 
 	if in.fancy() {
-		in.wiz = ui.StartWizard(in.deps.IOS.Out, "Zeshan Installer", in.deps.CLIVersion, in.cancel)
+		in.wiz = ui.StartWizard(in.deps.IOS.Out, "Flintyst Installer", in.deps.CLIVersion, in.cancel)
 		defer in.wiz.Abort()
 	}
 
@@ -238,13 +238,13 @@ func (in *installer) runInstall(ctx context.Context) error {
 				"keep the current configuration",
 				"leave the deployment as it is"
 			if running {
-				title, cancelHint = "Zeshan is already running here. What would you like to do?",
+				title, cancelHint = "Flintyst is already running here. What would you like to do?",
 					"leave everything running"
 			}
 			choice, err := in.selectOne(title,
 				[]ui.Option{
 					{Label: "Restart", Hint: restartHint},
-					{Label: "Upgrade", Hint: "move to a newer Zeshan version"},
+					{Label: "Upgrade", Hint: "move to a newer Flintyst version"},
 					{Label: "Cancel", Hint: cancelHint},
 				}, 0)
 			if err != nil {
@@ -276,7 +276,7 @@ func (in *installer) runInstall(ctx context.Context) error {
 			// Said once, whichever way the decision was reached: the run is
 			// about to sit on `pull` for a while, and this is what stops that
 			// looking like downtime.
-			in.infof("Zeshan keeps serving while the images download; each service is replaced once, at the end")
+			in.infof("Flintyst keeps serving while the images download; each service is replaced once, at the end")
 		}
 	} else {
 		if err := in.askModeQuestion(); err != nil {
@@ -314,7 +314,7 @@ func (in *installer) runInstall(ctx context.Context) error {
 		in.infof("Managing existing install at %s (created by install.sh)", in.root.Dir)
 	}
 	for _, alt := range in.root.Ambiguous {
-		in.warnf("Another Zeshan install exists at %s — pass --dir to target it instead", alt)
+		in.warnf("Another Flintyst install exists at %s — pass --dir to target it instead", alt)
 	}
 	if !hadManifest && paths.IsInstall(in.root.Dir) {
 		in.infof("No %s found — adopting this install; files not written by the CLI are treated as potentially customized", state.FileName)
@@ -465,7 +465,7 @@ func (in *installer) validateTag(ctx context.Context, tag string) (string, error
 	}
 	normalized, checkable := release.NormalizeVersionTag(tag)
 	if normalized != tag {
-		in.infof("Using %s (Zeshan versions are v-prefixed)", normalized)
+		in.infof("Using %s (Flintyst versions are v-prefixed)", normalized)
 	}
 	// A dry run writes nothing and pulls nothing, so it stays offline.
 	if !checkable || in.localFiles() || in.opts.DryRun {
@@ -488,7 +488,7 @@ func (in *installer) validateTag(ctx context.Context, tag string) (string, error
 		return normalized, nil
 	}
 	return "", exitcodes.Newf(exitcodes.BadRequest,
-		"version %s not found — Zeshan releases look like v4.4.6 (https://github.com/onyx-dot-app/onyx/releases)", normalized)
+		"version %s not found — Flintyst releases look like v4.4.6 (https://github.com/onyx-dot-app/onyx/releases)", normalized)
 }
 
 // appImage is the one image every deployment runs whatever its mode, so the
@@ -525,9 +525,9 @@ func (in *installer) unreachableTagFallback(ctx context.Context) string {
 	if in.opts.Offline {
 		// edge may well be here too; it just isn't a version, so it can't be
 		// compared with anything or verified as the one that was meant.
-		in.warnf("%s — no released Zeshan images on this host, offering edge", why)
+		in.warnf("%s — no released Flintyst images on this host, offering edge", why)
 	} else {
-		in.warnf("Could not determine latest Zeshan release — falling back to main / edge")
+		in.warnf("Could not determine latest Flintyst release — falling back to main / edge")
 	}
 	return "edge"
 }
@@ -648,7 +648,7 @@ func (in *installer) resolveDockerProblems(ctx context.Context, pre preflight) e
 				return err
 			}
 			if !ok {
-				return exitcodes.New(exitcodes.General, "Docker is required to run Zeshan")
+				return exitcodes.New(exitcodes.General, "Docker is required to run Flintyst")
 			}
 			if err := in.suspend(func() error {
 				return dockercmd.InstallDockerLinux(ctx, in.deps.Runner, in.deps.IOS.Out)
@@ -661,7 +661,7 @@ func (in *installer) resolveDockerProblems(ctx context.Context, pre preflight) e
 			in.successf("Docker installed successfully")
 		case runtime.GOOS == "windows":
 			in.plainf("%s", dockercmd.DockerDesktopInstructionsWindows)
-			return exitcodes.New(exitcodes.General, "Docker Desktop is required to run Zeshan")
+			return exitcodes.New(exitcodes.General, "Docker Desktop is required to run Flintyst")
 		default:
 			return exitcodes.New(exitcodes.General,
 				"Docker is not installed. Please install Docker Desktop first.\n  Visit: https://docs.docker.com/get-docker/")
@@ -679,7 +679,7 @@ func (in *installer) resolveDockerProblems(ctx context.Context, pre preflight) e
 			return err
 		}
 		if !ok {
-			return exitcodes.New(exitcodes.General, "Docker Compose is required to run Zeshan")
+			return exitcodes.New(exitcodes.General, "Docker Compose is required to run Flintyst")
 		}
 		if err := in.suspend(func() error {
 			return dockercmd.InstallComposePluginLinux(ctx, in.deps.Runner, in.deps.IOS.Out)
@@ -774,7 +774,7 @@ func (in *installer) resourceWarnings(pre preflight) error {
 	if !warning {
 		return nil
 	}
-	in.warnf("Zeshan recommends at least %dGB RAM and %dGB disk space in %s mode.", ramWant, diskWant, mode)
+	in.warnf("Flintyst recommends at least %dGB RAM and %dGB disk space in %s mode.", ramWant, diskWant, mode)
 	cont, err := in.confirmYN("Continue anyway?", true)
 	if err != nil {
 		return err
@@ -846,7 +846,7 @@ func (in *installer) createFreshEnv(envPath, tag string) (string, int, error) {
 		env = SetVarUncomment(env, "ENABLE_CRAFT", "true")
 		backend := sandboxBackendForTag(tag)
 		env = SetVarUncomment(env, "SANDBOX_BACKEND", backend)
-		in.successf("Zeshan Craft enabled (ENABLE_CRAFT=true, SANDBOX_BACKEND=%s)", backend)
+		in.successf("Flintyst Craft enabled (ENABLE_CRAFT=true, SANDBOX_BACKEND=%s)", backend)
 		if backend == "docker" {
 			in.plainf("%s", craftSecurityWarning)
 		} else {
@@ -915,7 +915,7 @@ func (in *installer) reconfigureExistingEnv(envPath, updateTag string) (string, 
 		env = SetVarUncomment(env, "ENABLE_CRAFT", "true")
 		backend := sandboxBackendForTag(effectiveTag)
 		env = SetVarUncomment(env, "SANDBOX_BACKEND", backend)
-		in.successf("Zeshan Craft enabled (ENABLE_CRAFT=true, SANDBOX_BACKEND=%s, image tag: %s)", backend, effectiveTag)
+		in.successf("Flintyst Craft enabled (ENABLE_CRAFT=true, SANDBOX_BACKEND=%s, image tag: %s)", backend, effectiveTag)
 	}
 
 	// Lite mode on an existing .env: the template ships with s3-filestore
@@ -965,7 +965,7 @@ func (in *installer) guardRunningServices(ctx context.Context) (bool, error) {
 	}
 	if in.prompt.AssumeDefaults && !in.opts.Force {
 		return true, exitcodes.New(exitcodes.General,
-			"Zeshan services are running — pass --force to recreate them with the new configuration, or stop them first with `onyx-cli deploy stop`")
+			"Flintyst services are running — pass --force to recreate them with the new configuration, or stop them first with `onyx-cli deploy stop`")
 	}
 	in.forceRecreate = true
 	return true, nil
@@ -1387,12 +1387,12 @@ func (in *installer) printSuccess(ctx context.Context, hostPort int) {
 	if in.prod {
 		url = in.prodAccessURL()
 	}
-	headline := "Zeshan is ready"
+	headline := "Flintyst is ready"
 	if url != "" {
 		headline += "  →  " + ui.Accent(url)
 	}
 	if in.opts.NoWait {
-		headline = "Zeshan containers started (still initializing — check: " + ui.Accent("onyx-cli deploy status") + ")"
+		headline = "Flintyst containers started (still initializing — check: " + ui.Accent("onyx-cli deploy status") + ")"
 	}
 	lines := []string{headline}
 	if !in.prod {
@@ -1500,7 +1500,7 @@ func (in *installer) askStarQuestion() bool {
 	if _, err := exec.LookPath("gh"); err != nil {
 		return false
 	}
-	ok, err := in.confirmYN("Enjoying Zeshan? ⭐ Star the repo on GitHub?", true)
+	ok, err := in.confirmYN("Enjoying Flintyst? ⭐ Star the repo on GitHub?", true)
 	return err == nil && ok
 }
 

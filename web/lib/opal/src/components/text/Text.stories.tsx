@@ -206,7 +206,7 @@ export const MarkdownCode: Story = {
 export const MarkdownLink: Story = {
   render: () => (
     <Text font="main-ui-body" color="text-05">
-      {markdown("Visit [Zeshan](https://www.onyx.app/) for more info")}
+      {markdown("Visit [Flintyst](https://www.onyx.app/) for more info")}
     </Text>
   ),
 };
@@ -223,7 +223,7 @@ export const MarkdownCombined: Story = {
   render: () => (
     <Text font="main-ui-body" color="text-05">
       {markdown(
-        "*Hello*, **world**! Check out [Zeshan](https://www.onyx.app/) and run `onyx start` to begin."
+        "*Hello*, **world**! Check out [Flintyst](https://www.onyx.app/) and run `onyx start` to begin."
       )}
     </Text>
   ),

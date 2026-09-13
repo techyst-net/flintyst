@@ -78,7 +78,7 @@ def parse_mdx_to_release_note_entries(mdx_content: str) -> list[ReleaseNoteEntry
                 ReleaseNoteEntry(
                     version=version,
                     date=date,
-                    title=f"Zeshan {version} is available!",
+                    title=f"Flintyst {version} is available!",
                 )
             )
 

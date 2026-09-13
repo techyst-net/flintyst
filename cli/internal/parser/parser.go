@@ -1,4 +1,4 @@
-// Package parser handles NDJSON stream parsing for Zeshan chat responses.
+// Package parser handles NDJSON stream parsing for Flintyst chat responses.
 package parser
 
 import (

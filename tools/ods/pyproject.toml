@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "onyx-devtools"
 description = "Developer utilities for working on onyx.app"
-authors = [{ name = "Zeshan AI", email = "founders@onyx.app" }]
+authors = [{ name = "Flintyst AI", email = "founders@onyx.app" }]
 readme = "README.md"
 requires-python = ">=3.9"
 keywords = [

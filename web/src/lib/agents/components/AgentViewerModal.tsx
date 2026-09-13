@@ -284,7 +284,7 @@ export function AgentViewerModal({ agent, onClose }: AgentViewerModalProps) {
             )}
             <Content
               icon={SvgUser}
-              title={agent.owner?.email ?? "Zeshan"}
+              title={agent.owner?.email ?? "Flintyst"}
               sizePreset="main-ui"
               variant="body"
               color="muted"

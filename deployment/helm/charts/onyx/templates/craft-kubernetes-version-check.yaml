@@ -1,6 +1,6 @@
 {{- if eq (include "onyx.craftEnabled" .) "true" }}
 {{- if not (semverCompare ">=1.33.0-0" .Capabilities.KubeVersion.Version) }}
-{{- fail (printf "Zeshan Craft Kubernetes deployments support Kubernetes >= 1.33 because sandbox pods use stable native restartable init sidecar containers; target cluster reports %s. Use a newer Kubernetes cluster." .Capabilities.KubeVersion.Version) }}
+{{- fail (printf "Flintyst Craft Kubernetes deployments support Kubernetes >= 1.33 because sandbox pods use stable native restartable init sidecar containers; target cluster reports %s. Use a newer Kubernetes cluster." .Capabilities.KubeVersion.Version) }}
 {{- end }}
 # Craft Kubernetes sandbox version check passed for {{ .Capabilities.KubeVersion.Version }}.
 {{- else }}

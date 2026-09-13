@@ -1,6 +1,6 @@
 """Operator-forced document-set search scope (self-hosted Search UI only).
 
-When ``FORCED_DOCUMENT_SET_NAMES`` is set, the Zeshan Search UI is hard-restricted to
+When ``FORCED_DOCUMENT_SET_NAMES`` is set, the Flintyst Search UI is hard-restricted to
 those document sets. The vector index stores document set NAMES, so the configured
 names are used directly — no resolution needed. Disabled under MULTI_TENANT.
 

@@ -245,11 +245,11 @@ def get_version() -> VersionResponse:
 @router.get("/versions", tags=PUBLIC_API_TAGS)
 def get_versions() -> AllVersions:
     """
-    Fetches the latest stable and beta versions of Zeshan Docker images.
+    Fetches the latest stable and beta versions of Flintyst Docker images.
     Since DockerHub does not explicitly flag stable and beta images,
     this endpoint can be used to programmatically check for new images.
     """
-    # Fetch the latest tags from DockerHub for each Zeshan component
+    # Fetch the latest tags from DockerHub for each Flintyst component
     dockerhub_repos = [
         "onyxdotapp/onyx-model-server",
         "onyxdotapp/onyx-backend",

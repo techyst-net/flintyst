@@ -14,7 +14,7 @@ export function useCustomFooterContent(): string {
   const settings = useSettings();
   return (
     settings.enterprise?.custom_lower_disclaimer_content ||
-    `[Zeshan ${settings.version ?? "dev"}](https://www.onyx.app/) - ${APP_SLOGAN}`
+    `[Flintyst ${settings.version ?? "dev"}](https://www.onyx.app/) - ${APP_SLOGAN}`
   );
 }
 

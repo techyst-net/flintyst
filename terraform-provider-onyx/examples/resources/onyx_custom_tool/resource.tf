@@ -1,4 +1,4 @@
-# A custom action lets an assistant call an external HTTP API. Zeshan derives one
+# A custom action lets an assistant call an external HTTP API. Flintyst derives one
 # callable method per operation, so every operation needs an operationId and
 # either a summary or a description.
 resource "onyx_custom_tool" "weather" {
@@ -42,7 +42,7 @@ resource "onyx_custom_tool" "billing" {
   name       = "billing"
   definition = file("${path.module}/openapi/billing.json")
 
-  # Forward the calling user's Zeshan credentials instead of a fixed key, so the
+  # Forward the calling user's Flintyst credentials instead of a fixed key, so the
   # API applies that user's own permissions. It cannot be combined with an
   # Authorization header above.
   passthrough_auth = true

@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
-// serverDefaultedInt64 plans an optional number that Zeshan fills in itself.
+// serverDefaultedInt64 plans an optional number that Flintyst fills in itself.
 // With nothing configured and nothing stored, the next update makes the server
 // substitute its own default, so that plan must say "known after apply".
 // Anything else keeps the stored value, which Terraform re-asserts on write.
@@ -19,7 +19,7 @@ func ServerDefaultedInt64() planmodifier.Int64 {
 }
 
 func (m serverDefaultedInt64) Description(_ context.Context) string {
-	return "Zeshan picks this value when it is not configured."
+	return "Flintyst picks this value when it is not configured."
 }
 
 func (m serverDefaultedInt64) MarkdownDescription(ctx context.Context) string {

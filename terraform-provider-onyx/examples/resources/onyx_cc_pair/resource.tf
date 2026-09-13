@@ -25,7 +25,7 @@ resource "onyx_cc_pair" "hr_handbook" {
   paused = false
 }
 
-# Destroying a pair also removes the documents it indexed, which Zeshan does in
+# Destroying a pair also removes the documents it indexed, which Flintyst does in
 # the background. Raise the timeout for a connector holding many documents.
 resource "onyx_cc_pair" "large_archive" {
   name          = "large-archive"

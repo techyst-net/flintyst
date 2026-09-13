@@ -12,7 +12,7 @@ import (
 	"github.com/onyx-dot-app/onyx/terraform-provider-onyx/internal/client"
 )
 
-// A definition Zeshan accepts: it needs info.title, info.description, a server
+// A definition Flintyst accepts: it needs info.title, info.description, a server
 // URL, and an operationId plus a summary on every operation.
 const customToolDefinition = `jsonencode({
     openapi = "3.0.0"
@@ -114,7 +114,7 @@ resource "onyx_custom_tool" "test" {
 	})
 }
 
-// Zeshan rejects a definition it cannot turn into callable methods, and the
+// Flintyst rejects a definition it cannot turn into callable methods, and the
 // provider asks it during planning rather than at apply time.
 func TestAccCustomToolResourceRejectsABadDefinition(t *testing.T) {
 	resource.Test(t, resource.TestCase{
@@ -128,7 +128,7 @@ resource "onyx_custom_tool" "bad" {
   definition = jsonencode({ openapi = "3.0.0" })
 }
 `,
-				ExpectError: regexp.MustCompile(`(?s)Zeshan rejected the action definition`),
+				ExpectError: regexp.MustCompile(`(?s)Flintyst rejected the action definition`),
 			},
 		},
 	})
@@ -180,7 +180,7 @@ func testAccCheckCustomToolDestroyed(t *testing.T) resource.TestCheckFunc {
 	}
 }
 
-// Zeshan answers the read endpoint for built-in actions but refuses every write
+// Flintyst answers the read endpoint for built-in actions but refuses every write
 // to them, so importing one would record state that can neither be updated nor
 // destroyed. The refresh rejects it instead.
 func TestAccCustomToolResourceRejectsImportingABuiltIn(t *testing.T) {
@@ -215,7 +215,7 @@ resource "onyx_custom_tool" "builtin" {
 				ResourceName:  "onyx_custom_tool.builtin",
 				ImportState:   true,
 				ImportStateId: builtInID,
-				ExpectError:   regexp.MustCompile(`(?s)Not a custom Zeshan action`),
+				ExpectError:   regexp.MustCompile(`(?s)Not a custom Flintyst action`),
 			},
 		},
 	})

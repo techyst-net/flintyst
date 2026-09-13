@@ -377,13 +377,13 @@ class SelectionAnalysis:
             return False
 
     def do_request(self, query: str) -> dict:
-        """Request the Zeshan API
+        """Request the Flintyst API
 
         Args:
             query (str): A query
 
         Returns:
-            dict: The Zeshan API response content
+            dict: The Flintyst API response content
         """
         cookies = (
             {FASTAPI_USERS_AUTH_COOKIE_NAME: self._auth_cookie}
@@ -406,14 +406,14 @@ class SelectionAnalysis:
             if response.status_code != 200:
                 color_output(
                     (
-                        f"something goes wrong while requesting the Zeshan API for the query '{query}': {response.text}"
+                        f"something goes wrong while requesting the Flintyst API for the query '{query}': {response.text}"
                     ),
                     model="critical",
                 )
                 sys.exit(1)
         except Exception as e:
             color_output(
-                f"Unable to request the Zeshan API for the query '{query}': {e}",
+                f"Unable to request the Flintyst API for the query '{query}': {e}",
                 model="critical",
             )
             sys.exit(1)
@@ -441,7 +441,7 @@ class SelectionAnalysis:
             return json.load(f)
 
     def extract_content(self, contents: dict) -> dict:
-        """Extract the content returns by the Zeshan API
+        """Extract the content returns by the Flintyst API
 
         Args:
             contents (dict): The onyx response content
@@ -664,7 +664,7 @@ if __name__ == "__main__":
         type=str,
         default=None,
         help=(
-            "Currently, to get this script working when the Zeshan Auth is "
+            "Currently, to get this script working when the Flintyst Auth is "
             "enabled, you must extract from the UI your cookie 'fastapiusersauth' "
             "and then set it using this argument"
         ),
@@ -699,8 +699,8 @@ if __name__ == "__main__":
         type=int,
         default=3000,
         help=(
-            "The Zeshan Web (not the API) port. We use the UI to forward the requests to the API. "
-            "It should be '3000' for local dev and '80' if Zeshan runs using docker compose."
+            "The Flintyst Web (not the API) port. We use the UI to forward the requests to the API. "
+            "It should be '3000' for local dev and '80' if Flintyst runs using docker compose."
         ),
     )
     parser.add_argument(

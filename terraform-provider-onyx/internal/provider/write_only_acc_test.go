@@ -332,14 +332,14 @@ resource "onyx_custom_tool" "wo" {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckNoResourceAttr("onyx_custom_tool.wo", "custom_headers"),
 					resource.TestCheckNoResourceAttr("onyx_custom_tool.wo", "custom_headers_wo"),
-					// Zeshan hands header values back in full, so this is a real
+					// Flintyst hands header values back in full, so this is a real
 					// end-to-end check that the secret arrived.
 					testAccCheckCustomToolHeader(t, "onyx_custom_tool.wo", "X-Api-Key", "tf-acc-write-only-header"),
 				),
 			},
 			{
 				// The refresh is where a write-only header map could leak:
-				// Zeshan returns the value, and without the private-state marker
+				// Flintyst returns the value, and without the private-state marker
 				// it would land in custom_headers.
 				RefreshState: true,
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -395,7 +395,7 @@ resource "onyx_custom_tool" "conflict_wo" {
 	})
 }
 
-// testAccCheckCustomToolHeader reads the header back from Zeshan, which masks
+// testAccCheckCustomToolHeader reads the header back from Flintyst, which masks
 // action header values, so the check compares against the masked form.
 func testAccCheckCustomToolHeader(t *testing.T, name, headerKey, want string) resource.TestCheckFunc {
 	return func(state *terraform.State) error {

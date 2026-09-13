@@ -1,4 +1,4 @@
-// Package models defines API request/response types for the Zeshan CLI.
+// Package models defines API request/response types for the Flintyst CLI.
 package models
 
 // AgentSummary represents an agent from the API.

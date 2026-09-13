@@ -1,6 +1,6 @@
 """Manual test harness for the coding-agent loop.
 
-Usage (from repo root, with venv active and Zeshan services running):
+Usage (from repo root, with venv active and Flintyst services running):
 
     source .venv/bin/activate
     python -m backend.scripts.coding_agent_test \\

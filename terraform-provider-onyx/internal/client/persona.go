@@ -100,7 +100,7 @@ type Persona struct {
 
 // ToolIDs returns the ids of the actions attached to the agent.
 //
-// Zeshan hides a few built-in tools from this list, so an agent that holds one
+// Flintyst hides a few built-in tools from this list, so an agent that holds one
 // reports fewer ids than were written.
 func (p *Persona) ToolIDs() []int64 {
 	ids := make([]int64, 0, len(p.Tools))
@@ -157,7 +157,7 @@ func (p *Persona) DocumentIDs() []string {
 
 // CreatePersona creates an agent and returns the stored object.
 //
-// Zeshan matches a create by name: a name another live agent holds is rejected,
+// Flintyst matches a create by name: a name another live agent holds is rejected,
 // and a name held only by a deleted agent revives that agent, id and all. That
 // makes the call unsafe to repeat, which the POST rule already covers.
 func (c *Client) CreatePersona(ctx context.Context, req PersonaWrite) (*Persona, error) {
@@ -171,7 +171,7 @@ func (c *Client) CreatePersona(ctx context.Context, req PersonaWrite) (*Persona,
 // GetPersona reads one agent.
 //
 // A missing or deleted agent answers 400, not 404: the lookup raises a plain
-// ValueError, which Zeshan renders as a bad request. Callers that need to tell
+// ValueError, which Flintyst renders as a bad request. Callers that need to tell
 // "gone" from "failed" use LookupPersona.
 func (c *Client) GetPersona(ctx context.Context, id int64) (*Persona, error) {
 	var persona Persona

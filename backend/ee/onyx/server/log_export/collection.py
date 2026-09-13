@@ -26,7 +26,7 @@ LOG_FILE_GLOB = "*.log*"
 # Known Debian package-manager logs at the top level of ``/var/log`` in the
 # backend image; build-time noise with no diagnostic value. Exact names only, so
 # unknown system logs fail open: they are collected as noise rather than risking
-# dropped Zeshan logs.
+# dropped Flintyst logs.
 EXCLUDED_SYSTEM_LOG_FILE_NAMES = frozenset(
     {"dpkg.log", "alternatives.log", "fontconfig.log"}
 )
@@ -107,14 +107,14 @@ def _build_readme(
 ) -> str:
     """Builds the README.txt content describing the export."""
     lines = [
-        "Zeshan log export",
+        "Flintyst log export",
         "===============",
         "",
         SENSITIVE_DATA_WARNING,
         "",
         scope_note,
         "",
-        f"Zeshan version: {__version__}",
+        f"Flintyst version: {__version__}",
         f"Hostname: {socket.gethostname()}",
         f"Collected at (UTC): {datetime.now(tz=timezone.utc).isoformat()}",
         "",

@@ -139,7 +139,7 @@ def _parse_html_to_web_content(url: str, html: str) -> WebContent:
         title = parsed.title or ""
     except Exception as exc:
         logger.warning(
-            "Zeshan crawler failed to parse %s (%s)", url, exc.__class__.__name__
+            "Flintyst crawler failed to parse %s (%s)", url, exc.__class__.__name__
         )
         return _failed_result(url, FailureReason.EMPTY_OR_UNPARSEABLE)
 
@@ -217,7 +217,7 @@ class OnyxWebCrawler(WebContentProvider):
             return self._fetch_url(url)
         except Exception as exc:
             logger.warning(
-                "Zeshan crawler unexpected error for %s (%s)",
+                "Flintyst crawler unexpected error for %s (%s)",
                 url,
                 exc.__class__.__name__,
             )
@@ -240,7 +240,7 @@ class OnyxWebCrawler(WebContentProvider):
             return _failed_result(url, FailureReason.SSRF_BLOCKED)
         except Exception as exc:
             logger.warning(
-                "Zeshan crawler failed to fetch %s (%s)",
+                "Flintyst crawler failed to fetch %s (%s)",
                 url,
                 exc.__class__.__name__,
             )
@@ -264,7 +264,7 @@ class OnyxWebCrawler(WebContentProvider):
 
             if try_fallback:
                 logger.info(
-                    "Zeshan crawler got %s for %s; retrying via Playwright "
+                    "Flintyst crawler got %s for %s; retrying via Playwright "
                     "(cf_signals=%s)",
                     response.status_code,
                     url,
@@ -277,7 +277,7 @@ class OnyxWebCrawler(WebContentProvider):
                     # fallback's own result is the truth.
                     return fallback
 
-            logger.warning("Zeshan crawler received %s for %s", response.status_code, url)
+            logger.warning("Flintyst crawler received %s for %s", response.status_code, url)
             return _failed_result(
                 url, _failure_reason_for_status(response, has_cf_signals)
             )
@@ -309,7 +309,7 @@ class OnyxWebCrawler(WebContentProvider):
             )
         except Exception as exc:
             logger.warning(
-                "Zeshan crawler failed to decode %s (%s)", url, exc.__class__.__name__
+                "Flintyst crawler failed to decode %s (%s)", url, exc.__class__.__name__
             )
             return _failed_result(url, FailureReason.DECODE_ERROR)
 

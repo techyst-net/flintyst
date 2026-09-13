@@ -161,7 +161,7 @@ def create_braintrust_dataset(records: List[Dict[str, Any]], dataset_name: str) 
         return
 
     # Initialize the dataset
-    dataset = init_dataset("Zeshan", dataset_name, api_key=BRAINTRUST_API_KEY)
+    dataset = init_dataset("Flintyst", dataset_name, api_key=BRAINTRUST_API_KEY)
 
     print(f"Creating Braintrust dataset with {len(records)} records...")
 

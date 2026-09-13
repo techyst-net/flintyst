@@ -27,7 +27,7 @@ locals {
     local.trusted_vpc_nat_gateway_cidrs,
   ))
 
-  # T-shirt size defaults. Calibrated against the Zeshan-managed production
+  # T-shirt size defaults. Calibrated against the Flintyst-managed production
   # fleet (Jul 2026): memory, not CPU, is the binding dimension on the EKS
   # side; the burstable db.t4g.large sustains fleet load until ~1k users but
   # peaks past 70% CPU on the largest deployments, and every production

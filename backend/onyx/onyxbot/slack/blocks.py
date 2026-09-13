@@ -390,7 +390,7 @@ def _build_continue_in_web_ui_block(
             elements=[
                 ButtonElement(
                     action_id=CONTINUE_IN_WEB_UI_ACTION_ID,
-                    text="Continue Chat in Zeshan!",
+                    text="Continue Chat in Flintyst!",
                     style="primary",
                     url=f"{WEB_DOMAIN}/chat?slackChatId={chat_session.id}",
                 ),
@@ -458,7 +458,7 @@ def build_slack_response_blocks(
     This function is a top level function that builds all the blocks for the Slack response.
     It also handles combining all the blocks together.
     """
-    # If called with the OnyxBot slash command, the question is lost so we have to reshow it
+    # If called with the FlintystBot slash command, the question is lost so we have to reshow it
     if not skip_restated_question:
         restate_question_block = get_restate_blocks(
             message_info.thread_messages[-1].message, message_info.is_slash_command

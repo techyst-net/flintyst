@@ -11,7 +11,7 @@
       }
     },
     {
-      "name": "Run All Zeshan Services",
+      "name": "Run All Flintyst Services",
       "configurations": [
         "Web Server",
         "Model Server",
@@ -43,7 +43,7 @@
       }
     },
     {
-      "name": "Run All Zeshan Services (k8s)",
+      "name": "Run All Flintyst Services (k8s)",
       "preLaunchTask": "k8s: telepresence quit",
       "configurations": [
         "Web Server",
@@ -1124,7 +1124,7 @@
       }
     },
     {
-      "name": "Zeshan OpenAPI Schema Generator",
+      "name": "Flintyst OpenAPI Schema Generator",
       "type": "debugpy",
       "request": "launch",
       "program": "backend/scripts/onyx_openapi_schema.py",
@@ -1141,7 +1141,7 @@
       ]
     },
     {
-      "name": "Zeshan DB Manager (Top Chunks)",
+      "name": "Flintyst DB Manager (Top Chunks)",
       "type": "debugpy",
       "request": "launch",
       "program": "scripts/debugging/onyx_db.py",

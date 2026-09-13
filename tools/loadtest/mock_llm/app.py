@@ -1,11 +1,11 @@
-"""Mock OpenAI-compatible LLM server for Zeshan load testing.
+"""Mock OpenAI-compatible LLM server for Flintyst load testing.
 
 The whole point: drive unlimited LLM call volume at zero cost with
-deterministic timing, so load tests measure Zeshan's application code and
+deterministic timing, so load tests measure Flintyst's application code and
 infrastructure — never answer quality or a real provider's latency.
 
-Register in Zeshan as an `openai_compatible` provider with this server's URL as
-`api_base`; Zeshan/litellm then sends plain /v1/chat/completions requests with
+Register in Flintyst as an `openai_compatible` provider with this server's URL as
+`api_base`; Flintyst/litellm then sends plain /v1/chat/completions requests with
 the model name passed through verbatim.
 
 Timing knobs are encoded in the model name (litellm passes it through):
@@ -29,7 +29,7 @@ Knob combinations can imitate provider latency profiles (see README:
 "Provider profiles") — e.g. a slow reasoning model is just
 `mock-ttft8000-itl40-len600`.
 
-Branching follows the contract of Zeshan's LLM loops (chat llm_loop.py and
+Branching follows the contract of Flintyst's LLM loops (chat llm_loop.py and
 deep_research/dr_loop.py):
 
 - tool_choice NONE / no tools        → stream plain filler text ("stop").
@@ -48,7 +48,7 @@ deep_research/dr_loop.py):
 
 Tool-call arguments are synthesized from each tool's JSON schema (required
 string props get a snippet of the last user message; arrays of strings get a
-single-element list), so schema changes in Zeshan degrade gracefully.
+single-element list), so schema changes in Flintyst degrade gracefully.
 
 Run locally:  uvicorn mock_llm.app:app --port 8001
 """
@@ -94,10 +94,10 @@ _KNOB_RE = re.compile(r"-(ttft|itl|len|tools|agents|maxctx)(\d+)")
 
 _FILLER_WORDS = (
     "This is deterministic mock answer content used only for load testing "
-    "the Zeshan application and infrastructure under controlled conditions. "
+    "the Flintyst application and infrastructure under controlled conditions. "
 ).split()
 
-# Tool names from Zeshan's chat / deep-research loops (see module docstring).
+# Tool names from Flintyst's chat / deep-research loops (see module docstring).
 _RETRIEVAL_TOOLS = ("internal_search", "web_search", "open_url")
 _RESEARCH_AGENT = "research_agent"
 _GENERATE_REPORT = "generate_report"
@@ -169,7 +169,7 @@ def _last_user_snippet(messages: list[ChatMessage]) -> str:
     return _last_user_text(messages)[:200]
 
 
-# Stable phrases from Zeshan's secondary-flow prompts whose LLM output feeds
+# Stable phrases from Flintyst's secondary-flow prompts whose LLM output feeds
 # back into the pipeline (backend/onyx/prompts/search_prompts.py — both the
 # semantic and keyword query-rephrase system prompts share this prefix). For
 # these calls the mock must echo the real question's terms, not filler, or

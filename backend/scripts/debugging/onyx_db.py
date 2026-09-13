@@ -1,4 +1,4 @@
-"""Zeshan Database tool"""
+"""Flintyst Database tool"""
 
 import os
 

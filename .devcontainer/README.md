@@ -1,6 +1,6 @@
-# Zeshan Dev Container
+# Flintyst Dev Container
 
-A containerized development environment for working on Zeshan.
+A containerized development environment for working on Flintyst.
 
 ## What's included
 

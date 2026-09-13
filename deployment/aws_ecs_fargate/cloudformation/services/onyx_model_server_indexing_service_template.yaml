@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudFormation template for Zeshan Model Server Indexing TaskDefinition
+Description: CloudFormation template for Flintyst Model Server Indexing TaskDefinition
 Parameters:
   Environment:
     Type: String
@@ -70,7 +70,7 @@ Resources:
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: !Sub Zeshan SecurityGroup access to EFS mount and ${ServiceName}.
+      GroupDescription: !Sub Flintyst SecurityGroup access to EFS mount and ${ServiceName}.
       GroupName: !Sub ${Environment}-ecs-${ServiceName}
       VpcId: !Ref VpcID
       SecurityGroupIngress:

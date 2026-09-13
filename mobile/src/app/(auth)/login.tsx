@@ -20,13 +20,13 @@ export default function LoginScreen() {
 
   return (
     <AuthScreenShell
-      title="Welcome to Zeshan"
+      title="Welcome to Flintyst"
       subtitle="Your open source AI platform for work"
       footer={
         <>
           {hasPassword ? (
             <AuthSwitchLink
-              prompt="New to Zeshan?"
+              prompt="New to Flintyst?"
               actionLabel="Create an Account"
               onPress={() => router.replace("/(auth)/signup")}
             />

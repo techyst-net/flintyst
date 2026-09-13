@@ -11,7 +11,7 @@ Company and Contributor may be referred to individually as a “**Party**” and
 
 ## 1. Purpose and scope
 
-Zeshan’s repository is primarily licensed under the MIT License, but includes **proprietary-licensed Enterprise Edition components** (as defined below). This Agreement applies **only** to Contributions made to the Enterprise Edition components and is intended to ensure Company owns all rights necessary to license, distribute, and commercialize Enterprise Edition features.
+Flintyst’s repository is primarily licensed under the MIT License, but includes **proprietary-licensed Enterprise Edition components** (as defined below). This Agreement applies **only** to Contributions made to the Enterprise Edition components and is intended to ensure Company owns all rights necessary to license, distribute, and commercialize Enterprise Edition features.
 
 ## 2. Definitions
 
